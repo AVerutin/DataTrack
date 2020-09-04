@@ -28,29 +28,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Commit full app">
-      <change afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/Arm2.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/Error.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/Index.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shared/NavMenu.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/bootstrap/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/FONT-LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/ICON-LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/css/site.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/favicon.ico" afterDir="false" />
+    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add pages for ARM1 and ARM2">
+      <change afterPath="$PROJECT_DIR$/Data/Material.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/MtsConnect.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/_Host.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/_Host.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/MainLayout.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTrack.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataTrack.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,21 +49,25 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock://E:/Projects/NET/DataTrack/Pages/_Host.cshtml" root0="FORCE_HIGHLIGHTING" root1="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/_Host.cshtml" root0="FORCE_HIGHLIGHTING" root1="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/Program.cs" />
-        <option value="$PROJECT_DIR$/_Imports.razor" />
         <option value="$PROJECT_DIR$/App.razor" />
         <option value="$PROJECT_DIR$/Pages/Index.razor" />
         <option value="$PROJECT_DIR$/Shared/MainLayout.razor" />
-        <option value="$PROJECT_DIR$/Pages/_Host.cshtml" />
-        <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
         <option value="$PROJECT_DIR$/Shared/NavMenu.razor" />
         <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
         <option value="$PROJECT_DIR$/Pages/Error.razor" />
+        <option value="$PROJECT_DIR$/Data/Material.cs" />
+        <option value="$PROJECT_DIR$/Pages/_Host.cshtml" />
+        <option value="$PROJECT_DIR$/Data/MtsConnect.cs" />
+        <option value="$PROJECT_DIR$/appsettings.json" />
+        <option value="$PROJECT_DIR$/_Imports.razor" />
+        <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
       </list>
     </option>
   </component>
@@ -92,6 +82,8 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30010834" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -143,7 +135,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599218058720</updated>
-      <workItem from="1599218117153" duration="4280000" />
+      <workItem from="1599218117153" duration="10292000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -159,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599219415906</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add pages for ARM1 and ARM2">
+      <created>1599222530107</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599222530107</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,28 +194,97 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="First clear commit" />
     <MESSAGE value="Commit full app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit full app" />
+    <MESSAGE value="Add pages for ARM1 and ARM2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add pages for ARM1 and ARM2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1599222195650">
+    <state width="487" height="618" key="DebuggerActiveHint" timestamp="1599226310196">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
-    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1599222195650">
+    <state width="487" height="618" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1599226310196" />
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom" timestamp="1599228206567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
-    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1599222195650">
+    <state width="1877" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206567" />
+    <state width="1877" height="261" key="GridCell.Tab.0.center" timestamp="1599228206567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
-    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1599222195650">
+    <state width="1877" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206567" />
+    <state width="1877" height="261" key="GridCell.Tab.0.left" timestamp="1599228206566">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1599219432939">
+    <state width="1877" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206566" />
+    <state width="1877" height="261" key="GridCell.Tab.0.right" timestamp="1599228206567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599219432939" />
+    <state width="1877" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206567" />
+    <state width="1877" height="261" key="GridCell.Tab.1.bottom" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.1.center" timestamp="1599228206567">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206567" />
+    <state width="1877" height="261" key="GridCell.Tab.1.left" timestamp="1599228206567">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206567" />
+    <state width="1877" height="261" key="GridCell.Tab.1.right" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.2.bottom" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.2.center" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.2.left" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.2.right" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.3.bottom" timestamp="1599228206569">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206569" />
+    <state width="1877" height="261" key="GridCell.Tab.3.center" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.3.left" timestamp="1599228206568">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206568" />
+    <state width="1877" height="261" key="GridCell.Tab.3.right" timestamp="1599228206569">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206569" />
+    <state width="1877" height="261" key="GridCell.Tab.4.bottom" timestamp="1599228206569">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206569" />
+    <state width="1877" height="261" key="GridCell.Tab.4.center" timestamp="1599228206569">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206569" />
+    <state width="1877" height="261" key="GridCell.Tab.4.left" timestamp="1599228206569">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206569" />
+    <state width="1877" height="261" key="GridCell.Tab.4.right" timestamp="1599228206569">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="261" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599228206569" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1599222546560">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599222546560" />
   </component>
 </project>

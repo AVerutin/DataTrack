@@ -1,6 +1,82 @@
 ﻿@page "/arm1"
+@using System.Diagnostics
+
 <h3>Arm1</h3>
+<p>@Message</p>
+<br />
+<table>
+    <tr>
+        <th>Сигнал</th>
+        <th>Значение</th>
+    </tr>
+    @foreach (var item in _data)
+    {
+        <tr>
+            <td>@item.Key</td>
+            <td>@item.Value</td>
+        </tr>
+    }
+</table>
 
 @code {
     
+    private Material _material = new Material();
+    private Logger _logger = LogManager.GetCurrentClassLogger();
+    private string Message;
+    private IConfigurationRoot _config;
+    private MtsConnect _mtsConnect;
+    private List<ushort> _signals;
+    private Dictionary<ushort, double> _data = new Dictionary<ushort, double>();
+    
+    // Обработка события загрузки страницы
+    protected override async Task OnInitializedAsync()
+    {
+        Message = "Получение параметров подключения сервису МТС";
+        _config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+        string mtsIP = _config.GetSection("Mts:Ip").Value;
+        int mtsPort = Int32.Parse(_config.GetSection("Mts:Port").Value);
+        int mtsTimeout = Int32.Parse(_config.GetSection("Mts:Timeout").Value);
+        int mtsReconnect = Int32.Parse(_config.GetSection("Mts:ReconnectTimeout").Value);
+        
+        Message = "Получение списка сигналов для подписки";
+        _signals = new List<ushort>();
+        _signals.Add(4030);
+        _signals.Add(4031);
+        _signals.Add(4032);
+        _signals.Add(4033);
+        _signals.Add(4034);
+        _signals.Add(4035);
+        _signals.Add(4036);
+        _signals.Add(4037);
+
+        Message = "Подключение к сервису МТС";
+        try
+        {
+            _mtsConnect = new MtsConnect("ARM-1", mtsIP, mtsPort, mtsTimeout, mtsReconnect);
+            await _mtsConnect.Subscribe(_signals, NewData);
+        }
+        catch (Exception e)
+        {
+            _logger.Error($"Ошибка при подключении к сервису МТС: [{e.Message}]");
+        }
+
+        _logger.Info("Подключились к АРМ1");
+        Message = "Подключено";
+    }
+
+    private void NewData(SubscriptionStateEventArgs e)
+    {
+        SignalsState diff = e.Diff.Signals;
+        // KeyValuePair<ushort, double> item = new KeyValuePair<ushort, double>();
+        
+        foreach (var item in diff)
+        {
+            _data[item.Key] = item.Value;
+            Message = $"[{item.Key}] = {item.Value}";
+            Debug.WriteLine($"[{item.Key}] = {item.Value} ==> {Message}");
+            StateHasChanged();
+        }
+    }
 }

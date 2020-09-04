@@ -10,4 +10,10 @@
       <PackageReference Include="Npgsql" Version="4.1.4" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="MtsConnect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\libs\MtsConnect.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
