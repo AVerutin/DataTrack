@@ -1,5 +1,11 @@
-﻿<h3>MainLayout</h3>
+﻿@inherits LayoutComponentBase
 
-@code {
-    
-}
+<div class="sidebar">
+    <NavMenu/>
+</div>
+
+<div class="main">
+    <div class="content px-4">
+        @Body
+    </div>
+</div>

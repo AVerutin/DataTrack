@@ -24,6 +24,10 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="Pages" t="Include">
         <e p="_Host.cshtml" t="Include" />
+        <e p="Arm1.razor" t="Include" />
+        <e p="Arm2.razor" t="Include" />
+        <e p="Error.razor" t="Include" />
+        <e p="Index.razor" t="Include" />
       </e>
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
@@ -31,8 +35,36 @@
       </e>
       <e p="Shared" t="Include">
         <e p="MainLayout.razor" t="Include" />
+        <e p="NavMenu.razor" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
+      <e p="wwwroot" t="Include">
+        <e p="css" t="Include">
+          <e p="bootstrap" t="Include">
+            <e p="bootstrap.min.css" t="Include" />
+            <e p="bootstrap.min.css.map" t="Include" />
+          </e>
+          <e p="open-iconic" t="Include">
+            <e p="font" t="Include">
+              <e p="css" t="Include">
+                <e p="open-iconic-bootstrap.min.css" t="Include" />
+              </e>
+              <e p="fonts" t="Include">
+                <e p="open-iconic.eot" t="Include" />
+                <e p="open-iconic.otf" t="Include" />
+                <e p="open-iconic.svg" t="Include" />
+                <e p="open-iconic.ttf" t="Include" />
+                <e p="open-iconic.woff" t="Include" />
+              </e>
+            </e>
+            <e p="FONT-LICENSE" t="Include" />
+            <e p="ICON-LICENSE" t="Include" />
+            <e p="README.md" t="Include" />
+          </e>
+          <e p="site.css" t="Include" />
+        </e>
+        <e p="favicon.ico" t="Include" />
+      </e>
     </e>
   </component>
 </project>

@@ -9,6 +9,15 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
     <select>
       <path>
@@ -19,26 +28,29 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pages/_Host.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shared/MainLayout.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Imports.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
+    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Commit full app">
+      <change afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pages/Arm2.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pages/Error.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pages/Index.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shared/NavMenu.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/bootstrap/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/bootstrap/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/FONT-LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/ICON-LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/open-iconic/font/fonts/open-iconic.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/css/site.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/_Host.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/_Host.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/MainLayout.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,15 +60,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/_Host.cshtml" root0="FORCE_HIGHLIGHTING" root1="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Pages/_Host.cshtml" />
         <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/Program.cs" />
-        <option value="$PROJECT_DIR$/Shared/MainLayout.razor" />
         <option value="$PROJECT_DIR$/_Imports.razor" />
         <option value="$PROJECT_DIR$/App.razor" />
+        <option value="$PROJECT_DIR$/Pages/Index.razor" />
+        <option value="$PROJECT_DIR$/Shared/MainLayout.razor" />
+        <option value="$PROJECT_DIR$/Pages/_Host.cshtml" />
+        <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
+        <option value="$PROJECT_DIR$/Shared/NavMenu.razor" />
+        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
+        <option value="$PROJECT_DIR$/Pages/Error.razor" />
       </list>
     </option>
   </component>
@@ -69,10 +90,17 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.DataTrack">
@@ -115,8 +143,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599218058720</updated>
-      <workItem from="1599218117153" duration="1079000" />
+      <workItem from="1599218117153" duration="4280000" />
     </task>
+    <task id="LOCAL-00001" summary="First clear commit">
+      <created>1599219318832</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1599219318832</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Commit full app">
+      <created>1599219415906</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599219415906</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,24 +191,32 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="First clear commit" />
+    <MESSAGE value="Commit full app" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit full app" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1599218709901">
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1599222195650">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599218709901" />
-    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1599218709901">
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
+    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1599222195650">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599218709901" />
-    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1599218709901">
+    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
+    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1599222195650">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599218709901" />
-    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1599218709901">
+    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
+    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1599222195650">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599218709901" />
+    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599222195650" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1599219432939">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599219432939" />
   </component>
 </project>
