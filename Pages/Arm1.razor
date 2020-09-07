@@ -1,10 +1,8 @@
 ﻿@page "/arm1"
-@using System.Diagnostics
 @inject NotifierService Notifier
 @implements IDisposable
 
 <h3>Arm1</h3>
-<p>@Message</p>
 <p>Last update: @lastNotification.key = @lastNotification.value</p>
 <br />
 <table>
@@ -21,95 +19,3 @@
     }
 </table>
 
-@code {
-    // Поключение уведомлений о небходимости обновления компонентов
-    private (ushort key, double value) lastNotification;
-    
-    private Material _material = new Material();
-    private Logger _logger = LogManager.GetCurrentClassLogger();
-    private string Message;
-    private IConfigurationRoot _config;
-    private MtsConnect _mtsConnect;
-    private List<ushort> _signals;
-    private Dictionary<ushort, double> _data = new Dictionary<ushort, double>();
-    DBConnection db = new DBConnection();
-   
-    // Обработка события загрузки страницы
-    protected override async void OnInitialized ()
-    {
-        // Добавления подписки на события уведомлений
-        Notifier.Notify += OnNotify;
-        
-        Message = "Получение параметров подключения сервису МТС";
-        _config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build();
-        string mtsIP = _config.GetSection("Mts:Ip").Value;
-        int mtsPort = Int32.Parse(_config.GetSection("Mts:Port").Value);
-        int mtsTimeout = Int32.Parse(_config.GetSection("Mts:Timeout").Value);
-        int mtsReconnect = Int32.Parse(_config.GetSection("Mts:ReconnectTimeout").Value);
-        
-        Message = "Получение списка сигналов для подписки";
-        _signals = new List<ushort>();
-        _signals.Add(4030);
-        _signals.Add(4031);
-        _signals.Add(4032);
-        _signals.Add(4033);
-        _signals.Add(4034);
-        _signals.Add(4035);
-        _signals.Add(4036);
-        _signals.Add(4037);
-
-        Message = "Подключение к сервису МТС";
-        try
-        {
-            _mtsConnect = new MtsConnect("ARM-1", mtsIP, mtsPort, mtsTimeout, mtsReconnect);
-            await _mtsConnect.Subscribe(_signals, NewData);
-        }
-        catch (Exception e)
-        {
-            _logger.Error($"Ошибка при подключении к сервису МТС: [{e.Message}]");
-        }
-
-        _logger.Info("Подключились к АРМ1");
-        Message = "Подключено";
-    }
-
-    // Событие при обновлении значения события
-    private async Task OnNotify(ushort key, double value)
-    {
-        await InvokeAsync(() =>
-        {
-            lastNotification = (key, value);
-            StateHasChanged();
-        });
-    }
-    
-    public void Dispose()
-    {
-        Notifier.Notify -= OnNotify;
-    }
-
-    private async void NewData(SubscriptionStateEventArgs e)
-    {
-        SignalsState diff = e.Diff.Signals;
-        if (diff != null)
-        {
-            foreach (var item  in  diff)
-            {
-                _data[item.Key] = item.Value;
-                lastNotification.key = item.Key;
-                lastNotification.value = item.Value;
-                Message = $"[{item.Key}] = {item.Value}";
-                Debug.WriteLine($"[{item.Key}] = {item.Value} ==> {Message}");
-                
-                await InvokeAsync(async () =>
-                {
-                    await OnNotify(item.Key, item.Value);
-                    StateHasChanged();
-                });                    
-            }
-        }
-    }
-
-}

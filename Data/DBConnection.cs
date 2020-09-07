@@ -36,7 +36,7 @@ namespace DataTrack.Data
             string db_pass = config.GetSection("PGSQL:DBPass").Value;
 
             ConnectionString =
-                $"Server={db_host};Username={db_user};Database={db_name};Port={db_port};Password={db_pass}"; // ;SSLMode=Prefer
+                $"Server={db_host};Username={db_user};Database={db_name};Port={db_port};Password={db_pass};SSLMode=Prefer";
 
             try
             {
@@ -192,18 +192,17 @@ namespace DataTrack.Data
         /// Получить материал из таблицы БД
         /// </summary>
         /// <returns>Экземпляр класса Material</returns>
-        public List<Material> GetMaterials(string material)
+        public List<Material> GetMaterials(/*string material*/)
         {
             List<Material> Result = new List<Material>();
 
             if (Connection != null)
             {
-                string query = $"SELECT * FROM {DBShema}._materials WHERE name='{material}' ORDER BY id ASC;";
-                var data = getData(query);
-
+                // string query = $"SELECT * FROM {DBShema}._materials WHERE name='{material}' ORDER BY id ASC;";
+                string query = $"SELECT * FROM {DBShema}.tmp_materials ORDER BY name, partno ASC;";
+                // var data = getData(query);
 
                 SQLCommand = new NpgsqlCommand(query, Connection);
-
                 Connection.Open();
                 SQLData = SQLCommand.ExecuteReader();
 
