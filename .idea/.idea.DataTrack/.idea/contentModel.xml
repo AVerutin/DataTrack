@@ -12,11 +12,14 @@
       <e p="appsettings.json" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Data" t="Include">
+        <e p="DBConnection.cs" t="Include" />
+        <e p="DBConnectionOptions.cs" t="Include" />
         <e p="Material.cs" t="Include" />
         <e p="MtsConnect.cs" t="Include" />
       </e>
       <e p="DataTrack.csproj" t="IncludeRecursive" />
       <e p="DataTrack.sln" t="IncludeFlat" />
+      <e p="NotifierService.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netcoreapp3.1" t="Include">
@@ -69,6 +72,7 @@
         </e>
         <e p="favicon.ico" t="Include" />
       </e>
+      <e p="Сигналы.txt" t="Include" />
     </e>
   </component>
 </project>

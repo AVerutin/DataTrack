@@ -33,6 +33,8 @@ namespace DataTrack
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
+            services.AddScoped<NotifierService>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
         }

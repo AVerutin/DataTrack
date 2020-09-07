@@ -1,8 +1,11 @@
 ﻿@page "/arm1"
 @using System.Diagnostics
+@inject NotifierService Notifier
+@implements IDisposable
 
 <h3>Arm1</h3>
 <p>@Message</p>
+<p>Last update: @lastNotification.key = @lastNotification.value</p>
 <br />
 <table>
     <tr>
@@ -19,6 +22,8 @@
 </table>
 
 @code {
+    // Поключение уведомлений о небходимости обновления компонентов
+    private (ushort key, double value) lastNotification;
     
     private Material _material = new Material();
     private Logger _logger = LogManager.GetCurrentClassLogger();
@@ -27,10 +32,14 @@
     private MtsConnect _mtsConnect;
     private List<ushort> _signals;
     private Dictionary<ushort, double> _data = new Dictionary<ushort, double>();
-    
+    DBConnection db = new DBConnection();
+   
     // Обработка события загрузки страницы
-    protected override async Task OnInitializedAsync()
+    protected override async void OnInitialized ()
     {
+        // Добавления подписки на события уведомлений
+        Notifier.Notify += OnNotify;
+        
         Message = "Получение параметров подключения сервису МТС";
         _config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
@@ -66,17 +75,41 @@
         Message = "Подключено";
     }
 
-    private void NewData(SubscriptionStateEventArgs e)
+    // Событие при обновлении значения события
+    private async Task OnNotify(ushort key, double value)
+    {
+        await InvokeAsync(() =>
+        {
+            lastNotification = (key, value);
+            StateHasChanged();
+        });
+    }
+    
+    public void Dispose()
+    {
+        Notifier.Notify -= OnNotify;
+    }
+
+    private async void NewData(SubscriptionStateEventArgs e)
     {
         SignalsState diff = e.Diff.Signals;
-        // KeyValuePair<ushort, double> item = new KeyValuePair<ushort, double>();
-        
-        foreach (var item in diff)
+        if (diff != null)
         {
-            _data[item.Key] = item.Value;
-            Message = $"[{item.Key}] = {item.Value}";
-            Debug.WriteLine($"[{item.Key}] = {item.Value} ==> {Message}");
-            StateHasChanged();
+            foreach (var item  in  diff)
+            {
+                _data[item.Key] = item.Value;
+                lastNotification.key = item.Key;
+                lastNotification.value = item.Value;
+                Message = $"[{item.Key}] = {item.Value}";
+                Debug.WriteLine($"[{item.Key}] = {item.Value} ==> {Message}");
+                
+                await InvokeAsync(async () =>
+                {
+                    await OnNotify(item.Key, item.Value);
+                    StateHasChanged();
+                });                    
+            }
         }
     }
+
 }
