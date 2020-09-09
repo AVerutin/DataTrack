@@ -7,6 +7,7 @@ namespace DataTrack.Data
         // Свойства класса Материал
         #region
         public long ID { get; private set; }            // Уникальный идентификационный номер
+        public long Invoice { get; private set; }       // Номер инвойса для идентификации номера партии материала 
         public string Name { get; private set; }        // Наименование материала
         public int PartNo { get; private set; }         // Номер партии
         public double Weight { get; private set; }      // Вес партии материала 
@@ -19,6 +20,7 @@ namespace DataTrack.Data
         public Material()
         {
             ID = 0;
+            Invoice = 0;
             Name = "";
             PartNo = 0;
             Weight = 0;
@@ -30,13 +32,15 @@ namespace DataTrack.Data
         /// Конструктор для создания материала
         /// </summary>
         /// <param name="id">Уникальный идентификатор материала</param>
+        /// <param name="invoice">Номер инвойса для идентификации партии материала</param>
         /// <param name="name">Наименование материала</param>
         /// <param name="partno">Номер партии</param>
         /// <param name="weight">Вес материала</param>
         /// <param name="volume">Объем материала</param>
-        public Material(long id=0, string name = "", int partno = 0, double weight=0.0, double volume = 0.0)
+        public Material(long id, long invoice, string name, int partno, double weight, double volume)
         {
             ID = id;
+            Invoice = invoice;
             Name = name;
             PartNo = partno;
             Weight = weight;
@@ -73,9 +77,10 @@ namespace DataTrack.Data
         /// <param name="partno">Номер партии</param>
         /// <param name="weight">Вес материала</param>
         /// <param name="weight">Объем материала</param>
-        public void setMaterial(long id, string name, int partno, double weight, double volume = 0.0)
+        public void setMaterial(long id, long invoice, string name, int partno, double weight, double volume = 0.0)
         {
             ID = id;
+            Invoice = invoice;
             Name = name;
             PartNo = partno;
             Weight = weight;

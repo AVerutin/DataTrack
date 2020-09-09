@@ -1,31 +1,35 @@
 ﻿@page "/arm1"
 @inject NotifierService Notifier
+@using System.Threading.Tasks.Dataflow
 @implements IDisposable
 
 <h3>АРМ №1</h3>
-<p>Last update: @lastNotification.key = @lastNotification.value</p>
-<p>Выбран силос: @silosSelected</p>
+<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
+<p>Выбран силос: @_silosSelected, Материал №@manual.MaterialID</p>   
+<p>Текущий материал: @_materials[_currentMaterial].Name [@_materials[_currentMaterial].PartNo, @_materials[_currentMaterial].Weight]</p>
 <br />
 
 <!-- Загрузочные бункера -->
-<img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial(e, 1))" />
-<img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial(e, 2))" />
+<img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial())" />
+<img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial())" />      
+<button id="Reset1" class="btn btn-primary" @onclick="@(e => ResetInputTank(1))">Сброс</button>
+<button id="Reset2" class="btn btn-primary" @onclick="@(e => ResetInputTank(2))">Сброс</button>
 
 <!-- Конвейеры -->
 <img id="Conveyor1" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 1" />
 <img id="Conveyor2" src="img/arm1/Elevator3Grey.png" alt="Вертикальный конвейер 1" />
 <img id="Conveyor3" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 2" />
-<img id="Conveyor4" src="img/arm1/TelegaGrey.png" alt="Конвейер на телеге" style="position: absolute; top: 60px; left: @TelegaPos;" />
+<img id="Conveyor4" src="img/arm1/TelegaGrey.png" alt="Конвейер на телеге" style="position: absolute; top: 60px; left: @_telegaPos;" />
 
 <!-- Силосы -->
-<img id="Silos1" src="img/arm1/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial(e, 3))" />
-<img id="Silos2" src="img/arm1/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial(e, 4))" />
-<img id="Silos3" src="img/arm1/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial(e, 5))" />
-<img id="Silos4" src="img/arm1/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial(e, 6))" />
-<img id="Silos5" src="img/arm1/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial(e, 7))" />
-<img id="Silos6" src="img/arm1/SilosLeft.png"  alt="Силос 6" @onmouseover="@(e => ShowMaterial(e, 8))" @onmouseout="@(e => HideMaterial(e, 8))" />
-<img id="Silos7" src="img/arm1/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 9))" @onmouseout="@(e => HideMaterial(e, 9))" />
-<img id="Silos8" src="img/arm1/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial(e, 10))" />
+<img id="Silos1" src="img/arm1/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos2" src="img/arm1/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos3" src="img/arm1/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos4" src="img/arm1/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos5" src="img/arm1/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos6" src="img/arm1/SilosLeft.png"  alt="Силос 6" @onmouseover="@(e => ShowMaterial(e, 8))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos7" src="img/arm1/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 9))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos8" src="img/arm1/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />
 
 <!-- Обработку события наведения мыши также разместить в коде страницы -->
 
@@ -54,16 +58,16 @@
 <img id="Input2_Status" src="@_statuses[1]" alt="Статус 2 загрузочного бункера" />
 
 <!-- Метка наименования материала -->
-<div id="Input1_Material" class="material_name">@InputTankers[0].Material</div>
-<div id="Input2_Material" class="material_name">@InputTankers[1].Material</div>
-<div id="Silos1_Material" class="material_name">@Siloses[0].Material</div>
-<div id="Silos2_Material" class="material_name">@Siloses[1].Material</div>
-<div id="Silos3_Material" class="material_name">@Siloses[2].Material</div>
-<div id="Silos4_Material" class="material_name">@Siloses[3].Material</div>
-<div id="Silos5_Material" class="material_name">@Siloses[4].Material</div>
-<div id="Silos6_Material" class="material_name">@Siloses[5].Material</div>
-<div id="Silos7_Material" class="material_name">@Siloses[6].Material</div>
-<div id="Silos8_Material" class="material_name">@Siloses[7].Material</div>
+<div id="Input1_Material" class="material_name">@_inputTankers[0].Material</div>
+<div id="Input2_Material" class="material_name">@_inputTankers[1].Material</div>
+<div id="Silos1_Material" class="material_name">@_siloses[0].Material</div>
+<div id="Silos2_Material" class="material_name">@_siloses[1].Material</div>
+<div id="Silos3_Material" class="material_name">@_siloses[2].Material</div>
+<div id="Silos4_Material" class="material_name">@_siloses[3].Material</div>
+<div id="Silos5_Material" class="material_name">@_siloses[4].Material</div>
+<div id="Silos6_Material" class="material_name">@_siloses[5].Material</div>
+<div id="Silos7_Material" class="material_name">@_siloses[6].Material</div>
+<div id="Silos8_Material" class="material_name">@_siloses[7].Material</div>
 
 <!-- Метка номера бункера -->
 <div id="Input1_Number" class="tanker_number">1</div>
@@ -77,7 +81,7 @@
 <div id="Silos7_Number" class="tanker_number">7</div>
 <div id="Silos8_Number" class="tanker_number">8</div>
 
-<div id="showSilosDetail" style="position: absolute; top: @detailPosY; left: @detailPosX; display: @showed;">
+<div id="showSilosDetail" style="position: absolute; top: @_detailPosY; left: @_detailPosX; display: @_showed;">
     <table class="silos_detail">
         <tr>
             <th>№</th>
@@ -86,15 +90,31 @@
             <th>Вес</th>
             <th>Объем</th>
         </tr>
-        @for (int i = 0; i < _material.Count; i++)
+        @for (int i = 0; i < _loadedMaterial.Count; i++)
         {
             <tr>
                 <td>@(i+1)</td>
-                <td>@_material[i].Name</td>
-                <td>@_material[i].PartNo</td>
-                <td>@_material[i].Weight</td>
-                <td>@_material[i].Volume</td>
+                <td>@_loadedMaterial[i].Name</td>
+                <td>@_loadedMaterial[i].PartNo</td>
+                <td>@_loadedMaterial[i].Weight</td>
+                <td>@_loadedMaterial[i].Volume</td>
             </tr>
         }
-    </table>
+    </table>          
 </div>
+               
+<div id="SelectMaterial">
+<EditForm Model="@manual">
+    <label for="materialID">Материал:</label>
+            <InputSelect id="materialID" @bind-Value="manual.MaterialID">
+                @foreach (var material in _materials)
+                {
+                    string option = $"{material.Name} [{material.PartNo}, {material.Weight}]";
+                    <option value="@material.Invoice.ToString()">@option</option>
+                }
+            </InputSelect>     
+    
+</EditForm>              
+</div>
+
+ 

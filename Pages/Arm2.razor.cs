@@ -6,7 +6,7 @@ namespace DataTrack.Pages
     {
         private (ushort key, double value) lastNotification;
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             Notifier.Notify += OnNotify;
             

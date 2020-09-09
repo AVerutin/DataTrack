@@ -246,7 +246,7 @@ namespace DataTrack.Data
                     if(mat_weight > 0)
                     {
                         chemicals = GetChemicals(material_name);
-                        layer.setMaterial(material_id, material_name, partno, mat_weight, mat_volume);
+                        layer.setMaterial(material_id, invoice_id, material_name, partno, mat_weight, mat_volume);
                         layer.AddChemicals(chemicals);
                         Result.Add(layer);
                     }

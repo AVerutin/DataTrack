@@ -21,12 +21,11 @@ namespace DataTrack.Data
         /// </summary>
         public string Material { get; private set; }
 
-        /// <summary>
-        /// Вес загруженного в силос материала
-        /// </summary>
-        public double Weight { get; private set; }
-
+        // Список материала, загруженного в силос
         private List<Material> Materials;
+        
+        // Время загрузки силоса
+        private int TimeLoading;
         private readonly Logger logger;
         private int LayersCount;
 
@@ -40,7 +39,6 @@ namespace DataTrack.Data
                 Materials = new List<Material>();
                 LayersCount = 0;
                 Material = "";
-                Weight = 0;
             }
             else
             {
@@ -60,43 +58,6 @@ namespace DataTrack.Data
         }
 
         /// <summary>
-        /// Выбор материала силоса
-        /// </summary>
-        /// <param name="material"></param>
-        public void SetMaterial(string material)
-        {
-            if (material != "")
-            {
-                Material = material;
-            }
-            else
-            {
-                Status = Statuses.Status.Error;
-                logger.Error($"Установка пустого материала для силоса {SilosId}");
-                throw new ArgumentNullException("Нельзя установить пустой материал для силоса!");
-            }
-        }
-
-        /// <summary>
-        /// Расчитать вес материала, загруженного в силос
-        /// </summary>
-        /// <returns>Рассчитанный вес материала в силосе</returns>
-        private double GetWeight()
-        {
-            double Result = 0;
-
-            if (Materials != null && LayersCount > 0)
-            {
-                for (int i = 0; i < LayersCount; i++)
-                {
-                    Result += Materials[i].getWeight();
-                }
-            }
-
-            return Result;
-        }
-
-        /// <summary>
         /// Сброс силоса в исходное состояние
         /// </summary>
         public void Reset()
@@ -105,9 +66,7 @@ namespace DataTrack.Data
             LayersCount = 0;
             Materials = new List<Material>();
             Material = "";
-            Weight = 0;
         }
-
 
         /// <summary>
         /// Загрузить материал в силос из загрузочного бункера
@@ -137,9 +96,22 @@ namespace DataTrack.Data
                 throw new ArgumentException($"Силос {SilosId} ожидает материал {Material} вместо {source.Material}");
             }
 
-            Materials = source.Unload();
+            // Добавляем материал из загрузочного бункера к слоям материала, уже имеющимся в силосе
+            List<Material> materials = source.Unload();
+            foreach (Material material in materials)
+            {
+                Materials.Add(material);
+            }
             LayersCount = Materials.Count;
-            Weight = GetWeight();
+            Status = Statuses.Status.Off;
+        }
+
+        public void SetTimeLoading(int time)
+        {
+            if (time > 0)
+            {
+                TimeLoading = time;
+            }
         }
 
         /// <summary>
@@ -164,15 +136,15 @@ namespace DataTrack.Data
         /// Полная разгрузка силоса
         /// </summary>
         /// <returns>Список разгруженного материала</returns>
-        public List<Material> UnloadFull()
+        public List<Material> Unload()
         {
             Status = Statuses.Status.Unloading;
 
             List<Material> Result = Materials;
             Materials = new List<Material>();
             LayersCount = Materials.Count;
-            Status = Statuses.Status.Empty;
-            Weight = 0;
+            Material = "";
+            Status = Statuses.Status.Off;
             
             return Result;
         }
@@ -215,7 +187,7 @@ namespace DataTrack.Data
 
                         // Добавляем в выгруженную часть слоя в список выгруженного материала
                         Material unload = new Material();
-                        unload.setMaterial(_material.ID, _material.Name, _material.PartNo, weight, _material.Volume);
+                        unload.setMaterial(_material.ID, _material.Invoice, _material.Name, _material.PartNo, weight, _material.Volume);
                         unload.setWeight(weight);
                         unloaded.Add(unload);
                         weight = 0;
@@ -270,7 +242,10 @@ namespace DataTrack.Data
                 throw new ArgumentNullException($"Не указан вес выгружаемого материала из силоса {SilosId}");
             }
 
-            Weight = GetWeight();
+            Materials = new List<Material>();
+            Material = "";
+            LayersCount = 0;
+            
             return unloaded;
         }
     }

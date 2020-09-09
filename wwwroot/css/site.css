@@ -221,23 +221,24 @@ app {
     width: 200px;
 }
 
-#add_materials {
+#SelectMaterial {
+    display: inherit;
     position: absolute;
     top: 550px;
-    left: 10px;
-    width: 300px;
+    left: 300px;
+    width: 350px;
 }
 
-#reset1 {
+#Reset1 {
     position: absolute;
-    top: 220px;
-    left: 50px;
+    top: 200px;
+    left: 320px;
 }
 
-#reset2 {
+#Reset2 {
     position: absolute;
-    top: 220px;
-    left: 200px;
+    top: 200px;
+    left: 437px;
 }
 
 .silos_detail {

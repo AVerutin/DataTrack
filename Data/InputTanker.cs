@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using NLog;
 namespace DataTrack.Data
 {
@@ -14,20 +16,19 @@ namespace DataTrack.Data
         /// Текущее состояние загрузочного бункера
         /// </summary>
         public Statuses.Status Status { get; private set; }
+        public bool Selected { get; set; }
 
         /// <summary>
         /// Наименование загруженного в бункер материала
         /// </summary>
         public string Material { get; private set; }
 
-        /// <summary>
-        /// Вес загруженного в бункер материала
-        /// </summary>
-        public double Weight { get; private set; }
-
+        // Список материала, загруженного в загрузочный бункер
         private List<Material> Materials;
+        
         private readonly Logger logger;
         private int LayersCount;
+        private int TimeLoading;
 
         public InputTanker(int number)
         {
@@ -39,7 +40,6 @@ namespace DataTrack.Data
                 Materials = new List<Material>();
                 LayersCount = 0;
                 Material = "";
-                Weight = 0;
             }
             else
             {
@@ -57,7 +57,7 @@ namespace DataTrack.Data
         {
             Status = status;
         }
-
+        
         /// <summary>
         /// Получить текущее состояние загрузочного бункера
         /// </summary>
@@ -68,28 +68,10 @@ namespace DataTrack.Data
         }
 
         /// <summary>
-        /// Выбор материала загрузочного бункера
-        /// </summary>
-        /// <param name="material"></param>
-        public void SetMaterial(string material)
-        {
-            if (material != "")
-            {
-                Material = material;
-            }
-            else
-            {
-                Status = Statuses.Status.Error;
-                logger.Error($"Установка пустого материала для загрузочного бункера {InputTankerId}");
-                throw new ArgumentNullException("Нельзя установить пустой материал для загрузочного бункера!");
-            }
-        }
-
-        /// <summary>
         /// Получить наименование материала, установленного для загрузочного бункера
         /// </summary>
-        /// <returns>Наименование материала. укстановленного для загрузочного бункера</returns>
-        public string GetMaterial()
+        /// <returns>Наименование материала. установленного для загрузочного бункера</returns>
+        public string GetMaterialName()
         {
             return Material;
         }
@@ -117,10 +99,19 @@ namespace DataTrack.Data
 
                 try
                 {
-                    Materials.Add(material);
-                    LayersCount = Materials.Count;
-                    Material = Materials[LayersCount - 1].Name;
-                    Weight = GetWeight();
+                    // Загрузка бункера производится определенное время
+                    logger.Info($"Начинается ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    Debug.WriteLine($"Начинается ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    var t = Task.Run(async delegate
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(TimeLoading));
+                        Materials.Add(material);
+                        LayersCount = Materials.Count;
+                        Material = Materials[LayersCount - 1].Name;
+                    });
+                    t.Wait();
+                    logger.Info($"Закончилось ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    Debug.WriteLine($"Закончилось ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
                 }
                 catch (Exception e)
                 {
@@ -129,31 +120,21 @@ namespace DataTrack.Data
                     throw new NotSupportedException();
                 }
             }
+
+            Status = Statuses.Status.Off;
         }
 
-        /// <summary>
-        /// Получить суммарный вес всех загруженных материалов в загрузочный бункер
-        /// </summary>
-        /// <returns>Суммарный вес загруженного материала</returns>
-        public double GetWeight()
+        public void SetTimeLoading(int time)
         {
-            double Result = 0;
-
-            if (Materials != null && LayersCount > 0)
+            if (time > 0)
             {
-                for (int i=0; i<LayersCount; i++)
-                {
-                    Result += Materials[i].getWeight();
-                }
+                TimeLoading = time;
             }
-
-            return Result;
         }
 
         /// <summary>
-        /// Выгрузить из загрузочного бункера требуемый вес материала
+        /// Выгрузить весь материал из загрузочного бункера
         /// </summary>
-        /// <param name="weight">Вес выгружаемого материала</param>
         /// <returns>Список выгруженного материала из загрузочного бункера</returns>
         public List<Material> Unload()
         {
@@ -167,9 +148,16 @@ namespace DataTrack.Data
                 throw new ArgumentNullException($"Загрузочный бункер {InputTankerId} не содержит материал");
             }
 
-            Weight = 0;
-            Status = Statuses.Status.Empty;
-            return Materials;
+            List<Material> result = Materials;
+            
+            var t = Task.Run(async delegate
+            {
+                await Task.Delay(TimeSpan.FromSeconds(20));
+            });
+            t.Wait();
+            
+            Reset();
+            return result;
         }
 
         /// <summary>
@@ -199,7 +187,6 @@ namespace DataTrack.Data
             LayersCount = 0;
             Materials = new List<Material>();
             Material = "";
-            Weight = 0;
         }
     }
 }

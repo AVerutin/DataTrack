@@ -18,6 +18,7 @@
         <e p="DBConnection.cs" t="Include" />
         <e p="DBConnectionOptions.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />
+        <e p="ManualWork.cs" t="Include" />
         <e p="Material.cs" t="Include" />
         <e p="MtsConnect.cs" t="Include" />
         <e p="Silos.cs" t="Include" />
