@@ -173,6 +173,24 @@ namespace DataTrack.Data
         }
 
         /// <summary>
+        /// Получить количество слоев материала, загруженного в бункер
+        /// </summary>
+        /// <returns>Количество слоев материала, загруженного в бункер</returns>
+        public int GetLayersCount()
+        {
+            return Materials.Count;
+        }
+
+        /// <summary>
+        /// Получить список слоев материала, загруженного в бункер
+        /// </summary>
+        /// <returns>Список слоев материала, загруженного в бункер</returns>
+        public List<Material> GetMaterials()
+        {
+            return Materials;
+        }
+
+        /// <summary>
         /// Сброс загрузочного бункера в исходное состояние
         /// </summary>
         public void Reset()

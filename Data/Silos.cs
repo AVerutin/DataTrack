@@ -143,6 +143,24 @@ namespace DataTrack.Data
         }
 
         /// <summary>
+        /// Получить количество слоев материала, загруженного в силос
+        /// </summary>
+        /// <returns>Количество слоев материала, загруженного в силос</returns>
+        public int GetLayersCount()
+        {
+            return Materials.Count;
+        }
+
+        /// <summary>
+        /// Получить список слоев материала, загруженного в силос
+        /// </summary>
+        /// <returns>Список слоев материала, загруженного в силос</returns>
+        public List<Material> GetMaterials()
+        {
+            return Materials;
+        }
+
+        /// <summary>
         /// Полная разгрузка силоса
         /// </summary>
         /// <returns>Список разгруженного материала</returns>

@@ -10,6 +10,7 @@ namespace DataTrack.Data
     public class DBConnection
     {
         private readonly NpgsqlConnection Connection;
+        private readonly DBConnectionOptions options;
         private readonly string ConnectionString;
         private NpgsqlCommand SQLCommand;
         private NpgsqlDataReader SQLData;
@@ -28,15 +29,17 @@ namespace DataTrack.Data
             config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
-            string db_host = config.GetSection("PGSQL:DBHost").Value;
-            string db_port = config.GetSection("PGSQL:DBPort").Value;
-            string db_name = config.GetSection("PGSQL:DBName").Value;
-            string db_schema = config.GetSection("PGSQL:DBSchema").Value;
-            string db_user = config.GetSection("PGSQL:DBUser").Value;
-            string db_pass = config.GetSection("PGSQL:DBPass").Value;
+            
+            options = new DBConnectionOptions(config);
+            // string db_host = config.GetSection("PGSQL:DBHost").Value;
+            // string db_port = config.GetSection("PGSQL:DBPort").Value;
+            // string db_name = config.GetSection("PGSQL:DBName").Value;
+            // string db_schema = config.GetSection("PGSQL:DBSchema").Value;
+            // string db_user = config.GetSection("PGSQL:DBUser").Value;
+            // string db_pass = config.GetSection("PGSQL:DBPass").Value;
 
             ConnectionString =
-                $"Server={db_host};Username={db_user};Database={db_name};Port={db_port};Password={db_pass};SSLMode=Prefer";
+                $"Server={options.DBHost};Username={options.DBUser};Database={options.DBName};Port={options.DBPort};Password={options.DBPass};SSLMode=Prefer";
 
             try
             {
@@ -50,7 +53,7 @@ namespace DataTrack.Data
 
             SQLCommand = null;
             SQLData = null;
-            DBShema = db_schema;
+            DBShema = options.DBSchema;
         }
 
         /// <summary>
@@ -198,9 +201,26 @@ namespace DataTrack.Data
 
             if (Connection != null)
             {
-                // string query = $"SELECT * FROM {DBShema}._materials WHERE name='{material}' ORDER BY id ASC;";
-                string query = $"SELECT * FROM {DBShema}.tmp_materials ORDER BY name, partno ASC;";
-                // var data = getData(query);
+                // Полчение прихода и расхода материалов
+
+                string query = "SELECT " +
+                   "pqca.materials.id as material_id, " +                    // 0    
+                   "pqca.invoices.id as invoices_id, " +                     // 1
+                   "pqca.materials.material as material, " +                 // 2
+                   "pqca.invoices.partno as partno, " +                      // 3
+                   "COALESCE(pqca.entry.volume, 0) as entry_volume, " +      // 4
+                   "COALESCE(pqca.entry.weight, 0) as entry_weight, " +      // 5
+                   "COALESCE(pqca.sale.volume, 0) as sale_volume, " +        // 6
+                   "COALESCE(pqca.sale.weight, 0) as sale_weight " +         // 7
+                   "FROM " +
+                   "pqca.materials LEFT JOIN pqca.invoices ON pqca.materials.id = pqca.invoices.material " +
+                   "LEFT JOIN pqca.entry ON pqca.invoices.id = pqca.entry.invoice " +
+                   "LEFT JOIN pqca.sale ON pqca.invoices.id = pqca.sale.invoice " +
+                   "ORDER BY " +
+                   "material ASC, " +
+                   "partno ASC;";
+
+                // string query = $"SELECT * FROM {DBShema}.tmp_materials ORDER BY name, partno ASC;";
 
                 SQLCommand = new NpgsqlCommand(query, Connection);
                 Connection.Open();
@@ -209,15 +229,27 @@ namespace DataTrack.Data
                 while (SQLData.Read())
                 {
                     Material layer = new Material();
+                    List<Chemical> chemicals;
 
-                    long id = SQLData.GetInt64(0);
-                    string name = SQLData.GetString(1);
-                    int partno = SQLData.GetInt32(2);
-                    double weight = SQLData.GetDouble(3);
-                    double volume = SQLData.GetDouble(4);
+                    long material_id = SQLData.GetInt64(0);
+                    long invoice_id = SQLData.GetInt64(1);
+                    string material_name = SQLData.GetString(2);
+                    int partno = SQLData.GetInt32(3);
+                    double entry_volume = SQLData.GetDouble(4);
+                    double entry_weight = SQLData.GetDouble(5);
+                    double sale_volume = SQLData.GetDouble(6);
+                    double sale_weight = SQLData.GetDouble(7);
 
-                    layer.setMaterial(id, name, partno, weight, volume);
-                    Result.Add(layer);
+                    double mat_weight = entry_weight - sale_weight;
+                    double mat_volume = entry_volume - sale_volume;
+
+                    if(mat_weight > 0)
+                    {
+                        chemicals = GetChemicals(material_name);
+                        layer.setMaterial(material_id, material_name, partno, mat_weight, mat_volume);
+                        layer.AddChemicals(chemicals);
+                        Result.Add(layer);
+                    }
                 }
 
                 Connection.Close();
@@ -228,6 +260,37 @@ namespace DataTrack.Data
             }
 
             return Result;
+        }
+
+
+        public List<Chemical> GetChemicals(string material_name)
+        {
+            List<Chemical> chemicals = new List<Chemical>();
+
+            // Запрос на получение химического состава материала по его наименованию
+            string query = "SELECT e.id as id, e.name as element, e.sign as sign, c.volume as volume ";
+            query += "FROM pqca.materials m, pqca.elements e, pqca.composition c ";
+            query += $"WHERE c.material = m.id AND c.element = e.id AND m.material = '{material_name}' "; 
+            query += "ORDER BY element;";
+
+            NpgsqlConnection _connection = new NpgsqlConnection(ConnectionString);
+            NpgsqlCommand _command = new NpgsqlCommand(query, _connection);
+            NpgsqlDataReader _sqlReader;
+            
+            _connection.Open();
+            _sqlReader = _command.ExecuteReader();
+            while (_sqlReader.Read())
+            {
+                long id = _sqlReader.GetInt64(0);
+                string name = _sqlReader.GetString(1);
+                string sign = _sqlReader.GetString(2);
+                double vol = _sqlReader.GetDouble(3);
+                Chemical chemical = new Chemical(id, name, sign, vol);
+                chemicals.Add(chemical);
+            }
+            _connection.Close();
+
+            return chemicals;
         }
     }
 }

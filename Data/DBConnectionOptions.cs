@@ -21,7 +21,7 @@ namespace DataTrack.Data
         /// <summary>
         /// Имя схемы в базе данных
         /// </summary>
-        public string DBSchena { get; }
+        public string DBSchema { get; }
 
         /// <summary>
         /// Имя пользователя СУБД
@@ -40,6 +40,7 @@ namespace DataTrack.Data
             DBName = config.GetSection("PGSQL:DBName").Value;
             DBUser = config.GetSection("PGSQL:DBUser").Value;
             DBPass = config.GetSection("PGSQL:DBPass").Value;
+            DBSchema = config.GetSection("PGSQL:DBSchema").Value;
         }
     }
 }

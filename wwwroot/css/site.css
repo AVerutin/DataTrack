@@ -30,16 +30,16 @@ app {
     flex: 1;
 }
 
-    .main .top-row {
-        background-color: #f7f7f7;
-        border-bottom: 1px solid #d6d5d5;
-        justify-content: flex-end;
-    }
+.main .top-row {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+}
 
-        .main .top-row > a, .main .top-row .btn-link {
-            white-space: nowrap;
-            margin-left: 1.5rem;
-        }
+.main .top-row > a, .main .top-row .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
 
 .main .top-row a:first-child {
     overflow: hidden;
@@ -50,52 +50,52 @@ app {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
-    .sidebar .top-row {
-        background-color: rgba(0,0,0,0.4);
-    }
+.sidebar .top-row {
+    background-color: rgba(0,0,0,0.4);
+}
 
-    .sidebar .navbar-brand {
-        font-size: 1.1rem;
-    }
+.sidebar .navbar-brand {
+    font-size: 1.1rem;
+}
 
-    .sidebar .oi {
-        width: 2rem;
-        font-size: 1.1rem;
-        vertical-align: text-top;
-        top: -2px;
-    }
+.sidebar .oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
 
-    .sidebar .nav-item {
-        font-size: 0.9rem;
-        padding-bottom: 0.5rem;
-    }
+.sidebar .nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
 
-        .sidebar .nav-item:first-of-type {
-            padding-top: 1rem;
-        }
+.sidebar .nav-item:first-of-type {
+    padding-top: 1rem;
+}
 
-        .sidebar .nav-item:last-of-type {
-            padding-bottom: 1rem;
-        }
+.sidebar .nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
 
-        .sidebar .nav-item a {
-            color: #d7d7d7;
-            border-radius: 4px;
-            height: 3rem;
-            display: flex;
-            align-items: center;
-            line-height: 3rem;
-        }
+.sidebar .nav-item a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
 
-            .sidebar .nav-item a.active {
-                background-color: rgba(255,255,255,0.25);
-                color: white;
-            }
+.sidebar .nav-item a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
 
-            .sidebar .nav-item a:hover {
-                background-color: rgba(255,255,255,0.1);
-                color: white;
-            }
+.sidebar .nav-item a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
 
 .content {
     padding-top: 1.1rem;
@@ -140,11 +140,11 @@ app {
     .main .top-row:not(.auth) {
         display: none;
     }
-
+    
     .main .top-row.auth {
         justify-content: space-between;
     }
-
+    
     .main .top-row a, .main .top-row .btn-link {
         margin-left: 0;
     }
@@ -201,3 +201,420 @@ app {
     border-style: solid;
     border-width: 1px;
 }
+
+#Input1 {
+    position: absolute;
+    top: 250px;
+    left: 310px;
+}
+
+#Input2 {
+    position: absolute;
+    top: 250px;
+    left: 430px;
+}
+
+#load_silos {
+    position: absolute;
+    top: 760px;
+    left: 10px;
+    width: 200px;
+}
+
+#add_materials {
+    position: absolute;
+    top: 550px;
+    left: 10px;
+    width: 300px;
+}
+
+#reset1 {
+    position: absolute;
+    top: 220px;
+    left: 50px;
+}
+
+#reset2 {
+    position: absolute;
+    top: 220px;
+    left: 200px;
+}
+
+.silos_detail {
+    background-color: papayawhip;
+    border-collapse: collapse;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    position: absolute;
+    font-family: "Times New Roman", serif;
+    font-size: 12px;
+}
+
+.silos_detail caption {
+    caption-side: top;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+th, td {
+    border: 1px solid black;
+}
+
+#Silos1 {
+    position: absolute;
+    top: 150px;
+    left: 650px;
+}
+
+#Silos2 {
+    position: absolute;
+    top: 150px;
+    left: 750px;
+}
+
+#Silos3 {
+    position: absolute;
+    top: 150px;
+    left: 850px;
+}
+
+#Silos4 {
+    position: absolute;
+    top: 150px;
+    left: 950px;
+}
+
+#Silos5 {
+    position: absolute;
+    top: 150px;
+    left: 1050px;
+}
+
+#Silos6 {
+    position: absolute;
+    top: 150px;
+    left: 1150px;
+}
+
+#Silos7 {
+    position: absolute;
+    top: 150px;
+    left: 1250px;
+}
+
+#Silos8 {
+    position: absolute;
+    top: 150px;
+    left: 1350px;
+}
+
+#Conveyor1 {
+    position: absolute;
+    top: 504px;
+}
+
+#Conveyor2 {
+    position: absolute;
+    top: 0;
+    left: 570px;
+}
+
+#Conveyor3 {
+    position: absolute;
+    top: 0;
+    left: 570px;
+}
+
+#Conveyor4 {
+    position: absolute;
+    top: 60px;
+    left: 700px;
+}
+
+#Led1 {
+    position: absolute;
+    top: 120px;
+    left: 680px;
+}
+
+#Led2 {
+    position: absolute;
+    top: 120px;
+    left: 780px;
+}
+
+#Led3 {
+    position: absolute;
+    top: 120px;
+    left: 880px;
+}
+
+#Led4 {
+    position: absolute;
+    top: 120px;
+    left: 980px;
+}
+
+#Led5 {
+    position: absolute;
+    top: 120px;
+    left: 1080px;
+}
+
+#Led6 {
+    position: absolute;
+    top: 120px;
+    left: 1180px;
+}
+
+#Led7 {
+    position: absolute;
+    top: 120px;
+    left: 1280px;
+}
+
+#Led8 {
+    position: absolute;
+    top: 120px;
+    left: 1380px;
+}
+
+dialog{
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    border-radius: 20px;
+    background: yellow;
+    z-index: 100;
+}
+
+.kha {
+    border-collapse: collapse;
+    position: absolute;
+    left: 1300px;
+    top: 100px;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    display: none;
+}
+
+.kha tbody {
+    width: 220px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.kha th {
+    border-width: 2px;
+}
+
+.kha caption {
+    font-family: Arial, sans-serif;
+    caption-side: top;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+#balloon {
+    padding: 6px;
+    background-color: #c1c0ac;
+    border-width: 1px;
+    border-color: #333434;
+    border-style: solid;
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    z-index: 1;
+}
+
+#tooltip {
+    border-collapse: collapse;
+}
+
+#tooltip_caption {
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.material_name {
+    position: absolute;
+    font-family: monospace;
+    font-size: 14pt;
+    color: darkblue;
+    font-weight: bold;
+}
+
+.tanker_number {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #0c5460;
+}
+
+#Input1_Material {
+    top: 260px;
+    left: 320px;
+}
+
+#Input2_Material {
+    top: 260px;
+    left: 440px;
+}
+
+#Silos1_Material {
+    top: 180px;
+    left: 665px;
+}
+
+#Silos2_Material {
+    top: 180px;
+    left: 765px;
+}
+
+#Silos3_Material {
+    top: 180px;
+    left: 865px;
+}
+
+#Silos4_Material {
+    top: 180px;
+    left: 965px;
+}
+
+#Silos5_Material {
+    top: 180px;
+    left: 1065px;
+}
+
+#Silos6_Material {
+    top: 180px;
+    left: 1165px;
+}
+
+#Silos7_Material {
+    top: 180px;
+    left: 1265px;
+}
+
+#Silos8_Material {
+    top: 180px;
+    left: 1365px;
+}
+
+#Input1_Number {
+    top: 385px;
+    left: 350px;
+}
+
+#Input2_Number {
+    top: 385px;
+    left: 470px;
+}
+
+#Silos1_Number {
+    top: 215px;
+    left: 687px;
+}
+
+#Silos2_Number {
+    top: 215px;
+    left: 787px;
+}
+
+#Silos3_Number {
+    top: 215px;
+    left: 887px;
+}
+
+#Silos4_Number {
+    top: 215px;
+    left: 987px;
+}
+
+#Silos5_Number {
+    top: 215px;
+    left: 1087px;
+}
+
+#Silos6_Number {
+    top: 215px;
+    left: 1187px;
+}
+
+#Silos7_Number {
+    top: 215px;
+    left: 1287px;
+}
+
+#Silos8_Number {
+    top: 215px;
+    left: 1387px;
+}
+
+#Input1_Status {
+    position: absolute;
+    top: 349px;
+    left: 333px;
+}
+
+#Input2_Status {
+    position: absolute;
+    top: 349px;
+    left: 453px;
+}
+
+#Silos1_Status {
+    position: absolute;
+    top: 157px;
+    left: 722px;
+}
+
+#Silos2_Status {
+    position: absolute;
+    top: 157px;
+    left: 822px;
+}
+
+#Silos3_Status {
+    position: absolute;
+    top: 157px;
+    left: 922px;
+}
+
+#Silos4_Status {
+    position: absolute;
+    top: 157px;
+    left: 1022px;
+}
+
+#Silos5_Status {
+    position: absolute;
+    top: 157px;
+    left: 1122px;
+}
+
+#Silos6_Status {
+    position: absolute;
+    top: 157px;
+    left: 1222px;
+}
+
+#Silos7_Status {
+    position: absolute;
+    top: 157px;
+    left: 1322px;
+}
+
+#Silos8_Status {
+    position: absolute;
+    top: 157px;
+    left: 1422px;
+}
+

@@ -2,20 +2,99 @@
 @inject NotifierService Notifier
 @implements IDisposable
 
-<h3>Arm1</h3>
+<h3>АРМ №1</h3>
 <p>Last update: @lastNotification.key = @lastNotification.value</p>
+<p>Выбран силос: @silosSelected</p>
 <br />
-<table>
-    <tr>
-        <th>Сигнал</th>
-        <th>Значение</th>
-    </tr>
-    @foreach (var item in _data)
-    {
-        <tr>
-            <td>@item.Key</td>
-            <td>@item.Value</td>
-        </tr>
-    }
-</table>
 
+<!-- Загрузочные бункера -->
+<img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial(e, 1))" />
+<img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial(e, 2))" />
+
+<!-- Конвейеры -->
+<img id="Conveyor1" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 1" />
+<img id="Conveyor2" src="img/arm1/Elevator3Grey.png" alt="Вертикальный конвейер 1" />
+<img id="Conveyor3" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 2" />
+<img id="Conveyor4" src="img/arm1/TelegaGrey.png" alt="Конвейер на телеге" style="position: absolute; top: 60px; left: @TelegaPos;" />
+
+<!-- Силосы -->
+<img id="Silos1" src="img/arm1/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial(e, 3))" />
+<img id="Silos2" src="img/arm1/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial(e, 4))" />
+<img id="Silos3" src="img/arm1/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial(e, 5))" />
+<img id="Silos4" src="img/arm1/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial(e, 6))" />
+<img id="Silos5" src="img/arm1/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial(e, 7))" />
+<img id="Silos6" src="img/arm1/SilosLeft.png"  alt="Силос 6" @onmouseover="@(e => ShowMaterial(e, 8))" @onmouseout="@(e => HideMaterial(e, 8))" />
+<img id="Silos7" src="img/arm1/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 9))" @onmouseout="@(e => HideMaterial(e, 9))" />
+<img id="Silos8" src="img/arm1/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial(e, 10))" />
+
+<!-- Обработку события наведения мыши также разместить в коде страницы -->
+
+<!-- Индикаторы выбранного силоса -->
+<img id="Led1" src="@_selected[0]" alt="Выбор силоса 1"/>
+<img id="Led2" src="@_selected[1]" alt="Выбор силоса 2"/>
+<img id="Led3" src="@_selected[2]" alt="Выбор силоса 3"/>
+<img id="Led4" src="@_selected[3]" alt="Выбор силоса 4"/>
+<img id="Led5" src="@_selected[4]" alt="Выбор силоса 5"/>
+<img id="Led6" src="@_selected[5]" alt="Выбор силоса 6"/>
+<img id="Led7" src="@_selected[6]" alt="Выбор силоса 7"/>
+<img id="Led8" src="@_selected[7]" alt="Выбор силоса 8"/>
+
+<!-- Индикаторы состояния силосов -->
+<img id="Silos1_Status" src="@_statuses[2]" alt="Статус 1 силоса" />
+<img id="Silos2_Status" src="@_statuses[3]" alt="Статус 2 силоса" />
+<img id="Silos3_Status" src="@_statuses[4]" alt="Статус 3 силоса" />
+<img id="Silos4_Status" src="@_statuses[5]" alt="Статус 4 силоса" />
+<img id="Silos5_Status" src="@_statuses[6]" alt="Статус 5 силоса" />
+<img id="Silos6_Status" src="@_statuses[7]" alt="Статус 6 силоса" />
+<img id="Silos7_Status" src="@_statuses[8]" alt="Статус 7 силоса" />
+<img id="Silos8_Status" src="@_statuses[9]" alt="Статус 8 силоса" />
+
+<!-- Индикаторы сосотояния загрузочных бункеров-->
+<img id="Input1_Status" src="@_statuses[0]" alt="Статус 1 загрузочного бункера"/>
+<img id="Input2_Status" src="@_statuses[1]" alt="Статус 2 загрузочного бункера" />
+
+<!-- Метка наименования материала -->
+<div id="Input1_Material" class="material_name">@InputTankers[0].Material</div>
+<div id="Input2_Material" class="material_name">@InputTankers[1].Material</div>
+<div id="Silos1_Material" class="material_name">@Siloses[0].Material</div>
+<div id="Silos2_Material" class="material_name">@Siloses[1].Material</div>
+<div id="Silos3_Material" class="material_name">@Siloses[2].Material</div>
+<div id="Silos4_Material" class="material_name">@Siloses[3].Material</div>
+<div id="Silos5_Material" class="material_name">@Siloses[4].Material</div>
+<div id="Silos6_Material" class="material_name">@Siloses[5].Material</div>
+<div id="Silos7_Material" class="material_name">@Siloses[6].Material</div>
+<div id="Silos8_Material" class="material_name">@Siloses[7].Material</div>
+
+<!-- Метка номера бункера -->
+<div id="Input1_Number" class="tanker_number">1</div>
+<div id="Input2_Number" class="tanker_number">2</div>
+<div id="Silos1_Number" class="tanker_number">1</div>
+<div id="Silos2_Number" class="tanker_number">2</div>
+<div id="Silos3_Number" class="tanker_number">3</div>
+<div id="Silos4_Number" class="tanker_number">4</div>
+<div id="Silos5_Number" class="tanker_number">5</div>
+<div id="Silos6_Number" class="tanker_number">6</div>
+<div id="Silos7_Number" class="tanker_number">7</div>
+<div id="Silos8_Number" class="tanker_number">8</div>
+
+<div id="showSilosDetail" style="position: absolute; top: @detailPosY; left: @detailPosX; display: @showed;">
+    <table class="silos_detail">
+        <tr>
+            <th>№</th>
+            <th>Материал</th>
+            <th>Партия</th>
+            <th>Вес</th>
+            <th>Объем</th>
+        </tr>
+        @for (int i = 0; i < _material.Count; i++)
+        {
+            <tr>
+                <td>@(i+1)</td>
+                <td>@_material[i].Name</td>
+                <td>@_material[i].PartNo</td>
+                <td>@_material[i].Weight</td>
+                <td>@_material[i].Volume</td>
+            </tr>
+        }
+    </table>
+</div>

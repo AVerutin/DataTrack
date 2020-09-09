@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DataTrack.Data;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Configuration;
 using MtsConnect;
 using NLog;
@@ -26,6 +27,14 @@ namespace DataTrack.Pages
         private Dictionary<ushort, double> _data = new Dictionary<ushort, double>();
         private DBConnection db = new DBConnection();
         private ConfigMill _configMill = new ConfigMill();
+
+        private string[] _statuses = new string[10];
+        private string[] _selected = new string[8];
+        private int silosSelected = 0;
+        private string TelegaPos;
+        private string detailPosX;
+        private string detailPosY;
+        private string showed = "none";
 
         // Обработка события загрузки страницы
         protected override async void OnInitialized()
@@ -134,7 +143,18 @@ namespace DataTrack.Pages
                     {
                         // Производим загрузку материала в силос из активного загрузочного бункера
                         Siloses[0].Load(InputTankers[tanker]);
+                        _statuses[2] = "img/arm1/led/SmallGreen.png";
                     }
+                    
+                    // Организация задержки на время загрузки силоса
+                    // Вместо лямбды передать ссылку на метод завершения загрузки силоса
+                    // var t = Task.Run(async delegate
+                    // {
+                    //     await Task.Delay(TimeSpan.FromSeconds(15));
+                    //     return 42;
+                    // });
+                    // t.Wait();
+                    Task.Delay(TimeSpan.FromSeconds(15));
 
                     Debug.WriteLine("OK");
                     _logger.Info($"В силос 1 загружен материал [{_mat.Name}]");
@@ -274,6 +294,139 @@ namespace DataTrack.Pages
             Conveyors.Add(_conveyor);
             _conveyor = new Conveyor(3, Conveyor.Types.Horizontal, 15);
             Conveyors.Add(_conveyor);
+
+            _statuses[0] = "img/arm1/led/SquareGrey.png";
+            _statuses[1] = "img/arm1/led/SquareGrey.png";
+            _statuses[2] = "img/arm1/led/SmallGrey.png";
+            _statuses[3] = "img/arm1/led/SmallGrey.png";
+            _statuses[4] = "img/arm1/led/SmallGrey.png";
+            _statuses[5] = "img/arm1/led/SmallGrey.png";
+            _statuses[6] = "img/arm1/led/SmallGrey.png";
+            _statuses[7] = "img/arm1/led/SmallGrey.png";
+            _statuses[8] = "img/arm1/led/SmallGrey.png";
+            _statuses[9] = "img/arm1/led/SmallGrey.png";
+
+            _selected[0] = "img/arm1/led/LedGrey.png";
+            _selected[1] = "img/arm1/led/LedGrey.png";
+            _selected[2] = "img/arm1/led/LedGrey.png";
+            _selected[3] = "img/arm1/led/LedGrey.png";
+            _selected[4] = "img/arm1/led/LedGrey.png";
+            _selected[5] = "img/arm1/led/LedGrey.png";
+            _selected[6] = "img/arm1/led/LedGrey.png";
+            _selected[7] = "img/arm1/led/LedGrey.png";
+            
+        }
+
+        private void ShowMaterial(MouseEventArgs e, int number)
+        {
+            int matCount = 0;
+            switch (number)
+            {
+                case 1:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    matCount = InputTankers[0].GetLayersCount();
+                    _material = InputTankers[0].GetMaterials();
+                    break;
+                }
+                case 2:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    matCount = InputTankers[1].GetLayersCount();
+                    _material = InputTankers[1].GetMaterials();
+                    break;
+                }
+                case 3:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "670px";
+                    matCount = Siloses[0].GetLayersCount();
+                    _material = Siloses[0].GetMaterials();
+                    break;
+                }
+                case 4:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "770px";
+                    matCount = Siloses[1].GetLayersCount();
+                    _material = Siloses[1].GetMaterials();
+                    break;
+                }
+                case 5:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "870px";
+                    matCount = Siloses[2].GetLayersCount();
+                    _material = Siloses[2].GetMaterials();
+                    break;
+                }
+                case 6:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "970px";
+                    matCount = Siloses[3].GetLayersCount();
+                    _material = Siloses[3].GetMaterials();
+                    break;
+                }
+                case 7:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "770px";
+                    matCount = Siloses[4].GetLayersCount();
+                    _material = Siloses[4].GetMaterials();
+                    break;
+                }
+                case 8:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "870px";
+                    matCount = Siloses[5].GetLayersCount();
+                    _material = Siloses[5].GetMaterials();
+                    break;
+                }
+                case 9:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "970px";
+                    matCount = Siloses[6].GetLayersCount();
+                    _material = Siloses[6].GetMaterials();
+                    break;
+                }
+                case 10:
+                {
+                    detailPosY = $"{e.ClientY + 20}px";
+                    detailPosX = $"{e.ClientX + 10}px";
+                    TelegaPos = "1070px";
+                    matCount = Siloses[7].GetLayersCount();
+                    _material = Siloses[7].GetMaterials();
+                    break;
+                }
+            }
+
+            silosSelected = number;
+            if (matCount > 0)
+            {
+                showed = "inherit";
+            }
+            else
+            {
+                showed = "none";
+            }
+        }
+
+        private void HideMaterial(MouseEventArgs e, int number)
+        {
+            silosSelected = 0;
+            showed = "none";
         }
     }
 }

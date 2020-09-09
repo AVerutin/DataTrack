@@ -12,7 +12,7 @@ namespace DataTrack.Data
         public double Weight { get; private set; }      // Вес партии материала 
         public double Volume { get; private set; }      // Объем материала в партии 
         
-        private readonly Dictionary<string, double> Chemicals;    // Химический состав материала
+        private List<Chemical> Chemicals;    // Химический состав материала
         #endregion
 
         // Конструктор по умолчанию
@@ -23,72 +23,7 @@ namespace DataTrack.Data
             PartNo = 0;
             Weight = 0;
             Volume = 0;
-            Chemicals = new Dictionary<string, double>();
-        }
-
-        /// <summary>
-        /// Добавление элемента к химическому составу материала
-        /// </summary>
-        /// <param name="element">Наименование химического элемента</param>
-        /// <param name="volume">Содержание химического элемента в составе материала</param>
-        public void AddElement(string element, double volume)
-        {
-            if (element.Trim() != "" && volume > 0)
-            {
-                Chemicals.Add(element, volume);
-            }
-        }
-
-        /// <summary>
-        /// Удаление элемента из химического состава материала
-        /// </summary>
-        /// <param name="element">Наименование удаляемого элемента из химического состава материала</param>
-        public void RemoveElement (string element)
-        {
-            if(element.Trim() != "")
-            {
-                // Ищем, имеется ли такой элемент в химическом составе материала
-                if (Chemicals.ContainsKey(element))
-                {
-                    Chemicals.Remove(element);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Получить химический состав материала
-        /// </summary>
-        /// <returns>Список элементов, входящий в химический состав материала, и доля их содержания в материале</returns>
-        public Dictionary<string, double> GetChemicals()
-        {
-            return Chemicals;
-        }
-
-        /// <summary>
-        /// Изменить долю содержания элемента в составе материала
-        /// </summary>
-        /// <param name="element">Наименование элемента, содержание которого требуется изменить</param>
-        /// <param name="volume">Значение содержания элемента в составе материала</param>
-        /// <returns>Результат выполнения операции (true - успешно, false - ошибка)</returns>
-        public bool ChangeElementVolume(string element, double volume)
-        {
-            bool Result = false;
-
-            // Если передан пустой элемент или неправильное значение доли содержания материала,
-            // то возвращаем false
-            if (element.Trim() == "" || volume <= 0)
-            {
-                return Result;
-            }
-
-            // Проверяем, есть ли такой элемент в составе материала
-            if (Chemicals.ContainsKey(element))
-            {
-                Chemicals[element] = volume;
-                Result = true;
-            }
-
-            return Result;
+            Chemicals = new List<Chemical>();
         }
 
         /// <summary>
@@ -106,6 +41,28 @@ namespace DataTrack.Data
             PartNo = partno;
             Weight = weight;
             Volume = volume;
+        }
+
+        /// <summary>
+        /// Добавление элемента к химическому составу материала
+        /// </summary>
+        /// <param name="element">Наименование химического элемента</param>
+        /// <param name="volume">Содержание химического элемента в составе материала</param>
+        public void AddChemicals(List<Chemical> chemicals)
+        {
+            if (chemicals != null)
+            {
+                Chemicals = chemicals;
+            }
+        }
+
+        /// <summary>
+        /// Получить химический состав материала
+        /// </summary>
+        /// <returns>Список элементов, входящий в химический состав материала, и доля их содержания в материале</returns>
+        public List<Chemical> GetChemicals()
+        {
+            return Chemicals;
         }
 
         /// <summary>
