@@ -40,8 +40,10 @@ namespace DataTrack.Pages
         private string _detailPosX;
         private string _detailPosY;
         private string _showed = "none";
+        private readonly string[] _loadStatus = new string[2];
 
-        private long num = 0;
+
+        // private long num = 0;
         private ManualWork manual = new ManualWork();
 
         // Обработка события загрузки страницы
@@ -52,7 +54,7 @@ namespace DataTrack.Pages
 
             GetMaterials();
             Initialize();
-            // await ConnectToMts(); // Подключение к сервису MTS Service
+            await ConnectToMts(); // Подключение к сервису MTS Service
         }
 
         // Событие при обновлении значения события
@@ -128,13 +130,6 @@ namespace DataTrack.Pages
         {
             switch (signal)
             {
-                /*
-                         * При получении сигнала на загрузку силоса:
-                         *     1. Получаем номер активного загрузочного бункера
-                         *     2. Получаем следующий материал, который будет загружен в активном загрузочном бункере
-                         *     3. Если силос пуст, или наименование материала совпадает:
-                         *         - загружаем материал из активного загрузочного бункера
-                         */
                 case 4014: // Загрузка силоса 1
                 {
                     // Debug.Write("Начата загрузка силоса 1...");
@@ -217,37 +212,31 @@ namespace DataTrack.Pages
                 case 4029:
                     break; // Температура плавки
 
-                case 4038: // Загрузить материал в первый загрузочный бункер
-                {
-                    LoadInputTanker(1);
-                    break;
-                }
-                case 4039: // Загрузить материал во второй загрузочный бункер
-                {
-                    LoadInputTanker(2);
-                    break;
-                }
+                // Загрузить материал в первый загрузочный бункер
+                case 4038: StartLoadInputTanker(0); break; 
+                // Загрузить материал во второй загрузочный бункер
+                case 4039:  StartLoadInputTanker(1); break; 
 
-                case 4040:    // Признак разгрузки первого загрузочного бункера
+                case 4040:    // Признак конца загрузки первого загрузочного бункера
                 {
                     /*
                     * Установить статус первого загрузочного бункера в состояния Selected
                     * Установить статус второго загрузочного бункера в состояние Deselected
                     */
-
+                    FinishLoadInputTanker(0);
                     _inputTankers[0].Selected = true;
                     _inputTankers[1].Selected = false;
                     _logger.Info("Выбран загрузочный бункер 1");
                     Debug.WriteLine("Выбран загрузочный бункер 1");
                     break;
                 } 
-                case 4041:    // Признак разгрузки второго загрузочного бункера
+                case 4041:    // Признак конца загрузки второго загрузочного бункера
                 {
                     /*
                     * Установить статус первого загрузочного бункера в состояния Selected
                     * Установить статус второго загрузочного бункера в состояние Deselected
                     */
-
+                    FinishLoadInputTanker(1);
                     _inputTankers[0].Selected = false;
                     _inputTankers[1].Selected = true;
                     _logger.Info("Выбран загрузочный бункер 2");
@@ -295,7 +284,7 @@ namespace DataTrack.Pages
             {
                 _tanker = new InputTanker(i);
                 // Время загрузки материала в загрузочный бункер производится 10 секунд
-                _tanker.SetTimeLoading(5);
+                _tanker.SetTimeLoading(0);
                 _inputTankers.Add(_tanker);
             }
 
@@ -447,19 +436,33 @@ namespace DataTrack.Pages
 
         private void ResetInputTank(int number)
         {
-            _inputTankers[number-1].Reset();
-            _statuses[number - 1] = "/img/arm1/led/SquareGrey.png";
+            _inputTankers[number].Reset();
+            _statuses[number] = "/img/arm1/led/SquareGrey.png";
+            _loadStatus[number] = "";
             _logger.Warn($"Был произведен сброс загрузочного бункера [{number}]!");
             Debug.WriteLine($"Был произведен сброс загрузочного бункера [{number}]!");
+        }
+
+        /// <summary>
+        /// Завершение загрузки материала в загрузочный бункер
+        /// </summary>
+        /// <param name="number">Номер загрузочного бункера</param>
+        private void FinishLoadInputTanker(int number)
+        {
+            _loadStatus[number] = "";
+            _inputTankers[number].SetStatus(Statuses.Status.Off);
+            _statuses[number] = "img/arm1/led/SquareGrey.png";
         }
 
         /// <summary>
         /// Загрузка материала в загрузочный бункер
         /// </summary>
         /// <param name="number">Номер загрузочного бункера, в который следует загрузить материал</param>
-        private void LoadInputTanker(int number)
+        /// <param name="value">Значение сигнала от MTS Service</param>
+        private void StartLoadInputTanker(int number)
         {
-            int tanker = number - 1;
+            int tanker = number;
+
             /*
              * 1. Получить следующий загружаемый материал из списка
              * 2. Если бункер не содержит материал, то загрузить полученный материал и установить задержку на время загрузки бункера
@@ -480,21 +483,26 @@ namespace DataTrack.Pages
                 {
                     string oldName = _inputTankers[tanker].GetMaterialName();
                     string newName = _material.Name;
+                    
                     // 3. Проверяем соотвествие загруженного и загружаемого материала
                     if (oldName == newName)
                     {
                         // a) Начинаем загрузку материала в загрузочный бункер №1
-                        _inputTankers[tanker].SetStatus(Statuses.Status.Loading);
+                        _inputTankers[tanker].SetStatus(Statuses.Status.On);
+                        _loadStatus[tanker] = "Загрузка";
                         _statuses[tanker] = "img/arm1/led/SquareGreen.png";
                         _inputTankers[tanker].Load(_material);
                         MoveNextMaterial();
-                        _inputTankers[tanker].SetStatus(Statuses.Status.Off);
-                        _statuses[tanker] = "img/arm1/led/SquareGrey.png";
+
+                        // Нижеследующий код вынесен в обработчик события завершения загрузки бункера
+                        // _inputTankers[tanker].SetStatus(Statuses.Status.Off);
+                        // _statuses[tanker] = "img/arm1/led/SquareGrey.png";
                     }
                     else
                     {
                         // b) Загружаемый материал не совпадает с загруженным, ошибка
                         _inputTankers[tanker].SetStatus(Statuses.Status.Error);
+                        _loadStatus[tanker] = "Ошибка";
                         _statuses[tanker] = "img/arm1/led/SquareRed.png";
                         _logger.Error(
                             $"Попытка загрузить материал {newName} в загрузочный бункер [1], содержащий материал {oldName}");
@@ -505,12 +513,15 @@ namespace DataTrack.Pages
                 else
                 {
                     // Загрузочный бункер пуст, загружаем материал
-                    _inputTankers[tanker].SetStatus(Statuses.Status.Loading);
+                    _inputTankers[tanker].SetStatus(Statuses.Status.On);
+                    _loadStatus[tanker] = "Загрузка";
                     _statuses[tanker] = "img/arm1/led/SquareGreen.png";
                     _inputTankers[tanker].Load(_material);
                     MoveNextMaterial();
-                    _inputTankers[tanker].SetStatus(Statuses.Status.Off);
-                    _statuses[tanker] = "img/arm1/led/SquareGrey.png";
+
+                    // Нижеследующий код вынесен в обработчик события завершения загрузки бункера
+                    // _inputTankers[tanker].SetStatus(Statuses.Status.Off);
+                    // _statuses[tanker] = "img/arm1/led/SquareGrey.png";
                 }
             }
             else
@@ -536,7 +547,8 @@ namespace DataTrack.Pages
 
         private void Test()
         {
-            Debug.WriteLine(manual.MaterialID);
+            int number = Int32.Parse(manual.BunkerID);
+            StartLoadInputTanker(number);
         }
     }
 }

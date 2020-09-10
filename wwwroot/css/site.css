@@ -244,7 +244,7 @@ app {
 .silos_detail {
     background-color: papayawhip;
     border-collapse: collapse;
-    border-color: black;
+    border-color: #491217;
     border-width: 2px;
     border-style: solid;
     position: absolute;
@@ -261,6 +261,10 @@ app {
 
 th, td {
     border: 1px solid black;
+}
+
+.form {
+    border-style: none;
 }
 
 #Silos1 {
@@ -467,6 +471,24 @@ dialog{
 #Input2_Material {
     top: 260px;
     left: 440px;
+}
+
+#Input1_Load {
+    position: absolute;
+    top: 300px;
+    left: 320px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: maroon;
+}
+
+#Input2_Load {
+    position: absolute;
+    top: 300px;
+    left: 440px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: maroon;
 }
 
 #Silos1_Material {

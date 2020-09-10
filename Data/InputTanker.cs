@@ -40,6 +40,7 @@ namespace DataTrack.Data
                 Materials = new List<Material>();
                 LayersCount = 0;
                 Material = "";
+                TimeLoading = 0;
             }
             else
             {
@@ -104,7 +105,7 @@ namespace DataTrack.Data
                     Debug.WriteLine($"Начинается ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
                     var t = Task.Run(async delegate
                     {
-                        await Task.Delay(TimeSpan.FromSeconds(TimeLoading));
+                        await Task.Delay(TimeLoading * 1000);
                         Materials.Add(material);
                         LayersCount = Materials.Count;
                         Material = Materials[LayersCount - 1].Name;
@@ -152,7 +153,7 @@ namespace DataTrack.Data
             
             var t = Task.Run(async delegate
             {
-                await Task.Delay(TimeSpan.FromSeconds(20));
+                await Task.Delay(TimeLoading * 1000);
             });
             t.Wait();
             

@@ -5,15 +5,17 @@
 
 <h3>АРМ №1</h3>
 <p>Last update: @_lastNotification.key = @_lastNotification.value</p>
-<p>Выбран силос: @_silosSelected, Материал №@manual.MaterialID</p>   
+<p>Выбран силос: @_silosSelected,<br />Материал: @_materials[Int32.Parse(manual.MaterialID)].Name [@_materials[Int32.Parse(manual.MaterialID)].PartNo, @_materials[Int32.Parse(manual.MaterialID)].Weight]</p>   
 <p>Текущий материал: @_materials[_currentMaterial].Name [@_materials[_currentMaterial].PartNo, @_materials[_currentMaterial].Weight]</p>
 <br />
 
 <!-- Загрузочные бункера -->
 <img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial())" />
 <img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial())" />      
-<button id="Reset1" class="btn btn-primary" @onclick="@(e => ResetInputTank(1))">Сброс</button>
-<button id="Reset2" class="btn btn-primary" @onclick="@(e => ResetInputTank(2))">Сброс</button>
+<div id="Input1_Load">@_loadStatus[0]</div>
+<div id="Input2_Load">@_loadStatus[1]</div>
+<button id="Reset1" class="btn btn-primary" @onclick="@(e => ResetInputTank(0))">Сброс</button>
+<button id="Reset2" class="btn btn-primary" @onclick="@(e => ResetInputTank(1))">Сброс</button>
 
 <!-- Конвейеры -->
 <img id="Conveyor1" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 1" />
@@ -102,19 +104,39 @@
         }
     </table>          
 </div>
-               
-<div id="SelectMaterial">
-<EditForm Model="@manual">
-    <label for="materialID">Материал:</label>
-            <InputSelect id="materialID" @bind-Value="manual.MaterialID">
-                @foreach (var material in _materials)
-                {
-                    string option = $"{material.Name} [{material.PartNo}, {material.Weight}]";
-                    <option value="@material.Invoice.ToString()">@option</option>
-                }
-            </InputSelect>     
-    
-</EditForm>              
-</div>
-
- 
+  
+<EditForm Model="manual" id="SelectMaterial">
+    <table class="form">
+        <tr>
+            <td class="form">
+                <label for="materialId">Материал:</label>
+            </td>
+            <td class="form">
+                <InputSelect id="materialId" @bind-Value="manual.MaterialID">
+                    @for (int i = 0; i < _materials.Count; i++)
+                    {
+                        string option = $"{_materials[i].Name} [{_materials[i].PartNo}, {_materials[i].Weight}]";
+                        <option value="@i.ToString()">@option</option>
+                    }
+                </InputSelect>
+            </td>
+        </tr>    
+        <tr>
+            <td class="form">
+                <label for="tankerId">Бункер:</label>
+            </td>
+            <td class="form">
+                
+                <InputSelect id="tankerId" @bind-Value="manual.BunkerID">
+                    <option value="0">Бункер 1</option>
+                    <option value="1">Бункер 2</option>
+                </InputSelect>
+            </td>
+        </tr>      
+        <tr>
+            <td colspan="2" style="text-align: center" class="form">
+                <button class="btn btn-primary" @onclick="@Test">Загрузить</button>
+            </td>
+        </tr>
+    </table>
+</EditForm> 
