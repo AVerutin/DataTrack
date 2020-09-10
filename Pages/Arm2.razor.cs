@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace DataTrack.Pages
 {
     public partial class Arm2
     {
-        private (ushort key, double value) lastNotification;
+        private (string value, Task t) lastNotification;
 
         protected override void OnInitialized()
         {
@@ -14,11 +15,11 @@ namespace DataTrack.Pages
             
         }
         
-        private async Task OnNotify(ushort key, double value)
+        private async Task OnNotify(string value)
         {
             await InvokeAsync(() =>
             {
-                lastNotification = (key, value);
+                lastNotification.value = value;
                 StateHasChanged();
             });
         }

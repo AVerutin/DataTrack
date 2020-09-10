@@ -6,13 +6,14 @@ namespace DataTrack
     public class NotifierService
     {
         // Can be called from anywhere
-        public async Task Update(ushort key, double value)
+        public async Task Update(string value)
         {
             if (Notify != null)
             {
-                await Notify.Invoke(key, value);
+                await Notify.Invoke(value);
             }
         }
 
-        public event Func<ushort, double, Task> Notify;    }
+        public event Func<string, Task> Notify;
+    }
 }

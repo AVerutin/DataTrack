@@ -214,11 +214,11 @@ app {
     left: 430px;
 }
 
-#load_silos {
+#LoadSiloses {
     position: absolute;
-    top: 760px;
-    left: 10px;
-    width: 200px;
+    top: 450px;
+    left: 650px;
+    width: 350px;
 }
 
 #SelectMaterial {
@@ -313,6 +313,54 @@ th, td {
     position: absolute;
     top: 150px;
     left: 1350px;
+}
+
+.SilosLoad {
+    position: absolute; 
+    font-family: serif; 
+    font-size: 8pt; 
+    font-weight: bold; 
+    color: maroon; 
+}
+
+#Silos1_Load {
+    top: 155px;
+    left: 657px;
+}
+
+#Silos2_Load {
+    top: 155px;
+    left: 757px;
+}
+
+#Silos3_Load {                              
+    top: 155px;
+    left: 857px;
+}
+
+#Silos4_Load {
+    top: 155px;
+    left: 957px;
+}
+
+#Silos5_Load {
+    top: 155px;
+    left: 1057px;
+}
+
+#Silos6_Load {
+    top: 155px;
+    left: 1157px;
+}
+
+#Silos7_Load {
+    top: 155px;
+    left: 1257px;
+}
+
+#Silos8_Load {
+    top: 155px;
+    left: 1357px;
 }
 
 #Conveyor1 {
@@ -477,8 +525,9 @@ dialog{
     position: absolute;
     top: 300px;
     left: 320px;
-    font-family: sans-serif;
+    font-family: serif;
     font-weight: bold;
+    font-size: 10pt;
     color: maroon;
 }
 
@@ -486,8 +535,9 @@ dialog{
     position: absolute;
     top: 300px;
     left: 440px;
-    font-family: sans-serif;
+    font-family: serif;
     font-weight: bold;
+    font-size: 10pt;
     color: maroon;
 }
 

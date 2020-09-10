@@ -52,10 +52,8 @@ namespace DataTrack.Data
         /// Установить статус силоса
         /// </summary>
         /// <param name="status">Статус силоса</param>
-        public void SetStatus(Statuses.Status status)
-        {
-            Status = status;
-        }
+        public void SetStatus(Statuses.Status status) => Status = status;             
+        public Statuses.Status GetStatus() => Status;
 
         /// <summary>
         /// Сброс силоса в исходное состояние

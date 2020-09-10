@@ -12,10 +12,6 @@ namespace DataTrack.Data
         /// </summary>
         public int InputTankerId { get; private set; }
 
-        /// <summary>
-        /// Текущее состояние загрузочного бункера
-        /// </summary>
-        public Statuses.Status Status { get; private set; }
         public bool Selected { get; set; }
 
         /// <summary>
@@ -24,28 +20,31 @@ namespace DataTrack.Data
         public string Material { get; private set; }
 
         // Список материала, загруженного в загрузочный бункер
-        private List<Material> Materials;
+        private List<Material> _materials;
         
-        private readonly Logger logger;
-        private int LayersCount;
-        private int TimeLoading;
+        // Текущее состояние загрузочного бункера
+        private Statuses.Status _status;
+
+        private readonly Logger _logger;
+        private int _layersCount;
+        private int _timeLoading;
 
         public InputTanker(int number)
         {
             if (number > 0)
             {
-                logger = LogManager.GetCurrentClassLogger();
+                _logger = LogManager.GetCurrentClassLogger();
                 InputTankerId = number;
-                Status = Statuses.Status.Off;
-                Materials = new List<Material>();
-                LayersCount = 0;
+                _status = Statuses.Status.Off;
+                _materials = new List<Material>();
+                _layersCount = 0;
                 Material = "";
-                TimeLoading = 0;
+                _timeLoading = 0;
             }
             else
             {
-                Status = Statuses.Status.Error;
-                logger.Error($"Неверный ID загузочного бункера: [{number}]");
+                _status = Statuses.Status.Error;
+                _logger.Error($"Неверный ID загузочного бункера: [{number}]");
                 throw new ArgumentException($"Неверный ID загузочного бункера: [{number}]");
             }
         }
@@ -56,7 +55,7 @@ namespace DataTrack.Data
         /// <param name="status">Статус загрузочного бункера</param>
         public void SetStatus(Statuses.Status status)
         {
-            Status = status;
+            _status = status;
         }
         
         /// <summary>
@@ -65,7 +64,7 @@ namespace DataTrack.Data
         /// <returns>Текущее состояние загрузочного бункера</returns>
         public Statuses.Status GetStatus()
         {
-            return Status;
+            return _status;
         }
 
         /// <summary>
@@ -83,17 +82,17 @@ namespace DataTrack.Data
         /// <param name="material">Загружаемый материал</param>
         public void Load(Material material)
         {
-            Status = Statuses.Status.Loading;
+            _status = Statuses.Status.Loading;
 
             if (material != null)
             {
                 Material = material.Name;
-                if (LayersCount > 0 && material.Name != Material)
+                if (_layersCount > 0 && material.Name != Material)
                 {
-                    Status = Statuses.Status.Error;
+                    _status = Statuses.Status.Error;
                     // Если наименование загружаемого материала не соответствует наименованию ранее заруженного материала
-                    logger.Error($"Попытка загрузить в загрузочный бункер {InputTankerId}, содержащий материал" +
-                        $"{Materials[LayersCount - 1].Name}, новый  материал {material.Name}");
+                    _logger.Error($"Попытка загрузить в загрузочный бункер {InputTankerId}, содержащий материал" +
+                        $"{_materials[_layersCount - 1].Name}, новый  материал {material.Name}");
                     throw new InvalidCastException($"Невозможно загрузить в загрузочный бункер {InputTankerId}, " + 
                         $"содержащий материал {Material}, новый материал {material.Name}");
                 }
@@ -101,35 +100,35 @@ namespace DataTrack.Data
                 try
                 {
                     // Загрузка бункера производится определенное время
-                    logger.Info($"Начинается ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
-                    Debug.WriteLine($"Начинается ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    _logger.Info($"Начинается ожидание [{_timeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    Debug.WriteLine($"Начинается ожидание [{_timeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
                     var t = Task.Run(async delegate
                     {
-                        await Task.Delay(TimeLoading * 1000);
-                        Materials.Add(material);
-                        LayersCount = Materials.Count;
-                        Material = Materials[LayersCount - 1].Name;
+                        await Task.Delay(_timeLoading * 1000);
+                        _materials.Add(material);
+                        _layersCount = _materials.Count;
+                        Material = _materials[_layersCount - 1].Name;
                     });
                     t.Wait();
-                    logger.Info($"Закончилось ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
-                    Debug.WriteLine($"Закончилось ожидание [{TimeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    _logger.Info($"Закончилось ожидание [{_timeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
+                    Debug.WriteLine($"Закончилось ожидание [{_timeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
                 }
                 catch (Exception e)
                 {
-                    Status = Statuses.Status.Error;
-                    logger.Error($"Ошибка при добавлении материала в загрузочного бункер [{InputTankerId}] : {e.Message}");
+                    _status = Statuses.Status.Error;
+                    _logger.Error($"Ошибка при добавлении материала в загрузочного бункер [{InputTankerId}] : {e.Message}");
                     throw new NotSupportedException();
                 }
             }
 
-            Status = Statuses.Status.Off;
+            _status = Statuses.Status.Off;
         }
 
         public void SetTimeLoading(int time)
         {
             if (time > 0)
             {
-                TimeLoading = time;
+                _timeLoading = time;
             }
         }
 
@@ -139,21 +138,21 @@ namespace DataTrack.Data
         /// <returns>Список выгруженного материала из загрузочного бункера</returns>
         public List<Material> Unload()
         {
-            Status = Statuses.Status.Unloading;
+            _status = Statuses.Status.Unloading;
 
             // Получаем количество слоев материала. Если материала нет, выдаем ошибку
-            if (LayersCount == 0)
+            if (_layersCount == 0)
             {
-                Status = Statuses.Status.Error;
-                logger.Error($"Загрузочный бункер {InputTankerId} не содержит материал");
+                _status = Statuses.Status.Error;
+                _logger.Error($"Загрузочный бункер {InputTankerId} не содержит материал");
                 throw new ArgumentNullException($"Загрузочный бункер {InputTankerId} не содержит материал");
             }
 
-            List<Material> result = Materials;
+            List<Material> result = _materials;
             
             var t = Task.Run(async delegate
             {
-                await Task.Delay(TimeLoading * 1000);
+                await Task.Delay(_timeLoading * 1000);
             });
             t.Wait();
             
@@ -167,7 +166,7 @@ namespace DataTrack.Data
         /// <returns>Количество слоев материала, загруженного в бункер</returns>
         public int GetLayersCount()
         {
-            return Materials.Count;
+            return _materials.Count;
         }
 
         /// <summary>
@@ -176,7 +175,7 @@ namespace DataTrack.Data
         /// <returns>Список слоев материала, загруженного в бункер</returns>
         public List<Material> GetMaterials()
         {
-            return Materials;
+            return _materials;
         }
 
         /// <summary>
@@ -184,9 +183,9 @@ namespace DataTrack.Data
         /// </summary>
         public void Reset()
         {
-            Status = Statuses.Status.Off;
-            LayersCount = 0;
-            Materials = new List<Material>();
+            _status = Statuses.Status.Off;
+            _layersCount = 0;
+            _materials = new List<Material>();
             Material = "";
         }
     }

@@ -4,28 +4,27 @@
 @implements IDisposable
 
 <h3>АРМ №1</h3>
-<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
-<p>Выбран силос: @_silosSelected,<br />Материал: @_materials[Int32.Parse(manual.MaterialID)].Name [@_materials[Int32.Parse(manual.MaterialID)].PartNo, @_materials[Int32.Parse(manual.MaterialID)].Weight]</p>   
-<p>Текущий материал: @_materials[_currentMaterial].Name [@_materials[_currentMaterial].PartNo, @_materials[_currentMaterial].Weight]</p>
+<p>Last update: @_lastNotification.value</p>
+<p>Силос: @_silosSelected, Материал: @_materials[_currentMaterial].Name [@_materials[_currentMaterial].PartNo, @_materials[_currentMaterial].Weight]</p>
 <br />
 
 <!-- Загрузочные бункера -->
 <img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial())" />
 <img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial())" />      
-<div id="Input1_Load">@_loadStatus[0]</div>
-<div id="Input2_Load">@_loadStatus[1]</div>
+<div id="Input1_Load">@_loadStatuses[0]</div>
+<div id="Input2_Load">@_loadStatuses[1]</div>
 <button id="Reset1" class="btn btn-primary" @onclick="@(e => ResetInputTank(0))">Сброс</button>
 <button id="Reset2" class="btn btn-primary" @onclick="@(e => ResetInputTank(1))">Сброс</button>
 
 <!-- Конвейеры -->
-<img id="Conveyor1" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 1" />
-<img id="Conveyor2" src="img/arm1/Elevator3Grey.png" alt="Вертикальный конвейер 1" />
-<img id="Conveyor3" src="img/arm1/Elevator2Grey.png" alt="Горизонтальный конвейер 2" />
-<img id="Conveyor4" src="img/arm1/TelegaGrey.png" alt="Конвейер на телеге" style="position: absolute; top: 60px; left: @_telegaPos;" />
+<img id="Conveyor1" src="@_conveyors[0]" alt="Горизонтальный конвейер 1" />
+<img id="Conveyor2" src="@_conveyors[1]" alt="Вертикальный конвейер 1" />
+<img id="Conveyor3" src="@_conveyors[2]" alt="Горизонтальный конвейер 2" />
+<img id="Conveyor4" src="@_conveyors[3]" alt="Конвейер на телеге" style="position: absolute; top: 60px; left: @_telegaPos;" />
 
 <!-- Силосы -->
-<img id="Silos1" src="img/arm1/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial())" />
-<img id="Silos2" src="img/arm1/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial())" />
+<img id="Silos1" src="img/arm1/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial())" />     
+<img id="Silos2" src="img/arm1/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial())" />           
 <img id="Silos3" src="img/arm1/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial())" />
 <img id="Silos4" src="img/arm1/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial())" />
 <img id="Silos5" src="img/arm1/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial())" />
@@ -69,7 +68,16 @@
 <div id="Silos5_Material" class="material_name">@_siloses[4].Material</div>
 <div id="Silos6_Material" class="material_name">@_siloses[5].Material</div>
 <div id="Silos7_Material" class="material_name">@_siloses[6].Material</div>
-<div id="Silos8_Material" class="material_name">@_siloses[7].Material</div>
+<div id="Silos8_Material" class="material_name">@_siloses[7].Material</div>         
+
+<div id="Silos1_Load" class="SilosLoad">@_loadStatuses[2]</div>
+<div id="Silos2_Load" class="SilosLoad">@_loadStatuses[3]</div>
+<div id="Silos3_Load" class="SilosLoad">@_loadStatuses[4]</div>
+<div id="Silos4_Load" class="SilosLoad">@_loadStatuses[5]</div>
+<div id="Silos5_Load" class="SilosLoad">@_loadStatuses[6]</div>
+<div id="Silos6_Load" class="SilosLoad">@_loadStatuses[7]</div>
+<div id="Silos7_Load" class="SilosLoad">@_loadStatuses[8]</div>
+<div id="Silos8_Load" class="SilosLoad">@_loadStatuses[9]</div>
 
 <!-- Метка номера бункера -->
 <div id="Input1_Number" class="tanker_number">1</div>
@@ -105,29 +113,15 @@
     </table>          
 </div>
   
-<EditForm Model="manual" id="SelectMaterial">
+<EditForm Model="_manualLoadMaterial" id="SelectMaterial">
     <table class="form">
-        <tr>
-            <td class="form">
-                <label for="materialId">Материал:</label>
-            </td>
-            <td class="form">
-                <InputSelect id="materialId" @bind-Value="manual.MaterialID">
-                    @for (int i = 0; i < _materials.Count; i++)
-                    {
-                        string option = $"{_materials[i].Name} [{_materials[i].PartNo}, {_materials[i].Weight}]";
-                        <option value="@i.ToString()">@option</option>
-                    }
-                </InputSelect>
-            </td>
-        </tr>    
         <tr>
             <td class="form">
                 <label for="tankerId">Бункер:</label>
             </td>
             <td class="form">
                 
-                <InputSelect id="tankerId" @bind-Value="manual.BunkerID">
+                <InputSelect id="tankerId" @bind-Value="_manualLoadMaterial.BunkerId">
                     <option value="0">Бункер 1</option>
                     <option value="1">Бункер 2</option>
                 </InputSelect>
@@ -139,4 +133,43 @@
             </td>
         </tr>
     </table>
-</EditForm> 
+</EditForm>          
+
+<EditForm Model="_manualLoadSilos" id="LoadSiloses">
+    <table class="form">
+        <tr>
+            <td class="form">
+                <label for="inputId">Бункер:</label>
+            </td>
+            <td class="form">
+                
+                <InputSelect id="inputId" @bind-Value="_manualLoadSilos.InputId">
+                    <option value="0">Бункер 1</option>
+                    <option value="1">Бункер 2</option>
+                </InputSelect>
+            </td>            
+        </tr>
+        <tr>
+            <td class="form">
+                <label for="silosId">Силос:</label>
+            </td>
+            <td class="form">
+                <InputSelect id="silosId" @bind-Value="_manualLoadSilos.SilosId">
+                    <option value="0">Силос 1</option>
+                    <option value="1">Силос 2</option>
+                    <option value="2">Силос 3</option>
+                    <option value="3">Силос 4</option>
+                    <option value="4">Силос 5</option>
+                    <option value="5">Силос 6</option>
+                    <option value="6">Силос 7</option>
+                    <option value="7">Силос 8</option>
+                </InputSelect>
+            </td>     
+        </tr>      
+        <tr>
+            <td colspan="2" style="text-align: center" class="form">
+                <button class="btn btn-primary" @onclick="@Test1">Загрузить</button>
+            </td>
+        </tr>
+    </table>
+</EditForm>                                        

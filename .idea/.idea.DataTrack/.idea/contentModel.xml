@@ -18,7 +18,8 @@
         <e p="DBConnection.cs" t="Include" />
         <e p="DBConnectionOptions.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />
-        <e p="ManualWork.cs" t="Include" />
+        <e p="ManualLoadMaterial.cs" t="Include" />
+        <e p="ManualLoadSilos.cs" t="Include" />
         <e p="Material.cs" t="Include" />
         <e p="MtsConnect.cs" t="Include" />
         <e p="Silos.cs" t="Include" />
@@ -132,8 +133,10 @@
             <e p="SilosLeft.png" t="Include" />
             <e p="SilosRight.png" t="Include" />
             <e p="TelegaGreen.png" t="Include" />
+            <e p="TelegaGreenLeft.png" t="Include" />
             <e p="TelegaGrey.png" t="Include" />
             <e p="TelegaRed.png" t="Include" />
+            <e p="TelegaRedLeft.png" t="Include" />
           </e>
         </e>
       </e>
