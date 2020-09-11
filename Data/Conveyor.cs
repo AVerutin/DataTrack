@@ -140,11 +140,14 @@ namespace DataTrack.Data
         /// <summary>
         /// Установка текущего состояния конвейера
         /// </summary>
-        /// <param name="status"></param>
-        public void SetStatus(Statuses.Status status)
-        {
-            Status = status;
-        }
+        /// <param name="status">Новое текущее состояние</param>
+        public void SetStatus(Statuses.Status status) => Status = status;
+
+        /// <summary>
+        /// Получить текущее состояние конвейра
+        /// </summary>
+        /// <returns>Текущее состояние конвейера</returns>
+        public Statuses.Status GetStatus() => Status;
 
         /// <summary>
         /// Добавление материала на конвейер для транспортировки
@@ -152,7 +155,7 @@ namespace DataTrack.Data
         /// <param name="material"></param>
         async public void Deliver(List<Material> material, Delivered ondelivered)
         {
-            Status = Statuses.Status.Delivering;
+            // Status = Statuses.Status.Delivering;
             if (material != null)
             {
                 // Расчитать время, необходимое на доставку материала до конца конвейера по формуле T=S/V
@@ -240,7 +243,7 @@ namespace DataTrack.Data
 
             Material.Remove(uid);
             MaterialCount = Material.Count;
-            Status = Statuses.Status.Delivered;
+            // Status = Statuses.Status.Delivered;
         }
     }
 }

@@ -15,6 +15,7 @@
         <e p="Chemical.cs" t="Include" />
         <e p="ConfigMill.cs" t="Include" />
         <e p="Conveyor.cs" t="Include" />
+        <e p="Coords.cs" t="Include" />
         <e p="DBConnection.cs" t="Include" />
         <e p="DBConnectionOptions.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />

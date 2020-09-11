@@ -23,7 +23,8 @@ namespace DataTrack.Data
         private List<Material> _materials;
         
         // Текущее состояние загрузочного бункера
-        private Statuses.Status _status;
+        public Statuses.Status Status { get; private set; }
+        // private Statuses.Status _status;
 
         private readonly Logger _logger;
         private int _layersCount;
@@ -50,7 +51,7 @@ namespace DataTrack.Data
             {
                 _logger = LogManager.GetCurrentClassLogger();
                 InputTankerId = number;
-                _status = Statuses.Status.Off;
+                Status = Statuses.Status.Off;
                 _materials = new List<Material>();
                 _layersCount = 0;
                 Material = "";
@@ -61,7 +62,6 @@ namespace DataTrack.Data
             }
             else
             {
-                _status = Statuses.Status.Error;
                 _logger.Error($"Неверный ID загузочного бункера: [{number}]");
                 throw new ArgumentException($"Неверный ID загузочного бункера: [{number}]");
             }
@@ -71,19 +71,14 @@ namespace DataTrack.Data
         /// Установить статус загрузочного бункера
         /// </summary>
         /// <param name="status">Статус загрузочного бункера</param>
-        public void SetStatus(Statuses.Status status)
-        {
-            _status = status;
-        }
-        
+        public void SetStatus(Statuses.Status status) => Status = status;
+
+
         /// <summary>
         /// Получить текущее состояние загрузочного бункера
         /// </summary>
         /// <returns>Текущее состояние загрузочного бункера</returns>
-        public Statuses.Status GetStatus()
-        {
-            return _status;
-        }
+        public Statuses.Status GetStatus() => Status;
 
         /// <summary>
         /// Получить наименование материала, установленного для загрузочного бункера
@@ -100,14 +95,14 @@ namespace DataTrack.Data
         /// <param name="material">Загружаемый материал</param>
         public void Load(Material material)
         {
-            _status = Statuses.Status.Loading;
+            // _status = Statuses.Status.Loading;
 
             if (material != null)
             {
                 Material = material.Name;
                 if (_layersCount > 0 && material.Name != Material)
                 {
-                    _status = Statuses.Status.Error;
+                    // _status = Statuses.Status.Error;
                     // Если наименование загружаемого материала не соответствует наименованию ранее заруженного материала
                     _logger.Error($"Попытка загрузить в загрузочный бункер {InputTankerId}, содержащий материал" +
                         $"{_materials[_layersCount - 1].Name}, новый  материал {material.Name}");
@@ -133,13 +128,13 @@ namespace DataTrack.Data
                 }
                 catch (Exception e)
                 {
-                    _status = Statuses.Status.Error;
+                    //  _status = Statuses.Status.Error;
                     _logger.Error($"Ошибка при добавлении материала в загрузочного бункер [{InputTankerId}] : {e.Message}");
                     throw new NotSupportedException();
                 }
             }
 
-            _status = Statuses.Status.Off;
+            // _status = Statuses.Status.Off;
         }
 
         public void SetTimeLoading(int time)
@@ -156,12 +151,12 @@ namespace DataTrack.Data
         /// <returns>Список выгруженного материала из загрузочного бункера</returns>
         public List<Material> Unload()
         {
-            _status = Statuses.Status.Unloading;
+            // _status = Statuses.Status.Unloading;
 
             // Получаем количество слоев материала. Если материала нет, выдаем ошибку
             if (_layersCount == 0)
             {
-                _status = Statuses.Status.Error;
+                // _status = Statuses.Status.Error;
                 _logger.Error($"Загрузочный бункер {InputTankerId} не содержит материал");
                 throw new ArgumentNullException($"Загрузочный бункер {InputTankerId} не содержит материал");
             }
@@ -201,7 +196,7 @@ namespace DataTrack.Data
         /// </summary>
         public void Reset()
         {
-            _status = Statuses.Status.Off;
+            Status = Statuses.Status.Off;
             _layersCount = 0;
             _materials = new List<Material>();
             Material = "";

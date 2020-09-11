@@ -57,10 +57,11 @@ namespace DataTrack.Data
                 Thread = thread;
                 StartPos = new Coords();
                 FinishPos = new Coords();
+                TimeLoading = 0;
             }
             else
             {
-                Status = Statuses.Status.Error;
+                // Status = Statuses.Status.Error;
                 logger.Error($"Номер создаваемого силоса не может быть равен {number}");
                 throw new ArgumentException($"Номер создаваемого силоса не может быть равен {number}");
             }
@@ -90,11 +91,11 @@ namespace DataTrack.Data
         /// <param name="source">Загрузочный бункер, из которого принимается материал</param>
         public void Load(InputTanker source)
         {
-            Status = Statuses.Status.Loading;
+            // Status = Statuses.Status.Loading;
 
             if (source == null)
             {
-                Status = Statuses.Status.Error;
+                // Status = Statuses.Status.Error;
                 logger.Error($"Не указан загрузочный бункер при загрузке материала в силос {SilosId}");
                 throw new ArgumentNullException($"Не указан загрузочный бункер при загрузке материала в силос {SilosId}");
             }
@@ -107,7 +108,7 @@ namespace DataTrack.Data
 
             if (source.Material != Material)
             {
-                Status = Statuses.Status.Error;
+                // Status = Statuses.Status.Error;
                 logger.Error($"Загрузка в силос {SilosId}, содержащего материал {Material} новый материал {source.Material}");
                 throw new ArgumentException($"Силос {SilosId} ожидает материал {Material} вместо {source.Material}");
             }
@@ -119,7 +120,7 @@ namespace DataTrack.Data
                 Materials.Add(material);
             }
             LayersCount = Materials.Count;
-            Status = Statuses.Status.Off;
+            // Status = Statuses.Status.Off;
         }
 
         public void SetTimeLoading(int time)
@@ -154,13 +155,13 @@ namespace DataTrack.Data
         /// <returns>Список разгруженного материала</returns>
         public List<Material> Unload()
         {
-            Status = Statuses.Status.Unloading;
+            // Status = Statuses.Status.Unloading;
 
             List<Material> Result = Materials;
             Materials = new List<Material>();
             LayersCount = Materials.Count;
             Material = "";
-            Status = Statuses.Status.Off;
+            // Status = Statuses.Status.Off;
             
             return Result;
         }
@@ -172,12 +173,12 @@ namespace DataTrack.Data
         /// <returns>Список выгруженного материала из силоса</returns>
         public List<Material> Unload(double weight)
         {
-            Status = Statuses.Status.Unloading;
+            // Status = Statuses.Status.Unloading;
 
             // Получаем количество слоев материала. Если материала нет, выдаем ошибку
             if (LayersCount == 0)
             {
-                Status = Statuses.Status.Error;
+                // Status = Statuses.Status.Error;
                 logger.Error($"Силос {SilosId} не содержит материал, невозможно выгрузить {weight} кг");
                 throw new ArgumentOutOfRangeException($"Силос {SilosId} не содержит материал, невозможно выгрузить {weight} кг");
             }
@@ -246,14 +247,14 @@ namespace DataTrack.Data
                 // то выдаем сообщение, что материал уже закончился, списывать больше нечего!
                 if (Materials.Count == 0 && weight > 0)
                 {
-                    Status = Statuses.Status.Error;
+                    // Status = Statuses.Status.Error;
                     logger.Error($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
                     throw new ArgumentOutOfRangeException($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
                 }
             }
             else
             {
-                Status = Statuses.Status.Error;
+                // Status = Statuses.Status.Error;
                 logger.Warn($"Не указан вес выгружаемого материала из силоса {SilosId}");
                 throw new ArgumentNullException($"Не указан вес выгружаемого материала из силоса {SilosId}");
             }
