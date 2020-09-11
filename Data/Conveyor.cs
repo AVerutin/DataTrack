@@ -9,6 +9,21 @@ namespace DataTrack.Data
     public class Conveyor
     {
         /// <summary>
+        /// Номер нити (Линия производства)
+        /// </summary>
+        public int Thread { get; set; }
+        
+        /// <summary>
+        /// Начальная координата относительно начала линии производства
+        /// </summary>
+        public Coords StartPos { get; set; }
+        
+        /// <summary>
+        /// Конечная координата относительно начала линии производства
+        /// </summary>
+        public Coords FinishPos { get; set; }
+        
+        /// <summary>
         /// Коллекция типов конвейера
         /// </summary>
         public enum Types { Horizontal, Vertical };
@@ -68,7 +83,7 @@ namespace DataTrack.Data
         /// <param name="number">Уникальный идентификатор конвейера</param>
         /// <param name="type">Тип конвейера</param>
         /// <param name="length">Длина конвейера в метрах</param>
-        public Conveyor(int number, Types type, double length)
+        public Conveyor(int number, Types type, double length, int thread=0)
         {
             logger = LogManager.GetCurrentClassLogger();
             ConveyorId = number;
@@ -79,6 +94,9 @@ namespace DataTrack.Data
             Status = Statuses.Status.Off;
             MaterialCount = 0;
             Length = length;
+            Thread = thread;
+            StartPos = new Coords();
+            FinishPos = new Coords();
         }
 
         /// <summary>

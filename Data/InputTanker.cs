@@ -28,8 +28,23 @@ namespace DataTrack.Data
         private readonly Logger _logger;
         private int _layersCount;
         private int _timeLoading;
+        
+        /// <summary>
+        /// Номер нити (Линия производства)
+        /// </summary>
+        public int Thread { get; set; }
+        
+        /// <summary>
+        /// Начальная координата относительно начала линии производства
+        /// </summary>
+        public Coords StartPos { get; set; }
+        
+        /// <summary>
+        /// Конечная координата относительно начала линии производства
+        /// </summary>
+        public Coords FinishPos { get; set; }
 
-        public InputTanker(int number)
+        public InputTanker(int number, int thread=0)
         {
             if (number > 0)
             {
@@ -40,6 +55,9 @@ namespace DataTrack.Data
                 _layersCount = 0;
                 Material = "";
                 _timeLoading = 0;
+                Thread = thread;
+                StartPos = new Coords();
+                FinishPos = new Coords();
             }
             else
             {

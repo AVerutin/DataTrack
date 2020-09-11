@@ -28,8 +28,23 @@ namespace DataTrack.Data
         private int TimeLoading;
         private readonly Logger logger;
         private int LayersCount;
+        
+        /// <summary>
+        /// Номер нити (Линия производства)
+        /// </summary>
+        public int Thread { get; set; }
+        
+        /// <summary>
+        /// Начальная координата относительно начала линии производства
+        /// </summary>
+        public Coords StartPos { get; set; }
+        
+        /// <summary>
+        /// Конечная координата относительно начала линии производства
+        /// </summary>
+        public Coords FinishPos { get; set; }
 
-        public Silos(int number)
+        public Silos(int number, int thread=0)
         {
             if (number > 0)
             {
@@ -39,6 +54,9 @@ namespace DataTrack.Data
                 Materials = new List<Material>();
                 LayersCount = 0;
                 Material = "";
+                Thread = thread;
+                StartPos = new Coords();
+                FinishPos = new Coords();
             }
             else
             {
