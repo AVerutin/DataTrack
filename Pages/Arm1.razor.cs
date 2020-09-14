@@ -36,6 +36,7 @@ namespace DataTrack.Pages
         private readonly string[] _selected = new string[10];
         private readonly string[] _loadStatuses = new string[10];
         private int _silosSelected;
+        private int _inputSelected;
         private string _telegaPos;
         private string[] _telegaPositions = new string[8];
         private string[] _conveyors = new string[4];
@@ -229,15 +230,6 @@ namespace DataTrack.Pages
                 _siloses.Add(_silos);
             }
 
-            /*
-            _conveyor = new Conveyor(1, Conveyor.Types.Horizontal, 5);
-            _conveyors.Add(_conveyor);
-            _conveyor = new Conveyor(2, Conveyor.Types.Vertical, 25);
-            _conveyors.Add(_conveyor);
-            _conveyor = new Conveyor(3, Conveyor.Types.Horizontal, 15);
-            _conveyors.Add(_conveyor);
-            */
-
             _conveyors[0] = "img/arm1/Elevator2Grey.png";
             _conveyors[1] = "img/arm1/Elevator3Grey.png";
             _conveyors[2] = "img/arm1/Elevator2Grey.png";
@@ -271,6 +263,9 @@ namespace DataTrack.Pages
             _telegaPositions[5] = "870px";
             _telegaPositions[6] = "970px";
             _telegaPositions[7] = "1070px";
+
+            _silosSelected = -1;
+            _inputSelected = -1;
         }
 
         private void ShowMaterial(MouseEventArgs e, int number)
@@ -411,6 +406,7 @@ namespace DataTrack.Pages
             _loadStatuses[number] = "";
             _inputTankers[number].SetStatus(Statuses.Status.Off);
             _statuses[number] = "img/arm1/led/SquareGrey.png";
+            _inputSelected = -1;
         }
 
         /// <summary>
@@ -450,13 +446,8 @@ namespace DataTrack.Pages
                         _inputTankers[tanker].SetStatus(Statuses.Status.Loading);
                         _loadStatuses[tanker] = "ЗАГРУЗКА";
                         _statuses[tanker] = "img/arm1/led/SquareGreen.png";
-                        // _inputTankers[tanker].Load(_material);
-                        // MoveNextMaterial();
                         _status = Statuses.Status.Loading;
-
-                        // Нижеследующий код вынесен в обработчик события завершения загрузки бункера
-                        // _inputTankers[tanker].SetStatus(Statuses.Status.Off);
-                        // _statuses[tanker] = "img/arm1/led/SquareGrey.png";
+                        _inputSelected = tanker;
                     }
                     else
                     {
@@ -477,13 +468,8 @@ namespace DataTrack.Pages
                     _inputTankers[tanker].SetStatus(Statuses.Status.Loading);
                     _loadStatuses[tanker] = "ЗАГРУЗКА";
                     _statuses[tanker] = "img/arm1/led/SquareGreen.png";
-                    // _inputTankers[tanker].Load(_material);
-                    // MoveNextMaterial();
                     _status = Statuses.Status.Loading;
-
-                    // Нижеследующий код вынесен в обработчик события завершения загрузки бункера
-                    // _inputTankers[tanker].SetStatus(Statuses.Status.Off);
-                    // _statuses[tanker] = "img/arm1/led/SquareGrey.png";
+                    _inputSelected = tanker;
                 }
             }
             else
@@ -543,9 +529,6 @@ namespace DataTrack.Pages
         /// <param name="silosNumber">Номер силоса для загрузки материала</param>
         private Statuses.Status StartLoadSilos(int silosNumber)
         {
-            Debug.WriteLine($"Начата загрузка силоса {silosNumber + 1}");
-            _logger.Info($"Начата загрузка силоса {silosNumber + 1}");
-            
             /* Алгоритм загрузки силоса
             1. Опрделить текущее состояние силоса:
                Если силос в состоянии ошибки или занят другой операцией, то выход из метода
@@ -560,20 +543,49 @@ namespace DataTrack.Pages
             7. Забрать материал из загрузочного бункера и добавить к слоям материала силоса
             8. Установить текущее состояние силоса "Ожидание"
             */
+            
+            Debug.WriteLine($"Начата загрузка силоса {silosNumber + 1}");
+            _logger.Info($"Начата загрузка силоса {silosNumber + 1}");
 
             Statuses.Status status = _siloses[silosNumber].GetStatus();
             if (status != Statuses.Status.Off)
             {
-                _logger.Error($"Силос {silosNumber + 1} занят или находится в состоянии ошибки, загрузка материала невозможна");
-                Debug.WriteLine($"Силос {silosNumber + 1} занят или находится в состоянии ошибки, загрузка материала невозможна");
+                // Если загрузочный бункер в состоянии разгрузки и текущий силос не является выбранным,
+                // то ставим силосу статус ошибка
+
+                if (_inputTankers[_inputSelected].Status == Statuses.Status.Unloading &&
+                    silosNumber != _silosSelected)
+                {
+                    _logger.Error(
+                        $"Загрузочный бункер [{_inputSelected + 1}] в состоянии {_inputTankers[_inputSelected].Status.ToString()}");
+                    Debug.WriteLine(
+                        $"Загрузочный бункер [{_inputSelected + 1}] в состоянии {_inputTankers[_inputSelected].Status.ToString()}");
+                    status = Statuses.Status.Error;
+                    _siloses[silosNumber].SetStatus(status);
+                    _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                    _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                }
+                else
+                {
+                    if (_inputTankers[_inputSelected].Status == Statuses.Status.Unloading &&
+                        silosNumber == _silosSelected)
+                    {
+                        _logger.Warn($"В силос №{silosNumber+1} уже загружается материал [{_inputTankers[_inputSelected].Material}] из загрузочного бункера №{_inputSelected+1}");
+                        Debug.WriteLine($"В силос №{silosNumber+1} уже загружается материал [{_inputTankers[_inputSelected].Material}] из загрузочного бункера №{_inputSelected+1}");
+                    }
+                }
+                
+                // _logger.Error($"Силос {silosNumber + 1} занят или находится в состоянии ошибки, загрузка материала невозможна");
+                // Debug.WriteLine($"Силос {silosNumber + 1} занят или находится в состоянии ошибки, загрузка материала невозможна");
+                // status = Statuses.Status.Error;
+                // _siloses[silosNumber].SetStatus(status);
+                // _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                // _loadStatuses[silosNumber + 2] = "ОШИБКА";
             }
             else
             {
                 // Силос готов к приему материала из загрузочного бункера
-                status = Statuses.Status.Loading;
-                _siloses[silosNumber].SetStatus(status);
-                _statuses[silosNumber + 2] = "img/arm1/led/SmallGreen.png";
-                _loadStatuses[silosNumber + 2] = "ЗАГРУЗКА";
+                // Получаем выбранный загрузочный бункер
 
                 int selectedInput = -1;
                 if (_inputTankers[0].Selected)
@@ -591,58 +603,79 @@ namespace DataTrack.Pages
                 { 
                     _logger.Error($"Нет выбранного загрузочного бункера для забора материала");
                     Debug.WriteLine($"Нет выбранного загрузочного бункера для забора материала");
+                    status = Statuses.Status.Error;
+                    _siloses[silosNumber].SetStatus(status);
+                    _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                    _loadStatuses[silosNumber + 2] = "ОШИБКА";
                 }
                 else
                 {
-                    // Один из загрузочных бункеров выбран
-                    if (silosNumber < 4)
+                    
+                    // Проверяем текущее состояние выбранного загрузочного бункера
+                    if (_inputTankers[selectedInput].Status == Statuses.Status.Off)
                     {
-                        _conveyors[3] = "img/arm1/TelegaGreenLeft.png"; 
+
+                        // Проверяем наличие материала в выбранном загрузочном бункере
+                        if (_inputTankers[selectedInput].GetLayersCount() > 0)
+                        {
+
+                            // Проверяем соответствие материала в загрузочном бункере и силосе, или если силос пуст
+                            if ((_inputTankers[selectedInput].Material == _siloses[silosNumber].Material) ||
+                                (_siloses[silosNumber].Material == ""))
+                            {
+                                if (silosNumber < 4)
+                                {
+                                    _conveyors[3] = "img/arm1/TelegaGreenLeft.png";
+                                }
+                                else
+                                {
+                                    _conveyors[3] = "img/arm1/TelegaGreen.png";
+                                }
+
+                                // Начинаем загрузку материала из загрузочного бункера в силос
+                                _silosSelected = silosNumber;
+                                _inputTankers[selectedInput].SetStatus(Statuses.Status.Unloading);
+                                _statuses[selectedInput] = "img/arm1/led/SquareYellow.png";
+                                _loadStatuses[selectedInput] = "ВЫГРУЗКА";
+                                status = Statuses.Status.Loading;
+                                _siloses[silosNumber].SetStatus(status);
+                                _statuses[silosNumber + 2] = "img/arm1/led/SmallGreen.png";
+                                _loadStatuses[silosNumber + 2] = "ЗАГРУЗКА";
+                                _selected[silosNumber] = "img/arm1/led/LedGreen.png";
+                                _conveyors[0] = "img/arm1/Elevator2Green.png";
+                                _conveyors[1] = "img/arm1/Elevator3Green.png";
+                                _conveyors[2] = "img/arm1/Elevator2Green.png";
+                                _telegaPos = _telegaPositions[silosNumber];
+                            }
+                            else
+                            {
+                                _logger.Error($"Материал в загрузочном бункере {selectedInput+1} [{_inputTankers[selectedInput].Material} не соответствует материалу в силосе {silosNumber+1} [{_siloses[silosNumber].Material}]");
+                                Debug.WriteLine($"Материал в загрузочном бункере {selectedInput+1} [{_inputTankers[selectedInput].Material} не соответствует материалу в силосе {silosNumber+1} [{_siloses[silosNumber].Material}]");
+                                status = Statuses.Status.Error;
+                                _siloses[silosNumber].SetStatus(status);
+                                _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                                _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                            }
+                        }
+                        else
+                        {
+                            _logger.Error($"В загрузочном бункере [{selectedInput+1}] нет материала для загрузки");
+                            Debug.WriteLine($"В загрузочном бункере [{selectedInput+1}] нет материала для загрузки");
+                            status = Statuses.Status.Error;
+                            _siloses[silosNumber].SetStatus(status);
+                            _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                            _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                        }
                     }
                     else
                     {
-                        _conveyors[3] = "img/arm1/TelegaGreen.png"; 
+                        // Загрузочный бункер занят или в состоянии ошибки
+                        _logger.Warn($"Из загрузочного бункера №{selectedInput+1} уже ведется разгрузка материала [{_inputTankers[selectedInput].Material}] в силос №{_silosSelected+1}");
+                        Debug.WriteLine($"Из загрузочного бункера №{selectedInput+1} уже ведется разгрузка материала [{_inputTankers[selectedInput].Material}] в силос №{_silosSelected+1}");
                     }
-                    
-                    _selected[silosNumber] = "img/arm1/led/LedGreen.png";
-                    _conveyors[0] = "img/arm1/Elevator2Green.png";
-                    _conveyors[1] = "img/arm1/Elevator3Green.png";
-                    _conveyors[2] = "img/arm1/Elevator2Green.png";
-                    _telegaPos = _telegaPositions[silosNumber];
                 }
                 
             }
-
-            // Получаем номер активного загрузочного бункера и загруженный в него материал
-            // int tanker;
-            //
-            // if (InputTankers[0].Selected)
-            // {
-            //     tanker = 0;
-            // }
-            // else
-            // {
-            //     tanker = 1;
-            // }
-
-            // Если материал загрузочного бункера и силоса совпадает, или силос пуст
-            // if (Siloses[0].Material == "" || _mat.Name == Siloses[0].Material)
-            // {
-            //     // Производим загрузку материала в силос из активного загрузочного бункера
-            //     Siloses[0].Load(InputTankers[tanker]);
-            //     _statuses[2] = "img/arm1/led/SmallGreen.png";
-            // }
-
-            // Организация задержки на время загрузки силоса
-            // var t = Task.Run(async delegate
-            // {
-            //     await Task.Delay(TimeSpan.FromSeconds(15));
-            // });
-            // t.Wait();
-            // Task.Delay(TimeSpan.FromSeconds(15));
-
-            // Debug.WriteLine("OK");
-            // _logger.Info($"В силос 1 загружен материал [{_mat.Name}]");
 
             return status;
         }
@@ -653,42 +686,66 @@ namespace DataTrack.Pages
         /// <param name="silosNumber">Номер силоса</param>
         private void FinishLoadSilos(int silosNumber)
         {
-            // Окончание загрузки силоса
-            Debug.WriteLine($"Завершена загрузка силоса {silosNumber}");
-            _logger.Info($"Завершена загрузка силоса {silosNumber}");
-
-            _loadStatuses[silosNumber + 2] = "";
-            _siloses[silosNumber].SetStatus(Statuses.Status.Off);
-            _statuses[silosNumber + 2] = "img/arm1/led/SmallGrey.png";
-            _selected[silosNumber] = "img/arm1/led/LedGrey.png"; 
-            _conveyors[0] = "img/arm1/Elevator2Grey.png";
-            _conveyors[1] = "img/arm1/Elevator3Grey.png";
-            _conveyors[2] = "img/arm1/Elevator2Grey.png";
-            _conveyors[3] = "img/arm1/TelegaGrey.png";
-
-            int selectedInput = -1;
-            if (_inputTankers[0].Selected)
+            Statuses.Status status = _siloses[silosNumber].Status;
+            if (status == Statuses.Status.Loading)
             {
-                selectedInput = 0;
-            }                                   
+                // Была начата загрузка силоса. Окончание загрузки силоса
+                Debug.WriteLine($"Завершена загрузка силоса {silosNumber}");
+                _logger.Info($"Завершена загрузка силоса {silosNumber}");
+
+                _loadStatuses[silosNumber + 2] = "";
+                _siloses[silosNumber].SetStatus(Statuses.Status.Off);
+                _statuses[silosNumber + 2] = "img/arm1/led/SmallGrey.png";
+                _selected[silosNumber] = "img/arm1/led/LedGrey.png";
+                _conveyors[0] = "img/arm1/Elevator2Grey.png";
+                _conveyors[1] = "img/arm1/Elevator3Grey.png";
+                _conveyors[2] = "img/arm1/Elevator2Grey.png";
+                _conveyors[3] = "img/arm1/TelegaGrey.png";
+
+                int selectedInput = -1;
+                if (_inputTankers[0].Selected)
+                {
+                    selectedInput = 0;
+                }
+                else
+                {
+                    selectedInput = 1;
+                }
+
+                _siloses[silosNumber].Load(_inputTankers[selectedInput]);
+
+                _inputTankers[selectedInput].Selected = false;
+                _statuses[selectedInput] = "img/arm1/led/SquareGrey.png";
+                _inputTankers[selectedInput].SetStatus(Statuses.Status.Off);
+                _loadStatuses[selectedInput] = "";
+            }
             else
             {
-                selectedInput = 1;
+                // Силос находится не в состоянии загрузки материала
+                _logger.Warn($"Загрузка материала в силос №{silosNumber+1} не производится (состояние силоса [{status.ToString()}])");
+                Debug.WriteLine($"Загрузка материала в силос №{silosNumber+1} не производится (состояние силоса [{status.ToString()}])");
+                
+                // Если силос находится в состоянии ошибки, то сбросим ее
+                if (status == Statuses.Status.Error)
+                {
+                    status = Statuses.Status.Off;
+                    _siloses[silosNumber].SetStatus(status);
+                    _statuses[silosNumber + 2] = "img/arm1/led/SmallGrey.png";
+                    _loadStatuses[silosNumber + 2] = "";
+                }
             }
-            
-            _siloses[silosNumber].Load(_inputTankers[selectedInput]);
-            
-            _inputTankers[selectedInput].Selected = false;
-            _statuses[selectedInput] = "img/arm1/led/SquareGrey.png";
-            _inputTankers[selectedInput].SetStatus(Statuses.Status.Off);
-            _loadStatuses[selectedInput] = "";
         }
 
+        /// <summary>
+        /// Ручная загрузка материала в выбранный загрузочный бункер
+        /// </summary>
         private async void Test()
         {
             int number = Int32.Parse(_manualLoadMaterial.BunkerId);
 
-            Statuses.Status status = _inputTankers[number].Status;
+            Statuses.Status status = _inputTankers[number].Status;    
+            
+            // Перенести проверку текущего состояния загрузочного бункера в метод StartLoadInputTanker()
             if (status == Statuses.Status.Off)
             {
                 status = StartLoadInputTanker(number);
@@ -720,6 +777,9 @@ namespace DataTrack.Pages
             }
         }
         
+        /// <summary>
+        /// Ручная загрузка материала в силос из выбранного загрузочного бункера
+        /// </summary>
         private async void Test1()
         {
             int input = Int32.Parse(_manualLoadSilos.InputId);
@@ -732,19 +792,15 @@ namespace DataTrack.Pages
                 case 0: // Загрузочный бункер 1 
                 {
                     _inputTankers[0].Selected = true;
-                    _inputTankers[0].SetStatus(Statuses.Status.Unloading);
-                    _statuses[0] = "img/arm1/led/SquareYellow.png";
-                    _loadStatuses[0] = "ВЫГРУЗКА";
                     _inputTankers[1].Selected = false;
+                    _inputSelected = 0;    // Выбираем загрузочный бункер 1
                     break;
                 }
                 case 1: // Загрузочный бункер 2
                 {
                     _inputTankers[0].Selected = false;
                     _inputTankers[1].Selected = true;
-                    _inputTankers[1].SetStatus(Statuses.Status.Unloading);
-                    _loadStatuses[1] = "ВЫГРУЗКА";
-                    _statuses[1] = "img/arm1/led/SquareYellow.png";
+                    _inputSelected = 1;    // Выбираем загрузочный бункер 2
                     break;
                 }
             }
@@ -755,11 +811,20 @@ namespace DataTrack.Pages
             // Организация задержки на время загрузки силоса
             if (status == Statuses.Status.Loading)
             {
-                await Task.Delay(TimeSpan.FromSeconds(10));
-
                 // Окончание загрузки материала в силос из загрузочного бункера
+
+                await Task.Delay(TimeSpan.FromSeconds(10));
                 FinishLoadSilos(silos);
                 await OnNotify($"Загрузка силоса №{silos + 1} завершена");
+            }
+            else
+            {
+                if (status == Statuses.Status.Error)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(10));
+                    FinishLoadSilos(silos);
+                    await OnNotify($"Ошибка силоса №{silos + 1}");
+                }
             }
         }
     }
