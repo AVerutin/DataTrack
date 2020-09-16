@@ -19,6 +19,7 @@
         <e p="DBConnection.cs" t="Include" />
         <e p="DBConnectionOptions.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />
+        <e p="Kernel.cs" t="Include" />
         <e p="ManualLoadMaterial.cs" t="Include" />
         <e p="ManualLoadSilos.cs" t="Include" />
         <e p="Material.cs" t="Include" />
@@ -33,7 +34,6 @@
       <e p="DataTrack.SetParameters.xml" t="Include" />
       <e p="DataTrack.sln" t="IncludeFlat" />
       <e p="DataTrack.SourceManifest.xml" t="Include" />
-      <e p="DataTrack.zip" t="Include" />
       <e p="NotifierService.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Release" t="Include">
@@ -58,6 +58,7 @@
         </e>
         <e p="Error.razor" t="Include" />
         <e p="Index.razor" t="Include" />
+        <e p="Index.razor.cs" t="Include" />
       </e>
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">

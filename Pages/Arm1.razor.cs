@@ -246,6 +246,13 @@ namespace DataTrack.Pages
             // _silosSelected = -1;
             _silosLoading = false;
             await OnNotify("Готов");
+            
+            /*
+             * Использование глобальных объектов для всех АРМ
+             */
+            
+            Kernel kernel = new Kernel();
+            kernel.AddMaterial(new Material());
         }
 
         private void ShowMaterial(MouseEventArgs e, int number)

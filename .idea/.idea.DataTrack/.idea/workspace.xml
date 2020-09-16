@@ -29,25 +29,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add pages for ARM1 and ARM2">
-      <change afterPath="$PROJECT_DIR$/.config/dotnet-tools.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/DataTrack/config/applicationhost.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.Parameters.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.SetParameters.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.SourceManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.deploy-readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.deploy.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataTrack.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Properties/PublishProfiles/FolderProfile.pubxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Properties/PublishProfiles/FolderProfile.pubxml.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/Kernel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pages/Index.razor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/DataTrack/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/DataTrack/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/DataTrack/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/DataTrack/v16/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTrack.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataTrack.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataTrack.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/DataTrack.csproj.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataTrack.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Index.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +59,6 @@
       <list>
         <option value="$PROJECT_DIR$/Program.cs" />
         <option value="$PROJECT_DIR$/App.razor" />
-        <option value="$PROJECT_DIR$/Pages/Index.razor" />
         <option value="$PROJECT_DIR$/Shared/MainLayout.razor" />
         <option value="$PROJECT_DIR$/Pages/Error.razor" />
         <option value="$PROJECT_DIR$/Pages/_Host.cshtml" />
@@ -100,8 +87,13 @@
         <option value="$PROJECT_DIR$/Data/ManualLoadMaterial.cs" />
         <option value="$PROJECT_DIR$/wwwroot/css/site.css" />
         <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
-        <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
         <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Pages/Index.razor.cs" />
+        <option value="$PROJECT_DIR$/Pages/Index.razor" />
+        <option value="$PROJECT_DIR$/Data/DataTrack.cs" />
+        <option value="$PROJECT_DIR$/Data/TrackCernel.cs" />
+        <option value="$PROJECT_DIR$/Data/Kernel.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
       </list>
     </option>
   </component>
@@ -195,7 +187,7 @@
       <workItem from="1600145646477" duration="23925000" />
       <workItem from="1600232361620" duration="2135000" />
       <workItem from="1600235645483" duration="4765000" />
-      <workItem from="1600259917675" duration="1320000" />
+      <workItem from="1600259917675" duration="4151000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -295,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600235794594</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add CORS">
+      <created>1600261431659</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1600261431659</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +343,8 @@
     <MESSAGE value="Input tankers can correct checking his status and load material only if not error" />
     <MESSAGE value="Add statuses control for silos loading." />
     <MESSAGE value="Split start and finish loading siloses snd input tankers in singles methods." />
-    <option name="LAST_COMMIT_MESSAGE" value="Split start and finish loading siloses snd input tankers in singles methods." />
+    <MESSAGE value="Add CORS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add CORS" />
   </component>
   <component name="WindowStateProjectService">
     <state width="487" height="618" key="DebuggerActiveHint" timestamp="1600166130530">
@@ -455,10 +455,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600235257009" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1600235816920">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1600261482119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600235816920" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600261482119" />
     <state x="715" y="172" key="VcsDiffUtil.ChangesDialog" timestamp="1599807139030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -473,13 +473,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pages/Arm1.razor.cs</url>
-          <line>585</line>
+          <line>592</line>
           <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm1.razor.cs" initialLine="596">
             <startOffsets>
-              <option value="24237" />
+              <option value="24446" />
             </startOffsets>
             <endOffsets>
-              <option value="24256" />
+              <option value="24465" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="21" />
