@@ -1,18 +1,20 @@
 ﻿@page "/arm1"
 @inject NotifierService Notifier
+@using System.Threading.Tasks.Dataflow
 @implements IDisposable
 
-<h3>АРМ №1</h3>      
-<div class="statusBar">
-    <span class="statusCell">Материал: @_materials[_currentMaterial].Name [@_materials[_currentMaterial].PartNo, @_materials[_currentMaterial].Weight]</span>
-    <span class="statusCell" style="display: @displayStatusBar">@_lastNotification.value</span>
-</div> 
+<h3>АРМ №1</h3>
+<p>Last update: @_lastNotification.value</p>
+<p>Силос: @_silosSelected, Материал: @_materials[_currentMaterial].Name [@_materials[_currentMaterial].PartNo, @_materials[_currentMaterial].Weight]</p>
+<br />
 
 <!-- Загрузочные бункера -->
 <img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial())" />
 <img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial())" />      
 <div id="Input1_Load">@_loadStatuses[0]</div>
 <div id="Input2_Load">@_loadStatuses[1]</div>
+<button id="Reset1" class="btn btn-primary" @onclick="@(e => ResetInputTank(0))">Сброс</button>
+<button id="Reset2" class="btn btn-primary" @onclick="@(e => ResetInputTank(1))">Сброс</button>
 
 <!-- Конвейеры -->
 <img id="Conveyor1" src="@_conveyors[0]" alt="Горизонтальный конвейер 1" />
@@ -112,11 +114,13 @@
 </div>
   
 <EditForm Model="_manualLoadMaterial" id="SelectMaterial">
-    <table class="form">        
-        <caption>Управление загрузочными бункерами</caption>
+    <table class="form">
         <tr>
-            <td class="form" colspan="3" style="text-align: center; vertical-align: middle;">
+            <td class="form">
                 <label for="tankerId">Бункер:</label>
+            </td>
+            <td class="form">
+                
                 <InputSelect id="tankerId" @bind-Value="_manualLoadMaterial.BunkerId">
                     <option value="0">Бункер 1</option>
                     <option value="1">Бункер 2</option>
@@ -124,25 +128,21 @@
             </td>
         </tr>      
         <tr>
-            <td style="text-align: center; vertical-align: middle;" class="form">
-                <button class="btn btn-primary" @onclick="@(() => Test(1))">Загрузить</button>
-            </td>   
-            <td style="text-align: center" class="form">
-                <button class="btn btn-primary" @onclick="@(() => Test(2))">Сброс</button>
-            </td>
-            <td style="text-align: center" class="form">
-                <button class="btn btn-primary" @onclick="@(() => Test(3))">Обнулить</button>
+            <td colspan="2" style="text-align: center" class="form">
+                <button class="btn btn-primary" @onclick="@Test">Загрузить</button>
             </td>
         </tr>
     </table>
 </EditForm>          
 
 <EditForm Model="_manualLoadSilos" id="LoadSiloses">
-    <table class="form">       
-        <caption>Управление силосами</caption>
+    <table class="form">
         <tr>
-            <td class="form" colspan="3" style="text-align: center; vertical-align: middle;">
+            <td class="form">
                 <label for="inputId">Бункер:</label>
+            </td>
+            <td class="form">
+                
                 <InputSelect id="inputId" @bind-Value="_manualLoadSilos.InputId">
                     <option value="0">Бункер 1</option>
                     <option value="1">Бункер 2</option>
@@ -150,8 +150,10 @@
             </td>            
         </tr>
         <tr>
-            <td class="form" colspan="3" style="text-align: center; vertical-align: middle;">
+            <td class="form">
                 <label for="silosId">Силос:</label>
+            </td>
+            <td class="form">
                 <InputSelect id="silosId" @bind-Value="_manualLoadSilos.SilosId">
                     <option value="0">Силос 1</option>
                     <option value="1">Силос 2</option>
@@ -165,14 +167,8 @@
             </td>     
         </tr>      
         <tr>
-            <td style="text-align: center" class="form">
-                <button class="btn btn-primary" @onclick="@(() => Test1(1))">Загрузить</button>
-            </td>
-            <td style="text-align: center" class="form">
-                <button class="btn btn-primary" @onclick="@(() => Test1(2))">Сбросить</button>
-            </td>
-            <td style="text-align: center" class="form">
-                <button class="btn btn-primary" @onclick="@(() => Test1(3))">Обнулить</button>
+            <td colspan="2" style="text-align: center" class="form">
+                <button class="btn btn-primary" @onclick="@Test1">Загрузить</button>
             </td>
         </tr>
     </table>

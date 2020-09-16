@@ -46,6 +46,10 @@
         <e p="Arm2.razor.cs" t="Include" />
         <e p="Arm3.razor" t="Include" />
         <e p="Arm3.razor.cs" t="Include" />
+        <e p="dual" t="Include">
+          <e p="Arm1.razo_" t="Include" />
+          <e p="Arm1.razo_.c_" t="Include" />
+        </e>
         <e p="Error.razor" t="Include" />
         <e p="Index.razor" t="Include" />
       </e>

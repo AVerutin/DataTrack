@@ -264,7 +264,15 @@ th, td {
 }
 
 .form {
-    border-style: none;
+    border-style: solid;
+}
+
+.form caption {
+    font-family: Arial, sans-serif;
+    caption-side: top;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
 }
 
 #Silos1 {
@@ -691,3 +699,33 @@ dialog{
     left: 1422px;
 }
 
+.statusBar {
+    position: absolute;
+    top: 700px;
+    left: 300px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.statusCell {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #533f03;
+    padding: 4px;
+}
+
+h3 {
+    font-size: 18pt;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #3a0647;
+    position: absolute;
+    top: 80px;
+    left: 340px;
+    padding: 12px;
+    border-style: solid;
+    border-radius: 8px;
+}
