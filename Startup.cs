@@ -22,12 +22,11 @@ namespace DataTrack
         {
             services.AddCors(opt => opt.AddPolicy("CorsPolicy", build =>
             {
-                build.SetIsOriginAllowed(host => true)
-                    .WithOrigins("localhost:5001")
+                build.AllowAnyOrigin()
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                    .AllowAnyMethod();
             }));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -57,6 +56,7 @@ namespace DataTrack
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

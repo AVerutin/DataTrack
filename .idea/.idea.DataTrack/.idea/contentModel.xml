@@ -27,10 +27,16 @@
         <e p="Statuses.cs" t="Include" />
       </e>
       <e p="DataTrack.csproj" t="IncludeRecursive" />
+      <e p="DataTrack.deploy-readme.txt" t="Include" />
+      <e p="DataTrack.deploy.cmd" t="Include" />
+      <e p="DataTrack.Parameters.xml" t="Include" />
+      <e p="DataTrack.SetParameters.xml" t="Include" />
       <e p="DataTrack.sln" t="IncludeFlat" />
+      <e p="DataTrack.SourceManifest.xml" t="Include" />
+      <e p="DataTrack.zip" t="Include" />
       <e p="NotifierService.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
-        <e p="Debug" t="Include">
+        <e p="Release" t="Include">
           <e p="netcoreapp3.1" t="Include">
             <e p="DataTrack.AssemblyInfo.cs" t="Include" />
             <e p="DataTrack.RazorAssemblyInfo.cs" t="Include" />
@@ -56,6 +62,9 @@
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />
+        <e p="PublishProfiles" t="Include">
+          <e p="FolderProfile.pubxml" t="Include" />
+        </e>
       </e>
       <e p="Shared" t="Include">
         <e p="MainLayout.razor" t="Include" />

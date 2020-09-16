@@ -13,7 +13,6 @@ namespace DataTrack.Pages
     public partial class Arm1
     {
         private (string value, Task t) _lastNotification;
-        private string displayStatusBar;
 
         // Список материалов, полученный из базы данных
         private List<Material> _materials = new List<Material>();
@@ -58,7 +57,7 @@ namespace DataTrack.Pages
             Notifier.Notify += OnNotify;
 
             GetMaterials();
-            Initialize();
+            await Initialize();
             // await ConnectToMts(); // Подключение к сервису MTS Service
         }
 
@@ -69,7 +68,6 @@ namespace DataTrack.Pages
             {
                 _lastNotification.value = value;
             });
-            displayStatusBar = "inline";
             StateHasChanged();
         }
 
@@ -130,7 +128,7 @@ namespace DataTrack.Pages
             }
         }
 
-        private void CheckSignal(ushort signal, double value)
+        private async void CheckSignal(ushort signal, double value)
         {
             switch (signal)
             {
@@ -156,8 +154,8 @@ namespace DataTrack.Pages
 
                 // case 4038: StartLoadInputTanker(0); break; // Загрузить материал в 1 загрузочный бункер
                 // case 4039: StartLoadInputTanker(1); break; // Загрузить материал во 2 загрузочный бункер
-                case 4038: LoadInputTanker(0); break; // Загрузить материал в 1 загрузочный бункер
-                case 4039: LoadInputTanker(1); break; // Загрузить материал во 2 загрузочный бункер
+                case 4038: await LoadInputTanker(0); break; // Загрузить материал в 1 загрузочный бункер
+                case 4039: await LoadInputTanker(1); break; // Загрузить материал во 2 загрузочный бункер
                 
                 // case 4040: break;// Признак конца загрузки первого загрузочного бункера
                 // case 4041: break; // Признак конца загрузки второго загрузочного бункера      
@@ -190,7 +188,7 @@ namespace DataTrack.Pages
         }
 
         // Начальная инициализация компонентов АРМ 1
-        private void Initialize()
+        private async Task Initialize()
         {
             InputTanker _tanker;
             Silos _silos;
@@ -247,7 +245,7 @@ namespace DataTrack.Pages
 
             // _silosSelected = -1;
             _silosLoading = false;
-            displayStatusBar = "none";
+            await OnNotify("Готов");
         }
 
         private void ShowMaterial(MouseEventArgs e, int number)
@@ -385,6 +383,7 @@ namespace DataTrack.Pages
         {
             _statuses[number] = "/img/arm1/led/SquareGrey.png";
             _loadStatuses[number] = "";
+            _inputTankers[number].SetStatus(Statuses.Status.Off);
             _logger.Warn($"Был произведен сброс загрузочного бункера [{number}]!");
             Debug.WriteLine($"Был произведен сброс загрузочного бункера [{number}]!");
             fromInput = 0;
@@ -413,12 +412,18 @@ namespace DataTrack.Pages
         /// <param name="number">Номер загрузочного бункера</param>
         private void ResetSilosError(int number)
         {
-            _statuses[number+2] = "/img/arm1/led/SmallGrey.png";
-            _loadStatuses[number+2] = "";
-            _logger.Warn($"Был произведен сброс силоса [{number+1}]!");
-            Debug.WriteLine($"Был произведен сброс силоса [{number+1}]!");
-            // fromInput = 0;
-            // _inputSelected = -1;
+            // Сбрасывать ошибку силоса только если он находится в состоянии ошибки
+            if(_siloses[number].Status == Statuses.Status.Error)
+            {
+                _statuses[number + 2] = "/img/arm1/led/SmallGrey.png";
+                _loadStatuses[number + 2] = "";
+                _siloses[number].SetStatus(Statuses.Status.Off);
+                _logger.Warn($"Был произведен сброс силоса [{number + 1}]!");
+                Debug.WriteLine($"Был произведен сброс силоса [{number + 1}]!");
+                // fromInput = 0;
+                // _inputSelected = -1;
+
+            }
         }
 
         /// <summary>
@@ -615,7 +620,12 @@ namespace DataTrack.Pages
                                         $"Загрузочный бункер {fromInput + 1} содержит материал [{inputMaterial}] вместо ожидаемого [{_siloses[silosNumber].Material}]!");
                                     _logger.Error(
                                         $"Загрузочный бункер {fromInput + 1} содержит материал [{inputMaterial}] вместо ожидаемого [{_siloses[silosNumber].Material}]!");
+                                    
                                     // Выдать ошибку силоса
+                                    _siloses[silosNumber].SetStatus(Statuses.Status.Error);
+                                    _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                                    _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                                    await OnNotify($"Загружаемый материал [{inputMaterial}] не соответствует материалу в силосе {silosNumber+1}");
                                     return;
                                 }
                             }
@@ -668,23 +678,38 @@ namespace DataTrack.Pages
                             // Выбранный загрузочный бункер пуст!
                             Debug.WriteLine($"Загрузочный бункер {fromInput+1} пуст!");
                             _logger.Error($"Загрузочный бункер {fromInput+1} пуст!");
+                            
                             // Выдать ошибку силоса
+                            _siloses[silosNumber].SetStatus(Statuses.Status.Error);
+                            _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                            _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                            await OnNotify($"Загрузочный бункер {fromInput+1} пуст!");
                         }
                     }
                     else
                     {
                         // Силос занят или ошибка силоса
-                        Debug.WriteLine($"Силос {silosNumber+1} занят или в состоянии ошибки: [{inputStatus.ToString()}]!");
-                        _logger.Error($"Силос {silosNumber+1} занят или в состоянии ошибки: [{inputStatus.ToString()}]!");
+                        Debug.WriteLine($"Силос {silosNumber+1} занят или в состоянии ошибки: [{silosStatus.ToString()}]!");
+                        _logger.Error($"Силос {silosNumber+1} занят или в состоянии ошибки: [{silosStatus.ToString()}]!");
+
                         // Выдать ошибку силоса
+                        _siloses[silosNumber].SetStatus(Statuses.Status.Error);
+                        _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                        _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                        await OnNotify($"Силос {silosNumber+1} в состоянии: [{silosStatus.ToString()}]!");
                     }
                 }
                 else
                 {
                     // Загрузочный бункер занят или ошибка загрузочного бункера
                     Debug.WriteLine($"Загрузочный бункер {fromInput+1} занят или в состоянии ошибки: [{inputStatus.ToString()}]!");
-                    _logger.Error($"Загрузочный {fromInput+1} бункер занят или в состоянии ошибки: [{inputStatus.ToString()}]!");
+                    _logger.Error($"Загрузочный бункер {fromInput+1} занят или в состоянии ошибки: [{inputStatus.ToString()}]!");
+
                     // Выдать ошибку силоса
+                    _siloses[silosNumber].SetStatus(Statuses.Status.Error);
+                    _statuses[silosNumber + 2] = "img/arm1/led/SmallRed.png";
+                    _loadStatuses[silosNumber + 2] = "ОШИБКА";
+                    await OnNotify($"Загрузочный бункер {fromInput+1} в состоянии: [{inputStatus.ToString()}]!");
                 }
             }
             else
@@ -692,7 +717,7 @@ namespace DataTrack.Pages
                 // Загрузка нескольких силосов одновременно невозможна
                 Debug.WriteLine("Загрузка нескольких силосов одновременно невозможна!");
                 _logger.Error("Загрузка нескольких силосов одновременно невозможна!");
-                // Выдать ошибку силоса
+                await OnNotify("Загрузка нескольких силосов одновременно невозможна!");
             }
         }
 
@@ -733,6 +758,7 @@ namespace DataTrack.Pages
         /// </summary>
         private async void Test1(int buttonId)
         {
+            //FIXME: Добавить возможность отмены загрузки силоса, пока его загрузка еще не завершена с возвратом материала из резерва
             int input = Int32.Parse(_manualLoadSilos.InputId);
             int silos = Int32.Parse(_manualLoadSilos.SilosId);
 
