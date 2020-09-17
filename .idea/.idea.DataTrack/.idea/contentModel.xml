@@ -13,6 +13,7 @@
       <e p="bin" t="ExcludeRecursive" />
       <e p="Data" t="Include">
         <e p="Chemical.cs" t="Include" />
+        <e p="Collection.cs" t="Include" />
         <e p="ConfigMill.cs" t="Include" />
         <e p="Conveyor.cs" t="Include" />
         <e p="Coords.cs" t="Include" />
@@ -20,6 +21,7 @@
         <e p="DBConnectionOptions.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />
         <e p="Kernel.cs" t="Include" />
+        <e p="KernelService.cs" t="Include" />
         <e p="ManualLoadMaterial.cs" t="Include" />
         <e p="ManualLoadSilos.cs" t="Include" />
         <e p="Material.cs" t="Include" />
@@ -36,7 +38,7 @@
       <e p="DataTrack.SourceManifest.xml" t="Include" />
       <e p="NotifierService.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
-        <e p="Release" t="Include">
+        <e p="Debug" t="Include">
           <e p="netcoreapp3.1" t="Include">
             <e p="DataTrack.AssemblyInfo.cs" t="Include" />
             <e p="DataTrack.RazorAssemblyInfo.cs" t="Include" />

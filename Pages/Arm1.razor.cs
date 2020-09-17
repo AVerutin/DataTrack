@@ -12,6 +12,7 @@ namespace DataTrack.Pages
 {
     public partial class Arm1
     {
+        // public Kernel DataKernel;
         private (string value, Task t) _lastNotification;
 
         // Список материалов, полученный из базы данных
@@ -49,7 +50,7 @@ namespace DataTrack.Pages
         // private long num = 0;
         private readonly ManualLoadMaterial _manualLoadMaterial = new ManualLoadMaterial();
         private readonly ManualLoadSilos _manualLoadSilos = new ManualLoadSilos();
-
+        
         // Обработка события загрузки страницы
         protected override async void OnInitialized()
         {
@@ -59,6 +60,11 @@ namespace DataTrack.Pages
             GetMaterials();
             await Initialize();
             // await ConnectToMts(); // Подключение к сервису MTS Service
+            
+            DataKernel.DataKernel.SetMaterials(_materials);
+            DataKernel.DataKernel.SetInputTankers(_inputTankers);
+            DataKernel.DataKernel.SetSiloses(_siloses);
+            // DataKernel.DataKernel.SetConveyors(_conveyors);
         }
 
         // Событие при обновлении значения события
@@ -74,6 +80,9 @@ namespace DataTrack.Pages
         public void Dispose()
         {
             Notifier.Notify -= OnNotify;
+            DataKernel.DataKernel.SetMaterials(_materials);
+            DataKernel.DataKernel.SetInputTankers(_inputTankers);
+            DataKernel.DataKernel.SetSiloses(_siloses);
         }
 
         /// <summary>
@@ -250,9 +259,7 @@ namespace DataTrack.Pages
             /*
              * Использование глобальных объектов для всех АРМ
              */
-            
-            Kernel kernel = new Kernel();
-            kernel.AddMaterial(new Material());
+
         }
 
         private void ShowMaterial(MouseEventArgs e, int number)

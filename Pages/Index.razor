@@ -1,5 +1,8 @@
-﻿@page "/"
+﻿@page "/"           
+@inject KernelService DataKernel
 
 <h3>Добро пожаловать</h3>
 <p>Рады видеть Вас в системе слежения за материалом Data Track</p>
-
+<p>Количество материала в списке: @DataKernel.DataKernel.GetMaterialsCount()</p>
+<p>Количество загрузочных бункеров: @DataKernel.DataKernel.GetInputTankersCount()</p>
+<p>Количество силосов в списке: @DataKernel.DataKernel.GetSilosesCount()</p>

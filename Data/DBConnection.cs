@@ -39,7 +39,7 @@ namespace DataTrack.Data
             // string db_pass = config.GetSection("PGSQL:DBPass").Value;
 
             ConnectionString =
-                $"Server={options.DBHost};Username={options.DBUser};Database={options.DBName};Port={options.DBPort};Password={options.DBPass};SSLMode=Prefer";
+                $"Server={options.DBHost};Username={options.DBUser};Database={options.DBName};Port={options.DBPort};Password={options.DBPass}"; //";SSLMode=Prefer";
 
             try
             {

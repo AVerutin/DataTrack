@@ -1,3 +1,4 @@
+using DataTrack.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,7 @@ namespace DataTrack
             });
             
             services.AddScoped<NotifierService>();
+            services.AddSingleton<KernelService>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
         }

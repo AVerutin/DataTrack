@@ -1,6 +1,10 @@
 ﻿@page "/arm2"
-@inject NotifierService Notifier
+@inject NotifierService Notifier       
+@inject KernelService DataKernel
 @implements IDisposable
 
-<h3>Arm2</h3>
+<h3>АРМ №2</h3>
 <p>Последнее обновление: @lastNotification.value</p>
+<p>Количество материала в списке: @DataKernel.DataKernel.GetMaterialsCount()</p>
+<p>Количество загрузочных бункеров: @DataKernel.DataKernel.GetInputTankersCount()</p>
+<p>Количество силосов в списке: @DataKernel.DataKernel.GetSilosesCount()</p>
