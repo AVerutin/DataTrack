@@ -32,6 +32,10 @@ namespace DataTrack.Data
             return _collection;
         }
 
+        /// <summary>
+        /// Установить ранее сформированную коллекцию
+        /// </summary>
+        /// <param name="items">Сформированная коллкция элементов</param>
         public void SetItems(List<T> items)
         {
             if (items != null)
@@ -57,7 +61,7 @@ namespace DataTrack.Data
         public T GetItem(int num)
         {
             T result = default;
-            if (_collection != null & num > 0 & num < _collection.Count)
+            if (_collection != null && num >= 0 && num < _collection.Count)
             {
                 result = _collection[num];
             }
@@ -73,7 +77,7 @@ namespace DataTrack.Data
         public bool RemoveItem(int num)
         {
             bool result = false;
-            if (_collection.Count > 0 && num > 0 && num < _collection.Count)
+            if (_collection.Count > 0 && num >= 0 && num < _collection.Count)
             {
                 _collection.RemoveAt(num);
                 result = true;

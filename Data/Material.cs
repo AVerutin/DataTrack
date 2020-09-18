@@ -177,5 +177,10 @@ namespace DataTrack.Data
             Volume = volume;
         }
 
+        public override string ToString()
+        {
+            string result = Name + "[" + PartNo +", " + Weight + "]";
+            return result;
+        }
     }
 }

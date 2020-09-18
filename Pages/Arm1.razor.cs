@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using DataTrack.Data;
 using Microsoft.AspNetCore.Components.Web;
@@ -46,6 +47,12 @@ namespace DataTrack.Pages
         private string _detailPosX;
         private string _detailPosY;
         private string _showed = "none";
+        
+        //TODO: Предусмотреть возможность отмены операции загрузки (разгрузки) с возвратом зарезервированного материала
+        private CancellationTokenSource _cancelLoadInput;
+        private CancellationTokenSource _cancelLoadSilos;
+        private CancellationToken _tokenInput;
+        private CancellationToken _tokenSilos;
 
         // private long num = 0;
         private readonly ManualLoadMaterial _manualLoadMaterial = new ManualLoadMaterial();
@@ -61,10 +68,6 @@ namespace DataTrack.Pages
             await Initialize();
             // await ConnectToMts(); // Подключение к сервису MTS Service
             
-            DataKernel.DataKernel.SetMaterials(_materials);
-            DataKernel.DataKernel.SetInputTankers(_inputTankers);
-            DataKernel.DataKernel.SetSiloses(_siloses);
-            // DataKernel.DataKernel.SetConveyors(_conveyors);
         }
 
         // Событие при обновлении значения события
@@ -83,6 +86,7 @@ namespace DataTrack.Pages
             DataKernel.DataKernel.SetMaterials(_materials);
             DataKernel.DataKernel.SetInputTankers(_inputTankers);
             DataKernel.DataKernel.SetSiloses(_siloses);
+            DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
         }
 
         /// <summary>
@@ -163,8 +167,8 @@ namespace DataTrack.Pages
 
                 // case 4038: StartLoadInputTanker(0); break; // Загрузить материал в 1 загрузочный бункер
                 // case 4039: StartLoadInputTanker(1); break; // Загрузить материал во 2 загрузочный бункер
-                case 4038: await LoadInputTanker(0); break; // Загрузить материал в 1 загрузочный бункер
-                case 4039: await LoadInputTanker(1); break; // Загрузить материал во 2 загрузочный бункер
+                case 4038: await LoadInputTanker(0, _tokenInput); break; // Загрузить материал в 1 загрузочный бункер
+                case 4039: await LoadInputTanker(1, _tokenInput); break; // Загрузить материал во 2 загрузочный бункер
                 
                 // case 4040: break;// Признак конца загрузки первого загрузочного бункера
                 // case 4041: break; // Признак конца загрузки второго загрузочного бункера      
@@ -175,6 +179,7 @@ namespace DataTrack.Pages
         private void GetMaterials()
         {
             _materials = _db.GetMaterials();
+            DataKernel.DataKernel.SetMaterials(_materials);
         }
 
         // Получить следующий материал из списка всех материалов 
@@ -194,28 +199,112 @@ namespace DataTrack.Pages
             {
                 _currentMaterial++;
             }
+            
+            // Установить текущий материал в ядре
+            DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+        }
+
+        // Перместить счетчик материала предыдущего загруженного материала
+        private void MovePrewMaterial()
+        {
+            if (_currentMaterial < 0)
+            {
+                _currentMaterial = 0;
+            }
+            else
+            {
+                _currentMaterial--;
+            }
+            
+            // Установить текущий материал в ядре
+            DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
         }
 
         // Начальная инициализация компонентов АРМ 1
         private async Task Initialize()
         {
-            InputTanker _tanker;
-            Silos _silos;
-            // Conveyor _conveyor;
-
-            // Добавляем загрузочные бункера
-            for (int i = 1; i < 3; i++)
+            
+            // DataKernel.DataKernel.SetInputTankers(_inputTankers);
+            // DataKernel.DataKernel.SetSiloses(_siloses);
+            // DataKernel.DataKernel.SetConveyors(_conveyors);
+            // DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+            
+            // Если в ядре системе нет загрузочных бункеров, то создадим их
+            if (DataKernel.DataKernel.GetInputTankersCount() == 0)
             {
-                _tanker = new InputTanker(i);
-                // Время загрузки материала в загрузочный бункер производится 10 секунд
-                _tanker.SetTimeLoading(0);
-                _inputTankers.Add(_tanker);
+                // Создаем новые загрузочные бункера
+                for (int i = 1; i < 3; i++)
+                {
+                    InputTanker tanker = new InputTanker(i);
+                    // Время загрузки материала в загрузочный бункер производится 10 секунд
+                    // tanker.SetTimeLoading(0);
+                    _inputTankers.Add(tanker);
+                }
+                
+                // Установить загрузочные бункера в ядре системы
+                DataKernel.DataKernel.SetInputTankers(_inputTankers);
+            }
+            else
+            {
+                // Добавляем загрузочные бункера из ядра системы слежения
+                for (int i = 0; i < DataKernel.DataKernel.GetInputTankersCount(); i++)
+                {
+                    _inputTankers.Add(DataKernel.DataKernel.GetInputTanker(i));
+                }
             }
 
-            for (int i = 1; i < 9; i++)
+            // Если в ядре системы нет силосов, то создадим их
+            if (DataKernel.DataKernel.GetSilosesCount() == 0)
             {
-                _silos = new Silos(i);
-                _siloses.Add(_silos);
+                // Создаем новые силоса
+                for (int i = 1; i < 9; i++)
+                {
+                    Silos silos = new Silos(i);
+                    _siloses.Add(silos);
+                }
+                
+                // Установить силосы в ядре системы 
+                DataKernel.DataKernel.SetSiloses(_siloses);
+            }
+            else
+            {
+                // Добавляем силоса из ядра системы
+                for (int i = 0; i < DataKernel.DataKernel.GetSilosesCount(); i++)
+                {
+                    _siloses.Add(DataKernel.DataKernel.GetSilos(i));
+                }
+            }
+            
+            // Если в ядре системы нет конвейеров, то создаим их
+            // if (DataKernel.DataKernel.GetConveyorsCount() == 0)
+            // {
+            //     for (int i = 0; i < 5; i++)
+            //     {
+            //         Conveyor conveyor = new Conveyor(i, Conveyor.Types.Horizontal, 15, 1);
+            //         _conveyors.Add(conveyor);
+            //     }
+            //     
+            //     // Добавляем конвейеры в ядро системы
+            //     DataKernel.DataKernel.SetConveyors(_conveyors);
+            // }
+            // else
+            // {
+            //     for (int i = 0; i < DataKernel.DataKernel.GetConveyorsCount(); i++)
+            //     {
+            //         _conveyors.Add(DataKernel.DataKernel.GetConveyor(i));
+            //     }
+            // }
+            
+            // Проверяем индекс текущего материала, и если он не установлен, то устанавливаем его
+            int kernelMaterialIndex = DataKernel.DataKernel.GetCurrentMaterialIndex();
+            if (kernelMaterialIndex == -1)
+            {
+                _currentMaterial = 0;
+                DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+            }
+            else
+            {
+                _currentMaterial = kernelMaterialIndex;
             }
 
             _conveyors[0] = "img/arm1/Elevator2Grey.png";
@@ -255,7 +344,11 @@ namespace DataTrack.Pages
             // _silosSelected = -1;
             _silosLoading = false;
             await OnNotify("Готов");
-            
+            _cancelLoadInput = new CancellationTokenSource();
+            _cancelLoadSilos = new CancellationTokenSource();
+            _tokenInput = _cancelLoadInput.Token;
+            _tokenSilos = _cancelLoadSilos.Token;
+
             /*
              * Использование глобальных объектов для всех АРМ
              */
@@ -444,7 +537,7 @@ namespace DataTrack.Pages
         /// Загрузка материала в загрузочный бункер
         /// </summary>
         /// <param name="number">Номер загрузочного бункера</param>
-        private async Task LoadInputTanker(int number)
+        private async Task LoadInputTanker(int number, CancellationToken cancel)
         {
             /*
              * 1. Проверяем, не производится ли уже загрузка бункера
@@ -504,9 +597,20 @@ namespace DataTrack.Pages
 
                     // Задержка и загрузка материала      
                     await Task.Delay(TimeSpan.FromSeconds(10));
-                    _inputTankers[number].Load(material);
+                    if (cancel.IsCancellationRequested)
+                    {
+                        _logger.Warn($"Отменена загрузка материала в силос {number}");
+                        Debug.WriteLine($"Отменена загрузка материала в силос {number}");
+                        MovePrewMaterial();
+                        _inputTankers[number].Load(material);
+                        _loadStatuses[number] = "";
+                        _inputTankers[number].SetStatus(Statuses.Status.Off);
+                        _statuses[number] = "img/arm1/led/SquareGrey.png";
+                        return;
+                    }
                     
                     // Материал загружен
+                    _inputTankers[number].Load(material);
                     _loadStatuses[number] = "";
                     _inputTankers[number].SetStatus(Statuses.Status.Off);
                     _statuses[number] = "img/arm1/led/SquareGrey.png";
@@ -567,7 +671,7 @@ namespace DataTrack.Pages
             {
                 case 1:
                 {
-                    await StartLoadSilos();
+                    await StartLoadSilos(_tokenSilos);
                     break;
                 }
             }
@@ -576,7 +680,7 @@ namespace DataTrack.Pages
         /// <summary>
         /// Начало загрузки материала в силос
         /// </summary>
-        private async Task StartLoadSilos()
+        private async Task StartLoadSilos(CancellationToken cancel)
         {
             /* Алгоритм загрузки силоса
             1. Опрделить текущее состояние силоса:
@@ -751,7 +855,7 @@ namespace DataTrack.Pages
             {
                 case 1:
                 {
-                    await LoadInputTanker(number);
+                    await LoadInputTanker(number, _tokenInput);
                     break;
                 }
                 case 2:
@@ -766,7 +870,13 @@ namespace DataTrack.Pages
                 }
             }
         }
-        
+
+        private void CancelLoadInput(CancellationTokenSource token)
+        {
+            token.Cancel();
+        }
+ 
+
         /// <summary>
         /// Ручная загрузка материала в силос из выбранного загрузочного бункера
         /// </summary>
@@ -787,7 +897,7 @@ namespace DataTrack.Pages
             {
                 case 1:
                 {
-                    await StartLoadSilos();
+                    await StartLoadSilos(_tokenSilos);
                     break;
                 }
                 case 2:

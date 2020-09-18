@@ -19,6 +19,9 @@
         <e p="Coords.cs" t="Include" />
         <e p="DBConnection.cs" t="Include" />
         <e p="DBConnectionOptions.cs" t="Include" />
+        <e p="IIngot.cs" t="Include" />
+        <e p="Ingot.cs" t="Include" />
+        <e p="IngotParameters.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />
         <e p="Kernel.cs" t="Include" />
         <e p="KernelService.cs" t="Include" />

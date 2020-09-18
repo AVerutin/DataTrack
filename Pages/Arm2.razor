@@ -4,7 +4,10 @@
 @implements IDisposable
 
 <h3>АРМ №2</h3>
-<p>Последнее обновление: @lastNotification.value</p>
-<p>Количество материала в списке: @DataKernel.DataKernel.GetMaterialsCount()</p>
-<p>Количество загрузочных бункеров: @DataKernel.DataKernel.GetInputTankersCount()</p>
-<p>Количество силосов в списке: @DataKernel.DataKernel.GetSilosesCount()</p>
+@* <p>Количество материала в списке: @DataKernel.DataKernel.GetMaterialsCount()</p> *@
+@* <p>Количество загрузочных бункеров: @DataKernel.DataKernel.GetInputTankersCount()</p> *@
+@* <p>Количество силосов в списке: @DataKernel.DataKernel.GetSilosesCount()</p> *@    
+
+<p>Бункер 1: @_material1</p>
+<p>Бункер 2: @_material2</p>          
+<p>Следующий материал: @_material3</p>

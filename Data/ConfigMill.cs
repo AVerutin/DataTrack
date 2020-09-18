@@ -6,9 +6,9 @@ namespace DataTrack.Data
 {
     public class ConfigMill
     {
-        private static string _cfgFileName;
-        private static List<ushort> _signals;
-        
+        private string _cfgFileName;
+        private List<ushort> _signals;
+        // private List<>
 
         public ConfigMill()
         {
@@ -24,8 +24,8 @@ namespace DataTrack.Data
                 // if (objectStart == true && objectSignal == true) => ищем параметр "Идентификатор=4005"
                 string line;
                 bool objectSignal = false;
-                string objectName = "";
-                ushort signalNumber = 0;
+                string objectName;
+                ushort signalNumber;
 
                 while ((line = sr.ReadLine()) != null)
                 {

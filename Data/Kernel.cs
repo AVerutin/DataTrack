@@ -8,6 +8,9 @@ namespace DataTrack.Data
         private readonly Collection<InputTanker> _inputTankers;
         private readonly Collection<Silos> _siloses;
         private readonly Collection<Conveyor> _conveyors;
+        private readonly IngotParameters _parameters;
+        private int _currentMaterialIndex;
+        
 
         public Kernel()
         {
@@ -15,6 +18,8 @@ namespace DataTrack.Data
             _inputTankers = new Collection<InputTanker>();
             _siloses = new Collection<Silos>();
             _conveyors = new Collection<Conveyor>();
+            _parameters = new IngotParameters();
+            _currentMaterialIndex = -1;
         }
 
         /// <summary>
@@ -262,6 +267,134 @@ namespace DataTrack.Data
         public void ClearConveyors()
         {
             _conveyors.ClearCollection();
+        }
+        
+        /// <summary>
+        /// Добавление строкового параметра для единицы учета
+        /// </summary>
+        /// <param name="key">Идентификатор параметра</param>
+        /// <param name="value">Значение параметра</param>
+        public void AddStringParameter(int key, string value)
+        {
+            if (key>0 && value.Trim()!="")
+            {
+                _parameters.AddStringParameter(key, value);
+            }
+        }
+
+        /// <summary>
+        /// Добавить значащий параметр для единицы учета
+        /// </summary>
+        /// <param name="key">Идентификатор параметра</param>
+        /// <param name="value">Значение параметра</param>
+        public void AddDoubleParameter(int key, double value)
+        {
+            if (key > 0 && value > 0)
+            {
+                _parameters.AddDoubleParameter(key, value);
+            }
+        }
+
+        /// <summary>
+        /// Получить все параметры единицы учета
+        /// </summary>
+        /// <returns>Список всех параметров единицы учета</returns>
+        public IngotParameters GetAllParameters()
+        {
+            return _parameters;
+        }
+
+        /// <summary>
+        /// Получить общее количество параметров в списке
+        /// </summary>
+        /// <returns>Количество параметров в списке</returns>
+        public int GetParametersCount()
+        {
+            return _parameters.GetParametersCount();
+        }
+
+        /// <summary>
+        /// Получить параметр единицы учета по его индентификатору
+        /// </summary>
+        /// <param name="id">Идентификатор параметра</param>
+        /// <returns>Параметр единицы учета</returns>
+        public IngotParameters GetParameterById(int id)
+        {
+            IngotParameters result = new IngotParameters();
+            var strings = _parameters.GetStringParameters();
+            var doubles = _parameters.GetDoubleParameters();
+            
+            foreach (var item in strings)
+            {
+                if (item.Key == id)
+                {
+                    result.AddStringParameter(item.Key, item.Value);
+                }
+            }
+
+            foreach (var item in doubles)
+            {
+                if (item.Key == id)
+                {
+                    result.AddDoubleParameter(item.Key, item.Value);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Удалить параметр по его идентификатору
+        /// </summary>
+        /// <param name="id">Идентификатор параметра</param>
+        /// <returns>Результат выполнения операции удаления</returns>
+        public bool RemoveParameterById(int id)
+        {
+            bool result = false;
+            if(_parameters.Exists(id))
+            {
+                result = _parameters.RemoveStringParameter(id) || _parameters.RemoveDoubleParameter(id); 
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Удалить все параметры единицы учета
+        /// </summary>
+        public void ClearParameters()
+        {
+            _parameters.RemoveAllParameters();
+        }
+
+        /// <summary>
+        /// Установить список параметров для единицы учета
+        /// </summary>
+        /// <param name="parameters"></param>
+        public void SetParameters(IngotParameters parameters)
+        {
+            _parameters.SetParameters(parameters);
+        }
+
+        /// <summary>
+        /// Получить индекс текущего материала в списке
+        /// </summary>
+        /// <returns>Индекс текущего материала в списке</returns>
+        public int GetCurrentMaterialIndex()
+        {
+            return _currentMaterialIndex;
+        }
+
+        /// <summary>
+        /// Установить индекс текущего материала в списке
+        /// </summary>
+        /// <param name="index">Индекс материала</param>
+        public void SetCurrentMaterialIndex(int index)
+        {
+            if (index >= 0 && (index < _materials.GetItemsCount() || _materials.GetItemsCount() == 0))
+            {
+                _currentMaterialIndex = index;
+            }
         }
     }
 }
