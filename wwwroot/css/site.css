@@ -729,3 +729,463 @@ h3 {
     border-style: solid;
     border-radius: 8px;
 }
+
+.siloses_a2mat {
+    font-family: serif;
+    font-weight: bold;
+    color: darkcyan;
+    font-size: 12pt;
+    position: absolute;
+}
+
+.siloses_a2stat {
+    position: absolute; 
+    font-family: sans-serif;
+    font-size: 8pt;
+    color: darkred;
+}
+
+.siloses_a2num {
+    position: absolute; 
+    font-family: sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#Silos1a2 {
+    position: absolute;
+    top: 180px;
+    left: 300px;
+}
+
+#Silos1a2_mat {
+    top: 202px; 
+    left: 307px;
+}
+
+#Silos1a2_stat {
+    top: 182px;
+    left: 304px;
+}
+
+#Silos1a2_num {
+    top: 228px;
+    left: 328px;
+}
+
+#Silos2a2 {
+    position: absolute;
+    top: 180px;
+    left: 375px;
+}
+
+#Silos2a2_mat {
+    top: 202px;
+    left: 382px;
+}
+
+#Silos2a2_stat {
+    top: 182px;
+    left: 379px;
+}
+
+#Silos2a2_num {
+    top: 228px;
+    left: 403px;
+}
+
+#Silos3a2 {
+    position: absolute;
+    top: 180px;
+    left: 450px;
+}
+
+#Silos3a2_mat {
+    top: 202px;
+    left: 457px;
+}
+
+#Silos3a2_stat {
+    top: 182px;
+    left: 454px;
+}
+
+#Silos3a2_num {
+    top: 228px;
+    left: 478px;
+}
+
+#Silos4a2 {
+    position: absolute;
+    top: 180px;
+    left: 550px;
+}
+
+#Silos4a2_mat {
+    top: 202px;
+    left: 557px;
+}
+
+#Silos4a2_stat {
+    top: 182px;
+    left: 554px;
+}
+
+#Silos4a2_num {
+    top: 228px;
+    left: 578px;
+}
+
+#Silos5a2 {
+    position: absolute;
+    top: 180px;
+    left: 625px;
+}
+
+#Silos5a2_mat {
+    top: 202px;
+    left: 632px;
+}
+
+#Silos5a2_stat {
+    top: 182px;
+    left: 629px;
+}
+
+#Silos5a2_num {
+    top: 228px;
+    left: 653px;
+}
+
+#Silos6a2 {
+    position: absolute;
+    top: 180px;
+    left: 700px;
+}
+
+#Silos6a2_mat {
+    top: 202px;
+    left: 707px;
+}
+
+#Silos6a2_stat {
+    top: 182px;
+    left: 704px;
+}
+
+#Silos6a2_num {
+    top: 228px;
+    left: 728px;
+}
+
+#Silos7a2 {
+    position: absolute;
+    top: 180px;
+    left: 800px;
+}
+
+#Silos7a2_mat {
+    top: 202px;
+    left: 807px;
+}
+
+#Silos7a2_stat {
+    top: 182px;
+    left: 804px;
+}
+
+#Silos7a2_num {
+    top: 228px;
+    left: 828px;
+}
+
+#Silos8a2 {
+    position: absolute;
+    top: 180px;
+    left: 875px;
+}
+
+#Silos8a2_mat {
+    top: 202px;
+    left: 882px;
+}
+
+#Silos8a2_stat {
+    top: 182px;
+    left: 879px;
+}
+
+#Silos8a2_num {
+    top: 228px;
+    left: 903px;
+}
+
+#Weight1a2 {
+    position: absolute;
+    top: 370px;
+    left: 370px;
+}
+
+#Weight1_weight {
+    position: absolute;
+    left: 395px;
+    top: 400px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight1_label {
+    position: absolute;
+    left: 378px;
+    top: 373px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight2a2 {
+    position: absolute;
+    top: 370px;
+    left: 620px;
+}
+
+#Weight2_weight {
+    position: absolute;
+    left: 645px;
+    top: 400px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight2_label {
+    position: absolute;
+    left: 628px;
+    top: 373px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight3a2 {
+    position: absolute;
+    top: 370px;
+    left: 830px;
+}
+
+#Weight3_weight {
+    position: absolute;
+    left: 855px;
+    top: 400px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight3_label {
+    position: absolute;
+    left: 838px;
+    top: 373px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Rollgang1a2 {
+    position: absolute;
+    top: 520px;
+    left: 300px;
+}
+
+#Conveyor1a2 {
+    position: absolute;
+    top: 560px;
+    left: 750px;
+}
+
+#Conveyor2a2 {
+    position: absolute;
+    left: 1050px;
+    top: 50px;
+}
+
+#Rolgang1a2 {
+    position: absolute;
+    top: 510px;
+    left: 360px;
+}
+
+#Conveyor3a2 {
+    position: absolute;
+    top: 30px;
+    left: 1080px;
+}
+
+#Rolgang2a2 {
+    position: absolute;
+    top: 70px;
+    left: 1100px;
+}
+
+#Conveyor4a2 {
+    position: absolute;
+    left: 1280px;
+    top: 360px;
+}
+
+#Stalevoz {
+    position: absolute;
+    left: 1180px;
+    top: 680px;
+}
+
+#Diviator1 {
+    position: absolute;
+    top: 120px;
+    left: 1500px;
+}
+
+#Diviator2 {
+    position: absolute;
+    left: 1355px;
+    top: 250px;
+}
+
+#Diviator3 {
+    position: absolute;
+    left: 1500px;
+    top: 380px;
+}
+
+#Diviator4 {
+    position: absolute;
+    top: 530px;
+    left: 1190px;
+}
+
+#Diviator5 {
+    position: absolute;
+    top: 620px;
+    left: 1480px;
+}
+
+#Weight4a2 {
+    position: absolute;
+    top: 220px;
+    left: 1590px;
+}
+
+#Weight4_weight {
+    position: absolute;
+    left: 1620px;
+    top: 253px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight4_led {
+    position: absolute;
+    top: 287px;
+    left: 1628px;
+}
+
+#Weight4_label {
+    position: absolute;
+    top: 222px;
+    left: 1600px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight5a2 {
+    position: absolute;
+    top: 400px;
+    left: 1200px;
+}
+
+#Weight5_weight {
+    position: absolute;
+    left: 1227px;
+    top: 433px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight5_led {
+    position: absolute;
+    top: 467px;
+    left: 1238px;
+}
+
+#Weight5_label {
+    position: absolute;
+    top: 402px;
+    left: 1208px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight6a2 {
+    position: absolute;
+    top: 500px;
+    left: 1420px;
+}
+
+#Weight6_weight {
+    position: absolute;
+    left: 1447px;
+    top: 533px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight6_led {
+    position: absolute;
+    top: 567px;
+    left: 1458px;
+}
+
+#Weight6_label {
+    position: absolute;
+    top: 502px;
+    left: 1428px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight7a2 {
+    position: absolute;
+    top: 500px;
+    left: 1600px;
+}
+
+#Weight7_weight {
+    position: absolute;
+    left: 1627px;
+    top: 533px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight7_led {
+    position: absolute;
+    top: 567px;
+    left: 1638px;
+}
+
+#Weight7_label {
+    position: absolute;
+    top: 502px;
+    left: 1608px;
+    color: darkred;
+    font-weight: bold;
+}

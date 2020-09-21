@@ -32,3 +32,12 @@
     "DBPass": "test$ope$_1"
   }
 
+Подлкючение к локальной базе данных
+  "PGSQL": {
+    "DBHost": "192.168.56.104",
+    "DBPort": 5432,
+    "DBName": "datatrack",
+    "DBSchema": "pqca",
+    "DBUser": "pguser",
+    "DBPass": "pg_psswrd"
+  }

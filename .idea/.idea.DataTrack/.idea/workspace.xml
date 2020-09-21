@@ -29,21 +29,89 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add pages for ARM1 and ARM2">
-      <change afterPath="$PROJECT_DIR$/Data/IIngot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Ingot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/IngotParameters.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator2Green.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator2Grey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator2Red.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator2Yellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator3Green.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator3Grey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator3Red.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Elevator3Yellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Razdvoitel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangLongGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangLongGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangLongRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangLongYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangVeryLongGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/SilosLeft.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/SilosRight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Stalevoz.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Weight1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/WeightGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/WeightGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/WeightRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/WeightYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_doublelong.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_long.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_mid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_short.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_verylong.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/funnel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/sandclock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/stalevoz_kovsh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/voronka.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/weights.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/weights_long.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/ButtonGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/ButtonGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/ButtonRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/ButtonYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/LongButtonGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/LongButtonGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/LongButtonRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/buttons/LongButtonYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/BigGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/BigGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/BigRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/BigWhite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/BigYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/LedGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/LedGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/LedRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/LedWhite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/LedYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SmallGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SmallGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SmallRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SmallWhite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SmallYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SquareGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SquareGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SquareRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SquareWhite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/SquareYellow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/w1LedGreen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/w1LedGrey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/w1LedRed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/w1LedYellow.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Collection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Collection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/ConfigMill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/ConfigMill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Kernel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Kernel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Material.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Material.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/KernelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/KernelService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Index.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Index.razor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Сигналы.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Сигналы.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,16 +152,11 @@
         <option value="$PROJECT_DIR$/Data/InputTanker.cs" />
         <option value="$PROJECT_DIR$/Data/Conveyor.cs" />
         <option value="$PROJECT_DIR$/Data/ManualLoadMaterial.cs" />
-        <option value="$PROJECT_DIR$/wwwroot/css/site.css" />
         <option value="$PROJECT_DIR$/Data/DataTrack.cs" />
         <option value="$PROJECT_DIR$/Data/TrackCernel.cs" />
         <option value="$PROJECT_DIR$/App.razor" />
         <option value="$PROJECT_DIR$/Startup.cs" />
-        <option value="$PROJECT_DIR$/Сигналы.txt" />
         <option value="$PROJECT_DIR$/Data/DBConnection.cs" />
-        <option value="$PROJECT_DIR$/appsettings.json" />
-        <option value="$PROJECT_DIR$/Pages/Index.razor.cs" />
-        <option value="$PROJECT_DIR$/Data/KernelService.cs" />
         <option value="$PROJECT_DIR$/Data/MtsConnect.cs" />
         <option value="$PROJECT_DIR$/Data/IIngot.cs" />
         <option value="$PROJECT_DIR$/Data/Ingot.cs" />
@@ -103,11 +166,16 @@
         <option value="$PROJECT_DIR$/Data/ConfigMill.cs" />
         <option value="$PROJECT_DIR$/Shared/NavMenu.razor" />
         <option value="$PROJECT_DIR$/Data/Collection.cs" />
-        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
         <option value="$PROJECT_DIR$/Data/Material.cs" />
-        <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
         <option value="$PROJECT_DIR$/Data/Kernel.cs" />
+        <option value="$PROJECT_DIR$/Сигналы.txt" />
+        <option value="$PROJECT_DIR$/appsettings.json" />
         <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
+        <option value="$PROJECT_DIR$/Data/KernelService.cs" />
+        <option value="$PROJECT_DIR$/Pages/Index.razor.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
+        <option value="$PROJECT_DIR$/wwwroot/css/site.css" />
       </list>
     </option>
   </component>
@@ -202,7 +270,8 @@
       <workItem from="1600232361620" duration="2135000" />
       <workItem from="1600235645483" duration="4765000" />
       <workItem from="1600259917675" duration="34692000" />
-      <workItem from="1600405337248" duration="18864000" />
+      <workItem from="1600405337248" duration="22804000" />
+      <workItem from="1600431226994" duration="17334000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -323,7 +392,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600339323148</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fixed: Correct sent materials from ARM1 and all other objects too.">
+      <created>1600427301349</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1600427301349</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +451,8 @@
     <MESSAGE value="Add CORS" />
     <MESSAGE value="Add global monitoring objects in kernel." />
     <MESSAGE value="Global kernel can include lists of all existing objects types and materials. Global kernel can be called from anywhere." />
-    <option name="LAST_COMMIT_MESSAGE" value="Global kernel can include lists of all existing objects types and materials. Global kernel can be called from anywhere." />
+    <MESSAGE value="Fixed: Correct sent materials from ARM1 and all other objects too." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed: Correct sent materials from ARM1 and all other objects too." />
   </component>
   <component name="WindowStateProjectService">
     <state width="490" height="618" key="DebuggerActiveHint" timestamp="1600422855854">
@@ -386,86 +463,86 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="135" y="64" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600340312500" />
-    <state width="1877" height="176" key="GridCell.Tab.0.bottom" timestamp="1600422902824">
+    <state width="914" height="198" key="GridCell.Tab.0.bottom" timestamp="1600681982272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902824" />
-    <state width="1877" height="176" key="GridCell.Tab.0.center" timestamp="1600422902824">
+    <state width="914" height="198" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600681982272" />
+    <state width="914" height="198" key="GridCell.Tab.0.center" timestamp="1600681982272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902824" />
-    <state width="1877" height="176" key="GridCell.Tab.0.left" timestamp="1600422902824">
+    <state width="914" height="198" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600681982272" />
+    <state width="914" height="198" key="GridCell.Tab.0.left" timestamp="1600681982272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902824" />
-    <state width="1877" height="176" key="GridCell.Tab.0.right" timestamp="1600422902824">
+    <state width="914" height="198" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600681982272" />
+    <state width="914" height="198" key="GridCell.Tab.0.right" timestamp="1600681982272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902824" />
-    <state width="1877" height="176" key="GridCell.Tab.1.bottom" timestamp="1600422913962">
+    <state width="914" height="198" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600681982272" />
+    <state width="1877" height="176" key="GridCell.Tab.1.bottom" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600422913962" />
-    <state width="1877" height="176" key="GridCell.Tab.1.center" timestamp="1600422913962">
+    <state width="1877" height="176" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.1.center" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600422913962" />
-    <state width="1877" height="176" key="GridCell.Tab.1.left" timestamp="1600422913962">
+    <state width="1877" height="176" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.1.left" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600422913962" />
-    <state width="1877" height="176" key="GridCell.Tab.1.right" timestamp="1600422913962">
+    <state width="1877" height="176" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.1.right" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600422913962" />
-    <state width="1877" height="176" key="GridCell.Tab.2.bottom" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.2.bottom" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.2.center" timestamp="1600422902565">
+    <state width="1877" height="176" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.2.center" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902565" />
-    <state width="1877" height="176" key="GridCell.Tab.2.left" timestamp="1600422902565">
+    <state width="1877" height="176" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.2.left" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902565" />
-    <state width="1877" height="176" key="GridCell.Tab.2.right" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.2.right" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.3.bottom" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.3.bottom" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.3.center" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.3.center" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.3.left" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.3.left" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.3.right" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.3.right" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.4.bottom" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.4.bottom" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.4.center" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.4.center" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.4.left" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.4.left" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
-    <state width="1877" height="176" key="GridCell.Tab.4.right" timestamp="1600422902566">
+    <state width="1877" height="176" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
+    <state width="1877" height="176" key="GridCell.Tab.4.right" timestamp="1600430945047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="176" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600422902566" />
+    <state width="1877" height="176" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600430945047" />
     <state x="630" y="340" key="LayersDialog" timestamp="1599821878696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -486,10 +563,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600235257009" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1600339757413">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1600427319205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600339757413" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600427319205" />
     <state x="715" y="172" key="VcsDiffUtil.ChangesDialog" timestamp="1599807139030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -503,32 +580,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm1.razor.cs</url>
-          <line>85</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm1.razor.cs" initialLine="89">
-            <startOffsets>
-              <option value="3198" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3245" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm1.razor.cs</url>
-          <line>298</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm1.razor.cs" initialLine="264">
-            <startOffsets>
-              <option value="11707" />
-            </startOffsets>
-            <endOffsets>
-              <option value="11781" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Data/Kernel.cs</url>
           <line>393</line>
           <properties documentPath="E:\Projects\NET\DataTrack\Data\Kernel.cs" initialLine="393">
@@ -540,19 +591,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm2.razor.cs</url>
-          <line>18</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm2.razor.cs" initialLine="18">
-            <startOffsets>
-              <option value="457" />
-            </startOffsets>
-            <endOffsets>
-              <option value="510" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

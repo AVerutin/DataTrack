@@ -18,9 +18,9 @@ namespace DataTrack
         }
         
         // Can be called from anywhere
-        public async Task Update(string value)
-        {
-            // Notify me
-        }
+        // public async Task Update(string value)
+        // {
+        //     // Notify me
+        // }
     }
 }

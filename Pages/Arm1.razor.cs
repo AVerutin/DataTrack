@@ -223,12 +223,6 @@ namespace DataTrack.Pages
         // Начальная инициализация компонентов АРМ 1
         private async Task Initialize()
         {
-            
-            // DataKernel.DataKernel.SetInputTankers(_inputTankers);
-            // DataKernel.DataKernel.SetSiloses(_siloses);
-            // DataKernel.DataKernel.SetConveyors(_conveyors);
-            // DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
-            
             // Если в ядре системе нет загрузочных бункеров, то создадим их
             if (DataKernel.DataKernel.GetInputTankersCount() == 0)
             {
@@ -341,18 +335,12 @@ namespace DataTrack.Pages
             _telegaPositions[6] = "970px";
             _telegaPositions[7] = "1070px";
 
-            // _silosSelected = -1;
             _silosLoading = false;
             await OnNotify("Готов");
             _cancelLoadInput = new CancellationTokenSource();
             _cancelLoadSilos = new CancellationTokenSource();
             _tokenInput = _cancelLoadInput.Token;
             _tokenSilos = _cancelLoadSilos.Token;
-
-            /*
-             * Использование глобальных объектов для всех АРМ
-             */
-
         }
 
         private void ShowMaterial(MouseEventArgs e, int number)
@@ -380,7 +368,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[0];
                     matCount = _siloses[0].GetLayersCount();
                     _loadedMaterial = _siloses[0].GetMaterials();
                     break;
@@ -389,7 +376,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[1];
                     matCount = _siloses[1].GetLayersCount();
                     _loadedMaterial = _siloses[1].GetMaterials();
                     break;
@@ -398,7 +384,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[2];
                     matCount = _siloses[2].GetLayersCount();
                     _loadedMaterial = _siloses[2].GetMaterials();
                     break;
@@ -407,7 +392,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[3];
                     matCount = _siloses[3].GetLayersCount();
                     _loadedMaterial = _siloses[3].GetMaterials();
                     break;
@@ -416,7 +400,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[4];
                     matCount = _siloses[4].GetLayersCount();
                     _loadedMaterial = _siloses[4].GetMaterials();
                     break;
@@ -425,7 +408,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[5];
                     matCount = _siloses[5].GetLayersCount();
                     _loadedMaterial = _siloses[5].GetMaterials();
                     break;
@@ -434,7 +416,6 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[6];
                     matCount = _siloses[6].GetLayersCount();
                     _loadedMaterial = _siloses[6].GetMaterials();
                     break;
@@ -443,14 +424,12 @@ namespace DataTrack.Pages
                 {
                     _detailPosY = $"{e.ClientY + 20}px";
                     _detailPosX = $"{e.ClientX + 10}px";
-                    // _telegaPos = _telegaPositions[7];
                     matCount = _siloses[7].GetLayersCount();
                     _loadedMaterial = _siloses[7].GetMaterials();
                     break;
                 }
             }
 
-            // _silosSelected = number;
             if (matCount > 0)
             {
                 _showed = "inherit";
@@ -463,7 +442,6 @@ namespace DataTrack.Pages
 
         private void HideMaterial()
         {
-            // _silosSelected = 0;
             _showed = "none";
         }
 
@@ -479,7 +457,6 @@ namespace DataTrack.Pages
             _logger.Warn($"Было произведено обнуление загрузочного бункера [{number}]!");
             Debug.WriteLine($"Было произведено обнуление загрузочного бункера [{number}]!");
             fromInput = 0;
-            // _inputSelected = -1;
         }
 
         /// <summary>
@@ -494,7 +471,6 @@ namespace DataTrack.Pages
             _logger.Warn($"Был произведен сброс загрузочного бункера [{number}]!");
             Debug.WriteLine($"Был произведен сброс загрузочного бункера [{number}]!");
             fromInput = 0;
-            // _inputSelected = -1;
         }
         
         /// <summary>
@@ -508,8 +484,6 @@ namespace DataTrack.Pages
             _loadStatuses[number+2] = "";
             _logger.Warn($"Было произведено обнуление загрузочного бункера [{number+1}]!");
             Debug.WriteLine($"Было произведено обнуление загрузочного бункера [{number+1}]!");
-            // fromInput = 0;
-            // _inputSelected = -1;
         }
 
 
@@ -527,9 +501,6 @@ namespace DataTrack.Pages
                 _siloses[number].SetStatus(Statuses.Status.Off);
                 _logger.Warn($"Был произведен сброс силоса [{number + 1}]!");
                 Debug.WriteLine($"Был произведен сброс силоса [{number + 1}]!");
-                // fromInput = 0;
-                // _inputSelected = -1;
-
             }
         }
 

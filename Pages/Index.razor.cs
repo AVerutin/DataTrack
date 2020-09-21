@@ -5,7 +5,7 @@ namespace DataTrack.Pages
     public partial class Index
     {
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             // DataKernel = new Kernel();
         }

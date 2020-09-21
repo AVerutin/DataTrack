@@ -158,6 +158,85 @@
             <e p="TelegaRed.png" t="Include" />
             <e p="TelegaRedLeft.png" t="Include" />
           </e>
+          <e p="arm2" t="Include">
+            <e p="conveyor_doublelong.png" t="Include" />
+            <e p="conveyor_long.png" t="Include" />
+            <e p="conveyor_mid.png" t="Include" />
+            <e p="conveyor_short.png" t="Include" />
+            <e p="conveyor_vertical_doublelong.png" t="Include" />
+            <e p="conveyor_verylong.png" t="Include" />
+            <e p="diviator_down.png" t="Include" />
+            <e p="diviator_left.png" t="Include" />
+            <e p="diviator_right.png" t="Include" />
+            <e p="Elevator2Green.png" t="Include" />
+            <e p="Elevator2Grey.png" t="Include" />
+            <e p="Elevator2Red.png" t="Include" />
+            <e p="Elevator2Yellow.png" t="Include" />
+            <e p="Elevator3Green.png" t="Include" />
+            <e p="Elevator3Grey.png" t="Include" />
+            <e p="Elevator3Red.png" t="Include" />
+            <e p="Elevator3Yellow.png" t="Include" />
+            <e p="funnel.png" t="Include" />
+            <e p="Razdvoitel.png" t="Include" />
+            <e p="RolgangGreen.png" t="Include" />
+            <e p="RolgangGrey.png" t="Include" />
+            <e p="RolgangLongGreen.png" t="Include" />
+            <e p="RolgangLongGrey.png" t="Include" />
+            <e p="RolgangLongRed.png" t="Include" />
+            <e p="RolgangLongYellow.png" t="Include" />
+            <e p="RolgangRed.png" t="Include" />
+            <e p="RolgangVeryLongGrey.png" t="Include" />
+            <e p="RolgangYellow.png" t="Include" />
+            <e p="sandclock.png" t="Include" />
+            <e p="SilosLeft.png" t="Include" />
+            <e p="SilosRight.png" t="Include" />
+            <e p="Stalevoz.png" t="Include" />
+            <e p="stalevoz_kovsh.png" t="Include" />
+            <e p="voronka.png" t="Include" />
+            <e p="Weight1.png" t="Include" />
+            <e p="WeightGreen.png" t="Include" />
+            <e p="WeightGrey.png" t="Include" />
+            <e p="WeightRed.png" t="Include" />
+            <e p="weights.png" t="Include" />
+            <e p="weights_long.png" t="Include" />
+            <e p="WeightYellow.png" t="Include" />
+          </e>
+          <e p="buttons" t="Include">
+            <e p="ButtonGreen.png" t="Include" />
+            <e p="ButtonGrey.png" t="Include" />
+            <e p="ButtonRed.png" t="Include" />
+            <e p="ButtonYellow.png" t="Include" />
+            <e p="LongButtonGreen.png" t="Include" />
+            <e p="LongButtonGrey.png" t="Include" />
+            <e p="LongButtonRed.png" t="Include" />
+            <e p="LongButtonYellow.png" t="Include" />
+          </e>
+          <e p="led" t="Include">
+            <e p="BigGreen.png" t="Include" />
+            <e p="BigGrey.png" t="Include" />
+            <e p="BigRed.png" t="Include" />
+            <e p="BigWhite.png" t="Include" />
+            <e p="BigYellow.png" t="Include" />
+            <e p="LedGreen.png" t="Include" />
+            <e p="LedGrey.png" t="Include" />
+            <e p="LedRed.png" t="Include" />
+            <e p="LedWhite.png" t="Include" />
+            <e p="LedYellow.png" t="Include" />
+            <e p="SmallGreen.png" t="Include" />
+            <e p="SmallGrey.png" t="Include" />
+            <e p="SmallRed.png" t="Include" />
+            <e p="SmallWhite.png" t="Include" />
+            <e p="SmallYellow.png" t="Include" />
+            <e p="SquareGreen.png" t="Include" />
+            <e p="SquareGrey.png" t="Include" />
+            <e p="SquareRed.png" t="Include" />
+            <e p="SquareWhite.png" t="Include" />
+            <e p="SquareYellow.png" t="Include" />
+            <e p="w1LedGreen.png" t="Include" />
+            <e p="w1LedGrey.png" t="Include" />
+            <e p="w1LedRed.png" t="Include" />
+            <e p="w1LedYellow.png" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Сигналы.txt" t="Include" />

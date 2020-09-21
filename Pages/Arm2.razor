@@ -4,10 +4,96 @@
 @implements IDisposable
 
 <h3>АРМ №2</h3>
-@* <p>Количество материала в списке: @DataKernel.DataKernel.GetMaterialsCount()</p> *@
-@* <p>Количество загрузочных бункеров: @DataKernel.DataKernel.GetInputTankersCount()</p> *@
-@* <p>Количество силосов в списке: @DataKernel.DataKernel.GetSilosesCount()</p> *@    
 
-<p>Бункер 1: @_material1</p>
-<p>Бункер 2: @_material2</p>          
-<p>Следующий материал: @_material3</p>
+<img id="Silos1a2" src="img/arm2/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial())" />   
+<div id="Silos1a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos1a2_stat" class="siloses_a2stat">ОШИБКА</div>      
+<div id="Silos1a2_num" class="siloses_a2num">1</div>
+
+<img id="Silos2a2" src="img/arm2/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial())" />     
+<div id="Silos2a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos2a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos2a2_num" class="siloses_a2num">2</div>
+
+<img id="Silos3a2" src="img/arm2/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial())" />
+<div id="Silos3a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos3a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos3a2_num" class="siloses_a2num">3</div>
+
+<img id="Silos4a2" src="img/arm2/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial())" />
+<div id="Silos4a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos4a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos4a2_num" class="siloses_a2num">4</div>
+
+<img id="Silos5a2" src="img/arm2/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial())" />
+<div id="Silos5a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos5a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos5a2_num" class="siloses_a2num">5</div>
+
+<img id="Silos6a2" src="img/arm2/SilosLeft.png"  alt="Силос 6" @onmouseover="@(e => ShowMaterial(e, 8))" @onmouseout="@(e => HideMaterial())" />
+<div id="Silos6a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos6a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos6a2_num" class="siloses_a2num">6</div>
+
+<img id="Silos7a2" src="img/arm2/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 9))" @onmouseout="@(e => HideMaterial())" />
+<div id="Silos7a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos7a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos7a2_num" class="siloses_a2num">7</div>
+
+<img id="Silos8a2" src="img/arm2/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />
+<div id="Silos8a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos8a2_stat" class="siloses_a2stat">ОШИБКА</div>
+<div id="Silos8a2_num" class="siloses_a2num">8</div>
+
+<!-- Весовой бункер 1 -->
+<img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />       
+<div id="Weight1_weight">100</div>
+<div id="Weight1_label">ОШИБКА</div>  
+                         
+<!-- Весовой бункер 2 -->
+<img id="Weight2a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 12))" @onmouseout="@(e => HideMaterial())" />
+<div id="Weight2_weight">100</div>
+<div id="Weight2_label">ОШИБКА</div>  
+                     
+<!-- Весовой бункер 3 -->
+<img id="Weight3a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 13))" @onmouseout="@(e => HideMaterial())" />        
+<div id="Weight3_weight">100</div>
+<div id="Weight3_label">ОШИБКА</div>  
+
+<img id="Conveyor1a2" src="img/arm2/conveyor_long.png" alt="Конвейер 1"/>
+<img id="Conveyor2a2" src="img/arm2/conveyor_vertical_doublelong.png" alt="Конвейер 2" />
+<img id="Rolgang1a2" src="img/arm2/RolgangVeryLongGrey.png" alt="Конвейер 3" />       
+<img id="Conveyor3a2" src="img/arm2/conveyor_short.png" alt="Конвейер 4" />           
+<img id="Rolgang2a2" src="img/arm2/RolgangLongGrey.png" alt="Конвейер 5" />            
+<img id="Conveyor4a2" src="img/arm2/conveyor_mid.png" alt="Конвейер 6" />     
+<img id="Stalevoz" src="img/arm2/Stalevoz.png" alt="Сталевоз" />    
+
+<img id="Diviator1" src="img/arm2/diviator_left.png" alt="Дивиатор 1" />     
+<img id="Diviator2" src="img/arm2/diviator_right.png" alt="Дивиатор 2" />
+<img id="Diviator3" src="img/arm2/diviator_right.png" alt="Дивиатор 3" />       
+<img id="Diviator4" src="img/arm2/diviator_down.png" alt="Дивиатор 4" />        
+<img id="Diviator5" src="img/arm2/Razdvoitel.png" alt="Дивиатор 5" />
+
+<!-- Весовой бункер 4 -->
+<img id="Weight4a2" src="img/arm2/weights_long.png" />
+<div id="Weight4_weight">100</div>
+<img id="Weight4_led" src="img/led/w1LedRed.png" />
+<div id="Weight4_label">ОШИБКА</div>       
+                                                                                           
+<!-- Весовой бункер 5 -->
+<img id="Weight5a2" src="img/arm2/weights_long.png" />
+<div id="Weight5_weight">100</div>
+<img id="Weight5_led" src="img/led/w1LedRed.png" />
+<div id="Weight5_label">ОШИБКА</div>       
+
+<!-- Весовой бункер 6 -->
+<img id="Weight6a2" src="img/arm2/weights_long.png" />
+<div id="Weight6_weight">100</div>
+<img id="Weight6_led" src="img/led/w1LedRed.png" />
+<div id="Weight6_label">ОШИБКА</div>       
+                     
+<!-- Весовой бункер 7 -->
+<img id="Weight7a2" src="img/arm2/weights_long.png" />
+<div id="Weight7_weight">100</div>
+<img id="Weight7_led" src="img/led/w1LedRed.png" />
+<div id="Weight7_label">ОШИБКА</div>       
