@@ -8,6 +8,7 @@ namespace DataTrack.Data
         private readonly Collection<InputTanker> _inputTankers;
         private readonly Collection<Silos> _siloses;
         private readonly Collection<Conveyor> _conveyors;
+        private readonly Collection<WeightTanker> _weights;
         private readonly IngotParameters _parameters;
         private int _currentMaterialIndex;
         
@@ -18,6 +19,7 @@ namespace DataTrack.Data
             _inputTankers = new Collection<InputTanker>();
             _siloses = new Collection<Silos>();
             _conveyors = new Collection<Conveyor>();
+            _weights = new Collection<WeightTanker>();
             _parameters = new IngotParameters();
             _currentMaterialIndex = -1;
         }
@@ -396,5 +398,70 @@ namespace DataTrack.Data
                 _currentMaterialIndex = index;
             }
         }
+
+        /// <summary>
+        /// Добавить новый весовой бункер
+        /// </summary>
+        /// <param name="tanker">Весовой бункер</param>
+        public void AddWeightTanker(WeightTanker tanker)
+        {
+            _weights.AddItem(tanker);
+        }
+
+        /// <summary>
+        /// Установить подготовленный список весовых бункеров
+        /// </summary>
+        /// <param name="tankers">Список весовых бункеров</param>
+        public void SetWeightTankers(List<WeightTanker> tankers)
+        {
+            _weights.SetItems(tankers);
+        }
+
+        /// <summary>
+        /// Получить список всех весовых бункеров
+        /// </summary>
+        /// <returns>Список весовых бункеров</returns>
+        public List<WeightTanker> GetWeightTankers()
+        {
+            return _weights.GetItems();
+        }
+
+        /// <summary>
+        /// Получить количество весовых бункеров в списке
+        /// </summary>
+        /// <returns>Количество весовых бункеров в списке</returns>
+        public int GetWeightTankersCount()
+        {
+            return _weights.GetItemsCount();
+        }
+
+        /// <summary>
+        /// Получить материал из списка по его номеру
+        /// </summary>
+        /// <param name="num">Номер материала</param>
+        /// <returns>Весовой бункер из списка</returns>
+        public WeightTanker GetWeightTanker(int num)
+        {
+            return _weights.GetItem(num);
+        }
+
+        /// <summary>
+        /// Удаление весового бункера из списка по его номеру
+        /// </summary>
+        /// <param name="num">Номер удаляемого весового бункера</param>
+        /// <returns>Результат удаления весового бункера</returns>
+        public bool RemoveWeightTanker(int num)
+        {
+            return _weights.RemoveItem(num);
+        }
+
+        /// <summary>
+        /// Удаление всех весовых бункеров из списка
+        /// </summary>
+        public void ClearWeightTankers()
+        {
+            _weights.ClearCollection();
+        }
+
     }
 }

@@ -83,10 +83,10 @@ namespace DataTrack.Pages
         public void Dispose()
         {
             Notifier.Notify -= OnNotify;
-            DataKernel.DataKernel.SetMaterials(_materials);
-            DataKernel.DataKernel.SetInputTankers(_inputTankers);
-            DataKernel.DataKernel.SetSiloses(_siloses);
-            DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+            DataKernel.Data.SetMaterials(_materials);
+            DataKernel.Data.SetInputTankers(_inputTankers);
+            DataKernel.Data.SetSiloses(_siloses);
+            DataKernel.Data.SetCurrentMaterialIndex(_currentMaterial);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace DataTrack.Pages
         private void GetMaterials()
         {
             _materials = _db.GetMaterials();
-            DataKernel.DataKernel.SetMaterials(_materials);
+            DataKernel.Data.SetMaterials(_materials);
         }
 
         // Получить следующий материал из списка всех материалов 
@@ -201,7 +201,7 @@ namespace DataTrack.Pages
             }
             
             // Установить текущий материал в ядре
-            DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+            DataKernel.Data.SetCurrentMaterialIndex(_currentMaterial);
         }
 
         // Перместить счетчик материала предыдущего загруженного материала
@@ -217,14 +217,14 @@ namespace DataTrack.Pages
             }
             
             // Установить текущий материал в ядре
-            DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+            DataKernel.Data.SetCurrentMaterialIndex(_currentMaterial);
         }
 
         // Начальная инициализация компонентов АРМ 1
         private async Task Initialize()
         {
             // Если в ядре системе нет загрузочных бункеров, то создадим их
-            if (DataKernel.DataKernel.GetInputTankersCount() == 0)
+            if (DataKernel.Data.GetInputTankersCount() == 0)
             {
                 // Создаем новые загрузочные бункера
                 for (int i = 1; i < 3; i++)
@@ -236,19 +236,19 @@ namespace DataTrack.Pages
                 }
                 
                 // Установить загрузочные бункера в ядре системы
-                DataKernel.DataKernel.SetInputTankers(_inputTankers);
+                DataKernel.Data.SetInputTankers(_inputTankers);
             }
             else
             {
                 // Добавляем загрузочные бункера из ядра системы слежения
-                for (int i = 0; i < DataKernel.DataKernel.GetInputTankersCount(); i++)
+                for (int i = 0; i < DataKernel.Data.GetInputTankersCount(); i++)
                 {
-                    _inputTankers.Add(DataKernel.DataKernel.GetInputTanker(i));
+                    _inputTankers.Add(DataKernel.Data.GetInputTanker(i));
                 }
             }
 
             // Если в ядре системы нет силосов, то создадим их
-            if (DataKernel.DataKernel.GetSilosesCount() == 0)
+            if (DataKernel.Data.GetSilosesCount() == 0)
             {
                 // Создаем новые силоса
                 for (int i = 1; i < 9; i++)
@@ -258,14 +258,14 @@ namespace DataTrack.Pages
                 }
                 
                 // Установить силосы в ядре системы 
-                DataKernel.DataKernel.SetSiloses(_siloses);
+                DataKernel.Data.SetSiloses(_siloses);
             }
             else
             {
                 // Добавляем силоса из ядра системы
-                for (int i = 0; i < DataKernel.DataKernel.GetSilosesCount(); i++)
+                for (int i = 0; i < DataKernel.Data.GetSilosesCount(); i++)
                 {
-                    _siloses.Add(DataKernel.DataKernel.GetSilos(i));
+                    _siloses.Add(DataKernel.Data.GetSilos(i));
                 }
             }
             
@@ -290,11 +290,11 @@ namespace DataTrack.Pages
             // }
             
             // Проверяем индекс текущего материала, и если он не установлен, то устанавливаем его
-            int kernelMaterialIndex = DataKernel.DataKernel.GetCurrentMaterialIndex();
+            int kernelMaterialIndex = DataKernel.Data.GetCurrentMaterialIndex();
             if (kernelMaterialIndex == -1)
             {
                 _currentMaterial = 0;
-                DataKernel.DataKernel.SetCurrentMaterialIndex(_currentMaterial);
+                DataKernel.Data.SetCurrentMaterialIndex(_currentMaterial);
             }
             else
             {

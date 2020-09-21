@@ -31,6 +31,7 @@
         <e p="MtsConnect.cs" t="Include" />
         <e p="Silos.cs" t="Include" />
         <e p="Statuses.cs" t="Include" />
+        <e p="WeightTanker.cs" t="Include" />
       </e>
       <e p="DataTrack.csproj" t="IncludeRecursive" />
       <e p="DataTrack.deploy-readme.txt" t="Include" />

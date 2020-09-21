@@ -6,14 +6,14 @@ namespace DataTrack
 {
     public class KernelService
     {
-        public Kernel DataKernel;
+        public Kernel Data;
         // public event Func<string, Task> kernel;
 
         public KernelService()
         {
-            if (DataKernel == null)
+            if (Data == null)
             {
-                DataKernel = new Kernel();
+                Data = new Kernel();
             }
         }
         

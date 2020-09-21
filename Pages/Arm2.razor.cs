@@ -9,7 +9,7 @@ namespace DataTrack.Pages
     public partial class Arm2
     {
         private (string value, Task t) lastNotification;
-        private readonly List<Silos> _siloses = new List<Silos>();
+        private List<Silos> _siloses = new List<Silos>();
 
         private string _detailPosX;
         private string _detailPosY;
@@ -27,7 +27,10 @@ namespace DataTrack.Pages
             Notifier.Notify += OnNotify;
             
             // Точка входа на страницу
-            int kernelMaterialIndex = DataKernel.DataKernel.GetCurrentMaterialIndex();
+            // Проверить наличие силосов и прочих узлов в ядре системе!
+            Initialize();
+            _siloses = Kernel.Data.GetSiloses();
+            int kernelMaterialIndex = Kernel.Data.GetCurrentMaterialIndex();
             _stalevozPos1 = "top: 680px; left: 1180px;";
             _stalevozPos2 = "top: 680px; left: 1500px;";
         }
@@ -44,6 +47,33 @@ namespace DataTrack.Pages
         public void Dispose()
         {
             Notifier.Notify -= OnNotify;
+        }
+
+        private async void Initialize()
+        {
+            // Если в ядре системы нет силосов, то создадим их
+            if (Kernel.Data.GetSilosesCount() == 0)
+            {
+                // Создаем новые силоса
+                for (int i = 1; i < 9; i++)
+                {
+                    Silos silos = new Silos(i);
+                    _siloses.Add(silos);
+                }
+                
+                // Установить силосы в ядре системы 
+                Kernel.Data.SetSiloses(_siloses);
+            }
+            else
+            {
+                // Добавляем силоса из ядра системы
+                for (int i = 0; i < Kernel.Data.GetSilosesCount(); i++)
+                {
+                    _siloses.Add(Kernel.Data.GetSilos(i));
+                }
+            }
+
+            await OnNotify("Готов");
         }
         
         private void ShowMaterial(MouseEventArgs e, int number)

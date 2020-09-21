@@ -763,6 +763,12 @@ h3 {
     left: 307px;
 }
 
+#Silos1a2_led {
+    position: absolute;
+    top: 184px; 
+    left: 354px;
+}
+
 #Silos1a2_stat {
     top: 182px;
     left: 304px;
@@ -784,6 +790,13 @@ h3 {
     left: 382px;
 }
 
+#Silos2a2_led {
+    position: absolute;
+    top: 184px;
+    left: 429px;
+}
+
+
 #Silos2a2_stat {
     top: 182px;
     left: 379px;
@@ -803,6 +816,12 @@ h3 {
 #Silos3a2_mat {
     top: 202px;
     left: 457px;
+}
+
+#Silos3a2_led {
+    position: absolute;
+    top: 184px;
+    left: 504px;
 }
 
 #Silos3a2_stat {
@@ -826,6 +845,12 @@ h3 {
     left: 557px;
 }
 
+#Silos4a2_led {
+    position: absolute;
+    top: 184px;
+    left: 604px;
+}
+
 #Silos4a2_stat {
     top: 182px;
     left: 554px;
@@ -845,6 +870,12 @@ h3 {
 #Silos5a2_mat {
     top: 202px;
     left: 632px;
+}
+
+#Silos5a2_led {
+    position: absolute;
+    top: 184px;
+    left: 679px;
 }
 
 #Silos5a2_stat {
@@ -868,6 +899,12 @@ h3 {
     left: 707px;
 }
 
+#Silos6a2_led {
+    position: absolute;
+    top: 184px;
+    left: 754px;
+}
+
 #Silos6a2_stat {
     top: 182px;
     left: 704px;
@@ -889,6 +926,12 @@ h3 {
     left: 807px;
 }
 
+#Silos7a2_led {
+    position: absolute;
+    top: 184px;
+    left: 854px;
+}
+
 #Silos7a2_stat {
     top: 182px;
     left: 804px;
@@ -908,6 +951,12 @@ h3 {
 #Silos8a2_mat {
     top: 202px;
     left: 882px;
+}
+
+#Silos8a2_led {
+    position: absolute;
+    top: 184px;
+    left: 929px;
 }
 
 #Silos8a2_stat {

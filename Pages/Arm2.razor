@@ -1,49 +1,57 @@
 ﻿@page "/arm2"
 @inject NotifierService Notifier       
-@inject KernelService DataKernel
+@inject KernelService Kernel
 @implements IDisposable
 
 <h3>АРМ №2</h3>
 
 <img id="Silos1a2" src="img/arm2/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial())" />   
-<div id="Silos1a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos1a2_mat" class="siloses_a2mat">@_siloses[0].Material</div>
 <div id="Silos1a2_stat" class="siloses_a2stat">ОШИБКА</div>      
-<div id="Silos1a2_num" class="siloses_a2num">1</div>
+<div id="Silos1a2_num" class="siloses_a2num">1</div>      
+<img id="Silos1a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos2a2" src="img/arm2/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial())" />     
-<div id="Silos2a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos2a2_mat" class="siloses_a2mat">@_siloses[1].Material</div>
 <div id="Silos2a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos2a2_num" class="siloses_a2num">2</div>
+<div id="Silos2a2_num" class="siloses_a2num">2</div>       
+<img id="Silos2a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos3a2" src="img/arm2/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial())" />
-<div id="Silos3a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos3a2_mat" class="siloses_a2mat">@_siloses[2].Material</div>
 <div id="Silos3a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos3a2_num" class="siloses_a2num">3</div>
+<div id="Silos3a2_num" class="siloses_a2num">3</div>       
+<img id="Silos3a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos4a2" src="img/arm2/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial())" />
-<div id="Silos4a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos4a2_mat" class="siloses_a2mat">@_siloses[3].Material</div>
 <div id="Silos4a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos4a2_num" class="siloses_a2num">4</div>
+<div id="Silos4a2_num" class="siloses_a2num">4</div>       
+<img id="Silos4a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos5a2" src="img/arm2/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial())" />
-<div id="Silos5a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos5a2_mat" class="siloses_a2mat">@_siloses[4].Material</div>
 <div id="Silos5a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos5a2_num" class="siloses_a2num">5</div>
+<div id="Silos5a2_num" class="siloses_a2num">5</div>     
+<img id="Silos5a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos6a2" src="img/arm2/SilosLeft.png"  alt="Силос 6" @onmouseover="@(e => ShowMaterial(e, 8))" @onmouseout="@(e => HideMaterial())" />
-<div id="Silos6a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos6a2_mat" class="siloses_a2mat">@_siloses[5].Material</div>
 <div id="Silos6a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos6a2_num" class="siloses_a2num">6</div>
+<div id="Silos6a2_num" class="siloses_a2num">6</div>     
+<img id="Silos6a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos7a2" src="img/arm2/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 9))" @onmouseout="@(e => HideMaterial())" />
-<div id="Silos7a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos7a2_mat" class="siloses_a2mat">@_siloses[6].Material</div>
 <div id="Silos7a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos7a2_num" class="siloses_a2num">7</div>
+<div id="Silos7a2_num" class="siloses_a2num">7</div>     
+<img id="Silos7a2_led" src="img/led/SmallGrey.png" />
 
 <img id="Silos8a2" src="img/arm2/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />
-<div id="Silos8a2_mat" class="siloses_a2mat">FeSiMn</div>
+<div id="Silos8a2_mat" class="siloses_a2mat">@_siloses[7].Material</div>
 <div id="Silos8a2_stat" class="siloses_a2stat">ОШИБКА</div>
-<div id="Silos8a2_num" class="siloses_a2num">8</div>
+<div id="Silos8a2_num" class="siloses_a2num">8</div>     
+<img id="Silos8a2_led" src="img/led/SmallGrey.png" />
 
 <!-- Весовой бункер 1 -->
 <img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />       
