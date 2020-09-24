@@ -969,78 +969,6 @@ h3 {
     left: 903px;
 }
 
-#Weight1a2 {
-    position: absolute;
-    top: 370px;
-    left: 370px;
-}
-
-#Weight1_weight {
-    position: absolute;
-    left: 395px;
-    top: 400px;
-    font-family: sans-serif;
-    color: darkblue;
-    font-weight: bold;
-    font-size: 14pt;
-}
-
-#Weight1_label {
-    position: absolute;
-    left: 378px;
-    top: 373px;
-    color: darkred;
-    font-weight: bold;
-}
-
-#Weight2a2 {
-    position: absolute;
-    top: 370px;
-    left: 620px;
-}
-
-#Weight2_weight {
-    position: absolute;
-    left: 645px;
-    top: 400px;
-    font-family: sans-serif;
-    color: darkblue;
-    font-weight: bold;
-    font-size: 14pt;
-}
-
-#Weight2_label {
-    position: absolute;
-    left: 628px;
-    top: 373px;
-    color: darkred;
-    font-weight: bold;
-}
-
-#Weight3a2 {
-    position: absolute;
-    top: 370px;
-    left: 830px;
-}
-
-#Weight3_weight {
-    position: absolute;
-    left: 855px;
-    top: 400px;
-    font-family: sans-serif;
-    color: darkblue;
-    font-weight: bold;
-    font-size: 14pt;
-}
-
-#Weight3_label {
-    position: absolute;
-    left: 838px;
-    top: 373px;
-    color: darkred;
-    font-weight: bold;
-}
-
 #Rollgang1a2 {
     position: absolute;
     top: 520px;
@@ -1117,6 +1045,96 @@ h3 {
     position: absolute;
     top: 620px;
     left: 1480px;
+}
+
+#Weight1a2 {
+    position: absolute;
+    top: 370px;
+    left: 370px;
+}
+
+#Weight1_weight {
+    position: absolute;
+    left: 395px;
+    top: 400px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight1_led {
+    position: absolute;
+    top: 484px;
+    left: 378px;
+}
+
+#Weight1_label {
+    position: absolute;
+    left: 378px;
+    top: 373px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight2a2 {
+    position: absolute;
+    top: 370px;
+    left: 620px;
+}
+
+#Weight2_weight {
+    position: absolute;
+    left: 645px;
+    top: 400px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight2_led {
+    position: absolute;
+    top: 484px;
+    left: 628px;
+}
+
+#Weight2_label {
+    position: absolute;
+    left: 628px;
+    top: 373px;
+    color: darkred;
+    font-weight: bold;
+}
+
+#Weight3a2 {
+    position: absolute;
+    top: 370px;
+    left: 830px;
+}
+
+#Weight3_weight {
+    position: absolute;
+    left: 855px;
+    top: 400px;
+    font-family: sans-serif;
+    color: darkblue;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#Weight3_led {
+    position: absolute;
+    top: 484px;
+    left: 838px;
+}
+
+#Weight3_label {
+    position: absolute;
+    left: 838px;
+    top: 373px;
+    color: darkred;
+    font-weight: bold;
 }
 
 #Weight4a2 {
@@ -1237,4 +1255,11 @@ h3 {
     left: 1608px;
     color: darkred;
     font-weight: bold;
+}
+
+#loadWeightsForm {
+    position: absolute;
+    top: 550px;
+    left: 350px;
+    
 }

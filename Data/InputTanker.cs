@@ -23,7 +23,7 @@ namespace DataTrack.Data
         private List<Material> _materials;
         
         // Текущее состояние загрузочного бункера
-        public Statuses.Status Status { get; private set; }
+        public Statuses Status { get; private set; }
         // private Statuses.Status _status;
 
         private readonly Logger _logger;
@@ -51,7 +51,9 @@ namespace DataTrack.Data
             {
                 _logger = LogManager.GetCurrentClassLogger();
                 InputTankerId = number;
-                Status = Statuses.Status.Off;
+                Statuses status = new Statuses();
+                status.CurrentState = Statuses.Status.Off;
+                Status = status;
                 _materials = new List<Material>();
                 _layersCount = 0;
                 Material = "";
@@ -71,14 +73,25 @@ namespace DataTrack.Data
         /// Установить статус загрузочного бункера
         /// </summary>
         /// <param name="status">Статус загрузочного бункера</param>
-        public void SetStatus(Statuses.Status status) => Status = status;
+        public void SetStatus(Statuses status) => Status = status;
 
+        /// <summary>
+        /// Получить статус загрузочного бункера
+        /// </summary>
+        /// <returns>Статус загрузочного бункера</returns>
+        public Statuses GetStatus() => Status;
+
+        /// <summary>
+        /// Установить текущее состояние загрузочного бункера 
+        /// </summary>
+        /// <param name="state">Текущее состояние загрузочного бункера</param>
+        public void SetCurrentState(Statuses.Status state) => Status.CurrentState = state;
 
         /// <summary>
         /// Получить текущее состояние загрузочного бункера
         /// </summary>
         /// <returns>Текущее состояние загрузочного бункера</returns>
-        public Statuses.Status GetStatus() => Status;
+        public Statuses.Status GetCurrentState() => Status.CurrentState;
 
         /// <summary>
         /// Получить наименование материала, установленного для загрузочного бункера
@@ -196,7 +209,9 @@ namespace DataTrack.Data
         /// </summary>
         public void Reset()
         {
-            Status = Statuses.Status.Off;
+            Statuses status = new Statuses();
+            status.CurrentState = Statuses.Status.Off; 
+            Status = status;
             _layersCount = 0;
             _materials = new List<Material>();
             Material = "";

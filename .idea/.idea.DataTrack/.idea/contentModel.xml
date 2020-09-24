@@ -27,6 +27,7 @@
         <e p="KernelService.cs" t="Include" />
         <e p="ManualLoadMaterial.cs" t="Include" />
         <e p="ManualLoadSilos.cs" t="Include" />
+        <e p="ManualLoadWeights.cs" t="Include" />
         <e p="Material.cs" t="Include" />
         <e p="MtsConnect.cs" t="Include" />
         <e p="Silos.cs" t="Include" />
@@ -76,6 +77,8 @@
       <e p="Shared" t="Include">
         <e p="MainLayout.razor" t="Include" />
         <e p="NavMenu.razor" t="Include" />
+        <e p="Tanker.razor" t="Include" />
+        <e p="Tanker.razor.cs" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
       <e p="wwwroot" t="Include">
@@ -223,6 +226,10 @@
             <e p="LedRed.png" t="Include" />
             <e p="LedWhite.png" t="Include" />
             <e p="LedYellow.png" t="Include" />
+            <e p="MotorGreen.png" t="Include" />
+            <e p="MotorGrey.png" t="Include" />
+            <e p="MotorRed.png" t="Include" />
+            <e p="MotorYellow.png" t="Include" />
             <e p="SmallGreen.png" t="Include" />
             <e p="SmallGrey.png" t="Include" />
             <e p="SmallRed.png" t="Include" />

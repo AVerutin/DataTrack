@@ -10,11 +10,16 @@ namespace DataTrack.Data
         /// Уникальный идентификатор силоса
         /// </summary>
         public readonly int SilosId;
+        
+        /// <summary>
+        /// Уникальный идентификатор силоса в базе данных
+        /// </summary>
+        public long SilosDbId { get; private set; }
 
         /// <summary>
         /// Текущее состояние силоса
         /// </summary>
-        public Statuses.Status Status { get; private set; }
+        public Statuses Status { get; private set; }
 
         /// <summary>
         /// Наименование загруженного в силос материала
@@ -22,12 +27,12 @@ namespace DataTrack.Data
         public string Material { get; private set; }
 
         // Список материала, загруженного в силос
-        private List<Material> Materials;
+        private List<Material> _materials;
         
         // Время загрузки силоса
-        private int TimeLoading;
-        private readonly Logger logger;
-        private int LayersCount;
+        private int _timeLoading;
+        private readonly Logger _logger;
+        private int _layersCount;
         
         /// <summary>
         /// Номер нити (Линия производства)
@@ -44,26 +49,29 @@ namespace DataTrack.Data
         /// </summary>
         public Coords FinishPos { get; set; }
 
-        public Silos(int number, int thread=0)
+        public Silos(int number, int thread=0, long dbid=0)
         {
             if (number > 0)
             {
-                logger = LogManager.GetCurrentClassLogger();
+                _logger = LogManager.GetCurrentClassLogger();
                 SilosId = number;
-                Status = Statuses.Status.Off;
-                Materials = new List<Material>();
-                LayersCount = 0;
+                SilosDbId = dbid;
+                Statuses status = new Statuses();
+                status.CurrentState = Statuses.Status.Off;
+                Status = status;
+                _materials = new List<Material>();
+                _layersCount = 0;
                 Material = "";
                 Thread = thread;
                 StartPos = new Coords();
                 FinishPos = new Coords();
-                TimeLoading = 0;
+                _timeLoading = 0;
             }
             else
             {
                 // Status = Statuses.Status.Error;
-                logger.Error($"Номер создаваемого силоса не может быть равен {number}");
-                throw new ArgumentException($"Номер создаваемого силоса не может быть равен {number}");
+                _logger.Error($"Номер создаваемого силоса не может быть равен {number}");
+                throw new ArgumentNullException($"Номер создаваемого силоса не может быть равен {number}");
             }
         }
 
@@ -71,17 +79,35 @@ namespace DataTrack.Data
         /// Установить статус силоса
         /// </summary>
         /// <param name="status">Статус силоса</param>
-        public void SetStatus(Statuses.Status status) => Status = status;             
-        public Statuses.Status GetStatus() => Status;
+        public void SetStatus(Statuses status) => Status = status;             
+        
+        /// <summary>
+        /// Получить статус силоса
+        /// </summary>
+        /// <returns>Статус силоса</returns>
+        public Statuses GetStatus() => Status;
+
+        /// <summary>
+        /// Установить текущее состояние силоса
+        /// </summary>
+        /// <param name="state">Текущее состояние силоса</param>
+        public void SetCurrentState(Statuses.Status state) => Status.CurrentState = state;
+        
+        /// <summary>
+        /// Получить текущее состояние силоса
+        /// </summary>
+        /// <returns>Текущее состояние силоса</returns>
+        public Statuses.Status GetCurrentState() => Status.CurrentState;
+        
 
         /// <summary>
         /// Сброс силоса в исходное состояние
         /// </summary>
         public void Reset()
         {
-            Status = Statuses.Status.Off;
-            LayersCount = 0;
-            Materials = new List<Material>();
+            Status.CurrentState = Statuses.Status.Off;
+            _layersCount = 0;
+            _materials = new List<Material>();
             Material = "";
         }
 
@@ -91,25 +117,21 @@ namespace DataTrack.Data
         /// <param name="source">Загрузочный бункер, из которого принимается материал</param>
         public void Load(InputTanker source)
         {
-            // Status = Statuses.Status.Loading;
-
             if (source == null)
             {
-                // Status = Statuses.Status.Error;
-                logger.Error($"Не указан загрузочный бункер при загрузке материала в силос {SilosId}");
+                _logger.Error($"Не указан загрузочный бункер при загрузке материала в силос {SilosId}");
                 throw new ArgumentNullException($"Не указан загрузочный бункер при загрузке материала в силос {SilosId}");
             }
 
             if (Material == "")
             {
-                logger.Info($"В силос {SilosId} загружается материал {source.Material}");
+                _logger.Info($"В силос {SilosId} загружается материал {source.Material}");
                 Material = source.Material;
             }
 
             if (source.Material != Material)
             {
-                // Status = Statuses.Status.Error;
-                logger.Error($"Загрузка в силос {SilosId}, содержащего материал {Material} новый материал {source.Material}");
+                _logger.Error($"Загрузка в силос {SilosId}, содержащего материал {Material} новый материал {source.Material}");
                 throw new ArgumentException($"Силос {SilosId} ожидает материал {Material} вместо {source.Material}");
             }
 
@@ -117,17 +139,16 @@ namespace DataTrack.Data
             List<Material> materials = source.Unload();
             foreach (Material material in materials)
             {
-                Materials.Add(material);
+                _materials.Add(material);
             }
-            LayersCount = Materials.Count;
-            // Status = Statuses.Status.Off;
+            _layersCount = _materials.Count;
         }
 
         public void SetTimeLoading(int time)
         {
             if (time > 0)
             {
-                TimeLoading = time;
+                _timeLoading = time;
             }
         }
 
@@ -137,7 +158,7 @@ namespace DataTrack.Data
         /// <returns>Количество слоев материала, загруженного в силос</returns>
         public int GetLayersCount()
         {
-            return Materials.Count;
+            return _materials.Count;
         }
 
         /// <summary>
@@ -146,7 +167,7 @@ namespace DataTrack.Data
         /// <returns>Список слоев материала, загруженного в силос</returns>
         public List<Material> GetMaterials()
         {
-            return Materials;
+            return _materials;
         }
 
         /// <summary>
@@ -155,13 +176,10 @@ namespace DataTrack.Data
         /// <returns>Список разгруженного материала</returns>
         public List<Material> Unload()
         {
-            // Status = Statuses.Status.Unloading;
-
-            List<Material> Result = Materials;
-            Materials = new List<Material>();
-            LayersCount = Materials.Count;
+            List<Material> Result = _materials;
+            _materials = new List<Material>();
+            _layersCount = _materials.Count;
             Material = "";
-            // Status = Statuses.Status.Off;
             
             return Result;
         }
@@ -173,13 +191,10 @@ namespace DataTrack.Data
         /// <returns>Список выгруженного материала из силоса</returns>
         public List<Material> Unload(double weight)
         {
-            // Status = Statuses.Status.Unloading;
-
             // Получаем количество слоев материала. Если материала нет, выдаем ошибку
-            if (LayersCount == 0)
+            if (_layersCount == 0)
             {
-                // Status = Statuses.Status.Error;
-                logger.Error($"Силос {SilosId} не содержит материал, невозможно выгрузить {weight} кг");
+                _logger.Error($"Силос {SilosId} не содержит материал, невозможно выгрузить {weight} кг");
                 throw new ArgumentOutOfRangeException($"Силос {SilosId} не содержит материал, невозможно выгрузить {weight} кг");
             }
 
@@ -189,10 +204,10 @@ namespace DataTrack.Data
                 // Известен вес выгружаемого материала, начинаем выгружать
 
                 // Пока остались слои материала и количество списываемого материала больше нуля
-                while (Materials.Count > 0 && weight > 0)
+                while (_materials.Count > 0 && weight > 0)
                 {
                     List<Material> _materials = new List<Material>();
-                    Material _material = Materials[0]; // получаем первый слой материала
+                    Material _material = this._materials[0]; // получаем первый слой материала
 
                     // Если вес материала в слое больше веса списываемого материала,
                     // то вес списываемого материала устанавливаем в ноль, а вес слоя уменьшаем на вес списываемого материала
@@ -200,7 +215,7 @@ namespace DataTrack.Data
                     {
                         // Находим вес оставшегося материала на слое
                         _material.setWeight(_material.Weight - weight);
-                        Materials[0] = _material;
+                        this._materials[0] = _material;
 
                         // Добавляем в выгруженную часть слоя в список выгруженного материала
                         Material unload = new Material();
@@ -216,13 +231,13 @@ namespace DataTrack.Data
                         if (_material.Weight < weight)
                         {
                             weight -= _material.Weight;
-                            unloaded.Add(Materials[0]);
-                            for (int i = 1; i < Materials.Count; i++)
+                            unloaded.Add(this._materials[0]);
+                            for (int i = 1; i < this._materials.Count; i++)
                             {
-                                _materials.Add(Materials[i]);
+                                _materials.Add(this._materials[i]);
                             }
-                            Materials = _materials;
-                            LayersCount--;
+                            this._materials = _materials;
+                            _layersCount--;
                         }
                         else
                         {
@@ -231,13 +246,13 @@ namespace DataTrack.Data
                             if (_material.Weight == weight)
                             {
                                 weight = 0;
-                                unloaded.Add(Materials[0]);
-                                for (int i = 1; i < Materials.Count; i++)
+                                unloaded.Add(this._materials[0]);
+                                for (int i = 1; i < this._materials.Count; i++)
                                 {
-                                    _materials.Add(Materials[i]);
+                                    _materials.Add(this._materials[i]);
                                 }
-                                Materials = _materials;
-                                LayersCount--;
+                                this._materials = _materials;
+                                _layersCount--;
                             }
                         }
                     }
@@ -245,23 +260,21 @@ namespace DataTrack.Data
 
                 // Если вес списываемого материала больше нуля, а количество слоев равно нулю, 
                 // то выдаем сообщение, что материал уже закончился, списывать больше нечего!
-                if (Materials.Count == 0 && weight > 0)
+                if (_materials.Count == 0 && weight > 0)
                 {
-                    // Status = Statuses.Status.Error;
-                    logger.Error($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
+                    _logger.Error($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
                     throw new ArgumentOutOfRangeException($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
                 }
             }
             else
             {
-                // Status = Statuses.Status.Error;
-                logger.Warn($"Не указан вес выгружаемого материала из силоса {SilosId}");
+                _logger.Warn($"Не указан вес выгружаемого материала из силоса {SilosId}");
                 throw new ArgumentNullException($"Не указан вес выгружаемого материала из силоса {SilosId}");
             }
 
-            Materials = new List<Material>();
+            _materials = new List<Material>();
             Material = "";
-            LayersCount = 0;
+            _layersCount = 0;
             
             return unloaded;
         }

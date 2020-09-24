@@ -4,5 +4,14 @@
 
 <h3>Arm3</h3>      
 <p>Последнее обновление: @lastNotification.value</p>
+@foreach (Tanker tanker in _tankers)
+{
+    RenderFragment renderFragment = (builder) => { builder.OpenComponent(0, tanker.GetType()); builder.CloseComponent(); };
+    @tanker;
+    @renderFragment
+}
 
-
+<form>
+    <label for="butt1">Создать</label>
+    <button id="butt1" class="btn btn-primary" @onclick="@(() => MoveTankers())">Переместить</button>
+</form>
