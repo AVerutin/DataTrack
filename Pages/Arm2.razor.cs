@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataTrack.Data;
 using Microsoft.AspNetCore.Components.Web;
+using NLog;
 
 namespace DataTrack.Pages
 {
     public partial class Arm2
     {
         private (string value, Task t) lastNotification;
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private List<Silos> _siloses = new List<Silos>();
         private List<WeightTanker> _weights = new List<WeightTanker>();
         private List<Material> _loadedMaterial = new List<Material>();
@@ -21,7 +23,6 @@ namespace DataTrack.Pages
         //    2. top: 680px; left: 1180px;
         private string _stalevozPos1;
         private string _stalevozPos2;
-        private readonly Statuses[] _statuses = new Statuses[15];
         private Statuses _status;
 
         private string _showed = "none";
@@ -122,26 +123,6 @@ namespace DataTrack.Pages
                     _weights = Kernel.Data.GetWeightTankers();
             }
             
-            // Установка индиатора текущего состояния для весовых бункеров
-            _statuses[0] = _weights[0].GetStatus();
-            _statuses[1] = _weights[1].GetStatus();
-            _statuses[2] = _weights[2].GetStatus();
-
-            _statuses[3] = _weights[3].GetStatus();
-            _statuses[4] = _weights[4].GetStatus();
-            _statuses[5] = _weights[5].GetStatus();
-            _statuses[6] = _weights[6].GetStatus();
-            
-            // Установка индикаторов текущего состояния для силосов
-            _statuses[7] = _siloses[0].GetStatus();
-            _statuses[8] = _siloses[1].GetStatus();
-            _statuses[9] = _siloses[2].GetStatus();
-            _statuses[10] = _siloses[3].GetStatus();
-            _statuses[11] = _siloses[4].GetStatus();
-            _statuses[12] = _siloses[5].GetStatus();
-            _statuses[13] = _siloses[6].GetStatus();
-            _statuses[14] = _siloses[7].GetStatus();
-
             _manualLoadWeights.WeightNumber = "0";
             _manualLoadWeights.SilosNumber = "0";
             _avalibleSiloses.Add("0", "Силос 1");
@@ -153,73 +134,22 @@ namespace DataTrack.Pages
         private void ShowMaterial(MouseEventArgs e, int number)
         {
             int matCount = 0;
-            switch (number)
+            
+            // Определяем тип объекта, который вызвал метод:
+            // number<10 - силос, number>10 - весовой бункер
+            if (number < 10)
             {
-                case 1:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[0].GetLayersCount();
-                    _loadedMaterial = _siloses[0].GetMaterials();
-                    break;
-                }
-                case 2:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[1].GetLayersCount();
-                    _loadedMaterial = _siloses[1].GetMaterials();
-                    break;
-                }
-                case 3:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[2].GetLayersCount();
-                    _loadedMaterial = _siloses[2].GetMaterials();
-                    break;
-                }
-                case 4:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[3].GetLayersCount();
-                    _loadedMaterial = _siloses[3].GetMaterials();
-                    break;
-                }
-                case 5:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[4].GetLayersCount();
-                    _loadedMaterial = _siloses[4].GetMaterials();
-                    break;
-                }
-                case 6:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[5].GetLayersCount();
-                    _loadedMaterial = _siloses[5].GetMaterials();
-                    break;
-                }
-                case 7:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[6].GetLayersCount();
-                    _loadedMaterial = _siloses[6].GetMaterials();
-                    break;
-                }
-                case 8:
-                {
-                    _detailPosY = $"{e.ClientY + 20}px";
-                    _detailPosX = $"{e.ClientX + 10}px";
-                    matCount = _siloses[7].GetLayersCount();
-                    _loadedMaterial = _siloses[7].GetMaterials();
-                    break;
-                }
+                matCount = _siloses[number-1].GetLayersCount();
+                _loadedMaterial = _siloses[number-1].GetMaterials();
             }
+            else
+            {
+                matCount = _weights[number-10].GetLayersCount();
+                _loadedMaterial = _weights[number-10].GetMaterials();
+            }
+
+            _detailPosY = $"{e.ClientY + 20}px";
+            _detailPosX = $"{e.ClientX + 10}px";
 
             if (matCount > 0)
             {
@@ -285,7 +215,7 @@ namespace DataTrack.Pages
         /// <summary>
         /// Начало загрузки материала в весовой бункер
         /// </summary>
-        private void LoadWeight()
+        private async void LoadWeight()
         {
             // Номер весового бункера, принимающего материал
             int weightTanker = Int32.Parse(_manualLoadWeights.WeightNumber);
@@ -293,23 +223,86 @@ namespace DataTrack.Pages
             // Номер силоса, отдающего материал
             int silos = Int32.Parse(_manualLoadWeights.SilosNumber);
 
-            _status = new Statuses();
-            _status.StatusIcon = "img/led/MotorGreen.png";
-            _status.StatusMessage = "WORK";
-            _statuses[weightTanker] = _status;
-            _weights[weightTanker].SetStatus(_status);
+            // Проверяем наличие весового бункера
+            if (_weights[weightTanker] != null)
+            {
+                // Проверяем наличие силоса
+                if (_siloses[silos] != null)
+                {
+                    // Проверяем наличие материала в силосе, из которого будет загрузка материала
+                    if (_siloses[silos].GetLayersCount() > 0)
+                    {
+                        // Проверяем наличие свободного места в весовом бункере
+                        double placed = _weights[weightTanker].GetWeight();
+                        double fulled = _weights[weightTanker].MaxWeight;
+                        if (fulled > placed)
+                        {
+                            // Загружем либо весь материал из силоса, либо количество материала, до полного наполнения весового буненра
+                            _status = new Statuses();
+                            _status.StatusIcon = "img/led/MotorGreen.png";
+                            _status.StatusMessage = "ЗАГРУЗКА";
+                            _weights[weightTanker].SetStatus(_status);
             
-            _status = new Statuses();
-            _status.StatusIcon = "img/led/SmallYellow.png";
-            _status.StatusMessage = "UNLOAD";
-            _statuses[silos+7] = _status;
-            _siloses[silos].SetStatus(_status);
+                            _status = new Statuses();
+                            _status.StatusIcon = "img/led/SmallYellow.png";
+                            _status.StatusMessage = "РАЗГРУЗКА";
+                            _siloses[silos].SetStatus(_status);
+                            
+                            await Task.Delay(TimeSpan.FromSeconds(15));
+                            bool result = _weights[weightTanker].LoadMaterial(_siloses[silos], fulled - placed);
+                            
+                            // Сброс теккущего состояния силоса и зарузочного бункера
+                            Statuses stateSilos = new Statuses();
+                            Statuses stateWeight = new Statuses();
+                            if (result)
+                            {
+                                stateSilos.CurrentState = Statuses.Status.Off;
+                                stateSilos.StatusIcon = "img/led/SmallGrey.png";
+                                stateSilos.StatusMessage = " ";
 
-            // Проверяем наличие весового бункера в ядре системы
-            // Проверяем наличие силоса в ядре системы
-            // Проверяем наличие материала в силосе, из которого будет загрузка материала
-            // Проверяем наличие свободного места в весовом бункере
-            // Загружем либо весь материал из силоса, либо количество материала, до полного наполнения весового буненра
+                                stateWeight.CurrentState = Statuses.Status.Off;
+                                stateWeight.StatusIcon = "img/led/MotorGrey.png";
+                                stateWeight.StatusMessage = " ";
+                            }
+                            else
+                            {
+                                stateSilos.CurrentState = Statuses.Status.Error;
+                                stateSilos.StatusIcon = "img/led/SmallRed.png";
+                                stateSilos.StatusMessage = "ОШИБКА";
+
+                                stateWeight.CurrentState = Statuses.Status.Error;
+                                stateWeight.StatusIcon = "img/led/MotorRed.png";
+                                stateWeight.StatusMessage = "ОШИБКА";
+                            }
+                            _siloses[silos].SetStatus(stateSilos);
+                            _weights[weightTanker].SetStatus(stateWeight);
+                            
+                            StateHasChanged();
+                            await OnNotify("Загрузка весового бункера завершена");
+                        }
+                        else
+                        {
+                            _logger.Error($"В весовом бункере {weightTanker+1} нет места!");
+                            throw new ArgumentOutOfRangeException($"В весовом бункере {weightTanker+1} нет места!");
+                        }
+                    }
+                    else
+                    {
+                        _logger.Error($"Силос {silos+1} пуст!");
+                        throw new ArgumentNullException($"Силос {silos+1} пуст!");
+                    }
+                }
+                else
+                {
+                    _logger.Error($"Силос {silos+1} не существует!");
+                    throw new ArgumentNullException($"Силос {silos+1} не существует!");
+                }
+            }
+            else
+            {
+                _logger.Error($"Весовой бункер {weightTanker+1} не существует!");
+                throw new ArgumentNullException($"Весовой бункер {weightTanker+1} не существует!");
+            }
         }
         
         /// <summary>

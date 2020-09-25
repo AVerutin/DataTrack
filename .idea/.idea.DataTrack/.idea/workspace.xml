@@ -28,19 +28,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add weight tankers into kernel">
-      <change afterPath="$PROJECT_DIR$/Data/ManualLoadWeights.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shared/Tanker.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shared/Tanker.razor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/MotorGreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/MotorGrey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/MotorRed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/led/MotorYellow.png" afterDir="false" />
+    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Share led-images.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/InputTanker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/InputTanker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Silos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Silos.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Statuses.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Statuses.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/WeightTanker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/WeightTanker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor.cs" afterDir="false" />
@@ -48,7 +39,8 @@
       <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm3.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm3.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm3.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm3.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Tanker.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/Tanker.razor.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +55,7 @@
     <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/41/RenderTreeBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/ManualLoadMaterial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4065B38D-0F9F-44D9-8F53-F4C9102AF396/25F/AsyncMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/8/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -93,7 +86,6 @@
         <option value="$PROJECT_DIR$/Data/IngotParameters.cs" />
         <option value="$PROJECT_DIR$/Data/ConfigMill.cs" />
         <option value="$PROJECT_DIR$/Data/Collection.cs" />
-        <option value="$PROJECT_DIR$/Data/Material.cs" />
         <option value="$PROJECT_DIR$/Сигналы.txt" />
         <option value="$PROJECT_DIR$/appsettings.json" />
         <option value="$PROJECT_DIR$/Pages/Index.razor.cs" />
@@ -101,20 +93,21 @@
         <option value="$PROJECT_DIR$/Data/Kernel.cs" />
         <option value="$PROJECT_DIR$/Data/TankerTest.cs" />
         <option value="$PROJECT_DIR$/Shared/Tanker.razor.cs" />
-        <option value="$PROJECT_DIR$/Pages/Arm3.razor" />
         <option value="$PROJECT_DIR$/Shared/Tanker.razor" />
         <option value="$PROJECT_DIR$/Shared/NavMenu.razor" />
-        <option value="$PROJECT_DIR$/Pages/Arm3.razor.cs" />
         <option value="$PROJECT_DIR$/Data/ManualLoadWeights.cs" />
         <option value="$PROJECT_DIR$/Data/Statuses.cs" />
-        <option value="$PROJECT_DIR$/Data/WeightTanker.cs" />
         <option value="$PROJECT_DIR$/Data/InputTanker.cs" />
-        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
         <option value="$PROJECT_DIR$/wwwroot/css/site.css" />
-        <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
-        <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
         <option value="$PROJECT_DIR$/Data/Silos.cs" />
+        <option value="$PROJECT_DIR$/Data/Material.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
+        <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
+        <option value="$PROJECT_DIR$/Pages/Arm3.razor" />
+        <option value="$PROJECT_DIR$/Pages/Arm3.razor.cs" />
+        <option value="$PROJECT_DIR$/Data/WeightTanker.cs" />
       </list>
     </option>
   </component>
@@ -215,7 +208,7 @@
       <workItem from="1600690084344" duration="51000" />
       <workItem from="1600690303250" duration="50000" />
       <workItem from="1600691723670" duration="21104000" />
-      <workItem from="1600836852115" duration="37007000" />
+      <workItem from="1600836852115" duration="48966000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -357,7 +350,21 @@
       <option name="project" value="LOCAL" />
       <updated>1600689850662</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Objects statuses has been saved between any workplaces (ARM1 and ARM2)">
+      <created>1600945696941</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1600945696941</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Share led-images.">
+      <created>1600945741257</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1600945741257</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,97 +419,99 @@
     <MESSAGE value="Fixed: Correct sent materials from ARM1 and all other objects too." />
     <MESSAGE value="Add web-visualization for ARM 2." />
     <MESSAGE value="Add weight tankers into kernel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add weight tankers into kernel" />
+    <MESSAGE value="Objects statuses has been saved between any workplaces (ARM1 and ARM2)" />
+    <MESSAGE value="Share led-images." />
+    <option name="LAST_COMMIT_MESSAGE" value="Share led-images." />
   </component>
   <component name="WindowStateProjectService">
-    <state width="490" height="618" key="DebuggerActiveHint" timestamp="1600944924636">
+    <state width="490" height="618" key="DebuggerActiveHint" timestamp="1600954602260">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="490" height="618" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1600944924636" />
+    <state width="490" height="618" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1600954602260" />
     <state x="135" y="64" width="1736" height="856" key="DiffContextDialog" timestamp="1600340312500">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="135" y="64" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600340312500" />
-    <state width="1877" height="181" key="GridCell.Tab.0.bottom" timestamp="1600945605273">
+    <state width="1877" height="181" key="GridCell.Tab.0.bottom" timestamp="1601013125598">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="181" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600945605273" />
-    <state width="1877" height="181" key="GridCell.Tab.0.center" timestamp="1600945605273">
+    <state width="1877" height="181" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601013125598" />
+    <state width="1877" height="181" key="GridCell.Tab.0.center" timestamp="1601013125598">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="181" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600945605273" />
-    <state width="1877" height="181" key="GridCell.Tab.0.left" timestamp="1600945605273">
+    <state width="1877" height="181" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601013125598" />
+    <state width="1877" height="181" key="GridCell.Tab.0.left" timestamp="1601013125598">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="181" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600945605273" />
-    <state width="1877" height="181" key="GridCell.Tab.0.right" timestamp="1600945605273">
+    <state width="1877" height="181" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601013125598" />
+    <state width="1877" height="181" key="GridCell.Tab.0.right" timestamp="1601013125598">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="181" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600945605273" />
-    <state width="1877" height="235" key="GridCell.Tab.1.bottom" timestamp="1600945004467">
+    <state width="1877" height="181" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601013125598" />
+    <state width="1877" height="235" key="GridCell.Tab.1.bottom" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.1.center" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.1.center" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.1.left" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.1.left" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.1.right" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.1.right" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.2.bottom" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.2.bottom" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.2.center" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.2.center" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.2.left" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.2.left" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.2.right" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.2.right" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.3.bottom" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.3.bottom" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.3.center" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.3.center" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.3.left" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.3.left" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.3.right" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.3.right" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.4.bottom" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.4.bottom" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.4.center" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.4.center" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.4.left" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.4.left" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
-    <state width="1877" height="235" key="GridCell.Tab.4.right" timestamp="1600945004467">
+    <state width="1877" height="235" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
+    <state width="1877" height="235" key="GridCell.Tab.4.right" timestamp="1601012587335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600945004467" />
+    <state width="1877" height="235" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601012587335" />
     <state x="630" y="340" key="LayersDialog" timestamp="1599821878696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -523,10 +532,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600691904943" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1600689863076">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1600946132165">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600689863076" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600946132165" />
     <state x="715" y="172" key="VcsDiffUtil.ChangesDialog" timestamp="1599807139030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -541,63 +550,6 @@
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600342957669" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm3.razor</url>
-          <line>10</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm3.razor" initialLine="10" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm2.razor.cs</url>
-          <line>67</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm2.razor.cs" initialLine="67">
-            <startOffsets>
-              <option value="2301" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2340" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm1.razor.cs</url>
-          <line>505</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm1.razor.cs" initialLine="505">
-            <startOffsets>
-              <option value="19737" />
-            </startOffsets>
-            <endOffsets>
-              <option value="19762" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Pages/Arm2.razor.cs</url>
-          <line>125</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm2.razor.cs" initialLine="125">
-            <startOffsets>
-              <option value="4569" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4608" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#DataTrack.Data.Kernel" memberName="_conveyors" />

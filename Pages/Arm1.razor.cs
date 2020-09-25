@@ -34,7 +34,6 @@ namespace DataTrack.Pages
         private readonly DBConnection _db = new DBConnection();
         private readonly ConfigMill _configMill = new ConfigMill();
 
-        private readonly Statuses[] _statuses = new Statuses[10];
         private Statuses _status = new Statuses();
         private readonly string[] _selected = new string[10];
         private bool _silosLoading;
@@ -314,24 +313,6 @@ namespace DataTrack.Pages
             _conveyors[2] = "img/arm1/Elevator2Grey.png";
             _conveyors[3] = "img/arm1/TelegaGrey.png";
 
-            // Устанавливаем текущее состояние для загрузочных бункеров
-            // _status = new Statuses();
-            // _status.StatusIcon = "img/led/SquareGrey.png";
-            _statuses[0] = _inputTankers[0].GetStatus();
-            _statuses[1] = _inputTankers[1].GetStatus();
-            
-            // Устанавливаем текущее состояние для силосов
-            // _status = new Statuses();
-            // _status.StatusIcon = "img/led/SmallGrey.png";
-            _statuses[2] = _siloses[0].GetStatus();
-            _statuses[3] = _siloses[1].GetStatus();
-            _statuses[4] = _siloses[2].GetStatus();
-            _statuses[5] = _siloses[3].GetStatus();
-            _statuses[6] = _siloses[4].GetStatus();
-            _statuses[7] = _siloses[5].GetStatus();
-            _statuses[8] = _siloses[6].GetStatus();
-            _statuses[9] = _siloses[7].GetStatus();
-
             _selected[0] = "img/led/LedGrey.png";
             _selected[1] = "img/led/LedGrey.png";
             _selected[2] = "img/led/LedGrey.png";
@@ -471,7 +452,6 @@ namespace DataTrack.Pages
             _status.StatusIcon = "img/led/SquareGrey.png";
             _status.StatusMessage = "";
             _status.CurrentState = Statuses.Status.Off;
-            _statuses[number] = _status;
             _logger.Warn($"Было произведено обнуление загрузочного бункера [{number}]!");
             Debug.WriteLine($"Было произведено обнуление загрузочного бункера [{number}]!");
             fromInput = 0;
@@ -489,7 +469,6 @@ namespace DataTrack.Pages
                 _status.StatusIcon = "img/led/SquareGrey.png";
                 _status.StatusMessage = "";
                 _status.CurrentState = Statuses.Status.Off;
-                _statuses[number] = _status;
                 _inputTankers[number].SetStatus(_status);
                 _logger.Warn($"Был произведен сброс загрузочного бункера [{number}]!");
                 Debug.WriteLine($"Был произведен сброс загрузочного бункера [{number}]!");
@@ -509,7 +488,6 @@ namespace DataTrack.Pages
             _status.CurrentState = Statuses.Status.Off;
             _siloses[number].Reset();
             _siloses[number].SetStatus(_status);
-            _statuses[number+2] =_status;
             _logger.Warn($"Было произведено обнуление загрузочного бункера [{number+1}]!");
             Debug.WriteLine($"Было произведено обнуление загрузочного бункера [{number+1}]!");
         }
@@ -528,7 +506,6 @@ namespace DataTrack.Pages
                 _status.StatusIcon = "img/led/SmallGrey.png";
                 _status.StatusMessage = "";
                 _status.CurrentState = Statuses.Status.Off;
-                _statuses[number + 2] = _status;
                 _siloses[number].SetStatus(_status);
                 _logger.Warn($"Был произведен сброс силоса [{number + 1}]!");
                 Debug.WriteLine($"Был произведен сброс силоса [{number + 1}]!");
@@ -584,7 +561,6 @@ namespace DataTrack.Pages
                             _status.StatusIcon = "img/led/SquareRed.png";
                             _status.CurrentState = Statuses.Status.Error;
                             _inputTankers[number].SetStatus(_status);
-                            _statuses[number] = _status;
                             _logger.Error(
                                 $"Попытка загрузить материал {newName} в загрузочный бункер [1], содержащий материал {oldName}");
                             Debug.WriteLine(
@@ -599,7 +575,6 @@ namespace DataTrack.Pages
                     _status.StatusMessage = "ЗАГРУЗКА";
                     _status.StatusIcon = "img/led/SquareGreen.png";
                     _status.CurrentState = Statuses.Status.Loading;
-                    _statuses[number] = _status;
                     _inputTankers[number].SetStatus(_status);
 
                     // Задержка и загрузка материала      
@@ -614,7 +589,6 @@ namespace DataTrack.Pages
                         _status.StatusMessage = "";
                         _status.StatusIcon = "img/led/SquareGrey.png";
                         _status.CurrentState = Statuses.Status.Off;
-                        _statuses[number] = _status;
                         _inputTankers[number].SetStatus(_status);
                         
                         return;
@@ -626,7 +600,6 @@ namespace DataTrack.Pages
                     _status.StatusMessage = "";
                     _status.StatusIcon = "img/led/SquareGrey.png";
                     _status.CurrentState = Statuses.Status.Off;
-                    _statuses[number] = _status;
                     _inputTankers[number].SetStatus(_status);
                     
 
@@ -760,7 +733,6 @@ namespace DataTrack.Pages
                                     _status.StatusMessage = "ОШИБКА";
                                     _status.CurrentState = Statuses.Status.Error;
                                     _siloses[silosNumber].SetStatus(_status);
-                                    _statuses[silosNumber + 2] = _status;
                                     await OnNotify($"Загружаемый материал [{inputMaterial}] не соответствует материалу в силосе {silosNumber+1}");
                                     return;
                                 }
@@ -772,14 +744,12 @@ namespace DataTrack.Pages
                             _status.StatusIcon = "img/led/SquareYellow.png";
                             _status.StatusMessage = "ВЫГРУЗКА";
                             _status.CurrentState = Statuses.Status.Unloading;
-                            _statuses[inputNumber] = _status;
                             _inputTankers[inputNumber].SetStatus(_status);
                             
                             _status = new Statuses();
                             _status.StatusIcon = "img/led/SmallGreen.png";
                             _status.StatusMessage = "ЗАГРУЗКА";
                             _status.CurrentState = Statuses.Status.Loading;
-                            _statuses[silosNumber + 2] = _status;
                             _siloses[silosNumber].SetStatus(_status);
                             
                             _selected[silosNumber] = "img/led/LedGreen.png";
@@ -805,14 +775,12 @@ namespace DataTrack.Pages
                             _status.StatusIcon = "img/led/SquareGrey.png";
                             _status.StatusMessage = "";
                             _status.CurrentState = Statuses.Status.Off;
-                            _statuses[inputNumber] = _status;
                             _inputTankers[inputNumber].SetStatus(_status);
                             
                             _status = new Statuses();
                             _status.StatusIcon = "img/led/SmallGrey.png";
                             _status.StatusMessage = "";
                             _status.CurrentState = Statuses.Status.Off;
-                            _statuses[silosNumber + 2] = _status;
                             _siloses[silosNumber].SetStatus(_status);
                             _selected[silosNumber] = "img/led/LedGrey.png";
                             
@@ -836,7 +804,6 @@ namespace DataTrack.Pages
                             _status.StatusIcon = "img/led/SmallRed.png";
                             _status.StatusMessage = "ОШИБКА";
                             _status.CurrentState = Statuses.Status.Error;
-                            _statuses[silosNumber + 2] = _status;
                             _siloses[silosNumber].SetStatus(_status);
                             await OnNotify($"Загрузочный бункер {fromInput+1} пуст!");
                         }
@@ -852,7 +819,6 @@ namespace DataTrack.Pages
                         _status.StatusIcon = "img/led/SmallRed.png";
                         _status.StatusMessage = "ОШИБКА";
                         _status.CurrentState = Statuses.Status.Error;
-                        _statuses[silosNumber + 2] = _status;
                         _siloses[silosNumber].SetStatus(_status);
                         await OnNotify($"Силос {silosNumber+1} в состоянии: [{silosStatus.ToString()}]!");
                     }
@@ -868,7 +834,6 @@ namespace DataTrack.Pages
                     _status.StatusIcon = "img/led/SmallRed.png";
                     _status.StatusMessage = "ОШИБКА";
                     _status.CurrentState = Statuses.Status.Error;
-                    _statuses[silosNumber + 2] = _status;
                     _siloses[silosNumber].SetStatus(_status);
                     await OnNotify($"Загрузочный бункер {fromInput+1} в состоянии: [{inputStatus.ToString()}]!");
                 }

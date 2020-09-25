@@ -77,8 +77,6 @@
       <e p="Shared" t="Include">
         <e p="MainLayout.razor" t="Include" />
         <e p="NavMenu.razor" t="Include" />
-        <e p="Tanker.razor" t="Include" />
-        <e p="Tanker.razor.cs" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
       <e p="wwwroot" t="Include">
@@ -110,16 +108,6 @@
         <e p="img" t="Include">
           <e p="arm1" t="Include">
             <e p="_InputGrey.png" t="Include" />
-            <e p="buttons" t="Include">
-              <e p="ButtonGreen.png" t="Include" />
-              <e p="ButtonGrey.png" t="Include" />
-              <e p="ButtonRed.png" t="Include" />
-              <e p="ButtonYellow.png" t="Include" />
-              <e p="LongButtonGreen.png" t="Include" />
-              <e p="LongButtonGrey.png" t="Include" />
-              <e p="LongButtonRed.png" t="Include" />
-              <e p="LongButtonYellow.png" t="Include" />
-            </e>
             <e p="Elevator2Green.png" t="Include" />
             <e p="Elevator2Grey.png" t="Include" />
             <e p="Elevator2Red.png" t="Include" />
@@ -132,28 +120,6 @@
             <e p="InputGrey.png" t="Include" />
             <e p="InputRed.png" t="Include" />
             <e p="InputYellow.png" t="Include" />
-            <e p="led" t="Include">
-              <e p="BigGreen.png" t="Include" />
-              <e p="BigGrey.png" t="Include" />
-              <e p="BigRed.png" t="Include" />
-              <e p="BigWhite.png" t="Include" />
-              <e p="BigYellow.png" t="Include" />
-              <e p="LedGreen.png" t="Include" />
-              <e p="LedGrey.png" t="Include" />
-              <e p="LedRed.png" t="Include" />
-              <e p="LedWhite.png" t="Include" />
-              <e p="LedYellow.png" t="Include" />
-              <e p="SmallGreen.png" t="Include" />
-              <e p="SmallGrey.png" t="Include" />
-              <e p="SmallRed.png" t="Include" />
-              <e p="SmallWhite.png" t="Include" />
-              <e p="SmallYellow.png" t="Include" />
-              <e p="SquareGreen.png" t="Include" />
-              <e p="SquareGrey.png" t="Include" />
-              <e p="SquareRed.png" t="Include" />
-              <e p="SquareWhite.png" t="Include" />
-              <e p="SquareYellow.png" t="Include" />
-            </e>
             <e p="SilosLeft.png" t="Include" />
             <e p="SilosRight.png" t="Include" />
             <e p="TelegaGreen.png" t="Include" />

@@ -12,8 +12,8 @@
 <!-- Загрузочные бункера -->
 <img id="Input1" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial())" />
 <img id="Input2" src="img/arm1/InputGrey.png" alt="Загрузочный бункер 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial())" />      
-<div id="Input1_Load">@_statuses[0].StatusMessage</div>
-<div id="Input2_Load">@_statuses[1].StatusMessage</div>
+<div id="Input1_Load">@_inputTankers[0].Status.StatusMessage</div>
+<div id="Input2_Load">@_inputTankers[1].Status.StatusMessage</div>
 
 <!-- Конвейеры -->
 <img id="Conveyor1" src="@_conveyors[0]" alt="Горизонтальный конвейер 1" />
@@ -44,18 +44,18 @@
 <img id="Led8" src="@_selected[7]" alt="Выбор силоса 8"/>
 
 <!-- Индикаторы состояния силосов -->
-<img id="Silos1_Status" src="@_statuses[2].StatusIcon" alt="Статус 1 силоса" />
-<img id="Silos2_Status" src="@_statuses[3].StatusIcon" alt="Статус 2 силоса" />
-<img id="Silos3_Status" src="@_statuses[4].StatusIcon" alt="Статус 3 силоса" />
-<img id="Silos4_Status" src="@_statuses[5].StatusIcon" alt="Статус 4 силоса" />
-<img id="Silos5_Status" src="@_statuses[6].StatusIcon" alt="Статус 5 силоса" />
-<img id="Silos6_Status" src="@_statuses[7].StatusIcon" alt="Статус 6 силоса" />
-<img id="Silos7_Status" src="@_statuses[8].StatusIcon" alt="Статус 7 силоса" />
-<img id="Silos8_Status" src="@_statuses[9].StatusIcon" alt="Статус 8 силоса" />
+<img id="Silos1_Status" src="@_siloses[0].Status.StatusIcon" alt="Статус 1 силоса" />
+<img id="Silos2_Status" src="@_siloses[1].Status.StatusIcon" alt="Статус 2 силоса" />
+<img id="Silos3_Status" src="@_siloses[2].Status.StatusIcon" alt="Статус 3 силоса" />
+<img id="Silos4_Status" src="@_siloses[3].Status.StatusIcon" alt="Статус 4 силоса" />
+<img id="Silos5_Status" src="@_siloses[4].Status.StatusIcon" alt="Статус 5 силоса" />
+<img id="Silos6_Status" src="@_siloses[5].Status.StatusIcon" alt="Статус 6 силоса" />
+<img id="Silos7_Status" src="@_siloses[6].Status.StatusIcon" alt="Статус 7 силоса" />
+<img id="Silos8_Status" src="@_siloses[7].Status.StatusIcon" alt="Статус 8 силоса" />
 
 <!-- Индикаторы сосотояния загрузочных бункеров-->
-<img id="Input1_Status" src="@_statuses[0].StatusIcon" alt="Статус 1 загрузочного бункера"/>
-<img id="Input2_Status" src="@_statuses[1].StatusIcon" alt="Статус 2 загрузочного бункера" />
+<img id="Input1_Status" src="@_inputTankers[0].Status.StatusIcon" alt="Статус 1 загрузочного бункера"/>
+<img id="Input2_Status" src="@_inputTankers[1].Status.StatusIcon" alt="Статус 2 загрузочного бункера" />
 
 <!-- Метка наименования материала -->
 <div id="Input1_Material" class="material_name">@_inputTankers[0].Material</div>
@@ -69,14 +69,14 @@
 <div id="Silos7_Material" class="material_name">@_siloses[6].Material</div>
 <div id="Silos8_Material" class="material_name">@_siloses[7].Material</div>         
 
-<div id="Silos1_Load" class="SilosLoad">@_statuses[2].StatusMessage</div>
-<div id="Silos2_Load" class="SilosLoad">@_statuses[3].StatusMessage</div>
-<div id="Silos3_Load" class="SilosLoad">@_statuses[4].StatusMessage</div>
-<div id="Silos4_Load" class="SilosLoad">@_statuses[5].StatusMessage</div>
-<div id="Silos5_Load" class="SilosLoad">@_statuses[6].StatusMessage</div>
-<div id="Silos6_Load" class="SilosLoad">@_statuses[7].StatusMessage</div>
-<div id="Silos7_Load" class="SilosLoad">@_statuses[8].StatusMessage</div>
-<div id="Silos8_Load" class="SilosLoad">@_statuses[9].StatusMessage</div>
+<div id="Silos1_Load" class="SilosLoad">@_siloses[0].Status.StatusMessage</div>
+<div id="Silos2_Load" class="SilosLoad">@_siloses[1].Status.StatusMessage</div>
+<div id="Silos3_Load" class="SilosLoad">@_siloses[2].Status.StatusMessage</div>
+<div id="Silos4_Load" class="SilosLoad">@_siloses[3].Status.StatusMessage</div>
+<div id="Silos5_Load" class="SilosLoad">@_siloses[4].Status.StatusMessage</div>
+<div id="Silos6_Load" class="SilosLoad">@_siloses[5].Status.StatusMessage</div>
+<div id="Silos7_Load" class="SilosLoad">@_siloses[6].Status.StatusMessage</div>
+<div id="Silos8_Load" class="SilosLoad">@_siloses[7].Status.StatusMessage</div>
 
 <!-- Метка номера бункера -->
 <div id="Input1_Number" class="tanker_number">1</div>

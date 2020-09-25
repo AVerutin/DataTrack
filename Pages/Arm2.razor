@@ -7,69 +7,69 @@
 
 <img id="Silos1a2" src="img/arm2/SilosRight.png" alt="Силос 1" @onmouseover="@(e => ShowMaterial(e, 1))" @onmouseout="@(e => HideMaterial())" />   
 <div id="Silos1a2_mat" class="siloses_a2mat">@_siloses[0].Material</div>
-<div id="Silos1a2_stat" class="siloses_a2stat">@_statuses[7].StatusMessage</div>      
+<div id="Silos1a2_stat" class="siloses_a2stat">@_siloses[0].Status.StatusMessage</div>      
 <div id="Silos1a2_num" class="siloses_a2num">1</div>      
-<img id="Silos1a2_led" src="@_statuses[7].StatusIcon" />
+<img id="Silos1a2_led" src="@_siloses[0].Status.StatusIcon" />
 
 <img id="Silos2a2" src="img/arm2/SilosRight.png" alt="Силос 2" @onmouseover="@(e => ShowMaterial(e, 2))" @onmouseout="@(e => HideMaterial())" />     
 <div id="Silos2a2_mat" class="siloses_a2mat">@_siloses[1].Material</div>
-<div id="Silos2a2_stat" class="siloses_a2stat">@_statuses[8].StatusMessage</div>
+<div id="Silos2a2_stat" class="siloses_a2stat">@_siloses[1].Status.StatusMessage</div>
 <div id="Silos2a2_num" class="siloses_a2num">2</div>       
-<img id="Silos2a2_led" src="@_statuses[8].StatusIcon" />
+<img id="Silos2a2_led" src="@_siloses[1].Status.StatusIcon" />
 
 <img id="Silos3a2" src="img/arm2/SilosLeft.png"  alt="Силос 3" @onmouseover="@(e => ShowMaterial(e, 3))" @onmouseout="@(e => HideMaterial())" />
 <div id="Silos3a2_mat" class="siloses_a2mat">@_siloses[2].Material</div>
-<div id="Silos3a2_stat" class="siloses_a2stat">@_statuses[9].StatusMessage</div>
+<div id="Silos3a2_stat" class="siloses_a2stat">@_siloses[2].Status.StatusMessage</div>
 <div id="Silos3a2_num" class="siloses_a2num">3</div>       
-<img id="Silos3a2_led" src="@_statuses[9].StatusIcon" />
+<img id="Silos3a2_led" src="@_siloses[2].Status.StatusIcon" />
 
 <img id="Silos4a2" src="img/arm2/SilosRight.png" alt="Силос 4" @onmouseover="@(e => ShowMaterial(e, 4))" @onmouseout="@(e => HideMaterial())" />
 <div id="Silos4a2_mat" class="siloses_a2mat">@_siloses[3].Material</div>
-<div id="Silos4a2_stat" class="siloses_a2stat">@_statuses[10].StatusMessage</div>
+<div id="Silos4a2_stat" class="siloses_a2stat">@_siloses[3].Status.StatusMessage</div>
 <div id="Silos4a2_num" class="siloses_a2num">4</div>       
-<img id="Silos4a2_led" src="@_statuses[10].StatusIcon" />
+<img id="Silos4a2_led" src="@_siloses[3].Status.StatusIcon" />
 
 <img id="Silos5a2" src="img/arm2/SilosRight.png" alt="Силос 5" @onmouseover="@(e => ShowMaterial(e, 5))" @onmouseout="@(e => HideMaterial())" />
 <div id="Silos5a2_mat" class="siloses_a2mat">@_siloses[4].Material</div>
-<div id="Silos5a2_stat" class="siloses_a2stat">@_statuses[11].StatusMessage</div>
+<div id="Silos5a2_stat" class="siloses_a2stat">@_siloses[4].Status.StatusMessage</div>
 <div id="Silos5a2_num" class="siloses_a2num">5</div>     
-<img id="Silos5a2_led" src="@_statuses[11].StatusIcon" />
+<img id="Silos5a2_led" src="@_siloses[4].Status.StatusIcon" />
 
 <img id="Silos6a2" src="img/arm2/SilosLeft.png"  alt="Силос 6" @onmouseover="@(e => ShowMaterial(e, 6))" @onmouseout="@(e => HideMaterial())" />
 <div id="Silos6a2_mat" class="siloses_a2mat">@_siloses[5].Material</div>
-<div id="Silos6a2_stat" class="siloses_a2stat">@_statuses[12].StatusMessage</div>
+<div id="Silos6a2_stat" class="siloses_a2stat">@_siloses[5].Status.StatusMessage</div>
 <div id="Silos6a2_num" class="siloses_a2num">6</div>     
-<img id="Silos6a2_led" src="@_statuses[12].StatusIcon" />
+<img id="Silos6a2_led" src="@_siloses[5].Status.StatusIcon" />
 
 <img id="Silos7a2" src="img/arm2/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 7))" @onmouseout="@(e => HideMaterial())" />
 <div id="Silos7a2_mat" class="siloses_a2mat">@_siloses[6].Material</div>
-<div id="Silos7a2_stat" class="siloses_a2stat">@_statuses[13].StatusMessage</div>
+<div id="Silos7a2_stat" class="siloses_a2stat">@_siloses[6].Status.StatusMessage</div>
 <div id="Silos7a2_num" class="siloses_a2num">7</div>     
-<img id="Silos7a2_led" src="@_statuses[13].StatusIcon" />
+<img id="Silos7a2_led" src="@_siloses[6].Status.StatusIcon" />
 
 <img id="Silos8a2" src="img/arm2/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 8))" @onmouseout="@(e => HideMaterial())" />
 <div id="Silos8a2_mat" class="siloses_a2mat">@_siloses[7].Material</div>
-<div id="Silos8a2_stat" class="siloses_a2stat">@_statuses[14].StatusMessage</div>
+<div id="Silos8a2_stat" class="siloses_a2stat">@_siloses[7].Status.StatusMessage</div>
 <div id="Silos8a2_num" class="siloses_a2num">8</div>     
-<img id="Silos8a2_led" src="@_statuses[14].StatusIcon" />
+<img id="Silos8a2_led" src="@_siloses[7].Status.StatusIcon" />
 
 <!-- Весовой бункер 1 -->
-<img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />       
+<img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />       
 <div id="Weight1_weight">100</div>
-<div id="Weight1_label">ОШИБКА</div>  
-<img id="Weight1_led" src="@_statuses[0].StatusIcon" />
+<div id="Weight1_label">@_weights[0].Status.StatusMessage</div>  
+<img id="Weight1_led" src="@_weights[0].Status.StatusIcon" />
                          
 <!-- Весовой бункер 2 -->
-<img id="Weight2a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 12))" @onmouseout="@(e => HideMaterial())" />
+<img id="Weight2a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 2" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />
 <div id="Weight2_weight">100</div>
-<div id="Weight2_label">ОШИБКА</div>  
-<img id="Weight2_led" src="@_statuses[1].StatusIcon" />
+<div id="Weight2_label">@_weights[1].Status.StatusMessage</div>  
+<img id="Weight2_led" src="@_weights[1].Status.StatusIcon" />
                      
 <!-- Весовой бункер 3 -->
-<img id="Weight3a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 13))" @onmouseout="@(e => HideMaterial())" />        
+<img id="Weight3a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 3" @onmouseover="@(e => ShowMaterial(e, 12))" @onmouseout="@(e => HideMaterial())" />        
 <div id="Weight3_weight">100</div>
-<div id="Weight3_label">ОШИБКА</div>  
-<img id="Weight3_led" src="@_statuses[2].StatusIcon" />
+<div id="Weight3_label">@_weights[2].Status.StatusMessage</div>  
+<img id="Weight3_led" src="@_weights[2].Status.StatusIcon" />
 
 <img id="Conveyor1a2" src="img/arm2/conveyor_long.png" alt="Конвейер 1"/>
 <img id="Conveyor2a2" src="img/arm2/conveyor_vertical_doublelong.png" alt="Конвейер 2" />
@@ -86,28 +86,28 @@
 <img id="Diviator5" src="img/arm2/Razdvoitel.png" alt="Дивиатор 5" />
 
 <!-- Весовой бункер 4 -->
-<img id="Weight4a2" src="img/arm2/weights_long.png" />
+<img id="Weight4a2" src="img/arm2/weights_long.png" alt="Весовой бункер 4" @onmouseover="@(e => ShowMaterial(e, 13))" @onmouseout="@(e => HideMaterial())" />
 <div id="Weight4_weight">100</div>
-<img id="Weight4_led" src="@_statuses[3].StatusIcon" />
-<div id="Weight4_label">ОШИБКА</div>       
+<img id="Weight4_led" src="@_weights[3].Status.StatusIcon" />
+<div id="Weight4_label">@_weights[3].Status.StatusMessage</div>       
                                                                                            
 <!-- Весовой бункер 5 -->
-<img id="Weight5a2" src="img/arm2/weights_long.png" />
+<img id="Weight5a2" src="img/arm2/weights_long.png" alt="Весовой бункер 5" @onmouseover="@(e => ShowMaterial(e, 14))" @onmouseout="@(e => HideMaterial())" />
 <div id="Weight5_weight">100</div>
-<img id="Weight5_led" src="@_statuses[4].StatusIcon" />
-<div id="Weight5_label">ОШИБКА</div>       
+<img id="Weight5_led" src="@_weights[4].Status.StatusIcon" />
+<div id="Weight5_label">@_weights[4].Status.StatusMessage</div>       
 
 <!-- Весовой бункер 6 -->
-<img id="Weight6a2" src="img/arm2/weights_long.png" />
+<img id="Weight6a2" src="img/arm2/weights_long.png" alt="Весовой бункер 6" @onmouseover="@(e => ShowMaterial(e, 15))" @onmouseout="@(e => HideMaterial())" />
 <div id="Weight6_weight">100</div>
-<img id="Weight6_led" src="@_statuses[5].StatusIcon" />
-<div id="Weight6_label">ОШИБКА</div>       
+<img id="Weight6_led" src="@_weights[5].Status.StatusIcon" />
+<div id="Weight6_label">@_weights[5].Status.StatusMessage</div>       
                      
 <!-- Весовой бункер 7 -->
-<img id="Weight7a2" src="img/arm2/weights_long.png" />
+<img id="Weight7a2" src="img/arm2/weights_long.png" alt="Весовой бункер 7" @onmouseover="@(e => ShowMaterial(e, 16))" @onmouseout="@(e => HideMaterial())" />
 <div id="Weight7_weight">100</div>
-<img id="Weight7_led" src="@_statuses[6].StatusIcon" />
-<div id="Weight7_label">ОШИБКА</div>       
+<img id="Weight7_led" src="@_weights[6].Status.StatusIcon" />
+<div id="Weight7_label">@_weights[6].Status.StatusMessage</div>       
 
 <EditForm Model="_manualLoadWeights" id="loadWeightsForm">
     <table class="form">

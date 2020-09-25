@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
 using NLog;
@@ -58,7 +59,7 @@ namespace DataTrack.Data
         public Coords FinishPos { get; set; }
 
         // Логирование
-        private Logger _logger;
+        private Logger _logger = LogManager.GetCurrentClassLogger();
         
         // Материал, загруженный в весовой бьункер
         private List<Material> _materials;
@@ -93,7 +94,7 @@ namespace DataTrack.Data
         /// <summary>
         /// Получить суммарный вес материала, загруженного в весовой бункер
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Суммарный вес материала, загруженного в весовой бункер</returns>
         public double GetWeight()
         {
             double weight = 0;
@@ -106,6 +107,43 @@ namespace DataTrack.Data
         }
 
         /// <summary>
+        /// Добавить материал к уже имеющимся слоям
+        /// </summary>
+        /// <param name="material">Добавлемый материал</param>
+        /// <returns>Результат выполнения операции добавления материала</returns>
+        public bool AddMaterial(Material material)
+        {
+            bool result = false; 
+            
+            if(material!=null)
+            {
+                _materials.Add(material);
+                result = true;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Добавить слои материала к уже загруженному материалу в весовой бункер
+        /// </summary>
+        /// <param name="materials">Список добавляемого материала</param>
+        /// <returns>Результат выполнения операции добавления материала</returns>
+        public bool AddMaterials(List<Material> materials)
+        {
+            bool result = false;
+            if (materials != null && materials.Count > 0)
+            {
+                foreach (Material material in materials)
+                {
+                    AddMaterial(material);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Загрузка определенного веса материала из указанного силоса
         /// </summary>
         /// <param name="silos">Силос, из которого будет произведена загрузка материала</param>
@@ -113,7 +151,18 @@ namespace DataTrack.Data
         public bool LoadMaterial(Silos silos, double weight)
         {
             bool result = false;
-
+            List<Material> loaded = new List<Material>();
+            // Загружаем из силоса требуемый вес материала
+            try
+            {
+                loaded = silos.Unload(weight);
+                AddMaterials(loaded);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             return result;
         }
 

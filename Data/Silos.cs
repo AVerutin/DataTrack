@@ -259,11 +259,11 @@ namespace DataTrack.Data
                 }
 
                 // Если вес списываемого материала больше нуля, а количество слоев равно нулю, 
-                // то выдаем сообщение, что материал уже закончился, списывать больше нечего!
+                // то выдаем сообщение, что материал уже закончился, выгружать больше нечего!
                 if (_materials.Count == 0 && weight > 0)
                 {
                     _logger.Error($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
-                    throw new ArgumentOutOfRangeException($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
+                    // throw new ArgumentOutOfRangeException($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
                 }
             }
             else
