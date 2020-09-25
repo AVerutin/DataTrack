@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using DataTrack.Data;
 using Microsoft.AspNetCore.Components.Web;
@@ -217,6 +218,7 @@ namespace DataTrack.Pages
         /// </summary>
         private async void LoadWeight()
         {
+            //TODO: Добавить проверку состояний силосо и весового бункера
             // Номер весового бункера, принимающего материал
             int weightTanker = Int32.Parse(_manualLoadWeights.WeightNumber);
             
@@ -226,76 +228,100 @@ namespace DataTrack.Pages
             // Проверяем наличие весового бункера
             if (_weights[weightTanker] != null)
             {
-                // Проверяем наличие силоса
-                if (_siloses[silos] != null)
+                // Если весовой бункер готов к приему материала
+                if (_weights[weightTanker].GetStatus().CurrentState == Statuses.Status.Off)
                 {
-                    // Проверяем наличие материала в силосе, из которого будет загрузка материала
-                    if (_siloses[silos].GetLayersCount() > 0)
+                    // Проверяем наличие силоса
+                    if (_siloses[silos] != null)
                     {
-                        // Проверяем наличие свободного места в весовом бункере
-                        double placed = _weights[weightTanker].GetWeight();
-                        double fulled = _weights[weightTanker].MaxWeight;
-                        if (fulled > placed)
+                        // Если силос не готов к разгрузке
+                        if (_siloses[silos].GetStatus().CurrentState != Statuses.Status.Off)
                         {
-                            // Загружем либо весь материал из силоса, либо количество материала, до полного наполнения весового буненра
-                            _status = new Statuses();
-                            _status.StatusIcon = "img/led/MotorGreen.png";
-                            _status.StatusMessage = "ЗАГРУЗКА";
-                            _weights[weightTanker].SetStatus(_status);
-            
-                            _status = new Statuses();
-                            _status.StatusIcon = "img/led/SmallYellow.png";
-                            _status.StatusMessage = "РАЗГРУЗКА";
-                            _siloses[silos].SetStatus(_status);
-                            
-                            await Task.Delay(TimeSpan.FromSeconds(15));
-                            bool result = _weights[weightTanker].LoadMaterial(_siloses[silos], fulled - placed);
-                            
-                            // Сброс теккущего состояния силоса и зарузочного бункера
-                            Statuses stateSilos = new Statuses();
-                            Statuses stateWeight = new Statuses();
-                            if (result)
+                            // Проверяем наличие материала в силосе, из которого будет загрузка материала
+                            if (_siloses[silos].GetLayersCount() > 0)
                             {
-                                stateSilos.CurrentState = Statuses.Status.Off;
-                                stateSilos.StatusIcon = "img/led/SmallGrey.png";
-                                stateSilos.StatusMessage = " ";
+                                // Проверяем наличие свободного места в весовом бункере
+                                double placed = _weights[weightTanker].GetWeight();
+                                double fulled = _weights[weightTanker].MaxWeight;
+                                if (fulled > placed)
+                                {
+                                    // Загружем либо весь материал из силоса, либо количество материала, до полного наполнения весового буненра
+                                    _status = new Statuses();
+                                    _status.StatusIcon = "img/led/MotorGreen.png";
+                                    _status.StatusMessage = "ЗАГРУЗКА";
+                                    _weights[weightTanker].SetStatus(_status);
 
-                                stateWeight.CurrentState = Statuses.Status.Off;
-                                stateWeight.StatusIcon = "img/led/MotorGrey.png";
-                                stateWeight.StatusMessage = " ";
+                                    _status = new Statuses();
+                                    _status.StatusIcon = "img/led/SmallYellow.png";
+                                    _status.StatusMessage = "РАЗГРУЗКА";
+                                    _siloses[silos].SetStatus(_status);
+
+                                    await Task.Delay(TimeSpan.FromSeconds(15));
+                                    bool result = _weights[weightTanker].LoadMaterial(_siloses[silos], fulled - placed);
+
+                                    // Сброс теккущего состояния силоса и зарузочного бункера
+                                    Statuses stateSilos = new Statuses();
+                                    Statuses stateWeight = new Statuses();
+                                    if (result)
+                                    {
+                                        stateSilos.CurrentState = Statuses.Status.Off;
+                                        stateSilos.StatusIcon = "img/led/SmallGrey.png";
+                                        stateSilos.StatusMessage = "";
+
+                                        stateWeight.CurrentState = Statuses.Status.Off;
+                                        stateWeight.StatusIcon = "img/led/MotorGrey.png";
+                                        stateWeight.StatusMessage = "";
+                                    }
+                                    else
+                                    {
+                                        stateSilos.CurrentState = Statuses.Status.Error;
+                                        stateSilos.StatusIcon = "img/led/SmallRed.png";
+                                        stateSilos.StatusMessage = "ОШИБКА";
+
+                                        stateWeight.CurrentState = Statuses.Status.Error;
+                                        stateWeight.StatusIcon = "img/led/MotorRed.png";
+                                        stateWeight.StatusMessage = "ОШИБКА";
+                                    }
+
+                                    _siloses[silos].SetStatus(stateSilos);
+                                    _weights[weightTanker].SetStatus(stateWeight);
+
+                                    StateHasChanged();
+                                    await OnNotify("Загрузка весового бункера завершена");
+                                }
+                                else
+                                {
+                                    _logger.Error($"В весовом бункере {weightTanker + 1} нет места!");
+                                    throw new ArgumentOutOfRangeException(
+                                        $"В весовом бункере {weightTanker + 1} нет места!");
+                                }
                             }
                             else
                             {
-                                stateSilos.CurrentState = Statuses.Status.Error;
-                                stateSilos.StatusIcon = "img/led/SmallRed.png";
-                                stateSilos.StatusMessage = "ОШИБКА";
-
-                                stateWeight.CurrentState = Statuses.Status.Error;
-                                stateWeight.StatusIcon = "img/led/MotorRed.png";
-                                stateWeight.StatusMessage = "ОШИБКА";
+                                _logger.Error($"Силос {silos + 1} пуст!");
+                                throw new ArgumentNullException($"Силос {silos + 1} пуст!");
                             }
-                            _siloses[silos].SetStatus(stateSilos);
-                            _weights[weightTanker].SetStatus(stateWeight);
-                            
-                            StateHasChanged();
-                            await OnNotify("Загрузка весового бункера завершена");
                         }
                         else
                         {
-                            _logger.Error($"В весовом бункере {weightTanker+1} нет места!");
-                            throw new ArgumentOutOfRangeException($"В весовом бункере {weightTanker+1} нет места!");
+                            _logger.Error(
+                                $"Силос {silos + 1} находится в состоянии {_siloses[silos].Status.CurrentState.ToString()}");
+                            Debug.WriteLine(
+                                $"Силос {silos + 1} находится в состоянии {_siloses[silos].Status.CurrentState.ToString()}");
                         }
                     }
                     else
                     {
-                        _logger.Error($"Силос {silos+1} пуст!");
-                        throw new ArgumentNullException($"Силос {silos+1} пуст!");
+                        _logger.Error($"Силос {silos + 1} не существует!");
+                        throw new ArgumentNullException($"Силос {silos + 1} не существует!");
                     }
                 }
                 else
                 {
-                    _logger.Error($"Силос {silos+1} не существует!");
-                    throw new ArgumentNullException($"Силос {silos+1} не существует!");
+                    _logger.Error(
+                        $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].Status.CurrentState.ToString()}");
+                    Debug.WriteLine(
+                        $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].Status.CurrentState.ToString()}");
                 }
             }
             else

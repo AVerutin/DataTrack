@@ -189,7 +189,7 @@ namespace DataTrack.Pages
         // Переместить счетчик следующего загружаемого материала 
         private void MoveNextMaterial()
         {
-            if (_currentMaterial >= _materials.Count)
+            if (_currentMaterial == _materials.Count-1)
             {
                 _currentMaterial = 0;
             }
@@ -205,9 +205,9 @@ namespace DataTrack.Pages
         // Перместить счетчик материала предыдущего загруженного материала
         private void MovePrewMaterial()
         {
-            if (_currentMaterial < 0)
+            if (_currentMaterial == 0)
             {
-                _currentMaterial = 0;
+                _currentMaterial = _materials.Count-1;
             }
             else
             {

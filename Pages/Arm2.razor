@@ -55,19 +55,19 @@
 
 <!-- Весовой бункер 1 -->
 <img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />       
-<div id="Weight1_weight">100</div>
+<div id="Weight1_weight">@_weights[0].GetWeight()</div>
 <div id="Weight1_label">@_weights[0].Status.StatusMessage</div>  
 <img id="Weight1_led" src="@_weights[0].Status.StatusIcon" />
                          
 <!-- Весовой бункер 2 -->
 <img id="Weight2a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 2" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight2_weight">100</div>
+<div id="Weight2_weight">@_weights[1].GetWeight()</div>
 <div id="Weight2_label">@_weights[1].Status.StatusMessage</div>  
 <img id="Weight2_led" src="@_weights[1].Status.StatusIcon" />
                      
 <!-- Весовой бункер 3 -->
 <img id="Weight3a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 3" @onmouseover="@(e => ShowMaterial(e, 12))" @onmouseout="@(e => HideMaterial())" />        
-<div id="Weight3_weight">100</div>
+<div id="Weight3_weight">@_weights[2].GetWeight()</div>
 <div id="Weight3_label">@_weights[2].Status.StatusMessage</div>  
 <img id="Weight3_led" src="@_weights[2].Status.StatusIcon" />
 
@@ -87,25 +87,25 @@
 
 <!-- Весовой бункер 4 -->
 <img id="Weight4a2" src="img/arm2/weights_long.png" alt="Весовой бункер 4" @onmouseover="@(e => ShowMaterial(e, 13))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight4_weight">100</div>
+<div id="Weight4_weight">@_weights[3].GetWeight()</div>
 <img id="Weight4_led" src="@_weights[3].Status.StatusIcon" />
 <div id="Weight4_label">@_weights[3].Status.StatusMessage</div>       
                                                                                            
 <!-- Весовой бункер 5 -->
 <img id="Weight5a2" src="img/arm2/weights_long.png" alt="Весовой бункер 5" @onmouseover="@(e => ShowMaterial(e, 14))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight5_weight">100</div>
+<div id="Weight5_weight">@_weights[4].GetWeight()</div>
 <img id="Weight5_led" src="@_weights[4].Status.StatusIcon" />
 <div id="Weight5_label">@_weights[4].Status.StatusMessage</div>       
 
 <!-- Весовой бункер 6 -->
 <img id="Weight6a2" src="img/arm2/weights_long.png" alt="Весовой бункер 6" @onmouseover="@(e => ShowMaterial(e, 15))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight6_weight">100</div>
+<div id="Weight6_weight">@_weights[5].GetWeight()</div>
 <img id="Weight6_led" src="@_weights[5].Status.StatusIcon" />
 <div id="Weight6_label">@_weights[5].Status.StatusMessage</div>       
                      
 <!-- Весовой бункер 7 -->
 <img id="Weight7a2" src="img/arm2/weights_long.png" alt="Весовой бункер 7" @onmouseover="@(e => ShowMaterial(e, 16))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight7_weight">100</div>
+<div id="Weight7_weight">@_weights[6].GetWeight()</div>
 <img id="Weight7_led" src="@_weights[6].Status.StatusIcon" />
 <div id="Weight7_label">@_weights[6].Status.StatusMessage</div>       
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using NLog;
 
 namespace DataTrack.Data
@@ -206,20 +207,19 @@ namespace DataTrack.Data
                 // Пока остались слои материала и количество списываемого материала больше нуля
                 while (_materials.Count > 0 && weight > 0)
                 {
-                    List<Material> _materials = new List<Material>();
-                    Material _material = this._materials[0]; // получаем первый слой материала
+                    List<Material> materials = new List<Material>();
+                    Material material = _materials[0]; // получаем первый слой материала
 
                     // Если вес материала в слое больше веса списываемого материала,
                     // то вес списываемого материала устанавливаем в ноль, а вес слоя уменьшаем на вес списываемого материала
-                    if (_material.Weight > weight)
+                    if (material.Weight > weight)
                     {
                         // Находим вес оставшегося материала на слое
-                        _material.setWeight(_material.Weight - weight);
-                        this._materials[0] = _material;
+                        material.setWeight(material.Weight - weight);
 
                         // Добавляем в выгруженную часть слоя в список выгруженного материала
                         Material unload = new Material();
-                        unload.setMaterial(_material.ID, _material.Invoice, _material.Name, _material.PartNo, weight, _material.Volume);
+                        unload.setMaterial(material.ID, material.Invoice, material.Name, material.PartNo, weight, material.Volume);
                         unload.setWeight(weight);
                         unloaded.Add(unload);
                         weight = 0;
@@ -228,31 +228,33 @@ namespace DataTrack.Data
                     {
                         // Если вес материала в слое меньше веса списываемого материала,
                         // то удаляем полностью слой и уменьшаем вес списываемого материала на вес, который был в слое
-                        if (_material.Weight < weight)
+                        
+                        if (material.Weight < weight)
                         {
-                            weight -= _material.Weight;
-                            unloaded.Add(this._materials[0]);
-                            for (int i = 1; i < this._materials.Count; i++)
+                            weight -= material.Weight;
+                            unloaded.Add(_materials[0]);
+                            for (int i = 1; i < _materials.Count; i++)
                             {
-                                _materials.Add(this._materials[i]);
+                                materials.Add(_materials[i]);
                             }
-                            this._materials = _materials;
-                            _layersCount--;
+                            _materials = materials;
+                            _layersCount = _materials.Count;
                         }
                         else
                         {
                             // Если вес материала в слое равен весу списываемого материала,
                             // то удаляем слой и устнавливаем вес списываемого материала равным нулю
-                            if (_material.Weight == weight)
+                            if ( Math.Abs(material.Weight - weight) <= 0.001)
                             {
+                                // этот код не выпоняется никогда
                                 weight = 0;
-                                unloaded.Add(this._materials[0]);
-                                for (int i = 1; i < this._materials.Count; i++)
+                                unloaded.Add(_materials[0]);
+                                for (int i = 1; i < _materials.Count; i++)
                                 {
-                                    _materials.Add(this._materials[i]);
+                                    _materials.Add(_materials[i]);
                                 }
-                                this._materials = _materials;
-                                _layersCount--;
+                                _materials = materials;
+                                _layersCount = _materials.Count;
                             }
                         }
                     }
@@ -263,7 +265,6 @@ namespace DataTrack.Data
                 if (_materials.Count == 0 && weight > 0)
                 {
                     _logger.Error($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
-                    // throw new ArgumentOutOfRangeException($"Материал в силосе {SilosId} закончился. Не хватило {weight} кг");
                 }
             }
             else
@@ -272,9 +273,11 @@ namespace DataTrack.Data
                 throw new ArgumentNullException($"Не указан вес выгружаемого материала из силоса {SilosId}");
             }
 
-            _materials = new List<Material>();
-            Material = "";
-            _layersCount = 0;
+            if(_layersCount == 0)
+            {
+                _materials = new List<Material>();
+                Material = "";
+            }
             
             return unloaded;
         }
