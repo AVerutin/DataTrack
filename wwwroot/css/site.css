@@ -701,8 +701,9 @@ dialog{
 
 .statusBar {
     position: absolute;
-    top: 700px;
+    top: 800px;
     left: 300px;
+    width: 700px;
     border-style: solid;
     border-width: 1px;
     padding: 5px;
@@ -740,8 +741,9 @@ h3 {
 
 .siloses_a2stat {
     position: absolute; 
-    font-family: sans-serif;
-    font-size: 8pt;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    font-size: 6pt;
     color: darkred;
 }
 
@@ -770,7 +772,7 @@ h3 {
 }
 
 #Silos1a2_stat {
-    top: 182px;
+    top: 185px;
     left: 304px;
 }
 
@@ -798,7 +800,7 @@ h3 {
 
 
 #Silos2a2_stat {
-    top: 182px;
+    top: 185px;
     left: 379px;
 }
 
@@ -825,7 +827,7 @@ h3 {
 }
 
 #Silos3a2_stat {
-    top: 182px;
+    top: 185px;
     left: 454px;
 }
 
@@ -852,7 +854,7 @@ h3 {
 }
 
 #Silos4a2_stat {
-    top: 182px;
+    top: 185px;
     left: 554px;
 }
 
@@ -879,7 +881,7 @@ h3 {
 }
 
 #Silos5a2_stat {
-    top: 182px;
+    top: 185px;
     left: 629px;
 }
 
@@ -906,7 +908,7 @@ h3 {
 }
 
 #Silos6a2_stat {
-    top: 182px;
+    top: 185px;
     left: 704px;
 }
 
@@ -933,7 +935,7 @@ h3 {
 }
 
 #Silos7a2_stat {
-    top: 182px;
+    top: 185px;
     left: 804px;
 }
 
@@ -960,7 +962,7 @@ h3 {
 }
 
 #Silos8a2_stat {
-    top: 182px;
+    top: 185px;
     left: 879px;
 }
 
@@ -1009,12 +1011,6 @@ h3 {
     position: absolute;
     left: 1280px;
     top: 360px;
-}
-
-#Stalevoz {
-    position: absolute;
-    left: 1180px;
-    top: 680px;
 }
 
 #Diviator1 {
@@ -1071,10 +1067,12 @@ h3 {
 
 #Weight1_label {
     position: absolute;
-    left: 378px;
+    left: 375px;
     top: 373px;
     color: darkred;
     font-weight: bold;
+    font-family: "Times New Roman", serif;
+    font-size: 11pt;
 }
 
 #Weight2a2 {
@@ -1101,10 +1099,12 @@ h3 {
 
 #Weight2_label {
     position: absolute;
-    left: 628px;
+    left: 625px;
     top: 373px;
     color: darkred;
     font-weight: bold;
+    font-family: "Times New Roman", serif;
+    font-size: 11pt;
 }
 
 #Weight3a2 {
@@ -1131,10 +1131,13 @@ h3 {
 
 #Weight3_label {
     position: absolute;
-    left: 838px;
+    left: 835px;
     top: 373px;
     color: darkred;
     font-weight: bold;
+    font-family: "Times New Roman", serif;
+    font-size: 11pt;
+
 }
 
 #Weight4a2 {
@@ -1145,12 +1148,12 @@ h3 {
 
 #Weight4_weight {
     position: absolute;
-    left: 1620px;
+    left: 1615px;
     top: 253px;
     font-family: sans-serif;
     color: darkblue;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 #Weight4_led {
@@ -1165,6 +1168,7 @@ h3 {
     left: 1600px;
     color: darkred;
     font-weight: bold;
+    font-size: 11pt;
 }
 
 #Weight5a2 {
@@ -1175,12 +1179,12 @@ h3 {
 
 #Weight5_weight {
     position: absolute;
-    left: 1227px;
+    left: 1225px;
     top: 433px;
     font-family: sans-serif;
     color: darkblue;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 #Weight5_led {
@@ -1195,6 +1199,7 @@ h3 {
     left: 1208px;
     color: darkred;
     font-weight: bold;
+    font-size: 11pt;
 }
 
 #Weight6a2 {
@@ -1205,12 +1210,12 @@ h3 {
 
 #Weight6_weight {
     position: absolute;
-    left: 1447px;
+    left: 1445px;
     top: 533px;
     font-family: sans-serif;
     color: darkblue;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 #Weight6_led {
@@ -1225,6 +1230,7 @@ h3 {
     left: 1428px;
     color: darkred;
     font-weight: bold;
+    font-size: 11pt;
 }
 
 #Weight7a2 {
@@ -1235,12 +1241,12 @@ h3 {
 
 #Weight7_weight {
     position: absolute;
-    left: 1627px;
+    left: 1625px;
     top: 533px;
     font-family: sans-serif;
     color: darkblue;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 #Weight7_led {
@@ -1255,11 +1261,29 @@ h3 {
     left: 1608px;
     color: darkred;
     font-weight: bold;
+    font-size: 11pt;
 }
 
 #loadWeightsForm {
+    background-color: ghostwhite;
     position: absolute;
-    top: 550px;
-    left: 350px;
-    
+    top: 590px;
+    left: 350px;    
+}
+
+#loadReceiverForm {
+    background-color: ghostwhite;
+    position: absolute;
+    top: 590px;
+    left: 595px;
+}
+
+#detailCaption {
+    background-color: papayawhip;
+    text-align: center;
+    vertical-align: middle;
+    caption-side: top;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
 }

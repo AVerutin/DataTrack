@@ -31,8 +31,6 @@
 <img id="Silos7" src="img/arm1/SilosRight.png" alt="Силос 7" @onmouseover="@(e => ShowMaterial(e, 9))" @onmouseout="@(e => HideMaterial())" />
 <img id="Silos8" src="img/arm1/SilosLeft.png"  alt="Силос 8" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />
 
-<!-- Обработку события наведения мыши также разместить в коде страницы -->
-
 <!-- Индикаторы выбранного силоса -->
 <img id="Led1" src="@_selected[0]" alt="Выбор силоса 1"/>
 <img id="Led2" src="@_selected[1]" alt="Выбор силоса 2"/>
@@ -92,6 +90,10 @@
 
 <div id="showSilosDetail" style="position: absolute; top: @_detailPosY; left: @_detailPosX; display: @_showed; z-index: 1">
     <table class="silos_detail">
+        @if (_detailCaption.Length > 0)
+        {
+            <caption>@_detailCaption</caption>
+        }
         <tr>
             <th>№</th>
             <th>Материал</th>
@@ -102,7 +104,7 @@
         @for (int i = 0; i < _loadedMaterial.Count; i++)
         {
             <tr>
-                <td>@(i+1)</td>
+                <td>@(i + 1)</td>
                 <td>@_loadedMaterial[i].Name</td>
                 <td>@_loadedMaterial[i].PartNo</td>
                 <td>@_loadedMaterial[i].Weight</td>

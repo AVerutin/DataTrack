@@ -26,6 +26,7 @@
         <e p="Kernel.cs" t="Include" />
         <e p="KernelService.cs" t="Include" />
         <e p="ManualLoadMaterial.cs" t="Include" />
+        <e p="ManualLoadReceiver.cs" t="Include" />
         <e p="ManualLoadSilos.cs" t="Include" />
         <e p="ManualLoadWeights.cs" t="Include" />
         <e p="Material.cs" t="Include" />

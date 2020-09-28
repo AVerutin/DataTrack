@@ -13,6 +13,11 @@ namespace DataTrack.Data
         /// Уникальный идентификатор весового бункера
         /// </summary>
         public int WeightTankerId { get; private set; }
+        
+        /// <summary>
+        /// Наименование бункера
+        /// </summary>
+        public string Name { get; private set; }
 
         /// <summary>
         /// Уникальный идентификатор весового бункера в базе данных
@@ -44,11 +49,6 @@ namespace DataTrack.Data
         public int Thread { get; private set; }
         
         /// <summary>
-        /// Количество слоев материала, загруженного в весовой бункер
-        /// </summary>
-        public int LayersCount { get; private set; }
-        
-        /// <summary>
         /// Начальная координата на линии производства
         /// </summary>
         public Coords StartPos { get; set; }
@@ -66,13 +66,14 @@ namespace DataTrack.Data
 
         private int _timeLoading;
 
-        public WeightTanker(int id, double maxWeight = 3500, int thread = 0, long dbid = 0)
+        public WeightTanker(int id, string name = "", double maxWeight = 3500, int thread = 0, long dbid = 0)
         {
             if (id>0)
             {
                 WeightTankerId = id;
                 MaxWeight = maxWeight;
                 Thread = thread;
+                Name = name;
                 WeightTankerDbId = dbid;
                 Statuses status = new Statuses();
                 status.CurrentState = Statuses.Status.Off; 
@@ -80,7 +81,6 @@ namespace DataTrack.Data
                 StartPos = new Coords();
                 FinishPos = new Coords();
                 _materials = new List<Material>();
-                LayersCount = _materials.Count;
                 Weight = GetWeight();
                 _timeLoading = 0;
             }
@@ -165,6 +165,133 @@ namespace DataTrack.Data
             }
             return result;
         }
+        
+        /// <summary>
+        /// Загрузка материала в приемочный бункер из весового
+        /// </summary>
+        /// <param name="tanker">Весовой бункер, из которого будет загружен материал</param>
+        /// <param name="weight">Вес загружаемого материала</param>
+        /// <returns></returns>
+        public void LoadMaterial(WeightTanker tanker, double weight)
+        {
+            // Загружаем из силоса требуемый вес материала
+            try
+            {
+                List<Material> loaded = new List<Material>();
+                loaded = tanker.Unload(weight);
+                AddMaterials(loaded);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Разгрузка материала из весового бункера
+        /// </summary>
+        /// <param name="weight">Вес разгружаемого материала</param>
+        /// <returns>Список разгруженного материала</returns>
+        public List<Material> Unload(double weight)
+        {
+            // Получаем количество слоев материала. Если материала нет, выдаем ошибку
+            if (GetLayersCount() == 0)
+            {
+                _logger.Error($"Бункер {WeightTankerId} не содержит материал, невозможно выгрузить {weight} кг");
+                throw new ArgumentOutOfRangeException($"Бункер {WeightTankerId} не содержит материал, невозможно выгрузить {weight} кг");
+            }
+
+            List<Material> unloaded = new List<Material>();
+            if (weight > 0)
+            {
+                // Известен вес выгружаемого материала, начинаем выгружать
+
+                // Пока остались слои материала и количество списываемого материала больше нуля
+                while (_materials.Count > 0 && weight > 0)
+                {
+                    List<Material> materials = new List<Material>();
+                    Material material = _materials[0]; // получаем первый слой материала
+
+                    // Если вес материала в слое больше веса списываемого материала,
+                    // то вес списываемого материала устанавливаем в ноль, а вес слоя уменьшаем на вес списываемого материала
+                    if (material.Weight > weight)
+                    {
+                        // Находим вес оставшегося материала на слое
+                        material.setWeight(material.Weight - weight);
+
+                        // Добавляем в выгруженную часть слоя в список выгруженного материала
+                        Material unload = new Material();
+                        unload.setMaterial(material.ID, material.Invoice, material.Name, material.PartNo, weight, material.Volume);
+                        unload.setWeight(weight);
+                        unloaded.Add(unload);
+                        weight = 0;
+                    }
+                    else
+                    {
+                        // Если вес материала в слое меньше веса списываемого материала,
+                        // то удаляем полностью слой и уменьшаем вес списываемого материала на вес, который был в слое
+                        
+                        if (material.Weight < weight)
+                        {
+                            weight -= material.Weight;
+                            unloaded.Add(_materials[0]);
+                            for (int i = 1; i < _materials.Count; i++)
+                            {
+                                materials.Add(_materials[i]);
+                            }
+                            _materials = materials;
+                        }
+                        else
+                        {
+                            // Если вес материала в слое равен весу списываемого материала,
+                            // то удаляем слой и устнавливаем вес списываемого материала равным нулю
+                            if ( Math.Abs(material.Weight - weight) <= 0.001)
+                            {
+                                // этот код не выпоняется никогда
+                                weight = 0;
+                                unloaded.Add(_materials[0]);
+                                for (int i = 1; i < _materials.Count; i++)
+                                {
+                                    _materials.Add(_materials[i]);
+                                }
+                                _materials = materials;
+                            }
+                        }
+                    }
+                }
+
+                // Если вес списываемого материала больше нуля, а количество слоев равно нулю, 
+                // то выдаем сообщение, что материал уже закончился, выгружать больше нечего!
+                if (_materials.Count == 0 && weight > 0)
+                {
+                    _logger.Error($"Материал в бункере{WeightTankerId} закончился. Не хватило {weight} кг");
+                }
+            }
+            else
+            {
+                _logger.Warn($"Не указан вес выгружаемого материала из бункера {WeightTankerId}");
+                throw new ArgumentNullException($"Не указан вес выгружаемого материала из бункера {WeightTankerId}");
+            }
+
+            if(GetLayersCount() == 0)
+            {
+                _materials = new List<Material>();
+            }
+            
+            return unloaded;
+        }
+
+        /// <summary>
+        /// Выгрузить весь материал из бункера
+        /// </summary>
+        /// <returns>Список выгруженного материала из бункера</returns>
+        public List<Material> Unload()
+        {
+            List<Material> Result = _materials;
+            _materials = new List<Material>();
+            
+            return Result;
+        }
 
         /// <summary>
         /// Загрузка всего материала из указанного силоса
@@ -234,9 +361,9 @@ namespace DataTrack.Data
             else
             {
                 _logger.Error(
-                    $"Весовой бункер {WeightTankerId + 1} не содержит слой материала{num}. Всего загружено {LayersCount} слоев материала");
+                    $"Весовой бункер {WeightTankerId + 1} не содержит слой материала{num}. Всего загружено {GetLayersCount()} слоев материала");
                 throw new ArgumentOutOfRangeException(
-                    $"Весовой бункер {WeightTankerId + 1} не содержит слой материала{num}. Всего загружено {LayersCount} слоев материала");
+                    $"Весовой бункер {WeightTankerId + 1} не содержит слой материала{num}. Всего загружено {GetLayersCount()} слоев материала");
             }
             
             return result;
@@ -251,7 +378,6 @@ namespace DataTrack.Data
             status.CurrentState = Statuses.Status.Off; 
             Status = status;
             _materials = new List<Material>();
-            LayersCount = _materials.Count;
             Weight = GetWeight();
         }
 
@@ -295,5 +421,11 @@ namespace DataTrack.Data
                 throw new ArgumentNullException($"Время загрузки весового бункера [{time}] должно быть больше нуля");
             }
         }
+
+        /// <summary>
+        /// Получить вес материала, который можно загрузить в бункер
+        /// </summary>
+        /// <returns>Свободный вес бункера</returns>
+        public double GetAvailibleWeight() => MaxWeight - GetWeight();
     }
 }
