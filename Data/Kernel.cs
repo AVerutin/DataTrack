@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NpgsqlTypes;
 
 namespace DataTrack.Data
 {
@@ -9,6 +10,8 @@ namespace DataTrack.Data
         private readonly Collection<Silos> _siloses;
         private readonly Collection<Conveyor> _conveyors;
         private readonly Collection<WeightTanker> _weights;
+        private readonly Collection<Ingot> _ingots;
+        private readonly Collection<Rollgang> _rollgangs;
         private readonly IngotParameters _parameters;
         private int _currentMaterialIndex;
         
@@ -20,8 +23,176 @@ namespace DataTrack.Data
             _siloses = new Collection<Silos>();
             _conveyors = new Collection<Conveyor>();
             _weights = new Collection<WeightTanker>();
+            _ingots = new Collection<Ingot>();
+            _rollgangs = new Collection<Rollgang>();
             _parameters = new IngotParameters();
             _currentMaterialIndex = -1;
+        }
+
+        /// <summary>
+        /// Добавить рольганг
+        /// </summary>
+        /// <param name="rollgang">Рольганг</param>
+        public void AddRollgang(Rollgang rollgang)
+        {
+            if (rollgang != null)
+            {
+                _rollgangs.AddItem(rollgang);
+            }
+        }
+
+        /// <summary>
+        /// Установить список рольгангов
+        /// </summary>
+        /// <param name="rollgangs">Список рольгангов</param>
+        public void SetRollgangs(List<Rollgang> rollgangs)
+        {
+            if (rollgangs != null)
+            {
+                _rollgangs.SetItems(rollgangs);
+            }
+        }
+
+        /// <summary>
+        /// Получить список рольгагнов
+        /// </summary>
+        /// <returns>Список рольгангов</returns>
+        public List<Rollgang> GetRollgangs() => _rollgangs.GetItems();
+
+        /// <summary>
+        /// Получить количество рольгангов
+        /// </summary>
+        /// <returns>Количество рольгангов</returns>
+        public int GetRollgangsCount() => _rollgangs.GetItemsCount();
+
+        /// <summary>
+        /// Получить рольганг по его номеру
+        /// </summary>
+        /// <param name="number">Номер рольганга</param>
+        /// <returns>Рольганг</returns>
+        public Rollgang GetRollgang(int number)
+        {
+            Rollgang res = null;
+            if (number > 0 && number < GetRollgangsCount())
+            {
+                res = _rollgangs.GetItem(number);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Удалить рольганг по его номеру
+        /// </summary>
+        /// <param name="number">Номер рольганга</param>
+        /// <returns>Результат удаления</returns>
+        public bool RemoveRollgang(int number)
+        {
+            bool res = false;
+            if (number > 0 && number < GetRollgangsCount())
+            {
+                res = _rollgangs.RemoveItem(number);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Очистить список рольгангов
+        /// </summary>
+        public void ClearRollgangs()
+        {
+            _rollgangs.ClearCollection();
+        }
+
+        /// <summary>
+        /// Добавить единицу учета
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        public void AddIngot(Ingot ingot)
+        {
+            if (ingot != null)
+            {
+                _ingots.AddItem(ingot);
+            }
+        }
+
+        /// <summary>
+        /// Установить подготовленный список единиц учета
+        /// </summary>
+        /// <param name="ingots">Список единиц учета</param>
+        public void SetIngots(List<Ingot> ingots)
+        {
+            if (ingots != null)
+            {
+                _ingots.SetItems(ingots);
+            }
+        }
+
+        /// <summary>
+        /// Получить список единиц учета
+        /// </summary>
+        /// <returns></returns>
+        public List<Ingot> GetIngots() => _ingots.GetItems();
+
+        /// <summary>
+        /// Получить единицу учета по ее номеру
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public Ingot GetIngot(int num)
+        {
+            Ingot res = null;
+
+            if (num > 0 && num < _ingots.GetItemsCount())
+            {
+                res = _ingots.GetItem(num);
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Получить количество едниц учета
+        /// </summary>
+        /// <returns>Количество единиц учета</returns>
+        public int GetIngotsCount() => _ingots.GetItemsCount();
+
+        /// <summary>
+        /// Удалить единицу учета по ее номеру
+        /// </summary>
+        /// <param name="num"></param>
+        public void RemoveIngot(int num)
+        {
+            if(num>0 && num<_ingots.GetItemsCount())
+            {
+                _ingots.RemoveItem(num);
+            }
+        }
+
+        /// <summary>
+        /// Удалить все единицы учета
+        /// </summary>
+        public void ClearIngots()
+        {
+            _ingots.ClearCollection();
+        }
+
+        /// <summary>
+        /// Получить номер последнее добавленной единицы учета
+        /// </summary>
+        /// <returns></returns>
+        public uint GetLastKnownId()
+        {
+            uint res = 0;
+            foreach (Ingot ingot in _ingots.GetItems())
+            {
+                if (ingot.Uid > res)
+                {
+                    res = ingot.Uid + 1;
+                }
+            }
+            
+            return res;
         }
 
         /// <summary>
@@ -30,7 +201,10 @@ namespace DataTrack.Data
         /// <param name="material">Добавляемый материал</param>
         public void AddMaterial(Material material)
         {
-            _materials.AddItem(material);
+            if (material != null)
+            {
+                _materials.AddItem(material);
+            }
         }
 
         /// <summary>

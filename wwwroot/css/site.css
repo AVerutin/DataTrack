@@ -216,8 +216,8 @@ app {
 
 #LoadSiloses {
     position: absolute;
-    top: 450px;
-    left: 650px;
+    top: 400px;
+    left: 880px;
     width: 350px;
 }
 
@@ -225,7 +225,7 @@ app {
     display: inherit;
     position: absolute;
     top: 550px;
-    left: 300px;
+    left: 280px;
     width: 350px;
 }
 

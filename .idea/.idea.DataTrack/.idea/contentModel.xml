@@ -14,14 +14,16 @@
       <e p="Data" t="Include">
         <e p="Chemical.cs" t="Include" />
         <e p="Collection.cs" t="Include" />
+        <e p="Colors.cs" t="Include" />
         <e p="ConfigMill.cs" t="Include" />
         <e p="Conveyor.cs" t="Include" />
         <e p="Coords.cs" t="Include" />
         <e p="DBConnection.cs" t="Include" />
         <e p="DBConnectionOptions.cs" t="Include" />
-        <e p="IIngot.cs" t="Include" />
+        <e p="Directions.cs" t="Include" />
         <e p="Ingot.cs" t="Include" />
         <e p="IngotParameters.cs" t="Include" />
+        <e p="IngotVisualParameters.cs" t="Include" />
         <e p="InputTanker.cs" t="Include" />
         <e p="Kernel.cs" t="Include" />
         <e p="KernelService.cs" t="Include" />
@@ -31,6 +33,8 @@
         <e p="ManualLoadWeights.cs" t="Include" />
         <e p="Material.cs" t="Include" />
         <e p="MtsConnect.cs" t="Include" />
+        <e p="Rollgang.cs" t="Include" />
+        <e p="RollgangTypes.cs" t="Include" />
         <e p="Silos.cs" t="Include" />
         <e p="Statuses.cs" t="Include" />
         <e p="WeightTanker.cs" t="Include" />
@@ -44,7 +48,7 @@
       <e p="DataTrack.SourceManifest.xml" t="Include" />
       <e p="NotifierService.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
-        <e p="Debug" t="Include">
+        <e p="Release" t="Include">
           <e p="netcoreapp3.1" t="Include">
             <e p="DataTrack.AssemblyInfo.cs" t="Include" />
             <e p="DataTrack.RazorAssemblyInfo.cs" t="Include" />
@@ -60,10 +64,6 @@
         <e p="Arm2.razor.cs" t="Include" />
         <e p="Arm3.razor" t="Include" />
         <e p="Arm3.razor.cs" t="Include" />
-        <e p="dual" t="Include">
-          <e p="Arm1.razo_" t="Include" />
-          <e p="Arm1.razo_.c_" t="Include" />
-        </e>
         <e p="Error.razor" t="Include" />
         <e p="Index.razor" t="Include" />
         <e p="Index.razor.cs" t="Include" />
@@ -131,14 +131,42 @@
           </e>
           <e p="arm2" t="Include">
             <e p="conveyor_doublelong.png" t="Include" />
+            <e p="conveyor_doublelong_green.png" t="Include" />
+            <e p="conveyor_doublelong_red.png" t="Include" />
+            <e p="conveyor_doublelong_yellow.png" t="Include" />
             <e p="conveyor_long.png" t="Include" />
+            <e p="conveyor_long_green.png" t="Include" />
+            <e p="conveyor_long_red.png" t="Include" />
+            <e p="conveyor_long_yellow.png" t="Include" />
             <e p="conveyor_mid.png" t="Include" />
+            <e p="conveyor_mid_green.png" t="Include" />
+            <e p="conveyor_mid_red.png" t="Include" />
+            <e p="conveyor_mid_yellow.png" t="Include" />
             <e p="conveyor_short.png" t="Include" />
+            <e p="conveyor_short_green.png" t="Include" />
+            <e p="conveyor_short_red.png" t="Include" />
+            <e p="conveyor_short_yellow.png" t="Include" />
             <e p="conveyor_vertical_doublelong.png" t="Include" />
+            <e p="conveyor_vertical_doublelong_geer.png" t="Include" />
+            <e p="conveyor_vertical_doublelong_green.png" t="Include" />
+            <e p="conveyor_vertical_doublelong_red.png" t="Include" />
+            <e p="conveyor_vertical_doublelong_yellow.png" t="Include" />
             <e p="conveyor_verylong.png" t="Include" />
+            <e p="conveyor_verylong_green.png" t="Include" />
+            <e p="conveyor_verylong_red.png" t="Include" />
+            <e p="conveyor_verylong_yellow.png" t="Include" />
             <e p="diviator_down.png" t="Include" />
+            <e p="diviator_down_green.png" t="Include" />
+            <e p="diviator_down_red.png" t="Include" />
+            <e p="diviator_down_yellow.png" t="Include" />
             <e p="diviator_left.png" t="Include" />
+            <e p="diviator_left_green.png" t="Include" />
+            <e p="diviator_left_red.png" t="Include" />
+            <e p="diviator_left_yellow.png" t="Include" />
             <e p="diviator_right.png" t="Include" />
+            <e p="diviator_right_green.png" t="Include" />
+            <e p="diviator_right_red.png" t="Include" />
+            <e p="diviator_right_yellow.png" t="Include" />
             <e p="Elevator2Green.png" t="Include" />
             <e p="Elevator2Grey.png" t="Include" />
             <e p="Elevator2Red.png" t="Include" />
@@ -149,6 +177,9 @@
             <e p="Elevator3Yellow.png" t="Include" />
             <e p="funnel.png" t="Include" />
             <e p="Razdvoitel.png" t="Include" />
+            <e p="Razdvoitel_green.png" t="Include" />
+            <e p="Razdvoitel_red.png" t="Include" />
+            <e p="Razdvoitel_yellow.png" t="Include" />
             <e p="RolgangGreen.png" t="Include" />
             <e p="RolgangGrey.png" t="Include" />
             <e p="RolgangLongGreen.png" t="Include" />
@@ -156,7 +187,10 @@
             <e p="RolgangLongRed.png" t="Include" />
             <e p="RolgangLongYellow.png" t="Include" />
             <e p="RolgangRed.png" t="Include" />
+            <e p="RolgangVeryLongGreen.png" t="Include" />
             <e p="RolgangVeryLongGrey.png" t="Include" />
+            <e p="RolgangVeryLongRed.png" t="Include" />
+            <e p="RolgangVeryLongYellow.png" t="Include" />
             <e p="RolgangYellow.png" t="Include" />
             <e p="sandclock.png" t="Include" />
             <e p="SilosLeft.png" t="Include" />
@@ -181,6 +215,38 @@
             <e p="LongButtonGrey.png" t="Include" />
             <e p="LongButtonRed.png" t="Include" />
             <e p="LongButtonYellow.png" t="Include" />
+          </e>
+          <e p="colors" t="Include">
+            <e p="Blue.png" t="Include" />
+            <e p="Cyan.png" t="Include" />
+            <e p="DarkBlue.png" t="Include" />
+            <e p="DarkCyan.png" t="Include" />
+            <e p="DarkGray.png" t="Include" />
+            <e p="DarkGreen.png" t="Include" />
+            <e p="DarkMagenta.png" t="Include" />
+            <e p="DarkRed.png" t="Include" />
+            <e p="DarkYellow.png" t="Include" />
+            <e p="Empty.png" t="Include" />
+            <e p="Gray.png" t="Include" />
+            <e p="Green.png" t="Include" />
+            <e p="Magenta.png" t="Include" />
+            <e p="Red.png" t="Include" />
+            <e p="vBlue.png" t="Include" />
+            <e p="vCyan.png" t="Include" />
+            <e p="vDarkBlue.png" t="Include" />
+            <e p="vDarkCyan.png" t="Include" />
+            <e p="vDarkGray.png" t="Include" />
+            <e p="vDarkGreen.png" t="Include" />
+            <e p="vDarkMagenta.png" t="Include" />
+            <e p="vDarkRed.png" t="Include" />
+            <e p="vDarkYellow.png" t="Include" />
+            <e p="vEmpty.png" t="Include" />
+            <e p="vGray.png" t="Include" />
+            <e p="vGreen.png" t="Include" />
+            <e p="vMagenta.png" t="Include" />
+            <e p="vRed.png" t="Include" />
+            <e p="vYellow.png" t="Include" />
+            <e p="Yellow.png" t="Include" />
           </e>
           <e p="led" t="Include">
             <e p="BigGreen.png" t="Include" />

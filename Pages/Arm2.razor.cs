@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DataTrack.Data;
 using Microsoft.AspNetCore.Components.Web;
 using NLog;
-using NLog.Targets;
 
 namespace DataTrack.Pages
 {
@@ -16,7 +15,15 @@ namespace DataTrack.Pages
         private List<Silos> _siloses = new List<Silos>();
         private List<WeightTanker> _weights = new List<WeightTanker>();
         private List<Material> _loadedMaterial = new List<Material>();
+        private List<Ingot> _ingots = new List<Ingot>();
+        // private List<IngotVisualParameters> _ingotsVisualParameters = new List<IngotVisualParameters>();
+        private IngotVisualParameters _ingotsVisualParameters;
+        // private List<IngotVisualParameters> _visualParameters = new List<IngotVisualParameters>();
+        private int _ingotsDisplayed;
+        private int _ingotDeliveringNumber;
+        private List<Rollgang> _rollgangs = new List<Rollgang>();
         private string[] _diviatorsDirection = new string[4];
+        private string[] _conveyors = new string[6];
 
         private string _detailPosX;
         private string _detailPosY;
@@ -66,6 +73,14 @@ namespace DataTrack.Pages
             Notifier.Notify -= OnNotify;
             Kernel.Data.SetWeightTankers(_weights);
             Kernel.Data.SetSiloses(_siloses);
+            Kernel.Data.SetIngots(_ingots);
+            Kernel.Data.SetRollgangs(_rollgangs);
+
+            foreach (Rollgang rollgang in _rollgangs)
+            {
+                rollgang.Moved -= MaterialMoved;
+                rollgang.Delivered -= MaterialDelivered;
+            }
         }
 
         /// <summary>
@@ -95,6 +110,21 @@ namespace DataTrack.Pages
             {
                 // Добавляем силоса из ядра системы
                 _siloses = Kernel.Data.GetSiloses();
+            }
+            
+            // Если в ядре нет рольгангов, то создадим их
+            if (Kernel.Data.GetRollgangsCount() == 0)
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    Rollgang rollgang = new Rollgang(i + 1, i + 1, 1.25F, 35F, 1);
+                    rollgang.Moved += MaterialMoved;
+                    rollgang.Delivered += MaterialDelivered;
+                }
+            }
+            else
+            {
+                _rollgangs = Kernel.Data.GetRollgangs();
             }
 
             if (Kernel.Data.GetWeightTankersCount() == 0)
@@ -132,6 +162,30 @@ namespace DataTrack.Pages
                     _weights = Kernel.Data.GetWeightTankers();
             }
 
+            if (Kernel.Data.GetIngotsCount() == 0)
+            {
+                if (_ingots.Count > 0)
+                {
+                    Kernel.Data.SetIngots(_ingots);
+                }
+            }
+            else
+            {
+                _ingots = Kernel.Data.GetIngots();
+            }
+            
+            // Инициализация единиц учета для отображения на странице
+            // for (int i = 0; i < 3; i++)
+            // {
+            //     IngotVisualParameters visualParameters = new IngotVisualParameters("img/colors/Empty.png");
+            //     visualParameters.XPos = "400px";
+            //     visualParameters.YPos = "510px";
+            //     _ingotsVisualParameters.Add(visualParameters);
+            // }
+            _ingotsVisualParameters = new IngotVisualParameters("img/colors/Empty.png");
+            _ingotsVisualParameters.XPos = "400px";
+            _ingotsVisualParameters.YPos = "510px";
+
             _manualLoadWeights.WeightNumber = "0";
             _manualLoadWeights.SilosNumber = "0";
             _avalibleSiloses.Add("0", "Силос 1");
@@ -141,6 +195,13 @@ namespace DataTrack.Pages
             _diviatorsDirection[1] = "img/arm2/diviator_right.png";
             _diviatorsDirection[2] = "img/arm2/diviator_right.png";
             _diviatorsDirection[3] = "img/arm2/diviator_down.png";
+            _conveyors[0] = "img/arm2/conveyor_long.png";
+            _conveyors[1] = "img/arm2/conveyor_vertical_doublelong.png";
+            _conveyors[2] = "img/arm2/RolgangVeryLongGrey.png";
+            _conveyors[3] = "img/arm2/conveyor_short.png";
+            _conveyors[4] = "img/arm2/RolgangLongGrey.png";
+            _conveyors[5] = "img/arm2/conveyor_mid.png";
+            
             _detailCaption = "";
             
             // Сбрасываем флаги загрузки весового и приемочного бункеров
@@ -151,7 +212,7 @@ namespace DataTrack.Pages
         
         private void ShowMaterial(MouseEventArgs e, int number)
         {
-            int matCount;
+            int matCount = 0;
             
             // Определяем тип объекта, который вызвал метод:
             // number<10 - силос, number>10 - весовой бункер
@@ -161,11 +222,21 @@ namespace DataTrack.Pages
                 _loadedMaterial = _siloses[number - 1].GetMaterials();
                 _detailCaption = "";
             }
-            else
+            else if (number < 17)
             {
                 matCount = _weights[number - 10].GetLayersCount();
                 _loadedMaterial = _weights[number - 10].GetMaterials();
                 _detailCaption = _weights[number - 10].Name;
+            }
+            else if (number == 17)
+            {
+                //TODO: Отобразить список материалов единицы учета
+                if (_ingots.Count>0)
+                {
+                    matCount = _ingots[_ingotDeliveringNumber].GetMaterialsCount();
+                    _loadedMaterial = _ingots[_ingotDeliveringNumber].GetMaterials();
+                    _detailCaption = "Плавка №" + _ingots[_ingotDeliveringNumber].PlavNo;
+                }                
             }
 
             _detailPosY = $"{e.ClientY + 20}px";
@@ -232,51 +303,136 @@ namespace DataTrack.Pages
             _manualLoadWeights.SilosNumber = value;
         }
 
+        private async Task Waiting(int time)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(time));
+            StateHasChanged();
+        }
+
+        /// <summary>
+        /// Установить дивиаторы в исходное состояние
+        /// </summary>
+        private void ClearTarget()
+        {
+            _conveyors[0] = "img/arm2/conveyor_long.png";
+            _conveyors[1] = "img/arm2/conveyor_vertical_doublelong.png";
+            _conveyors[2] = "img/arm2/RolgangVeryLongGrey.png";
+            _conveyors[3] = "img/arm2/conveyor_short.png";
+            _conveyors[4] = "img/arm2/RolgangLongGrey.png";
+            _conveyors[5] = "img/arm2/conveyor_mid.png";
+            _diviatorsDirection[0] = "img/arm2/diviator_right.png";
+            _diviatorsDirection[1] = "img/arm2/diviator_right.png";
+            _diviatorsDirection[2] = "img/arm2/diviator_right.png";
+            _diviatorsDirection[3] = "img/arm2/diviator_down.png";
+            StateHasChanged();
+        }
+
         /// <summary>
         /// Установить дивиаторы на цель
         /// </summary>
-        private void SetTarget()
+        private async Task SetTarget()
         {
             //TODO: Добавить выделение цветом с задержкой через каждые 5 сек для промежуточных целей (конвейеров,
-            // дивиаторов) (с одного снял выделение, на следующий поставил 
+            // дивиаторов) (с одного снял выделение, на следующий поставил)
            string value = _manualLoadReceiver.ReceiverTanker;
+           
+           // Устанавливаем направления дивиаторов на цель
+           switch (value)
+           {
+               case "0":
+               {
+                   _stalevozPos = "1500px;";
+                   _diviatorsDirection[0] = "img/arm2/diviator_right.png";
+                   break;
+               }
+               case "1":
+               {
+                   _stalevozPos = "1180px;";
+                   _diviatorsDirection[0] = "img/arm2/diviator_left.png";
+                   _diviatorsDirection[1] = "img/arm2/diviator_left.png";
+                   break;
+               }
+               case "2":
+               {
+                   _stalevozPos = "1500px;";
+                   _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
+                   _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
+                   _diviatorsDirection[2] = "img/arm2/diviator_Left.png";
+                   break;
+               }
+               case "3":
+               {
+                   _stalevozPos = "1500px;";
+                   _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
+                   _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
+                   _diviatorsDirection[2] = "img/arm2/diviator_Right.png";
+                   break;
+               }
+           }
+
+           // Выделяем общий путь для всех направлений
+           _conveyors[2] = "img/arm2/RolgangVeryLongGreen.png";
+           await Waiting(5);
+           _conveyors[2] = "img/arm2/RolgangVeryLongGrey.png";
+           _conveyors[0] = "img/arm2/Conveyor_Long_Green.png";
+           await Waiting(5);
+           _conveyors[0] = "img/arm2/Conveyor_Long.png";
+           _conveyors[1] = "img/arm2/Conveyor_Vertical_DoubleLong_Green.png";
+           await Waiting(5);
+           _conveyors[1] = "img/arm2/Conveyor_Vertical_DoubleLong.png";
+           _conveyors[3] = "img/arm2/Conveyor_Short_Green.png";
+           await Waiting(5);
+           _conveyors[3] = "img/arm2/Conveyor_Short.png";
+           _conveyors[4] = "img/arm2/RolgangLongGreen.png";
+           await Waiting(5);
+           _conveyors[4] = "img/arm2/RolgangLongGrey.png";
            
            switch (value)
             {
                 case "0":
                 {
                     // Направление - ДСП
-                    _diviatorsDirection[0] = "img/arm2/diviator_Right.png";
-                    _stalevozPos = "1500px;";
+                    _diviatorsDirection[0] = "img/arm2/diviator_right_green.png";
+                    await Waiting(5);
                     break;
                 }
                 case "1":
                 {
                     // Направление - УПК
-                    _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
-                    _diviatorsDirection[1] = "img/arm2/diviator_Left.png";
-                    _stalevozPos = "1180px;";
+                    _diviatorsDirection[0] = "img/arm2/diviator_left_green.png";
+                    await Waiting(5);
+                    _diviatorsDirection[0] = "img/arm2/diviator_left.png";
+                    _diviatorsDirection[1] = "img/arm2/diviator_left_green.png";
+                    await Waiting(5);
                     break;
                 }
                 case "2":
                 {
                     // Направление - Сторона УПК
+                    _diviatorsDirection[0] = "img/arm2/diviator_Left_green.png";
+                    await Waiting(5);
                     _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
+                    _diviatorsDirection[1] = "img/arm2/diviator_Right_green.png";
+                    await Waiting(5);
                     _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
-                    _diviatorsDirection[2] = "img/arm2/diviator_Left.png";
-                    _stalevozPos = "1500px;";
+                    _diviatorsDirection[2] = "img/arm2/diviator_Left_green.png";
                     break;
                 }
                 case "3":
                 {
                     // Направление - Сторона ДСП
+                    _diviatorsDirection[0] = "img/arm2/diviator_Left_green.png";
+                    await Waiting(5);
                     _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
+                    _diviatorsDirection[1] = "img/arm2/diviator_Right_green.png";
+                    await Waiting(5);
                     _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
-                    _diviatorsDirection[2] = "img/arm2/diviator_Right.png";
-                    _stalevozPos = "1500px;";
+                    _diviatorsDirection[2] = "img/arm2/diviator_Right_green.png";
                     break;
                 }
             }
+
+           await Waiting(5);
         }
 
         /// <summary>
@@ -328,8 +484,8 @@ namespace DataTrack.Pages
                                         _status.StatusMessage = "ВЫГРУЗКА";
                                         _siloses[silos].SetStatus(_status);
 
-                                        // Задержка на время загрузки 50 секунд
-                                        await Task.Delay(TimeSpan.FromSeconds(50));
+                                        // Задержка на время загрузки 10 секунд
+                                        await Waiting(10);
                                         bool result = _weights[weightTanker]
                                             .LoadMaterial(_siloses[silos], fulled - placed);
 
@@ -456,6 +612,86 @@ namespace DataTrack.Pages
             // Загружем либо весь материал из силоса, либо количество материала, до полного наполнения весового буненра
         }
 
+        /// <summary>
+        /// Получить следующий унркальный идентификатор единицы учета
+        /// </summary>
+        /// <returns></returns>
+        private uint GetNextIngotId()
+        {
+            uint next = 0;
+            foreach (Ingot ingot in _ingots)
+            {
+                if (ingot.Uid > next)
+                {
+                    next = ingot.Uid;
+                }
+            }
+
+            if (next == uint.MaxValue)
+            {
+                next = 1;
+            }
+            else
+            {
+                next++;
+            }
+
+            return next;
+        }
+        
+        /// <summary>
+        /// Тестирование модуля сопровождения единицы учета
+        /// </summary>
+        private async void TestIngots()
+        {
+            // Одновременно может находиться одна единица учета
+            Rollgang rollgang = new Rollgang(1, 1, 1.25F, 35F, 1);
+            rollgang.Moved += MaterialMoved;
+            rollgang.Delivered += MaterialDelivered;
+            if (_ingotsDisplayed == 0)
+            {
+                _ingotsDisplayed++;
+                uint nextIngotId = GetNextIngotId();
+                Ingot ingot = new Ingot(nextIngotId);
+                _ingots.Add(ingot);
+                _ingotDeliveringNumber = _ingots.Count - 1;
+                
+                // await Waiting(5);
+                await OnNotify($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()}");
+                Console.ForegroundColor = ingot.Color;
+                Console.WriteLine($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()} ({ingot.Color.ToString()})");
+                await rollgang.Delivering(ingot);
+            }
+        }
+
+        private void MaterialMoved(Ingot ingot)
+        {
+            // int ingotNum = (int)ingot.Uid - 1;
+            _ingotsVisualParameters.XPos = ingot.VisualParameters.XPos;
+            _ingotsVisualParameters.YPos = ingot.VisualParameters.YPos;
+            _ingotsVisualParameters.FileName = ingot.VisualParameters.FileName;
+            StateHasChanged();
+        }
+        
+        /// <summary>
+        /// Доставка материала завершена
+        /// </summary>
+        /// <param name="ingot">Доставленный материал</param>
+        private async void MaterialDelivered(Ingot ingot)
+        {
+            // int ingotNum = (int)ingot.Uid - 1;
+            _ingotsVisualParameters.FileName = "img/colors/Empty.png";
+            _ingotsVisualParameters.XPos = "400px";
+            _ingotsVisualParameters.YPos = "510px";
+            _ingotsDisplayed = 0;
+            await OnNotify($"Материал №{ingot.Uid} был доставлен");
+        }
+
+
+        
+        /// <summary>
+        /// Загрузка материала в приемочный бункер
+        /// </summary>
         private async void LoadReceiver()
         {
             if (!_weightLoading && !_receiverLoading)
@@ -491,7 +727,6 @@ namespace DataTrack.Pages
                                     {
                                         // Устанавливаем текущие состояния для весового и приемочного бункера
                                         _receiverLoading = true;
-                                        SetTarget();
                                         await OnNotify(
                                             $"Начата загрузка приемочного бункера {receiverTanker + 1} из загрузочного бункера {weightTanker + 1}");
 
@@ -509,11 +744,14 @@ namespace DataTrack.Pages
                                         state.StatusIcon = "img/led/w1LedGreen.png";
                                         _weights[receiverTanker].SetStatus(state);
 
-                                        // Задержка на время загрузки 50 секунд
-                                        await Task.Delay(TimeSpan.FromSeconds(50));
+                                        // Задержка на время загрузки 10 секунд
+                                        await SetTarget();
+                                        await Waiting(5);
 
                                         // Загружаем требуемый вес материала, либо вес до максимальной загрузки приемочного бункера
                                         _weights[receiverTanker].LoadMaterial(_weights[weightTanker], weight);
+                                        await Waiting(5);
+                                        ClearTarget();
 
                                         // Снимаем текущие состояния весового и приемочного бункеров
 

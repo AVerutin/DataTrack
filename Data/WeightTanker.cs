@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection.Metadata.Ecma335;
 using NLog;
 
 namespace DataTrack.Data
@@ -63,6 +61,7 @@ namespace DataTrack.Data
         
         // Материал, загруженный в весовой бьункер
         private List<Material> _materials;
+        private Ingot _ingot;
 
         private int _timeLoading;
 
@@ -81,6 +80,7 @@ namespace DataTrack.Data
                 StartPos = new Coords();
                 FinishPos = new Coords();
                 _materials = new List<Material>();
+                _ingot = new Ingot();
                 Weight = GetWeight();
                 _timeLoading = 0;
             }

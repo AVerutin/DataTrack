@@ -75,12 +75,12 @@
 <div id="Weight3_label">@_weights[2].Status.StatusMessage</div>  
 <img id="Weight3_led" src="@_weights[2].Status.StatusIcon" />
 
-<img id="Conveyor1a2" src="img/arm2/conveyor_long.png" alt="Конвейер 1"/>
-<img id="Conveyor2a2" src="img/arm2/conveyor_vertical_doublelong.png" alt="Конвейер 2" />
-<img id="Rolgang1a2" src="img/arm2/RolgangVeryLongGrey.png" alt="Конвейер 3" />       
-<img id="Conveyor3a2" src="img/arm2/conveyor_short.png" alt="Конвейер 4" />           
-<img id="Rolgang2a2" src="img/arm2/RolgangLongGrey.png" alt="Конвейер 5" />            
-<img id="Conveyor4a2" src="img/arm2/conveyor_mid.png" alt="Конвейер 6" />     
+<img id="Conveyor1a2" src="@_conveyors[0]" alt="Конвейер 1"/>
+<img id="Conveyor2a2" src="@_conveyors[1]" alt="Конвейер 2" />
+<img id="Rolgang1a2" src="@_conveyors[2]" alt="Конвейер 3" />       
+<img id="Conveyor3a2" src="@_conveyors[3]" alt="Конвейер 4" />           
+<img id="Rolgang2a2" src="@_conveyors[4]" alt="Конвейер 5" />            
+<img id="Conveyor4a2" src="@_conveyors[5]" alt="Конвейер 6" />     
 <img id="Stalevoz" src="img/arm2/Stalevoz.png" alt="Сталевоз" style="position: absolute; left: @_stalevozPos; top: 680px;" />    
 
 <img id="Diviator1" src="@_diviatorsDirection[0]" alt="Дивиатор 1" />     
@@ -112,6 +112,16 @@
 <div id="Weight7_weight">@_weights[6].GetWeight()</div>
 <img id="Weight7_led" src="@_weights[6].Status.StatusIcon" />
 <div id="Weight7_label">@_weights[6].Status.StatusMessage</div>       
+
+<img src="@_ingotsVisualParameters.FileName" alt="Ingot_1" style="position: absolute; top: @_ingotsVisualParameters.YPos; left: @_ingotsVisualParameters.XPos" @onmouseover="@(e => ShowMaterial(e, 17))" @onmouseout="@(e => HideMaterial())" />
+@* 
+<img src="@_ingotsVisualParameters[1].FileName" alt="Ingot_2" style="position: absolute; top: @_ingotsVisualParameters[1].YPos; left: @_ingotsVisualParameters[1].XPos" />
+<img src="@_ingotsVisualParameters[2].FileName" alt="Ingot_3" style="position: absolute; top: @_ingotsVisualParameters[2].YPos; left: @_ingotsVisualParameters[2].XPos" />
+
+@* @foreach (var ingot in _ingots) *@
+@* { *@
+@*     <img src="@ingot.VisualParameters.FileName" alt="Ingot_@ingot.Uid" style="position: absolute; top: @ingot.VisualParameters.YPos; left: @ingot.VisualParameters.XPos" /> *@
+@* } *@
 
 <EditForm Model="_manualLoadWeights" id="loadWeightsForm">
     <table class="form">
@@ -179,6 +189,7 @@
         <tr>
             <td style="text-align: center; vertical-align: middle">
                 <button class="btn btn-primary" @onclick="LoadReceiver">Загрузить</button>
+                <button class="btn btn-primary" @onclick="TestIngots">Ingot</button>
             </td>
         </tr>
     </table>

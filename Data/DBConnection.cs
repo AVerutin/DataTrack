@@ -14,7 +14,7 @@ namespace DataTrack.Data
         private readonly string ConnectionString;
         private NpgsqlCommand SQLCommand;
         private NpgsqlDataReader SQLData;
-        private string DBShema;
+        private string DBSchema;
         private readonly IConfigurationRoot config;
         private readonly Logger logger;
 
@@ -53,7 +53,7 @@ namespace DataTrack.Data
 
             SQLCommand = null;
             SQLData = null;
-            DBShema = options.DBSchema;
+            DBSchema = options.DBSchema;
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace DataTrack.Data
                 return Result;
             }
 
-            string sql = $"INSERT INTO {DBShema}._material(name) VALUES (\'{name}\') RETURNING id;";
+            string sql = $"INSERT INTO {DBSchema}._material(name) VALUES (\'{name}\') RETURNING id;";
             SQLCommand = new NpgsqlCommand(sql, Connection);
 
             try
@@ -108,7 +108,7 @@ namespace DataTrack.Data
 
                 string query = string.Format(
                     "INSERT INTO {0}._materials (name, partno, weight, volume) VALUES ('{1}', {2}, {3}, {4});",
-                    DBShema, name, partno, w, v);
+                    DBSchema, name, partno, w, v);
 
                 SQLCommand = new NpgsqlCommand(query, Connection);
 
@@ -171,7 +171,7 @@ namespace DataTrack.Data
                 };
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(command);
                 DataSet ds = new DataSet();
-                da.Fill(ds, $"{DBShema}._materials");
+                da.Fill(ds, $"{DBSchema}._materials");
 
                 // Перебор таблиц из результирующего набора
                 foreach (DataTable table in ds.Tables)

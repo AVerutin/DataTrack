@@ -21,6 +21,7 @@ namespace DataTrack.Data
 
         // Список материала, загруженного в загрузочный бункер
         private List<Material> _materials;
+        // private List<Ingot> _ingots;
         
         // Текущее состояние загрузочного бункера
         public Statuses Status { get; private set; }
@@ -55,6 +56,7 @@ namespace DataTrack.Data
                 status.CurrentState = Statuses.Status.Off;
                 Status = status;
                 _materials = new List<Material>();
+                // _ingots = new List<Ingot>();
                 _layersCount = 0;
                 Material = "";
                 _timeLoading = 0;
@@ -118,7 +120,7 @@ namespace DataTrack.Data
                     // _status = Statuses.Status.Error;
                     // Если наименование загружаемого материала не соответствует наименованию ранее заруженного материала
                     _logger.Error($"Попытка загрузить в загрузочный бункер {InputTankerId}, содержащий материал" +
-                        $"{_materials[_layersCount - 1].Name}, новый  материал {material.Name}");
+                        $"{_materials[_layersCount-1].Name}, новый  материал {material.Name}");
                     throw new InvalidCastException($"Невозможно загрузить в загрузочный бункер {InputTankerId}, " + 
                         $"содержащий материал {Material}, новый материал {material.Name}");
                 }
@@ -130,8 +132,13 @@ namespace DataTrack.Data
                     Debug.WriteLine($"Начинается ожидание [{_timeLoading} сек] загрузки загрузочного бункера [{InputTankerId}]");
                     var t = Task.Run(async delegate
                     {
-                        await Task.Delay(_timeLoading * 1000);
+                        await Task.Delay(TimeSpan.FromSeconds(_timeLoading));
+                        // Ingot ingot = new Ingot(_ingots[_ingots.Count].Uid+1);
+                        // ingot.AddMaterial(material);
                         _materials.Add(material);
+                        // _ingots.Add(ingot);
+                        // _layersCount = _ingots.Count;
+                        // Material = _ingots[_layersCount - 1].GetLastMaterialName();
                         _layersCount = _materials.Count;
                         Material = _materials[_layersCount - 1].Name;
                     });
