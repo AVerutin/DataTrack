@@ -28,94 +28,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add loading materials into receiver tankers">
-      <change afterPath="$PROJECT_DIR$/Data/Colors.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Directions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/Rollgang.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/RollgangTypes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Razdvoitel_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Razdvoitel_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/Razdvoitel_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangVeryLongGreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangVeryLongRed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/RolgangVeryLongYellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_doublelong_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_doublelong_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_doublelong_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_long_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_long_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_long_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_mid_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_mid_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_mid_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_short_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_short_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_short_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong_geer.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_verylong_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_verylong_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_verylong_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_down_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_down_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_down_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_left_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_left_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_left_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_right_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_right_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/arm2/diviator_right_yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Cyan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkBlue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkCyan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkGreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkMagenta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkRed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/DarkYellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Empty.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Gray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Magenta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/Yellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vBlue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vCyan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkBlue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkCyan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkGreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkMagenta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkRed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vDarkYellow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vEmpty.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vGreen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vMagenta.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vRed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wwwroot/img/colors/vYellow.png" afterDir="false" />
+    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add rollgangs list in Kernel and add test delivering ingots on rollgangs.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/DBConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/DBConnection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/IIngot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Ingot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Ingot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/IngotParameters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/IngotParameters.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/InputTanker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/InputTanker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Kernel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Kernel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/WeightTanker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/WeightTanker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/dual/Arm1.razo_" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/dual/Arm1.razo_.c_" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/NavMenu.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/css/site.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong.png" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/img/arm2/conveyor_vertical_doublelong.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,14 +47,21 @@
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AC0C4011-A7A1-405B-A616-B464E28F050D/74/296cef3d/ConsoleColor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/41/RenderTreeBuilder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Data/ManualLoadMaterial.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4065B38D-0F9F-44D9-8F53-F4C9102AF396/25F/AsyncMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/AC0C4011-A7A1-405B-A616-B464E28F050D/4/Console.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/Directions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4065B38D-0F9F-44D9-8F53-F4C9102AF396/25F/AsyncMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Data/IngotVisualParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/11/EventCallbackWorkItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Data/IngotVisualParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/ManualLoadMaterial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Data/IngotVisualParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/8/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -177,18 +104,18 @@
         <option value="$PROJECT_DIR$/Data/Colors.cs" />
         <option value="$PROJECT_DIR$/Data/InputTanker.cs" />
         <option value="$PROJECT_DIR$/Data/IngotParameters.cs" />
-        <option value="$PROJECT_DIR$/Data/WeightTanker.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
         <option value="$PROJECT_DIR$/Pages/Index.razor" />
         <option value="$PROJECT_DIR$/Shared/NavMenu.razor" />
         <option value="$PROJECT_DIR$/wwwroot/css/site.css" />
         <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
         <option value="$PROJECT_DIR$/Data/RollgangTypes.cs" />
-        <option value="$PROJECT_DIR$/Data/IngotVisualParameters.cs" />
         <option value="$PROJECT_DIR$/Data/Rollgang.cs" />
-        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
-        <option value="$PROJECT_DIR$/Data/Ingot.cs" />
         <option value="$PROJECT_DIR$/Data/Kernel.cs" />
+        <option value="$PROJECT_DIR$/Data/Ingot.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
+        <option value="$PROJECT_DIR$/Data/WeightTanker.cs" />
+        <option value="$PROJECT_DIR$/Data/IngotVisualParameters.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
       </list>
     </option>
@@ -216,7 +143,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.DataTrack">
@@ -299,7 +226,9 @@
       <workItem from="1600836852115" duration="86412000" />
       <workItem from="1601290727670" duration="27864000" />
       <workItem from="1601458207134" duration="34771000" />
-      <workItem from="1601619048920" duration="22523000" />
+      <workItem from="1601619048920" duration="23188000" />
+      <workItem from="1601875923934" duration="64000" />
+      <workItem from="1601876083290" duration="20399000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -476,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601301072887</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Add rollgangs list in Kernel and add test delivering ingots on rollgangs.">
+      <created>1601647158181</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1601647158181</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,7 +447,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="First clear commit" />
     <MESSAGE value="Commit full app" />
     <MESSAGE value="Add pages for ARM1 and ARM2" />
     <MESSAGE value="Correct update data on page and add skeleton for connection to database" />
@@ -536,101 +471,102 @@
     <MESSAGE value="Fixed status messages for siloses and all tankers in both ARMs." />
     <MESSAGE value="Add checking silos and weight tankers state before loading materials from siloses to weight tankers." />
     <MESSAGE value="Add loading materials into receiver tankers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add loading materials into receiver tankers" />
+    <MESSAGE value="Add rollgangs list in Kernel and add test delivering ingots on rollgangs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add rollgangs list in Kernel and add test delivering ingots on rollgangs." />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601553751974">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601553751974" />
-    <state width="490" height="618" key="DebuggerActiveHint" timestamp="1601645350749">
+    <state width="490" height="618" key="DebuggerActiveHint" timestamp="1601891349796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="490" height="618" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1601645350749" />
-    <state x="135" y="64" width="1736" height="856" key="DiffContextDialog" timestamp="1600340312500">
+    <state width="490" height="618" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1601891349796" />
+    <state x="80" y="84" width="1736" height="856" key="DiffContextDialog" timestamp="1601899640704">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="135" y="64" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600340312500" />
-    <state width="1877" height="168" key="GridCell.Tab.0.bottom" timestamp="1601647053622">
+    <state x="80" y="84" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601899640704" />
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1601899619959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601647053622" />
-    <state width="1877" height="168" key="GridCell.Tab.0.center" timestamp="1601647053622">
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601899619959" />
+    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1601899619959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601647053622" />
-    <state width="1877" height="168" key="GridCell.Tab.0.left" timestamp="1601647053622">
+    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601899619959" />
+    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1601899619959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601647053622" />
-    <state width="1877" height="168" key="GridCell.Tab.0.right" timestamp="1601647053622">
+    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601899619959" />
+    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1601899619959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601647053622" />
-    <state width="1877" height="215" key="GridCell.Tab.1.bottom" timestamp="1601645644608">
+    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601899619959" />
+    <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.1.center" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.1.center" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.1.left" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.1.left" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.1.right" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.1.right" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.2.bottom" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.2.bottom" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.2.center" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.2.center" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.2.left" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.2.left" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.2.right" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.2.right" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.3.bottom" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.3.bottom" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.3.center" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.3.center" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.3.left" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.3.left" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.3.right" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.3.right" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.4.bottom" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.4.bottom" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.4.center" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.4.center" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.4.left" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.4.left" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
-    <state width="1877" height="215" key="GridCell.Tab.4.right" timestamp="1601645644608">
+    <state width="1877" height="216" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
+    <state width="1877" height="216" key="GridCell.Tab.4.right" timestamp="1601898765082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="215" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601645644608" />
+    <state width="1877" height="216" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601898765082" />
     <state x="630" y="340" key="LayersDialog" timestamp="1599821878696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -647,14 +583,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="793" y="146" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599483827869" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1600691904943">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1601882783863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600691904943" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1601301089220">
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601882783863" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1601647168905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601301089220" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601647168905" />
     <state x="715" y="172" key="VcsDiffUtil.ChangesDialog" timestamp="1599807139030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -663,10 +599,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1600941515077" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601631690466">
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601899640704">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601631690466" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601899640704" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601367146937">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -677,16 +613,29 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Pages/Arm2.razor.cs</url>
-          <line>647</line>
-          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm2.razor.cs" initialLine="623">
+          <line>778</line>
+          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm2.razor.cs" initialLine="765">
             <startOffsets>
-              <option value="28239" />
+              <option value="33125" />
             </startOffsets>
             <endOffsets>
-              <option value="28293" />
+              <option value="33165" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="26" />
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Pages/Arm2.razor.cs</url>
+          <line>791</line>
+          <properties documentPath="E:\Projects\NET\DataTrack\Pages\Arm2.razor.cs" initialLine="778">
+            <startOffsets>
+              <option value="33720" />
+            </startOffsets>
+            <endOffsets>
+              <option value="33760" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -696,5 +645,10 @@
         <PinnedItemInfo parentTag="Type#DataTrack.Data.InputTanker" memberName="_materials" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="LaunchSettings">
+        <watch expression="_ingotsFree" language="C#" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

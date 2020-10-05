@@ -1,4 +1,4 @@
-﻿namespace DataTrack.Data
+﻿﻿namespace DataTrack.Data
 {
     public class IngotVisualParameters
     {

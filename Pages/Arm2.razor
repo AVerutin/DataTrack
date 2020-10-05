@@ -113,10 +113,9 @@
 <img id="Weight7_led" src="@_weights[6].Status.StatusIcon" />
 <div id="Weight7_label">@_weights[6].Status.StatusMessage</div>       
 
-<img src="@_ingotsVisualParameters.FileName" alt="Ingot_1" style="position: absolute; top: @_ingotsVisualParameters.YPos; left: @_ingotsVisualParameters.XPos" @onmouseover="@(e => ShowMaterial(e, 17))" @onmouseout="@(e => HideMaterial())" />
-@* 
-<img src="@_ingotsVisualParameters[1].FileName" alt="Ingot_2" style="position: absolute; top: @_ingotsVisualParameters[1].YPos; left: @_ingotsVisualParameters[1].XPos" />
-<img src="@_ingotsVisualParameters[2].FileName" alt="Ingot_3" style="position: absolute; top: @_ingotsVisualParameters[2].YPos; left: @_ingotsVisualParameters[2].XPos" />
+<img src="@_ingotsVisualParameters[0].FileName" alt="Ingot_1" style="position: absolute; top: @_ingotsVisualParameters[0].YPos; left: @_ingotsVisualParameters[0].XPos" @onmouseover="@(e => ShowMaterial(e, 17))" @onmouseout="@(e => HideMaterial())" />
+<img src="@_ingotsVisualParameters[1].FileName" alt="Ingot_2" style="position: absolute; top: @_ingotsVisualParameters[1].YPos; left: @_ingotsVisualParameters[1].XPos" @onmouseover="@(e => ShowMaterial(e, 18))" @onmouseout="@(e => HideMaterial())" />
+<img src="@_ingotsVisualParameters[2].FileName" alt="Ingot_3" style="position: absolute; top: @_ingotsVisualParameters[2].YPos; left: @_ingotsVisualParameters[2].XPos" @onmouseover="@(e => ShowMaterial(e, 19))" @onmouseout="@(e => HideMaterial())" />
 
 @* @foreach (var ingot in _ingots) *@
 @* { *@
@@ -189,7 +188,7 @@
         <tr>
             <td style="text-align: center; vertical-align: middle">
                 <button class="btn btn-primary" @onclick="LoadReceiver">Загрузить</button>
-                <button class="btn btn-primary" @onclick="TestIngots">Ingot</button>
+                @* <button class="btn btn-primary" @onclick="TestIngots">Ingot</button> *@
             </td>
         </tr>
     </table>

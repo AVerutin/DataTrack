@@ -106,6 +106,7 @@ namespace DataTrack.Data
             Random rnd = new Random();
             Color = (ConsoleColor)rnd.Next(colorsCount)+1;
             VisualParameters = new IngotVisualParameters("img/colors/Empty.png");
+            _materials = new List<Material>();
         }
 
         /// <summary>

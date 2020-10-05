@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -16,11 +16,12 @@ namespace DataTrack.Pages
         private List<WeightTanker> _weights = new List<WeightTanker>();
         private List<Material> _loadedMaterial = new List<Material>();
         private List<Ingot> _ingots = new List<Ingot>();
-        // private List<IngotVisualParameters> _ingotsVisualParameters = new List<IngotVisualParameters>();
-        private IngotVisualParameters _ingotsVisualParameters;
+        private uint[] _ingotsFree = new uint[3];
+        private List<IngotVisualParameters> _ingotsVisualParameters = new List<IngotVisualParameters>();
+        // private IngotVisualParameters _ingotsVisualParameters;
         // private List<IngotVisualParameters> _visualParameters = new List<IngotVisualParameters>();
         private int _ingotsDisplayed;
-        private int _ingotDeliveringNumber;
+        private int _ingotDeliveringNumber = -1;
         private List<Rollgang> _rollgangs = new List<Rollgang>();
         private string[] _diviatorsDirection = new string[4];
         private string[] _conveyors = new string[6];
@@ -76,11 +77,24 @@ namespace DataTrack.Pages
             Kernel.Data.SetIngots(_ingots);
             Kernel.Data.SetRollgangs(_rollgangs);
 
-            foreach (Rollgang rollgang in _rollgangs)
-            {
-                rollgang.Moved -= MaterialMoved;
-                rollgang.Delivered -= MaterialDelivered;
-            }
+            // Удаление рольганга 1
+            _rollgangs[0].Moved -= IngotMoved1;
+            _rollgangs[0].Delivered -= IngotDelivered1;
+            // Удаление рольганга 2
+            _rollgangs[1].Moved -= IngotMoved2;
+            _rollgangs[1].Delivered -= IngotDelivered2;
+            // Удаление рольганга 3
+            _rollgangs[2].Moved -= IngotMoved3;
+            _rollgangs[2].Delivered -= IngotDelivered3;
+            // Удаление рольганга 4
+            _rollgangs[3].Moved -= IngotMoved4;
+            _rollgangs[3].Delivered -= IngotDelivered4;
+            // Удаление рольганга 5
+            _rollgangs[4].Moved -= IngotMoved5;
+            _rollgangs[4].Delivered -= IngotDelivered5;
+            // Удаление рольганга 6
+            _rollgangs[5].Moved -= IngotMoved6;
+            _rollgangs[5].Delivered -= IngotDelivered6;
         }
 
         /// <summary>
@@ -113,18 +127,61 @@ namespace DataTrack.Pages
             }
             
             // Если в ядре нет рольгангов, то создадим их
+            //TODO: Добавить несколько рольгангов с "реальными" длинами и скоростями
             if (Kernel.Data.GetRollgangsCount() == 0)
             {
-                for (int i = 0; i < 1; i++)
-                {
-                    Rollgang rollgang = new Rollgang(i + 1, i + 1, 1.25F, 35F, 1);
-                    rollgang.Moved += MaterialMoved;
-                    rollgang.Delivered += MaterialDelivered;
-                }
+                // Рольганг 1
+                Rollgang rollgang = new Rollgang(1, 1, 1.25F, 35F, 1);
+                rollgang.Moved += IngotMoved1;
+                rollgang.Delivered += IngotDelivered1;
+                _rollgangs.Add(rollgang);
+                
+                // Рольганг 2
+                rollgang = new Rollgang(2, 2, 1.25F, 35F, 1);
+                rollgang.Moved += IngotMoved2;
+                rollgang.Delivered += IngotDelivered2;
+                _rollgangs.Add(rollgang);
+                
+                // Рольганг 3
+                rollgang = new Rollgang(3, 3, 1.25F, 35F, 1);
+                rollgang.Moved += IngotMoved3;
+                rollgang.Delivered += IngotDelivered3;
+                _rollgangs.Add(rollgang);
+                
+                // Рольганг 4
+                rollgang = new Rollgang(4, 4, 1.25F, 35F, 1);
+                rollgang.Moved += IngotMoved4;
+                rollgang.Delivered += IngotDelivered4;
+                _rollgangs.Add(rollgang);
+                
+                // Рольганг 5
+                rollgang = new Rollgang(5, 5, 1.25F, 35F, 1);
+                rollgang.Moved += IngotMoved5;
+                rollgang.Delivered += IngotDelivered5;
+                _rollgangs.Add(rollgang);
+                
+                // Рольганг 6
+                rollgang = new Rollgang(6, 6, 1.25F, 35F, 1);
+                rollgang.Moved += IngotMoved6;
+                rollgang.Delivered += IngotDelivered6;
+                _rollgangs.Add(rollgang);
             }
             else
             {
                 _rollgangs = Kernel.Data.GetRollgangs();
+                _rollgangs[0].Moved += IngotMoved1;
+                _rollgangs[0].Delivered += IngotDelivered1;
+                _rollgangs[1].Moved += IngotMoved2;
+                _rollgangs[1].Delivered += IngotDelivered2;
+                _rollgangs[2].Moved += IngotMoved3;
+                _rollgangs[2].Delivered += IngotDelivered3;
+                _rollgangs[3].Moved += IngotMoved4;
+                _rollgangs[3].Delivered += IngotDelivered4;
+                _rollgangs[4].Moved += IngotMoved5;
+                _rollgangs[4].Delivered += IngotDelivered5;
+                _rollgangs[5].Moved += IngotMoved6;
+                _rollgangs[5].Delivered += IngotDelivered6;
+
             }
 
             if (Kernel.Data.GetWeightTankersCount() == 0)
@@ -175,16 +232,16 @@ namespace DataTrack.Pages
             }
             
             // Инициализация единиц учета для отображения на странице
-            // for (int i = 0; i < 3; i++)
-            // {
-            //     IngotVisualParameters visualParameters = new IngotVisualParameters("img/colors/Empty.png");
-            //     visualParameters.XPos = "400px";
-            //     visualParameters.YPos = "510px";
-            //     _ingotsVisualParameters.Add(visualParameters);
-            // }
-            _ingotsVisualParameters = new IngotVisualParameters("img/colors/Empty.png");
-            _ingotsVisualParameters.XPos = "400px";
-            _ingotsVisualParameters.YPos = "510px";
+            for (int i = 0; i < 3; i++)
+            {
+                IngotVisualParameters visualParameters = new IngotVisualParameters("img/colors/Empty.png");
+                visualParameters.XPos = "400px";
+                visualParameters.YPos = "510px";
+                _ingotsVisualParameters.Add(visualParameters);
+            }
+            // _ingotsVisualParameters = new IngotVisualParameters("img/colors/Empty.png");
+            // _ingotsVisualParameters.XPos = "400px";
+            // _ingotsVisualParameters.YPos = "510px";
 
             _manualLoadWeights.WeightNumber = "0";
             _manualLoadWeights.SilosNumber = "0";
@@ -201,6 +258,9 @@ namespace DataTrack.Pages
             _conveyors[3] = "img/arm2/conveyor_short.png";
             _conveyors[4] = "img/arm2/RolgangLongGrey.png";
             _conveyors[5] = "img/arm2/conveyor_mid.png";
+            _ingotsFree[0] = 0;
+            _ingotsFree[1] = 0;
+            _ingotsFree[2] = 0;
             
             _detailCaption = "";
             
@@ -228,10 +288,10 @@ namespace DataTrack.Pages
                 _loadedMaterial = _weights[number - 10].GetMaterials();
                 _detailCaption = _weights[number - 10].Name;
             }
-            else if (number == 17)
+            else if (number < 20)
             {
                 //TODO: Отобразить список материалов единицы учета
-                if (_ingots.Count>0)
+                if (_ingots.Count>0 && _ingotDeliveringNumber >=0)
                 {
                     matCount = _ingots[_ingotDeliveringNumber].GetMaterialsCount();
                     _loadedMaterial = _ingots[_ingotDeliveringNumber].GetMaterials();
@@ -642,21 +702,17 @@ namespace DataTrack.Pages
         /// <summary>
         /// Тестирование модуля сопровождения единицы учета
         /// </summary>
-        private async void TestIngots()
+        private async Task DeliverIngots(Ingot ingot)
         {
-            // Одновременно может находиться одна единица учета
-            Rollgang rollgang = new Rollgang(1, 1, 1.25F, 35F, 1);
-            rollgang.Moved += MaterialMoved;
-            rollgang.Delivered += MaterialDelivered;
-            if (_ingotsDisplayed == 0)
+            // Доставка единицы учета по рольгангу 1
+            Rollgang rollgang = _rollgangs[0];
+            if (_ingotsDisplayed < 3)
             {
                 _ingotsDisplayed++;
-                uint nextIngotId = GetNextIngotId();
-                Ingot ingot = new Ingot(nextIngotId);
-                _ingots.Add(ingot);
+                int ingotNum = FindNextIngotNumber();
+                _ingotsFree[ingotNum] = ingot.Uid;
                 _ingotDeliveringNumber = _ingots.Count - 1;
                 
-                // await Waiting(5);
                 await OnNotify($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()}");
                 Console.ForegroundColor = ingot.Color;
                 Console.WriteLine($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()} ({ingot.Color.ToString()})");
@@ -664,31 +720,179 @@ namespace DataTrack.Pages
             }
         }
 
-        private void MaterialMoved(Ingot ingot)
+        /// <summary>
+        /// Получить номер следующего свободного номера единицы учета
+        /// </summary>
+        /// <returns></returns>
+        private int FindNextIngotNumber()
         {
-            // int ingotNum = (int)ingot.Uid - 1;
-            _ingotsVisualParameters.XPos = ingot.VisualParameters.XPos;
-            _ingotsVisualParameters.YPos = ingot.VisualParameters.YPos;
-            _ingotsVisualParameters.FileName = ingot.VisualParameters.FileName;
+            int res = -1;
+
+            if (_ingotsFree[0] == 0)
+            {
+                res = 0;
+            }
+            else if (_ingotsFree[1] == 0)
+            {
+                res = 1;
+            }
+            else if (_ingotsFree[2] == 0)
+            {
+                res = 2;
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Получить номер свободной единицы учета
+        /// </summary>
+        /// <returns>Номер свободной единицы учета</returns>
+        private int FindIngotById(uint ingotUid)
+        {
+            int res = -1;
+
+            if (_ingotsFree[0] == ingotUid)
+            {
+                res = 0;
+            }
+            else if (_ingotsFree[1] == ingotUid)
+            {
+                res = 1;
+            }
+            else if (_ingotsFree[2] == ingotUid)
+            {
+                res = 2;
+            }
+
+            return res;
+        }
+
+        #region Перемещение и доставка материала по рольгангам
+
+        /// <summary>
+        /// Перемещение единицы учета по рольгангу 1
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        private void IngotMoved1(Ingot ingot)
+        {
+            int ingotNum = FindIngotById(ingot.Uid);
+            _ingotsVisualParameters[ingotNum].XPos = ingot.VisualParameters.XPos;
+            _ingotsVisualParameters[ingotNum].YPos = ingot.VisualParameters.YPos;
+            _ingotsVisualParameters[ingotNum].FileName = ingot.VisualParameters.FileName;
             StateHasChanged();
         }
         
         /// <summary>
-        /// Доставка материала завершена
+        /// Доставка единицы учета по рольгангу 1 завершена
         /// </summary>
-        /// <param name="ingot">Доставленный материал</param>
-        private async void MaterialDelivered(Ingot ingot)
+        /// <param name="ingot">Доставленная единица учета</param>
+        private async void IngotDelivered1(Ingot ingot)
         {
-            // int ingotNum = (int)ingot.Uid - 1;
-            _ingotsVisualParameters.FileName = "img/colors/Empty.png";
-            _ingotsVisualParameters.XPos = "400px";
-            _ingotsVisualParameters.YPos = "510px";
-            _ingotsDisplayed = 0;
+            int ingotNum = FindIngotById(ingot.Uid);
+            _ingotsVisualParameters[ingotNum].FileName = "img/colors/Empty.png";
+            _ingotsVisualParameters[ingotNum].XPos = "400px";
+            _ingotsVisualParameters[ingotNum].YPos = "510px";
+            _ingotsFree[ingotNum] = 0;
+            _ingotsDisplayed--;
+            _ingotDeliveringNumber = -1;
+            
             await OnNotify($"Материал №{ingot.Uid} был доставлен");
         }
 
+        /// <summary>
+        /// Перемещение единицы учета по рольгангу 2
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        private void IngotMoved2(Ingot ingot)
+        {
+            
+        }
 
+        /// <summary>
+        /// Доставка единицы учета по рольгангу 2завершена
+        /// </summary>
+        /// <param name="ingot">Доставленная единица учета</param>
+        private async void IngotDelivered2(Ingot ingot)
+        {
+            
+        }
         
+        /// <summary>
+        /// Перемещение единицы учета по рольгангу 3
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        private void IngotMoved3(Ingot ingot)
+        {
+            
+        }
+
+        /// <summary>
+        /// Доставка единицы учета по рольгангу 3 завершена
+        /// </summary>
+        /// <param name="ingot">Доставленная единица учета</param>
+        private async void IngotDelivered3(Ingot ingot)
+        {
+            
+        }
+        
+        /// <summary>
+        /// Перемещение единицы учета по рольгангу 4
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        private void IngotMoved4(Ingot ingot)
+        {
+            
+        }
+
+        /// <summary>
+        /// Доставка единицы учета по рольгангу 4 завершена
+        /// </summary>
+        /// <param name="ingot">Доставленная единица учета</param>
+        private async void IngotDelivered4(Ingot ingot)
+        {
+            
+        }
+        
+        /// <summary>
+        /// Перемещение единицы учета по рольгангу 5
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        private void IngotMoved5(Ingot ingot)
+        {
+            
+        }
+
+        /// <summary>
+        /// Доставка единицы учета по рольгангу 5 завершена
+        /// </summary>
+        /// <param name="ingot">Доставленная единица учета</param>
+        private async void IngotDelivered5(Ingot ingot)
+        {
+            
+        }
+        
+        /// <summary>
+        /// Перемещение единицы учета по рольгангу 6
+        /// </summary>
+        /// <param name="ingot">Единица учета</param>
+        private void IngotMoved6(Ingot ingot)
+        {
+            
+        }
+
+        /// <summary>
+        /// Доставка единицы учета по рольгангу 6 завершена
+        /// </summary>
+        /// <param name="ingot">Доставленная единица учета</param>
+        private async void IngotDelivered6(Ingot ingot)
+        {
+            
+        }
+
+        #endregion 
+
+
         /// <summary>
         /// Загрузка материала в приемочный бункер
         /// </summary>
@@ -701,122 +905,143 @@ namespace DataTrack.Pages
                 double weight = _manualLoadReceiver.Weight; // Вес загружаемого материала
                 double availible; // Свободное место в приемочном бункере
 
-                // Определить наличие приемочного бункера в ядре системы
-                if (_weights[receiverTanker] != null)
+                if (weight > 0)
                 {
-                    // Определить наличие весового бункера в ядре системы
-                    if (_weights[weightTanker] != null)
+                    // Определить наличие приемочного бункера в ядре системы
+                    if (_weights[receiverTanker] != null)
                     {
-                        // Определить статус приемочного бункера
-                        if (_weights[weightTanker].GetCurrentState() == Statuses.Status.Off)
+                        // Определить наличие весового бункера в ядре системы
+                        if (_weights[weightTanker] != null)
                         {
-                            // Определить статус весового бункера
-                            if (_weights[receiverTanker].GetCurrentState() == Statuses.Status.Off)
+                            // Определить статус приемочного бункера
+                            if (_weights[weightTanker].GetCurrentState() == Statuses.Status.Off)
                             {
-                                availible = _weights[receiverTanker].GetAvailibleWeight();
-                                // Определить свободное место в приемочном бункере
-                                if (availible > 0)
+                                // Определить статус весового бункера
+                                if (_weights[receiverTanker].GetCurrentState() == Statuses.Status.Off)
                                 {
-                                    if (weight > availible)
+                                    availible = _weights[receiverTanker].GetAvailibleWeight();
+                                    // Определить свободное место в приемочном бункере
+                                    if (availible > 0)
                                     {
-                                        weight = availible;
-                                    }
+                                        if (weight > availible)
+                                        {
+                                            weight = availible;
+                                        }
 
-                                    // Определить наличие материала в весовом бункера
-                                    if (_weights[weightTanker].GetLayersCount() > 0)
-                                    {
-                                        // Устанавливаем текущие состояния для весового и приемочного бункера
-                                        _receiverLoading = true;
-                                        await OnNotify(
-                                            $"Начата загрузка приемочного бункера {receiverTanker + 1} из загрузочного бункера {weightTanker + 1}");
+                                        // Определить наличие материала в весовом бункера
+                                        if (_weights[weightTanker].GetLayersCount() > 0)
+                                        {
+                                            //TODO: Добавить создание единицы учета при выгрузке материала и сопровождение его
+                                            // Устанавливаем текущие состояния для весового и приемочного бункера
+                                            _receiverLoading = true;
+                                            await OnNotify(
+                                                $"Начата загрузка приемочного бункера {receiverTanker + 1} из загрузочного бункера {weightTanker + 1}");
 
-                                        // Весовой бункер
-                                        Statuses state = new Statuses();
-                                        state.CurrentState = Statuses.Status.Unloading;
-                                        state.StatusMessage = "ВЫГРУЗКА";
-                                        state.StatusIcon = "img/led/MotorYellow.png";
-                                        _weights[weightTanker].SetStatus(state);
+                                            // Весовой бункер
+                                            Statuses state = new Statuses();
+                                            state.CurrentState = Statuses.Status.Unloading;
+                                            state.StatusMessage = "ВЫГРУЗКА";
+                                            state.StatusIcon = "img/led/MotorYellow.png";
+                                            _weights[weightTanker].SetStatus(state);
 
-                                        // Приемочный бункер
-                                        state = new Statuses();
-                                        state.CurrentState = Statuses.Status.Loading;
-                                        state.StatusMessage = "ЗАГРУЗКА";
-                                        state.StatusIcon = "img/led/w1LedGreen.png";
-                                        _weights[receiverTanker].SetStatus(state);
+                                            // Приемочный бункер
+                                            state = new Statuses();
+                                            state.CurrentState = Statuses.Status.Loading;
+                                            state.StatusMessage = "ЗАГРУЗКА";
+                                            state.StatusIcon = "img/led/w1LedGreen.png";
+                                            _weights[receiverTanker].SetStatus(state);
 
-                                        // Задержка на время загрузки 10 секунд
-                                        await SetTarget();
-                                        await Waiting(5);
+                                            // Создание единицы учета
+                                            uint uid = GetNextIngotId();
+                                            Ingot ingot = new Ingot(uid);
+                                            List<Material> materials = _weights[weightTanker].Unload(weight);
+                                            ingot.AddMaterials(materials);
+                                            _ingots.Add(ingot);
 
-                                        // Загружаем требуемый вес материала, либо вес до максимальной загрузки приемочного бункера
-                                        _weights[receiverTanker].LoadMaterial(_weights[weightTanker], weight);
-                                        await Waiting(5);
-                                        ClearTarget();
+                                            // Перемещение единицы учета по рольгангам
+                                            await DeliverIngots(ingot);
 
-                                        // Снимаем текущие состояния весового и приемочного бункеров
 
-                                        // Весовой бункер
-                                        state = new Statuses();
-                                        state.CurrentState = Statuses.Status.Off;
-                                        state.StatusMessage = "";
-                                        state.StatusIcon = "img/led/MotorGrey.png";
-                                        _weights[weightTanker].SetStatus(state);
+                                            // Задержка на время загрузки 10 секунд
+                                            // await SetTarget();
+                                            // await Waiting(5); // доставка материала через рольганг
 
-                                        // Приемочный бункер
-                                        state = new Statuses();
-                                        state.CurrentState = Statuses.Status.Off;
-                                        state.StatusMessage = "";
-                                        state.StatusIcon = "img/led/w1LedGrey.png";
-                                        _weights[receiverTanker].SetStatus(state);
-                                        await OnNotify($"Приемочный бункер {receiverTanker + 1} загружен");
-                                        _receiverLoading = false;
+                                            // Загружаем требуемый вес материала, либо вес до максимальной загрузки приемочного бункера
+                                            _weights[receiverTanker].SetIngot(ingot);
+                                            // await Waiting(5);
+                                            // ClearTarget();
+
+                                            // Снимаем текущие состояния весового и приемочного бункеров
+
+                                            // Весовой бункер
+                                            state = new Statuses();
+                                            state.CurrentState = Statuses.Status.Off;
+                                            state.StatusMessage = "";
+                                            state.StatusIcon = "img/led/MotorGrey.png";
+                                            _weights[weightTanker].SetStatus(state);
+
+                                            // Приемочный бункер
+                                            state = new Statuses();
+                                            state.CurrentState = Statuses.Status.Off;
+                                            state.StatusMessage = "";
+                                            state.StatusIcon = "img/led/w1LedGrey.png";
+                                            _weights[receiverTanker].SetStatus(state);
+                                            await OnNotify($"Приемочный бункер {receiverTanker + 1} загружен");
+                                            _receiverLoading = false;
+                                        }
+                                        else
+                                        {
+                                            _logger.Error($"Весовой бункер {weightTanker + 1} пуст!");
+                                            Debug.WriteLine($"Весовой бункер {weightTanker + 1} пуст!");
+                                            await OnNotify($"Весовой бункер {weightTanker + 1} пуст!");
+                                        }
                                     }
                                     else
                                     {
-                                        _logger.Error($"Весовой бункер {weightTanker + 1} пуст!");
-                                        Debug.WriteLine($"Весовой бункер {weightTanker + 1} пуст!");
-                                        await OnNotify($"Весовой бункер {weightTanker + 1} пуст!");
+                                        _logger.Error($"Приемочный бункер {receiverTanker + 1} заполнен!");
+                                        Debug.WriteLine($"Приемочный бункер {receiverTanker + 1} заполнен!");
+                                        await OnNotify($"Приемочный бункер {receiverTanker + 1} заполнен!");
                                     }
                                 }
                                 else
                                 {
-                                    _logger.Error($"Приемочный бункер {receiverTanker + 1} заполнен!");
-                                    Debug.WriteLine($"Приемочный бункер {receiverTanker + 1} заполнен!");
-                                    await OnNotify($"Приемочный бункер {receiverTanker + 1} заполнен!");
+                                    _logger.Error(
+                                        $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].GetCurrentState()}");
+                                    Debug.WriteLine(
+                                        $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].GetCurrentState()}");
+                                    await OnNotify(
+                                        $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].GetCurrentState()}");
                                 }
                             }
                             else
                             {
                                 _logger.Error(
-                                    $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].GetCurrentState()}");
+                                    $"Приемочный бункер {receiverTanker + 1} находится в состоянии {_weights[receiverTanker].GetCurrentState()}");
                                 Debug.WriteLine(
-                                    $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].GetCurrentState()}");
+                                    $"Приемочный бункер {receiverTanker + 1} находится в состоянии {_weights[receiverTanker].GetCurrentState()}");
                                 await OnNotify(
-                                    $"Весовой бункер {weightTanker + 1} находится в состоянии {_weights[weightTanker].GetCurrentState()}");
+                                    $"Приемочный бункер {receiverTanker + 1} находится в состоянии {_weights[receiverTanker].GetCurrentState()}");
                             }
                         }
                         else
                         {
-                            _logger.Error(
-                                $"Приемочный бункер {receiverTanker + 1} находится в состоянии {_weights[receiverTanker].GetCurrentState()}");
-                            Debug.WriteLine(
-                                $"Приемочный бункер {receiverTanker + 1} находится в состоянии {_weights[receiverTanker].GetCurrentState()}");
-                            await OnNotify(
-                                $"Приемочный бункер {receiverTanker + 1} находится в состоянии {_weights[receiverTanker].GetCurrentState()}");
+                            _logger.Error($"Весовой бункер {weightTanker + 1} не определен");
+                            Debug.WriteLine($"Весовой бункер {weightTanker + 1} не определен");
+                            await OnNotify($"Весовой бункер {weightTanker + 1} не определен");
                         }
                     }
                     else
                     {
-                        _logger.Error($"Весовой бункер {weightTanker + 1} не определен");
-                        Debug.WriteLine($"Весовой бункер {weightTanker + 1} не определен");
-                        await OnNotify($"Весовой бункер {weightTanker + 1} не определен");
+                        _logger.Error($"Приемочный бункер {receiverTanker + 1} не определен");
+                        Debug.WriteLine($"Приемочный бункер {receiverTanker + 1} не определен");
+                        await OnNotify($"Приемочный бункер {receiverTanker + 1} не определен");
                     }
                 }
                 else
                 {
-                    _logger.Error($"Приемочный бункер {receiverTanker + 1} не определен");
-                    Debug.WriteLine($"Приемочный бункер {receiverTanker + 1} не определен");
-                    await OnNotify($"Приемочный бункер {receiverTanker + 1} не определен");
+                    _logger.Error($"Вес загружаемого материала не может составлять {weight} кг!");
+                    Debug.WriteLine($"Вес загружаемого материала не может составлять {weight} кг!");
+                    await OnNotify($"Вес загружаемого материала не может составлять {weight} кг!");
                 }
             }
             else

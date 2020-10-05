@@ -129,9 +129,8 @@ namespace DataTrack.Data
         /// </summary>
         /// <param name="materials">Список добавляемого материала</param>
         /// <returns>Результат выполнения операции добавления материала</returns>
-        public bool AddMaterials(List<Material> materials)
+        public void AddMaterials(List<Material> materials)
         {
-            bool result = false;
             if (materials != null && materials.Count > 0)
             {
                 foreach (Material material in materials)
@@ -139,8 +138,42 @@ namespace DataTrack.Data
                     AddMaterial(material);
                 }
             }
+        }
 
-            return result;
+        /// <summary>
+        /// Загрузить в бункер единицу учета
+        /// </summary>
+        /// <param name="ingot"></param>
+        public void SetIngot(Ingot ingot)
+        {
+            if (ingot != null)
+            {
+                _ingot = ingot;
+                List<Material> loadMaterials = _ingot.GetMaterials();
+                foreach (Material material in loadMaterials)
+                {
+                    _materials.Add(material);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Получить единицу учета, загруженную в бункер
+        /// </summary>
+        /// <returns>Единица учета</returns>
+        public Ingot GetIngot() => _ingot;
+
+        /// <summary>
+        /// Удалить единицу учета из бункера
+        /// </summary>
+        /// <returns>Единица учета</returns>
+        public Ingot RemoveIngot()
+        {
+            Ingot res = _ingot;
+            _ingot = new Ingot();
+            _materials = _ingot.GetMaterials();
+            
+            return res;
         }
 
         /// <summary>
