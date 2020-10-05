@@ -3,6 +3,11 @@
     public class IngotVisualParameters
     {
         /// <summary>
+        /// UID единицы учета
+        /// </summary>
+        public uint IngotUid { get; set; }
+        
+        /// <summary>
         /// Имя графического файла
         /// </summary>
         public string FileName { get; set; }

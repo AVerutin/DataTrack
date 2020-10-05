@@ -28,14 +28,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add rollgangs list in Kernel and add test delivering ingots on rollgangs.">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Ingot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Ingot.cs" afterDir="false" />
+    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add transfer ingots in Rollgang1">
       <change beforePath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/WeightTanker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/WeightTanker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,8 +109,8 @@
         <option value="$PROJECT_DIR$/Data/Ingot.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
         <option value="$PROJECT_DIR$/Data/WeightTanker.cs" />
-        <option value="$PROJECT_DIR$/Data/IngotVisualParameters.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
+        <option value="$PROJECT_DIR$/Data/IngotVisualParameters.cs" />
       </list>
     </option>
   </component>
@@ -228,7 +222,7 @@
       <workItem from="1601458207134" duration="34771000" />
       <workItem from="1601619048920" duration="23188000" />
       <workItem from="1601875923934" duration="64000" />
-      <workItem from="1601876083290" duration="20399000" />
+      <workItem from="1601876083290" duration="20513000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -412,7 +406,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601647158181</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Add transfer ingots in Rollgang1">
+      <created>1601899713829</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1601899713829</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +448,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Commit full app" />
     <MESSAGE value="Add pages for ARM1 and ARM2" />
     <MESSAGE value="Correct update data on page and add skeleton for connection to database" />
     <MESSAGE value="Add ARM3 and detach code from layout. Add 2 Input tankers and 8 Siloses. Silos 1 can take material from active InputTanker." />
@@ -472,7 +472,8 @@
     <MESSAGE value="Add checking silos and weight tankers state before loading materials from siloses to weight tankers." />
     <MESSAGE value="Add loading materials into receiver tankers" />
     <MESSAGE value="Add rollgangs list in Kernel and add test delivering ingots on rollgangs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add rollgangs list in Kernel and add test delivering ingots on rollgangs." />
+    <MESSAGE value="Add transfer ingots in Rollgang1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add transfer ingots in Rollgang1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601553751974">
