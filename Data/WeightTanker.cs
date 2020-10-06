@@ -254,7 +254,7 @@ namespace DataTrack.Data
 
                         // Добавляем в выгруженную часть слоя в список выгруженного материала
                         Material unload = new Material();
-                        unload.setMaterial(material.ID, material.Invoice, material.Name, material.PartNo, weight, material.Volume);
+                        unload.setMaterial(material.ID, material.Invoice, material.Name, material.PartNo, weight, material.Volume, material.GetChemicals());
                         unload.setWeight(weight);
                         unloaded.Add(unload);
                         weight = 0;

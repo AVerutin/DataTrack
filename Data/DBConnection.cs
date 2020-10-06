@@ -220,7 +220,8 @@ namespace DataTrack.Data
                    "material ASC, " +
                    "partno ASC;";
 
-                // string query = $"SELECT * FROM {DBShema}.tmp_materials ORDER BY name, partno ASC;";
+                // string query1 = $"SELECT * FROM pqca.tmp_materials ORDER BY name, partno ASC;";
+                // var t = getData(query1);
 
                 SQLCommand = new NpgsqlCommand(query, Connection);
                 Connection.Open();
@@ -230,7 +231,16 @@ namespace DataTrack.Data
                 {
                     Material layer = new Material();
                     List<Chemical> chemicals;
-
+                    
+                    // var cell1 = SQLData[0];
+                    // var cell2 = SQLData[1];
+                    // var cell3 = SQLData[2];
+                    // var cell4 = SQLData[3];
+                    // var cell5 = SQLData[4];
+                    // var cell6 = SQLData[5];
+                    // var cell7 = SQLData[6];
+                    // var cell8 = SQLData[7];
+                    
                     long material_id = SQLData.GetInt64(0);
                     long invoice_id = SQLData.GetInt64(1);
                     string material_name = SQLData.GetString(2);

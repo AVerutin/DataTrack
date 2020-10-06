@@ -77,7 +77,7 @@ namespace DataTrack.Data
         /// <param name="partno">Номер партии</param>
         /// <param name="weight">Вес материала</param>
         /// <param name="weight">Объем материала</param>
-        public void setMaterial(long id, long invoice, string name, int partno, double weight, double volume = 0.0)
+        public void setMaterial(long id, long invoice, string name, int partno, double weight, double volume = 0.0, List<Chemical> chemicals = null)
         {
             ID = id;
             Invoice = invoice;
@@ -85,6 +85,7 @@ namespace DataTrack.Data
             PartNo = partno;
             Weight = weight;
             Volume = volume;
+            Chemicals = chemicals;
         }
 
         /// <summary>

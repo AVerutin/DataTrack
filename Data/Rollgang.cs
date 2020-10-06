@@ -23,15 +23,12 @@ namespace DataTrack.Data
         public double CurrentSpeed { get; set; }
         
         /// <summary>
-        /// Длина рольганга
-        /// </summary>
-        public double RollgangLength { get; set; }
-        
-        /// <summary>
         /// Координаты начала и конца рольганга
         /// </summary>
-        public Coords StartPos { get; set; }
-        public Coords FinishPos { get; set; }
+        public Coords ScreenStartPos { get; set; }
+        public Coords ScreenFinishPos { get; set; }
+        public Coords RealStartPos { get; set; }
+        public Coords RealFinishPos { get; set; }
 
         /// <summary>
         /// Номер нити, на которой расположен рольганг 
@@ -54,7 +51,7 @@ namespace DataTrack.Data
         /// </summary>
         private readonly List<Ingot> _ingotsList;
 
-        private double _deliveringTime;
+        // private double _deliveringTime;
         
         /// <summary>
         /// Метод, вызывающийся при завершении доставки материала через рольганг 
@@ -83,36 +80,48 @@ namespace DataTrack.Data
         /// Конструктор класса рольганга
         /// </summary>
         /// <param name="uid">Уникальный идентификатор рольганга</param>
+        /// <param name="type">Тип рольганга</param>
         /// <param name="dbuid">Уникальный идентификатор рольганга в базе данных</param>
         /// <param name="currentSpeed">Скорость движения рольганга в м/с</param>
-        /// <param name="length">Длина рольганга в метрах</param>
         /// <param name="thread">Номер нити</param>
         /// <exception cref="ArgumentNullException">Не указан уникальный идентификатор рольганга</exception>
-        public Rollgang(int uid, long dbuid=0, double currentSpeed=0.25, double length=5, int thread=0)
+        public Rollgang(int uid, RollgangTypes type, long dbuid=0, double currentSpeed=0.25, int thread=0)
         {
             if (uid > 0)
             {
                 Uid = uid;
                 DbUid = dbuid;
                 CurrentSpeed = currentSpeed;
-                RollgangLength = length;
-                StartPos = new Coords();
-                FinishPos = new Coords();
+                ScreenStartPos = new Coords();
+                ScreenFinishPos = new Coords();
+                RealStartPos = new Coords();
+                RealFinishPos = new Coords();
                 Thread = thread;
                 _ingotsList = new List<Ingot>();
                 Direction = Directions.Forward;
-                try
-                {
-                    _deliveringTime = RollgangLength / CurrentSpeed;
-                }
-                catch (DivideByZeroException)
-                {
-                    _deliveringTime = RollgangLength / 0.25;
-                }
+                Type = type;
             }
             else
             {
                 throw new ArgumentNullException("Не указан номер рольганга!");
+            }
+        }
+
+        /// <summary>
+        /// Установить координаты рольганга
+        /// </summary>
+        /// <param name="screenStart">Координаты головы рольганга на экране</param>
+        /// <param name="screenFinish">Координаты хвоста рольганга на экране</param>
+        /// <param name="realStart">Координаты головы рольганга физические</param>
+        /// <param name="realFinish">Координаты хвоста рольганга физические</param>
+        public void SetPosition(Coords screenStart, Coords screenFinish, Coords realStart, Coords realFinish)
+        {
+            if (screenStart != null && screenFinish != null && realStart != null && realFinish != null)
+            {
+                ScreenStartPos = screenStart;
+                ScreenFinishPos = screenFinish;
+                RealStartPos = realStart;
+                RealFinishPos = realFinish;
             }
         }
 
@@ -168,6 +177,33 @@ namespace DataTrack.Data
         }
 
         /// <summary>
+        /// Получить рассчетное время доставки единицы учета рольгангом 
+        /// </summary>
+        /// <returns>Рассчетное время доставки единицы учета</returns>
+        public double GetDeliveringTime()
+        {
+            double deliveringTime;
+            double rollgangLength = 0;
+            
+            switch (Type)
+            {
+                case RollgangTypes.Horizontal:
+                {
+                    rollgangLength = RealFinishPos.PosX - RealStartPos.PosX;
+                    break;
+                }
+                case RollgangTypes.Vertical:
+                {
+                    rollgangLength = RealFinishPos.PosY - RealStartPos.PosY;
+                    break;
+                }
+            }
+
+            deliveringTime = rollgangLength / CurrentSpeed;
+            return deliveringTime;
+        }
+
+        /// <summary>
         /// Получить координаты единицы учета по ее номеру
         /// </summary>
         /// <param name="number">Номер единицы учета</param>
@@ -176,33 +212,34 @@ namespace DataTrack.Data
         {
             // Расчитать текущие координаты единицы учета исходя из времени движения единицы учета,
             // скорости движения и длины рольганга.
-            
-           Coords pos = new Coords();
-           pos.PosX = 400;
-           pos.PosY = 510;
-            
+            Coords newPos = new Coords();
+            newPos.PosX = ScreenStartPos.PosX;
+            newPos.PosY = ScreenStartPos.PosY;
+
             // Рассчитываем время движения единицы учета по рольгангу
-           switch (Type)
+            switch (Type)
             {
                 case RollgangTypes.Horizontal:
                 {
+                    double rollgangLength = RealFinishPos.PosX - RealStartPos.PosX;
                     double realX = CurrentSpeed * movingTime.TotalSeconds;
-                    double percentX = realX * 100 / RollgangLength;
-                    int screenX = (int)Math.Round(440 * percentX / 100);
-                    pos.PosX += screenX;
+                    double percentX = realX * 100 / rollgangLength;
+                    int screenX = (int) Math.Round((ScreenFinishPos.PosX - ScreenStartPos.PosX) * percentX / 100);
+                    newPos.PosX += screenX;
                     break;
                 }
                 case RollgangTypes.Vertical:
                 {
+                    double rollgangLength = RealFinishPos.PosY - RealStartPos.PosY;
                     double realY = CurrentSpeed * movingTime.TotalSeconds;
-                    double percentY = realY * 100 / RollgangLength;
-                    int screenY = (int) Math.Round(510 * percentY / 100);
-                    pos.PosY += screenY;
+                    double percentY = realY * 100 / rollgangLength;
+                    int screenY = (int) Math.Abs(Math.Round((ScreenFinishPos.PosY - ScreenStartPos.PosY) * percentY / 100));
+                    newPos.PosY -= screenY;
                     break;
                 }
             }
                 
-            return pos;
+            return newPos;
         }
         
         /// <summary>
@@ -238,7 +275,8 @@ namespace DataTrack.Data
             TimeSpan movingTime = DateTime.Now - startDelivering;
             
             // Пока время перемещения не достигнуто
-            while (movingTime.TotalSeconds < _deliveringTime)
+            double deliveringTime = GetDeliveringTime();
+            while (movingTime.TotalSeconds < deliveringTime)
             {
                 // Расчитываем новые координаты для единицы учета и выводим ее позицию
                 Coords newCoords = GetIngotPosition(movingTime);

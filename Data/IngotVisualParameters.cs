@@ -21,12 +21,18 @@
         /// Положение от верхнего края страницы
         /// </summary>
         public string YPos { get; set; }
+        
+        /// <summary>
+        /// Положение слоя в пачке
+        /// </summary>
+        public string ZIndex { get; set; }
 
         public IngotVisualParameters(string filename)
         {
             FileName = filename;
             XPos = "0px";
             YPos = "0px";
+            ZIndex = "-1";
         }
     }
 }

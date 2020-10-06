@@ -33,5 +33,10 @@
             Sign = sign;
             Volume = volume;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}[{Sign}, {Volume:F4}]";
+        }
     }
 }

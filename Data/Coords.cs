@@ -10,5 +10,11 @@
             PosX = default;
             PosY = default;
         }
+
+        public Coords(double posX, double posY)
+        {
+            PosX = posX;
+            PosY = posY;
+        }
     }
 }

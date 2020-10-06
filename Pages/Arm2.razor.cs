@@ -16,12 +16,9 @@ namespace DataTrack.Pages
         private List<WeightTanker> _weights = new List<WeightTanker>();
         private List<Material> _loadedMaterial = new List<Material>();
         private List<Ingot> _ingots = new List<Ingot>();
-        private uint[] _ingotsFree = new uint[3];
         private List<IngotVisualParameters> _ingotsVisualParameters = new List<IngotVisualParameters>();
         // private IngotVisualParameters _ingotsVisualParameters;
         // private List<IngotVisualParameters> _visualParameters = new List<IngotVisualParameters>();
-        private int _ingotsDisplayed;
-        private int _ingotDeliveringNumber = -1;
         private List<Rollgang> _rollgangs = new List<Rollgang>();
         private string[] _diviatorsDirection = new string[4];
         private string[] _conveyors = new string[6];
@@ -78,23 +75,11 @@ namespace DataTrack.Pages
             Kernel.Data.SetRollgangs(_rollgangs);
 
             // Удаление рольганга 1
-            _rollgangs[0].Moved -= IngotMoved1;
-            _rollgangs[0].Delivered -= IngotDelivered1;
-            // Удаление рольганга 2
-            _rollgangs[1].Moved -= IngotMoved2;
-            _rollgangs[1].Delivered -= IngotDelivered2;
-            // Удаление рольганга 3
-            _rollgangs[2].Moved -= IngotMoved3;
-            _rollgangs[2].Delivered -= IngotDelivered3;
-            // Удаление рольганга 4
-            _rollgangs[3].Moved -= IngotMoved4;
-            _rollgangs[3].Delivered -= IngotDelivered4;
-            // Удаление рольганга 5
-            _rollgangs[4].Moved -= IngotMoved5;
-            _rollgangs[4].Delivered -= IngotDelivered5;
-            // Удаление рольганга 6
-            _rollgangs[5].Moved -= IngotMoved6;
-            _rollgangs[5].Delivered -= IngotDelivered6;
+            foreach (Rollgang rollgang in _rollgangs)
+            {
+                rollgang.Moved -= IngotMoved;
+                rollgang.Delivered -= IngotDelivered;
+            }
         }
 
         /// <summary>
@@ -127,61 +112,65 @@ namespace DataTrack.Pages
             }
             
             // Если в ядре нет рольгангов, то создадим их
-            //TODO: Добавить несколько рольгангов с "реальными" длинами и скоростями
             if (Kernel.Data.GetRollgangsCount() == 0)
             {
                 // Рольганг 1
-                Rollgang rollgang = new Rollgang(1, 1, 1.25F, 35F, 1);
-                rollgang.Moved += IngotMoved1;
-                rollgang.Delivered += IngotDelivered1;
+                Rollgang rollgang = new Rollgang(1, RollgangTypes.Horizontal, 1, 1.05F, 1);
+                rollgang.SetPosition(new Coords(400, 510), new Coords(840, 510), new Coords(200, 350),
+                    new Coords(225, 410));
+                rollgang.Moved += IngotMoved;
+                rollgang.Delivered += IngotDelivered;
                 _rollgangs.Add(rollgang);
                 
                 // Рольганг 2
-                rollgang = new Rollgang(2, 2, 1.25F, 35F, 1);
-                rollgang.Moved += IngotMoved2;
-                rollgang.Delivered += IngotDelivered2;
+                rollgang = new Rollgang(2, RollgangTypes.Horizontal, 2, 0.7F, 1);
+                rollgang.SetPosition(new Coords(750, 550), new Coords(960, 550), new Coords(305, 350),
+                    new Coords(320, 410));
+                rollgang.Moved += IngotMoved;
+                rollgang.Delivered += IngotDelivered;
                 _rollgangs.Add(rollgang);
                 
                 // Рольганг 3
-                rollgang = new Rollgang(3, 3, 1.25F, 35F, 1);
-                rollgang.Moved += IngotMoved3;
-                rollgang.Delivered += IngotDelivered3;
+                rollgang = new Rollgang(3, RollgangTypes.Vertical, 3, 0.85F, 1);
+                rollgang.SetPosition(new Coords(1040, 480), new Coords(1040, 50), new Coords(300, 350),
+                    new Coords(315, 395));
+                rollgang.Moved += IngotMoved;
+                rollgang.Delivered += IngotDelivered;
                 _rollgangs.Add(rollgang);
                 
                 // Рольганг 4
-                rollgang = new Rollgang(4, 4, 1.25F, 35F, 1);
-                rollgang.Moved += IngotMoved4;
-                rollgang.Delivered += IngotDelivered4;
+                rollgang = new Rollgang(4, RollgangTypes.Horizontal, 4, 0.75F, 1);
+                rollgang.SetPosition(new Coords(1080, 20), new Coords(1090, 20), new Coords(300, 350),
+                    new Coords(315, 410));
+                rollgang.Moved += IngotMoved;
+                rollgang.Delivered += IngotDelivered;
                 _rollgangs.Add(rollgang);
                 
                 // Рольганг 5
-                rollgang = new Rollgang(5, 5, 1.25F, 35F, 1);
-                rollgang.Moved += IngotMoved5;
-                rollgang.Delivered += IngotDelivered5;
+                rollgang = new Rollgang(5, RollgangTypes.Horizontal, 5, 1.0F, 1);
+                rollgang.SetPosition(new Coords(1150, 70), new Coords(1400, 70), new Coords(300, 350),
+                    new Coords(325, 410));
+                rollgang.Moved += IngotMoved;
+                rollgang.Delivered += IngotDelivered;
                 _rollgangs.Add(rollgang);
                 
                 // Рольганг 6
-                rollgang = new Rollgang(6, 6, 1.25F, 35F, 1);
-                rollgang.Moved += IngotMoved6;
-                rollgang.Delivered += IngotDelivered6;
+                rollgang = new Rollgang(6, RollgangTypes.Horizontal, 6, 0.75F, 1);
+                rollgang.SetPosition(new Coords(1350, 350), new Coords(1280, 350), new Coords(305, 350),
+                    new Coords(325, 410));
+                rollgang.Moved += IngotMoved;
+                rollgang.Delivered += IngotDelivered;
                 _rollgangs.Add(rollgang);
             }
             else
             {
                 _rollgangs = Kernel.Data.GetRollgangs();
-                _rollgangs[0].Moved += IngotMoved1;
-                _rollgangs[0].Delivered += IngotDelivered1;
-                _rollgangs[1].Moved += IngotMoved2;
-                _rollgangs[1].Delivered += IngotDelivered2;
-                _rollgangs[2].Moved += IngotMoved3;
-                _rollgangs[2].Delivered += IngotDelivered3;
-                _rollgangs[3].Moved += IngotMoved4;
-                _rollgangs[3].Delivered += IngotDelivered4;
-                _rollgangs[4].Moved += IngotMoved5;
-                _rollgangs[4].Delivered += IngotDelivered5;
-                _rollgangs[5].Moved += IngotMoved6;
-                _rollgangs[5].Delivered += IngotDelivered6;
 
+                foreach (Rollgang rollgang in _rollgangs)
+                {
+                    rollgang.Moved += IngotMoved;
+                    rollgang.Delivered += IngotDelivered;
+                }
             }
 
             if (Kernel.Data.GetWeightTankersCount() == 0)
@@ -232,16 +221,60 @@ namespace DataTrack.Pages
             }
             
             // Инициализация единиц учета для отображения на странице
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 18; i++)
             {
                 IngotVisualParameters visualParameters = new IngotVisualParameters("img/colors/Empty.png");
-                visualParameters.XPos = "400px";
-                visualParameters.YPos = "510px";
+                visualParameters.XPos = "0px";
+                visualParameters.YPos = "0px";
                 _ingotsVisualParameters.Add(visualParameters);
             }
-            // _ingotsVisualParameters = new IngotVisualParameters("img/colors/Empty.png");
-            // _ingotsVisualParameters.XPos = "400px";
-            // _ingotsVisualParameters.YPos = "510px";
+            
+            // Определение начальных координат для отображения единиц учета
+            // Рольганг 1
+            _ingotsVisualParameters[0].XPos = "400px";
+            _ingotsVisualParameters[0].YPos = "510px";
+            _ingotsVisualParameters[1].XPos = "400x";
+            _ingotsVisualParameters[1].YPos = "510px";
+            _ingotsVisualParameters[2].XPos = "400px";
+            _ingotsVisualParameters[2].YPos = "510px";
+            // Рольганг 2
+            _ingotsVisualParameters[3].XPos = "750px";
+            _ingotsVisualParameters[3].YPos = "550px";
+            _ingotsVisualParameters[4].XPos = "750px";
+            _ingotsVisualParameters[4].YPos = "550px";
+            _ingotsVisualParameters[5].XPos = "750px";
+            _ingotsVisualParameters[5].YPos = "550px";
+            // Рольганг 3
+            _ingotsVisualParameters[6].FileName = "img/colors/vEmpty.png";
+            _ingotsVisualParameters[6].XPos = "1040px";
+            _ingotsVisualParameters[6].YPos = "480px";
+            _ingotsVisualParameters[7].FileName = "img/colors/vEmpty.png";
+            _ingotsVisualParameters[7].XPos = "1040px";
+            _ingotsVisualParameters[7].YPos = "480px";
+            _ingotsVisualParameters[8].FileName = "img/colors/vEmpty.png";
+            _ingotsVisualParameters[8].XPos = "1040px";
+            _ingotsVisualParameters[8].YPos = "480px";
+            // Рольганг 4
+            _ingotsVisualParameters[9].XPos = "1080px";
+            _ingotsVisualParameters[9].YPos = "20px";
+            _ingotsVisualParameters[10].XPos = "1080px";
+            _ingotsVisualParameters[10].YPos = "20px";
+            _ingotsVisualParameters[11].XPos = "1080px";
+            _ingotsVisualParameters[11].YPos = "20px";
+            // Рольганг 5
+            _ingotsVisualParameters[12].XPos = "1150px";
+            _ingotsVisualParameters[12].YPos = "70px";
+            _ingotsVisualParameters[13].XPos = "1150px";
+            _ingotsVisualParameters[13].YPos = "70px";
+            _ingotsVisualParameters[14].XPos = "1150px";
+            _ingotsVisualParameters[14].YPos = "70px";
+            // Рольганг 6
+            _ingotsVisualParameters[15].XPos = "1350px";
+            _ingotsVisualParameters[15].YPos = "350px";
+            _ingotsVisualParameters[16].XPos = "1350px";
+            _ingotsVisualParameters[16].YPos = "350px";
+            _ingotsVisualParameters[17].XPos = "1350px";
+            _ingotsVisualParameters[17].YPos = "350px";
 
             _manualLoadWeights.WeightNumber = "0";
             _manualLoadWeights.SilosNumber = "0";
@@ -258,9 +291,6 @@ namespace DataTrack.Pages
             _conveyors[3] = "img/arm2/conveyor_short.png";
             _conveyors[4] = "img/arm2/RolgangLongGrey.png";
             _conveyors[5] = "img/arm2/conveyor_mid.png";
-            _ingotsFree[0] = 0;
-            _ingotsFree[1] = 0;
-            _ingotsFree[2] = 0;
             
             _detailCaption = "";
             
@@ -288,15 +318,20 @@ namespace DataTrack.Pages
                 _loadedMaterial = _weights[number - 10].GetMaterials();
                 _detailCaption = _weights[number - 10].Name;
             }
-            else if (number < 20)
+            else if (number < 35)
             {
-                //TODO: Отобразить список материалов единицы учета
-                if (_ingots.Count>0 && _ingotDeliveringNumber >=0)
+                uint ingotUid = _ingotsVisualParameters[number - 17].IngotUid;
+                if (ingotUid > 0)
                 {
-                    matCount = _ingots[_ingotDeliveringNumber].GetMaterialsCount();
-                    _loadedMaterial = _ingots[_ingotDeliveringNumber].GetMaterials();
-                    _detailCaption = "Плавка №" + _ingots[_ingotDeliveringNumber].PlavNo;
-                }                
+                    Ingot ingot = GetIngotByUid(ingotUid);
+                    matCount = ingot.GetMaterialsCount();
+
+                    if (matCount > 0)
+                    {
+                        _loadedMaterial = ingot.GetMaterials();
+                        _detailCaption = "Плавка №" + ingot.PlavNo;
+                    }
+                }
             }
 
             _detailPosY = $"{e.ClientY + 20}px";
@@ -390,10 +425,8 @@ namespace DataTrack.Pages
         /// <summary>
         /// Установить дивиаторы на цель
         /// </summary>
-        private async Task SetTarget()
+        private void SetTarget()
         {
-            //TODO: Добавить выделение цветом с задержкой через каждые 5 сек для промежуточных целей (конвейеров,
-            // дивиаторов) (с одного снял выделение, на следующий поставил)
            string value = _manualLoadReceiver.ReceiverTanker;
            
            // Устанавливаем направления дивиаторов на цель
@@ -401,12 +434,14 @@ namespace DataTrack.Pages
            {
                case "0":
                {
+                   // ДСП
                    _stalevozPos = "1500px;";
                    _diviatorsDirection[0] = "img/arm2/diviator_right.png";
                    break;
                }
                case "1":
                {
+                   // УПК
                    _stalevozPos = "1180px;";
                    _diviatorsDirection[0] = "img/arm2/diviator_left.png";
                    _diviatorsDirection[1] = "img/arm2/diviator_left.png";
@@ -414,6 +449,7 @@ namespace DataTrack.Pages
                }
                case "2":
                {
+                   // Сторона УПК
                    _stalevozPos = "1500px;";
                    _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
                    _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
@@ -422,6 +458,7 @@ namespace DataTrack.Pages
                }
                case "3":
                {
+                   // Сторона ДСП
                    _stalevozPos = "1500px;";
                    _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
                    _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
@@ -429,70 +466,6 @@ namespace DataTrack.Pages
                    break;
                }
            }
-
-           // Выделяем общий путь для всех направлений
-           _conveyors[2] = "img/arm2/RolgangVeryLongGreen.png";
-           await Waiting(5);
-           _conveyors[2] = "img/arm2/RolgangVeryLongGrey.png";
-           _conveyors[0] = "img/arm2/Conveyor_Long_Green.png";
-           await Waiting(5);
-           _conveyors[0] = "img/arm2/Conveyor_Long.png";
-           _conveyors[1] = "img/arm2/Conveyor_Vertical_DoubleLong_Green.png";
-           await Waiting(5);
-           _conveyors[1] = "img/arm2/Conveyor_Vertical_DoubleLong.png";
-           _conveyors[3] = "img/arm2/Conveyor_Short_Green.png";
-           await Waiting(5);
-           _conveyors[3] = "img/arm2/Conveyor_Short.png";
-           _conveyors[4] = "img/arm2/RolgangLongGreen.png";
-           await Waiting(5);
-           _conveyors[4] = "img/arm2/RolgangLongGrey.png";
-           
-           switch (value)
-            {
-                case "0":
-                {
-                    // Направление - ДСП
-                    _diviatorsDirection[0] = "img/arm2/diviator_right_green.png";
-                    await Waiting(5);
-                    break;
-                }
-                case "1":
-                {
-                    // Направление - УПК
-                    _diviatorsDirection[0] = "img/arm2/diviator_left_green.png";
-                    await Waiting(5);
-                    _diviatorsDirection[0] = "img/arm2/diviator_left.png";
-                    _diviatorsDirection[1] = "img/arm2/diviator_left_green.png";
-                    await Waiting(5);
-                    break;
-                }
-                case "2":
-                {
-                    // Направление - Сторона УПК
-                    _diviatorsDirection[0] = "img/arm2/diviator_Left_green.png";
-                    await Waiting(5);
-                    _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
-                    _diviatorsDirection[1] = "img/arm2/diviator_Right_green.png";
-                    await Waiting(5);
-                    _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
-                    _diviatorsDirection[2] = "img/arm2/diviator_Left_green.png";
-                    break;
-                }
-                case "3":
-                {
-                    // Направление - Сторона ДСП
-                    _diviatorsDirection[0] = "img/arm2/diviator_Left_green.png";
-                    await Waiting(5);
-                    _diviatorsDirection[0] = "img/arm2/diviator_Left.png";
-                    _diviatorsDirection[1] = "img/arm2/diviator_Right_green.png";
-                    await Waiting(5);
-                    _diviatorsDirection[1] = "img/arm2/diviator_Right.png";
-                    _diviatorsDirection[2] = "img/arm2/diviator_Right_green.png";
-                    break;
-                }
-            }
-
-           await Waiting(5);
         }
 
         /// <summary>
@@ -500,6 +473,7 @@ namespace DataTrack.Pages
         /// </summary>
         private async void LoadWeight()
         {
+            //TODO: Добавить одновременную загрузку нескольких весовых бункеров
             // Номер весового бункера, принимающего материал
             if (!_weightLoading && !_receiverLoading)
             {
@@ -673,6 +647,25 @@ namespace DataTrack.Pages
         }
 
         /// <summary>
+        /// Получить единицу учета по ее UID
+        /// </summary>
+        /// <param name="uid">UID единицы учета</param>
+        /// <returns>Единица учета</returns>
+        private Ingot GetIngotByUid(uint uid)
+        {
+            Ingot res = null;
+            foreach (Ingot ingot in _ingots)
+            {
+                if (ingot.Uid == uid)
+                {
+                    res = ingot;
+                    break;
+                }
+            }
+            return res;
+        }
+
+        /// <summary>
         /// Получить следующий унркальный идентификатор единицы учета
         /// </summary>
         /// <returns></returns>
@@ -698,47 +691,73 @@ namespace DataTrack.Pages
 
             return next;
         }
+
+        private async Task PlaceOnRolgang(int number, Ingot ingot)
+        {
+            Rollgang rollgang = _rollgangs[number - 1];
+            int ingotNum = FindNextIngotNumber(number);
+            if (ingotNum >= 0)
+            {
+                // Есть свободная ячейка для отображения
+                _ingotsVisualParameters[ingotNum].IngotUid = ingot.Uid;
+                await rollgang.Delivering(ingot); 
+            }
+        }
         
         /// <summary>
         /// Тестирование модуля сопровождения единицы учета
         /// </summary>
         private async Task DeliverIngots(Ingot ingot)
         {
-            // Доставка единицы учета по рольгангу 1
-            Rollgang rollgang = _rollgangs[0];
-            if (_ingotsDisplayed < 3)
+            // Определяем назначение доставки единицы учета
+            string targetNum = _manualLoadReceiver.ReceiverTanker;
+            string targetMsg = "";
+            switch (targetNum)
             {
-                _ingotsDisplayed++;
-                int ingotNum = FindNextIngotNumber();
-                _ingotsFree[ingotNum] = ingot.Uid;
-                _ingotDeliveringNumber = _ingots.Count - 1;
-                
-                await OnNotify($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()}");
-                Console.ForegroundColor = ingot.Color;
-                Console.WriteLine($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()} ({ingot.Color.ToString()})");
-                await rollgang.Delivering(ingot);
+                case "0" : targetMsg = "ДСП"; break;
+                case "1" : targetMsg = "УПК"; break;
+                case "2" : targetMsg = "Сторона УПК"; break;
+                case "3" : targetMsg = "Сторона ДСП"; break;
             }
+            
+            await OnNotify($"[{ingot.GetStartTime()}] Начата доставка единицы учета №{ingot.Uid} к {targetMsg}");
+            Console.ForegroundColor = ingot.Color;
+            Console.WriteLine($"[{ingot.Uid}] {ingot.GetStartTime()} => {ingot.GetFinishTime()} ({ingot.Color.ToString()})");
+            
+
+            await PlaceOnRolgang(1, ingot);
+            await PlaceOnRolgang(2, ingot);
+            await PlaceOnRolgang(3, ingot);
+            await PlaceOnRolgang(4, ingot);
+            await PlaceOnRolgang(5, ingot);
+            
+            //TODO: Добавить определение назначения материала и задействовать рольганг 6 для УПК
+            //TODO: Добавить выделение цветом дивиатора при подходе к нему материала, организовать задержку 2 секунды и снять выделение дивиатора
+            
+            await OnNotify($"Единица учета №{ingot.Uid} была доставлена");
         }
 
         /// <summary>
-        /// Получить номер следующего свободного номера единицы учета
+        /// Получить номер следующей свободной ячейки для отображения единицы учета
         /// </summary>
-        /// <returns></returns>
-        private int FindNextIngotNumber()
+        /// <param name="rollgangNumer">Номер рольганга</param>
+        /// <returns>Номер ячейки для отображения кдиницы учета</returns>
+        private int FindNextIngotNumber(int rollgangNumer)
         {
+            int band = rollgangNumer * 3 - 3;
             int res = -1;
 
-            if (_ingotsFree[0] == 0)
+            if (_ingotsVisualParameters[band].IngotUid == 0)
             {
-                res = 0;
+                res = band;
             }
-            else if (_ingotsFree[1] == 0)
+            else if (_ingotsVisualParameters[band + 1].IngotUid == 0)
             {
-                res = 1;
+                res = band + 1;
             }
-            else if (_ingotsFree[2] == 0)
+            else if (_ingotsVisualParameters[band + 2].IngotUid == 0)
             {
-                res = 2;
+                res = band + 2;
             }
 
             return res;
@@ -751,147 +770,47 @@ namespace DataTrack.Pages
         private int FindIngotById(uint ingotUid)
         {
             int res = -1;
-
-            if (_ingotsFree[0] == ingotUid)
+            for (int i = 0; i < _ingotsVisualParameters.Count; i++)
             {
-                res = 0;
-            }
-            else if (_ingotsFree[1] == ingotUid)
-            {
-                res = 1;
-            }
-            else if (_ingotsFree[2] == ingotUid)
-            {
-                res = 2;
+                if (_ingotsVisualParameters[i].IngotUid == ingotUid)
+                {
+                    res = i;
+                    break;
+                }
             }
 
             return res;
         }
 
-        #region Перемещение и доставка материала по рольгангам
-
         /// <summary>
-        /// Перемещение единицы учета по рольгангу 1
+        /// Перемещение единицы учета по рольгангу
         /// </summary>
         /// <param name="ingot">Единица учета</param>
-        private void IngotMoved1(Ingot ingot)
+        private void IngotMoved(Ingot ingot)
         {
             int ingotNum = FindIngotById(ingot.Uid);
             _ingotsVisualParameters[ingotNum].XPos = ingot.VisualParameters.XPos;
             _ingotsVisualParameters[ingotNum].YPos = ingot.VisualParameters.YPos;
             _ingotsVisualParameters[ingotNum].FileName = ingot.VisualParameters.FileName;
+            _ingotsVisualParameters[ingotNum].ZIndex = "1";
             StateHasChanged();
         }
         
         /// <summary>
-        /// Доставка единицы учета по рольгангу 1 завершена
+        /// Доставка единицы учета по рольгангу завершена
         /// </summary>
         /// <param name="ingot">Доставленная единица учета</param>
-        private async void IngotDelivered1(Ingot ingot)
+        private void IngotDelivered(Ingot ingot)
         {
             int ingotNum = FindIngotById(ingot.Uid);
             _ingotsVisualParameters[ingotNum].FileName = "img/colors/Empty.png";
             _ingotsVisualParameters[ingotNum].XPos = "400px";
             _ingotsVisualParameters[ingotNum].YPos = "510px";
-            _ingotsFree[ingotNum] = 0;
-            _ingotsDisplayed--;
-            _ingotDeliveringNumber = -1;
-            
-            await OnNotify($"Материал №{ingot.Uid} был доставлен");
+            _ingotsVisualParameters[ingotNum].IngotUid = 0;
+            _ingotsVisualParameters[ingotNum].ZIndex = "-1";
+            // await OnNotify($"Материал №{ingot.Uid} был доставлен");
+            StateHasChanged();
         }
-
-        /// <summary>
-        /// Перемещение единицы учета по рольгангу 2
-        /// </summary>
-        /// <param name="ingot">Единица учета</param>
-        private void IngotMoved2(Ingot ingot)
-        {
-            
-        }
-
-        /// <summary>
-        /// Доставка единицы учета по рольгангу 2завершена
-        /// </summary>
-        /// <param name="ingot">Доставленная единица учета</param>
-        private async void IngotDelivered2(Ingot ingot)
-        {
-            
-        }
-        
-        /// <summary>
-        /// Перемещение единицы учета по рольгангу 3
-        /// </summary>
-        /// <param name="ingot">Единица учета</param>
-        private void IngotMoved3(Ingot ingot)
-        {
-            
-        }
-
-        /// <summary>
-        /// Доставка единицы учета по рольгангу 3 завершена
-        /// </summary>
-        /// <param name="ingot">Доставленная единица учета</param>
-        private async void IngotDelivered3(Ingot ingot)
-        {
-            
-        }
-        
-        /// <summary>
-        /// Перемещение единицы учета по рольгангу 4
-        /// </summary>
-        /// <param name="ingot">Единица учета</param>
-        private void IngotMoved4(Ingot ingot)
-        {
-            
-        }
-
-        /// <summary>
-        /// Доставка единицы учета по рольгангу 4 завершена
-        /// </summary>
-        /// <param name="ingot">Доставленная единица учета</param>
-        private async void IngotDelivered4(Ingot ingot)
-        {
-            
-        }
-        
-        /// <summary>
-        /// Перемещение единицы учета по рольгангу 5
-        /// </summary>
-        /// <param name="ingot">Единица учета</param>
-        private void IngotMoved5(Ingot ingot)
-        {
-            
-        }
-
-        /// <summary>
-        /// Доставка единицы учета по рольгангу 5 завершена
-        /// </summary>
-        /// <param name="ingot">Доставленная единица учета</param>
-        private async void IngotDelivered5(Ingot ingot)
-        {
-            
-        }
-        
-        /// <summary>
-        /// Перемещение единицы учета по рольгангу 6
-        /// </summary>
-        /// <param name="ingot">Единица учета</param>
-        private void IngotMoved6(Ingot ingot)
-        {
-            
-        }
-
-        /// <summary>
-        /// Доставка единицы учета по рольгангу 6 завершена
-        /// </summary>
-        /// <param name="ingot">Доставленная единица учета</param>
-        private async void IngotDelivered6(Ingot ingot)
-        {
-            
-        }
-
-        #endregion 
-
 
         /// <summary>
         /// Загрузка материала в приемочный бункер
@@ -931,7 +850,6 @@ namespace DataTrack.Pages
                                         // Определить наличие материала в весовом бункера
                                         if (_weights[weightTanker].GetLayersCount() > 0)
                                         {
-                                            //TODO: Добавить создание единицы учета при выгрузке материала и сопровождение его
                                             // Устанавливаем текущие состояния для весового и приемочного бункера
                                             _receiverLoading = true;
                                             await OnNotify(
@@ -952,24 +870,19 @@ namespace DataTrack.Pages
                                             _weights[receiverTanker].SetStatus(state);
 
                                             // Создание единицы учета
-                                            uint uid = GetNextIngotId();
+                                            uint uid = GetNextIngotId(); // ищем следующий номер UID единицы учета
                                             Ingot ingot = new Ingot(uid);
                                             List<Material> materials = _weights[weightTanker].Unload(weight);
                                             ingot.AddMaterials(materials);
                                             _ingots.Add(ingot);
 
                                             // Перемещение единицы учета по рольгангам
+                                            //TODO: Посмотреть, почему обрывается загрузка приемочного бункера при обновлении страницы
+                                            SetTarget();
                                             await DeliverIngots(ingot);
-
-
-                                            // Задержка на время загрузки 10 секунд
-                                            // await SetTarget();
-                                            // await Waiting(5); // доставка материала через рольганг
 
                                             // Загружаем требуемый вес материала, либо вес до максимальной загрузки приемочного бункера
                                             _weights[receiverTanker].SetIngot(ingot);
-                                            // await Waiting(5);
-                                            // ClearTarget();
 
                                             // Снимаем текущие состояния весового и приемочного бункеров
 
@@ -1062,6 +975,16 @@ namespace DataTrack.Pages
                     await OnNotify("Одновременная загрузка нескольких приемочных бунеров недопустима!");
                 }
             }
+        }
+
+        private void ResetErrorTanker()
+        {
+            //TODO: Добавить сброс ошибок для весовых и приемочных бункеров
+        }
+
+        private void ResetTanker()
+        {
+            //TODO: Добавить обнуление весовых и приемочных бункеров
         }
     }
 }
