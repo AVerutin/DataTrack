@@ -234,6 +234,7 @@ namespace DataTrack.Pages
                     status.StatusIcon = "img/led/SquareGrey.png";
                     status.StatusMessage = "";
                     tanker.SetStatus(status);
+                    tanker.Name = $"Загрузочный бункер [{i}]";
                     _inputTankers.Add(tanker);
                 }
                 
@@ -261,6 +262,7 @@ namespace DataTrack.Pages
                     status.StatusIcon = "img/led/SmallGrey.png";
                     status.StatusMessage = "";
                     silos.SetStatus(status);
+                    silos.Name = $"Силос [{i}]";
                     _siloses.Add(silos);
                 }
                 
@@ -348,13 +350,15 @@ namespace DataTrack.Pages
 
             if (number < 3)
             {
-                matCount = _inputTankers[number-1].GetLayersCount();
-                _loadedMaterial = _inputTankers[number-1].GetMaterials();
+                matCount = _inputTankers[number - 1].GetLayersCount();
+                _loadedMaterial = _inputTankers[number - 1].GetMaterials();
+                _detailCaption = _inputTankers[number - 1].Name;
             }
             else
             {
                 matCount = _siloses[number - 3].GetLayersCount();
                 _loadedMaterial = _siloses[number - 3].GetMaterials();
+                _detailCaption = _siloses[number - 3].Name;
             }
             
             _detailPosY = $"{e.ClientY + 20}px";

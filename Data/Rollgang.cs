@@ -51,8 +51,6 @@ namespace DataTrack.Data
         /// </summary>
         private readonly List<Ingot> _ingotsList;
 
-        // private double _deliveringTime;
-        
         /// <summary>
         /// Метод, вызывающийся при завершении доставки материала через рольганг 
         /// </summary>
@@ -155,12 +153,6 @@ namespace DataTrack.Data
         }
 
         /// <summary>
-        /// Получить количество единиц учета на рольганге
-        /// </summary>
-        /// <returns></returns>
-        public int IngotsCount() => _ingotsList.Count;
-
-        /// <summary>
         /// Получить единицу учета по ее номеру
         /// </summary>
         /// <param name="number">Номер единицы учета</param>
@@ -168,7 +160,7 @@ namespace DataTrack.Data
         public Ingot GetIngot(int number)
         {
             Ingot result = null;
-            if (number > 0 && number < IngotsCount())
+            if (number > 0 && number <= GetIngotsCount())
             {
                 result = _ingotsList[number - 1];
             }
@@ -241,7 +233,52 @@ namespace DataTrack.Data
                 
             return newPos;
         }
-        
+
+        /// <summary>
+        /// Добаввить единицу учета в список
+        /// </summary>
+        public void AddIngot(Ingot ingot)
+        {
+            if (ingot != null)
+            {
+                _ingotsList.Add(ingot);
+            }
+        }
+
+        /// <summary>
+        /// Получить количество единиц учета на рольганге
+        /// </summary>
+        /// <returns>Количество единиц учета</returns>
+        public int GetIngotsCount() => _ingotsList.Count;
+
+        /// <summary>
+        /// Удалить единицу учета с рольганга
+        /// </summary>
+        /// <param name="ingot"></param>
+        /// <returns>Удаленная с рольганга единица учета</returns>
+        public Ingot RemoveIngot(Ingot ingot)
+        {
+            Ingot res = null;
+            for (int i = 0; i < _ingotsList.Count; i++)
+            {
+                if (_ingotsList[i].Uid == ingot.Uid)
+                {
+                    res = _ingotsList[i];
+                    _ingotsList.RemoveAt(i);
+                }
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Удалить все единицы учета с рольганга
+        /// </summary>
+        public void ClearIngots()
+        {
+            _ingotsList.Clear();
+        }
+
         /// <summary>
         /// Доставить материал через рольганг
         /// </summary>
@@ -249,6 +286,7 @@ namespace DataTrack.Data
         public async Task Delivering(Ingot ingot)
         {
             // Установка изображения единицы учета в соотвествии с типом рольганга
+            AddIngot(ingot);
             string color;
             if (Type == RollgangTypes.Horizontal)
             {
@@ -291,6 +329,7 @@ namespace DataTrack.Data
             
             // Сообщаем о завершении доставки материала
             ingot.SetAccessTime(default);
+            RemoveIngot(ingot);
             Delivered?.Invoke(ingot);
         }
     }

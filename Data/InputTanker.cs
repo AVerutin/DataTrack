@@ -12,7 +12,10 @@ namespace DataTrack.Data
         /// </summary>
         public int InputTankerId { get; private set; }
 
-        public bool Selected { get; set; }
+        /// <summary>
+        /// Наименование загругзочного бункера
+        /// </summary>
+        public string Name { get; set; }
 
         /// <summary>
         /// Наименование загруженного в бункер материала

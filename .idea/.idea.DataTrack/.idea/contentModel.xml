@@ -35,6 +35,7 @@
         <e p="MtsConnect.cs" t="Include" />
         <e p="Rollgang.cs" t="Include" />
         <e p="RollgangTypes.cs" t="Include" />
+        <e p="Selection.cs" t="Include" />
         <e p="Silos.cs" t="Include" />
         <e p="Statuses.cs" t="Include" />
         <e p="WeightTanker.cs" t="Include" />

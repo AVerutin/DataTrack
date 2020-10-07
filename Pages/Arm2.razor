@@ -58,22 +58,22 @@
 <img id="Silos8a2_led" src="@_siloses[7].Status.StatusIcon" />
 
 <!-- Весовой бункер 1 -->
-<img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="Весовой бункер 1" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />       
-<div id="Weight1_weight">@_weights[0].GetWeight()</div>
-<div id="Weight1_label">@_weights[0].Status.StatusMessage</div>  
-<img id="Weight1_led" src="@_weights[0].Status.StatusIcon" />
+<img id="Weight1a2" src="img/arm2/WeightGrey.png" alt="@_weightTankers[0].Name" @onmouseover="@(e => ShowMaterial(e, 10))" @onmouseout="@(e => HideMaterial())" />       
+<div id="Weight1_weight">@_weightTankers[0].GetWeight()</div>
+<div id="Weight1_label">@_weightTankers[0].Status.StatusMessage</div>  
+<img id="Weight1_led" src="@_weightTankers[0].Status.StatusIcon" />
                          
 <!-- Весовой бункер 2 -->
-<img id="Weight2a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 2" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight2_weight">@_weights[1].GetWeight()</div>
-<div id="Weight2_label">@_weights[1].Status.StatusMessage</div>  
-<img id="Weight2_led" src="@_weights[1].Status.StatusIcon" />
+<img id="Weight2a2" src="img/arm2/WeightGrey.png"  alt="@_weightTankers[1].Name" @onmouseover="@(e => ShowMaterial(e, 11))" @onmouseout="@(e => HideMaterial())" />
+<div id="Weight2_weight">@_weightTankers[1].GetWeight()</div>
+<div id="Weight2_label">@_weightTankers[1].Status.StatusMessage</div>  
+<img id="Weight2_led" src="@_weightTankers[1].Status.StatusIcon" />
                      
 <!-- Весовой бункер 3 -->
-<img id="Weight3a2" src="img/arm2/WeightGrey.png"  alt="Весовой бункер 3" @onmouseover="@(e => ShowMaterial(e, 12))" @onmouseout="@(e => HideMaterial())" />        
-<div id="Weight3_weight">@_weights[2].GetWeight()</div>
-<div id="Weight3_label">@_weights[2].Status.StatusMessage</div>  
-<img id="Weight3_led" src="@_weights[2].Status.StatusIcon" />
+<img id="Weight3a2" src="img/arm2/WeightGrey.png"  alt="@_weightTankers[2].Name" @onmouseover="@(e => ShowMaterial(e, 12))" @onmouseout="@(e => HideMaterial())" />        
+<div id="Weight3_weight">@_weightTankers[2].GetWeight()</div>
+<div id="Weight3_label">@_weightTankers[2].Status.StatusMessage</div>  
+<img id="Weight3_led" src="@_weightTankers[2].Status.StatusIcon" />
 
 <img id="Conveyor1a2" src="@_conveyors[0]" alt="Конвейер 1"/>
 <img id="Conveyor2a2" src="@_conveyors[1]" alt="Конвейер 2" />
@@ -89,29 +89,29 @@
 <img id="Diviator4" src="@_diviatorsDirection[3]" alt="Дивиатор 4" />        
 <img id="Diviator5" src="img/arm2/Razdvoitel.png" alt="Дивиатор 5" />
 
-<!-- Весовой бункер 4 -->
-<img id="Weight4a2" src="img/arm2/weights_long.png" alt="@_weights[3].Name" @onmouseover="@(e => ShowMaterial(e, 13))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight4_weight">@_weights[3].GetWeight()</div>
-<img id="Weight4_led" src="@_weights[3].Status.StatusIcon" />
-<div id="Weight4_label">@_weights[3].Status.StatusMessage</div>       
+<!-- Приемочный бункер 1 -->
+<img id="Weight4a2" src="img/arm2/weights_long.png" alt="@_receiverTankers[0].Name" @onmouseover="@(e => ShowMaterial(e, 13))" @onmouseout="@(e => HideMaterial())" />
+<div id="Weight4_weight">@_receiverTankers[0].GetWeight()</div>
+<img id="Weight4_led" src="@_receiverTankers[0].Status.StatusIcon" />
+<div id="Weight4_label">@_receiverTankers[0].Status.StatusMessage</div>       
                                                                                            
-<!-- Весовой бункер 5 -->
-<img id="Weight5a2" src="img/arm2/weights_long.png" alt="@_weights[4].Name" @onmouseover="@(e => ShowMaterial(e, 14))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight5_weight">@_weights[4].GetWeight()</div>
-<img id="Weight5_led" src="@_weights[4].Status.StatusIcon" />
-<div id="Weight5_label">@_weights[4].Status.StatusMessage</div>       
+<!-- Приемочный бункер 2 -->
+<img id="Weight5a2" src="img/arm2/weights_long.png" alt="@_receiverTankers[1].Name" @onmouseover="@(e => ShowMaterial(e, 14))" @onmouseout="@(e => HideMaterial())" />
+<div id="Weight5_weight">@_receiverTankers[1].GetWeight()</div>
+<img id="Weight5_led" src="@_receiverTankers[1].Status.StatusIcon" />
+<div id="Weight5_label">@_receiverTankers[1].Status.StatusMessage</div>       
 
-<!-- Весовой бункер 6 -->
-<img id="Weight6a2" src="img/arm2/weights_long.png" alt="@_weights[5].Name" @onmouseover="@(e => ShowMaterial(e, 15))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight6_weight">@_weights[5].GetWeight()</div>
-<img id="Weight6_led" src="@_weights[5].Status.StatusIcon" />
-<div id="Weight6_label">@_weights[5].Status.StatusMessage</div>       
+<!-- Приемочный бункер 3 -->
+<img id="Weight6a2" src="img/arm2/weights_long.png" alt="@_receiverTankers[2].Name" @onmouseover="@(e => ShowMaterial(e, 15))" @onmouseout="@(e => HideMaterial())" />
+<div id="Weight6_weight">@_receiverTankers[2].GetWeight()</div>
+<img id="Weight6_led" src="@_receiverTankers[2].Status.StatusIcon" />
+<div id="Weight6_label">@_receiverTankers[2].Status.StatusMessage</div>       
                      
-<!-- Весовой бункер 7 -->
-<img id="Weight7a2" src="img/arm2/weights_long.png" alt="@_weights[6].Name" @onmouseover="@(e => ShowMaterial(e, 16))" @onmouseout="@(e => HideMaterial())" />
-<div id="Weight7_weight">@_weights[6].GetWeight()</div>
-<img id="Weight7_led" src="@_weights[6].Status.StatusIcon" />
-<div id="Weight7_label">@_weights[6].Status.StatusMessage</div>       
+<!-- Приемочный бункер 4 -->
+<img id="Weight7a2" src="img/arm2/weights_long.png" alt="@_receiverTankers[3].Name" @onmouseover="@(e => ShowMaterial(e, 16))" @onmouseout="@(e => HideMaterial())" />
+<div id="Weight7_weight">@_receiverTankers[3].GetWeight()</div>
+<img id="Weight7_led" src="@_receiverTankers[3].Status.StatusIcon" />
+<div id="Weight7_label">@_receiverTankers[3].Status.StatusMessage</div>       
 
 <img src="@_ingotsVisualParameters[0].FileName" alt="Ingot_1" style="position: absolute; top: @_ingotsVisualParameters[0].YPos; left: @_ingotsVisualParameters[0].XPos; z-index: @_ingotsVisualParameters[0].ZIndex" @onmouseover="@(e => ShowMaterial(e, 17))" @onmouseout="@(e => HideMaterial())" />
 <img src="@_ingotsVisualParameters[1].FileName" alt="Ingot_2" style="position: absolute; top: @_ingotsVisualParameters[1].YPos; left: @_ingotsVisualParameters[1].XPos; z-index: @_ingotsVisualParameters[1].ZIndex" @onmouseover="@(e => ShowMaterial(e, 18))" @onmouseout="@(e => HideMaterial())" />
@@ -146,7 +146,7 @@
     <table class="form">
         <caption>Загрузка весовых бункеров</caption>
         <tr>
-            <td style="vertical-align: middle;">
+            <td style="text-align: center; vertical-align: middle;" colspan="3">
                 <label for="weightNumber">Весовой бункер:</label>
                 <InputSelect id="weightNumber" ValueExpression="@(()=>_manualLoadWeights.WeightNumber)" Value="@_manualLoadWeights.WeightNumber" ValueChanged="@((string value) => GetSilosesList(value))">
                     <option value="0">Весовой 1 </option>
@@ -156,7 +156,7 @@
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: middle;">
+            <td style="text-align: center; vertical-align: middle;" colspan="3">
                 <label for="silosNumber">Силос:</label>
                 <InputSelect id="silosNumber" ValueExpression="@(()=>_manualLoadWeights.SilosNumber)" Value="@_manualLoadWeights.SilosNumber" ValueChanged="@((string value) => SetSilosNumber(value))">
                     @foreach (var item in _avalibleSiloses)
@@ -170,6 +170,12 @@
             <td style="text-align: center; vertical-align: middle;">
                 <button class="btn btn-primary" @onclick="@(() => LoadWeight())">Загрузить</button>
             </td>
+            <td>
+                <button class="btn btn-primary" @onclick="@(() => ResetErrorTanker(1))">Сбросить</button>
+            </td>
+            <td>
+                <button class="btn btn-primary" @onclick="@(() => ResetTanker(1))">Обнулить</button>
+            </td>
         </tr>
     </table>
 </EditForm>
@@ -178,7 +184,7 @@
     <table class="form">
         <caption>Загрузка приемочных бункеров</caption>
         <tr>
-            <td>
+            <td colspan="3" style="text-align: center; vertical-align: middle">
                 <label for="_weightTanker">Весовой бункер:</label>
                 <InputSelect id="_weightTanker" @bind-Value="_manualLoadReceiver.WeightTanker">
                     <option value="0">Бункер 1</option>
@@ -188,7 +194,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="3" style="text-align: center; vertical-align: middle">
                 <label for="_receiverTanker">Приемочный бункер:</label>
                 @* <InputSelect id="_receiverTanker" ValueExpression="@(() => _manualLoadReceiver.ReceiverTanker)" Value="@_manualLoadReceiver.ReceiverTanker" ValueChanged="@((string value) => SetReceiverNumber(value))"> *@
                 <InputSelect id="_receiverTanker" @bind-Value="_manualLoadReceiver.ReceiverTanker">    
@@ -200,15 +206,20 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="3" style="text-align: center; vertical-align: middle">
                 <label for="_weight">Вес материала:</label>
-                <InputNumber id="_weight" @bind-Value="_manualLoadReceiver.Weight"/>
+                <InputNumber id="_weight" @bind-Value="_manualLoadReceiver.Weight" style="width: 80px"/>
             </td>
         </tr>
         <tr>
             <td style="text-align: center; vertical-align: middle">
                 <button class="btn btn-primary" @onclick="LoadReceiver">Загрузить</button>
-                @* <button class="btn btn-primary" @onclick="TestIngots">Ingot</button> *@
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <button class="btn btn-primary" @onclick="@(() => ResetErrorTanker(2))">Сбросить</button>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <button class="btn btn-primary" @onclick="@(() => ResetTanker(2))">Обнулить</button>
             </td>
         </tr>
     </table>

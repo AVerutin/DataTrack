@@ -13,6 +13,11 @@ namespace DataTrack.Data
         public readonly int SilosId;
         
         /// <summary>
+        /// Наименование силоса
+        /// </summary>
+        public string Name { get; set; }
+        
+        /// <summary>
         /// Уникальный идентификатор силоса в базе данных
         /// </summary>
         public long SilosDbId { get; private set; }
