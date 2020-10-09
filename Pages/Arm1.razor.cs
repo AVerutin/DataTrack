@@ -33,6 +33,8 @@ namespace DataTrack.Pages
         private List<ushort> _signals;
         private readonly DBConnection _db = new DBConnection();
         private readonly ConfigMill _configMill = new ConfigMill();
+        private readonly CfgFileParser _cfgFileParser = new CfgFileParser();
+        private List<CfgFileObjects> _cfgFileObjects = new List<CfgFileObjects>();
 
         private Statuses _status = new Statuses();
         private readonly string[] _selected = new string[10];
@@ -65,8 +67,9 @@ namespace DataTrack.Pages
 
             GetMaterials();
             await Initialize();
+            _cfgFileObjects = _cfgFileParser.GetObjects();
             // await ConnectToMts(); // Подключение к сервису MTS Service
-            
+
         }
 
         // Событие при обновлении значения события
