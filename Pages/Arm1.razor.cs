@@ -517,6 +517,7 @@ namespace DataTrack.Pages
                     // 5. Начинаем загрузку материала в загрузочный бункер        
                     await OnNotify(
                         $"Начата загрузка материала [{material.getName()}] в загрузочный бункер {number + 1}");
+                    // if(!cancel.IsCancellationRequested)
                     MoveNextMaterial();    // Резервируем загружаемый материал для бункера
                     _status = new Statuses();
                     _status.StatusMessage = "ЗАГРУЗКА";
@@ -525,12 +526,9 @@ namespace DataTrack.Pages
                     _inputTankers[number].SetStatus(_status);
 
                     // Задержка и загрузка материала      
-                    await Task.Delay(TimeSpan.FromSeconds(10));
+                    await Task.Delay(TimeSpan.FromSeconds(10), cancel);
                     if (cancel.IsCancellationRequested)
                     {
-                        _logger.Warn($"Отменена загрузка материала в силос {number + 1}");
-                        Debug.WriteLine($"Отменена загрузка материала в силос {number + 1}");
-                        await OnNotify($"Отменена загрузка материала в силос {number + 1}");
                         MovePrewMaterial();
                         _inputTankers[number].Load(material);
                         _status = new Statuses();
@@ -538,6 +536,9 @@ namespace DataTrack.Pages
                         _status.StatusIcon = "img/led/SquareGrey.png";
                         _status.CurrentState = Statuses.Status.Off;
                         _inputTankers[number].SetStatus(_status);
+                        _logger.Warn($"Отменена загрузка материала в силос {number + 1}");
+                        Debug.WriteLine($"Отменена загрузка материала в силос {number + 1}");
+                        await OnNotify($"Отменена загрузка материала в силос {number + 1}");
                         
                         return;
                     }

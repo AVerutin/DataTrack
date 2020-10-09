@@ -23,24 +23,19 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:release" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="Add delivering ingots in all rollgangs">
-      <change afterPath="$PROJECT_DIR$/Data/Selection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/contentModel.xml" afterDir="false" />
+    <list default="true" id="df35d07f-f0a9-489d-993d-32e38b9641da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DataTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/InputTanker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/InputTanker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/ConfigMill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/ConfigMill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/DBConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/DBConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/IngotVisualParameters.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Kernel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Kernel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Rollgang.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Rollgang.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Silos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Silos.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pages/Arm1.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm1.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Arm2.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Arm2.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,34 +43,27 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Data/Directions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Data/Rollgang.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4065B38D-0F9F-44D9-8F53-F4C9102AF396/25F/AsyncMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Data/Rollgang.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm1.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Data/Directions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Data/ConfigMill.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/11/EventCallbackWorkItem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Data/Rollgang.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm2.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm1.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm1.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.nuget/packages/nlog.config/4.7.4/contentFiles/any/any/NLog.config" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Data/ManualLoadMaterial.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/88AF82DF-D459-4726-BC5E-EBB98920992D/8/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Projects/NET/DataTrack/Data/Rollgang.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Pages/Arm1.razor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Projects/NET/DataTrack/Data/ConfigMill.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -92,10 +80,8 @@
         <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/Data/MtsConnect.cs" />
         <option value="$PROJECT_DIR$/Data/IIngot.cs" />
-        <option value="$PROJECT_DIR$/Data/ConfigMill.cs" />
         <option value="$PROJECT_DIR$/Data/Collection.cs" />
         <option value="$PROJECT_DIR$/Сигналы.txt" />
-        <option value="$PROJECT_DIR$/appsettings.json" />
         <option value="$PROJECT_DIR$/Pages/Index.razor.cs" />
         <option value="$PROJECT_DIR$/Data/KernelService.cs" />
         <option value="$PROJECT_DIR$/Data/TankerTest.cs" />
@@ -115,22 +101,24 @@
         <option value="$PROJECT_DIR$/Shared/NavMenu.razor" />
         <option value="$PROJECT_DIR$/Data/RollgangTypes.cs" />
         <option value="$PROJECT_DIR$/Data/Ingot.cs" />
-        <option value="$PROJECT_DIR$/Data/DBConnection.cs" />
         <option value="$PROJECT_DIR$/Data/Material.cs" />
         <option value="$PROJECT_DIR$/Data/WeightTanker.cs" />
         <option value="$PROJECT_DIR$/Data/Chemical.cs" />
         <option value="$PROJECT_DIR$/Data/Coords.cs" />
-        <option value="$PROJECT_DIR$/Data/IngotVisualParameters.cs" />
-        <option value="$PROJECT_DIR$/Data/Kernel.cs" />
         <option value="$PROJECT_DIR$/Data/Silos.cs" />
         <option value="$PROJECT_DIR$/Data/InputTanker.cs" />
-        <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm1.razor" />
         <option value="$PROJECT_DIR$/Data/Selection.cs" />
         <option value="$PROJECT_DIR$/wwwroot/css/site.css" />
         <option value="$PROJECT_DIR$/Pages/Arm2.razor" />
         <option value="$PROJECT_DIR$/Data/Rollgang.cs" />
         <option value="$PROJECT_DIR$/Pages/Arm2.razor.cs" />
+        <option value="$PROJECT_DIR$/Data/Kernel.cs" />
+        <option value="$PROJECT_DIR$/Data/IngotVisualParameters.cs" />
+        <option value="$PROJECT_DIR$/Data/DBConnection.cs" />
+        <option value="$PROJECT_DIR$/appsettings.json" />
+        <option value="$PROJECT_DIR$/Data/ConfigMill.cs" />
+        <option value="$PROJECT_DIR$/Pages/Arm1.razor.cs" />
       </list>
     </option>
   </component>
@@ -243,7 +231,9 @@
       <workItem from="1601619048920" duration="23188000" />
       <workItem from="1601875923934" duration="64000" />
       <workItem from="1601876083290" duration="23566000" />
-      <workItem from="1601905039990" duration="55631000" />
+      <workItem from="1601905039990" duration="57710000" />
+      <workItem from="1602137534690" duration="6062000" />
+      <workItem from="1602156018974" duration="5402000" />
     </task>
     <task id="LOCAL-00001" summary="First clear commit">
       <created>1599219318832</created>
@@ -448,7 +438,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601992415218</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="a) Was been divided Weight tankers and Receiver tankers in Kernel.&#10;b) Restructured Kernel Data code.&#10;c) Add selected diviators.&#10;d) Add loading some Weight tankers in same time. &#10;e) Add Reset function for Weight and Receiver tankers.">
+      <created>1602075300321</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1602075300321</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,7 +464,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="release" />
                       </list>
                     </value>
                   </entry>
@@ -483,7 +480,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Correct update data on page and add skeleton for connection to database" />
     <MESSAGE value="Add ARM3 and detach code from layout. Add 2 Input tankers and 8 Siloses. Silos 1 can take material from active InputTanker." />
     <MESSAGE value="Add entry-point to ARM2 and ARM3" />
     <MESSAGE value="Add floating table with material detail. Add reading materials and his chemicals from database." />
@@ -508,7 +504,8 @@
     <MESSAGE value="Add rollgangs list in Kernel and add test delivering ingots on rollgangs." />
     <MESSAGE value="Add transfer ingots in Rollgang1" />
     <MESSAGE value="Add delivering ingots in all rollgangs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add delivering ingots in all rollgangs" />
+    <MESSAGE value="a) Was been divided Weight tankers and Receiver tankers in Kernel.&#10;b) Restructured Kernel Data code.&#10;c) Add selected diviators.&#10;d) Add loading some Weight tankers in same time. &#10;e) Add Reset function for Weight and Receiver tankers." />
+    <option name="LAST_COMMIT_MESSAGE" value="a) Was been divided Weight tankers and Receiver tankers in Kernel.&#10;b) Restructured Kernel Data code.&#10;c) Add selected diviators.&#10;d) Add loading some Weight tankers in same time. &#10;e) Add Reset function for Weight and Receiver tankers." />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601553751974">
@@ -519,98 +516,98 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="501" height="618" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1602072797635" />
-    <state x="80" y="84" width="1736" height="856" key="DiffContextDialog" timestamp="1601989700326">
+    <state x="80" y="84" width="1736" height="856" key="DiffContextDialog" timestamp="1602219827734">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="80" y="84" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601989700326" />
-    <state width="1877" height="145" key="GridCell.Tab.0.bottom" timestamp="1602075039602">
+    <state x="80" y="84" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602219827734" />
+    <state width="1877" height="145" key="GridCell.Tab.0.bottom" timestamp="1602219474580">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="145" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602075039602" />
-    <state width="1877" height="145" key="GridCell.Tab.0.center" timestamp="1602075039602">
+    <state width="1877" height="145" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602219474580" />
+    <state width="1877" height="145" key="GridCell.Tab.0.center" timestamp="1602219474580">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="145" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602075039602" />
-    <state width="1877" height="145" key="GridCell.Tab.0.left" timestamp="1602075039602">
+    <state width="1877" height="145" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602219474580" />
+    <state width="1877" height="145" key="GridCell.Tab.0.left" timestamp="1602219474580">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="145" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602075039602" />
-    <state width="1877" height="145" key="GridCell.Tab.0.right" timestamp="1602075039602">
+    <state width="1877" height="145" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602219474580" />
+    <state width="1877" height="145" key="GridCell.Tab.0.right" timestamp="1602219474580">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="145" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602075039602" />
-    <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1602073852357">
+    <state width="1877" height="145" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602219474580" />
+    <state width="1877" height="216" key="GridCell.Tab.1.bottom" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852357" />
-    <state width="1877" height="216" key="GridCell.Tab.1.center" timestamp="1602073852357">
+    <state width="1877" height="216" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.1.center" timestamp="1602219466792">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852357" />
-    <state width="1877" height="216" key="GridCell.Tab.1.left" timestamp="1602073852357">
+    <state width="1877" height="216" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466792" />
+    <state width="1877" height="216" key="GridCell.Tab.1.left" timestamp="1602219466792">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852357" />
-    <state width="1877" height="216" key="GridCell.Tab.1.right" timestamp="1602073852357">
+    <state width="1877" height="216" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466792" />
+    <state width="1877" height="216" key="GridCell.Tab.1.right" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852357" />
-    <state width="1877" height="216" key="GridCell.Tab.2.bottom" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.2.bottom" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.2.center" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.2.center" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.2.left" timestamp="1602073852357">
+    <state width="1877" height="216" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.2.left" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852357" />
-    <state width="1877" height="216" key="GridCell.Tab.2.right" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.2.right" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.3.bottom" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.3.bottom" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.3.center" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
+    <state width="1877" height="216" key="GridCell.Tab.3.center" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.3.left" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
+    <state width="1877" height="216" key="GridCell.Tab.3.left" timestamp="1602219466793">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.3.right" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466793" />
+    <state width="1877" height="216" key="GridCell.Tab.3.right" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.4.bottom" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
+    <state width="1877" height="216" key="GridCell.Tab.4.bottom" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.4.center" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
+    <state width="1877" height="216" key="GridCell.Tab.4.center" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.4.left" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
+    <state width="1877" height="216" key="GridCell.Tab.4.left" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
-    <state width="1877" height="216" key="GridCell.Tab.4.right" timestamp="1602073852358">
+    <state width="1877" height="216" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
+    <state width="1877" height="216" key="GridCell.Tab.4.right" timestamp="1602219466794">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="216" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602073852358" />
+    <state width="1877" height="216" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602219466794" />
     <state x="630" y="340" key="LayersDialog" timestamp="1599821878696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="630" y="340" key="LayersDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599821878696" />
-    <state x="552" y="252" key="Rider.ProjectTemplateDialog.Size" timestamp="1601381433163">
+    <state x="552" y="252" key="Rider.ProjectTemplateDialog.Size" timestamp="1602156559475">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040@0.0.1920.1040" timestamp="1601381433163" />
+    <state x="552" y="252" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040@0.0.1920.1040" timestamp="1602156559475" />
     <state x="883" y="232" width="490" height="774" key="RiderGenerateDialog" timestamp="1599485679849">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -623,10 +620,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601882783863" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1601992430061">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1602075315957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601992430061" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602075315957" />
     <state x="715" y="172" key="VcsDiffUtil.ChangesDialog" timestamp="1599807139030">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -635,10 +632,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1600941515077" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601989700326">
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602219827734">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601989700326" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602219827734" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1602060491941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -664,6 +661,19 @@
           </properties>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Data/DBConnection.cs</url>
+          <line>225</line>
+          <properties documentPath="E:\Projects\NET\DataTrack\Data\DBConnection.cs" initialLine="225">
+            <startOffsets>
+              <option value="8355" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8405" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -673,11 +683,5 @@
         <PinnedItemInfo parentTag="Type#DataTrack.Data.InputTanker" memberName="_materials" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="LaunchSettings">
-        <watch expression="_receiverTankers[Int32.Parse(_manualLoadReceiver.ReceiverTanker)].Status.CurrentState" language="C#" />
-        <watch expression="_target" language="C#" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

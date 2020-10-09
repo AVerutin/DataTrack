@@ -24,7 +24,10 @@ namespace DataTrack.Data
                 // if (objectStart == true && objectSignal == true) => ищем параметр "Идентификатор=4005"
                 string line;
                 bool objectSignal = false;
+                bool objectStart = false;
                 string objectName;
+                string paramName;
+                string paramValue;
                 ushort signalNumber;
 
                 while ((line = sr.ReadLine()) != null)
@@ -36,9 +39,15 @@ namespace DataTrack.Data
                     if (line.StartsWith("//")) // Комментарий
                         continue;
                     if (line == "(") // Начало блока описания объекта
+                    {
+                        objectStart = true;
                         continue;
+                    }
                     if (line == ")") // Начало блока описания объекта
+                    {
+                        objectStart = false;
                         continue;
+                    }
 
                     if (line.Contains("="))
                     {
@@ -58,14 +67,17 @@ namespace DataTrack.Data
                     }
                     else
                     {
-                        objectName = line.Trim();
-                        if (objectName == "Сигнал")
+                        if (objectStart)
                         {
-                            objectSignal = true;
-                        }
-                        else
-                        {
-                            objectSignal = false;
+                            objectName = line.Trim();
+                            if (objectName == "Сигнал")
+                            {
+                                objectSignal = true;
+                            }
+                            else
+                            {
+                                objectSignal = false;
+                            }
                         }
                     }
                 }

@@ -219,7 +219,7 @@ namespace DataTrack.Data
                    "ORDER BY " +
                    "material ASC, " +
                    "partno ASC;";
-
+                   
                 // string query1 = $"SELECT * FROM pqca.tmp_materials ORDER BY name, partno ASC;";
                 // var t = getData(query1);
 
