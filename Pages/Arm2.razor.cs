@@ -4,13 +4,22 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using DataTrack.Data;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.Configuration;
+using MtsConnect;
 using NLog;
+using Ingot = DataTrack.Data.Ingot;
 
 namespace DataTrack.Pages
 {
     public partial class Arm2
     {
         private (string value, Task t) _lastNotification;
+        private IConfigurationRoot _config;
+        private Data.MtsConnect _mtsConnect;
+        private List<ushort> _signals;
+        private readonly DBConnection _db = new DBConnection();
+        private readonly ConfigMill _configMill = new ConfigMill();
+
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private List<Silos> _siloses = new List<Silos>();
         private List<WeightTanker> _weightTankers = new List<WeightTanker>();
@@ -46,10 +55,11 @@ namespace DataTrack.Pages
         private bool[] _receiverLoading = new bool[4];
         private int _target; // 0 - ДСП, 1- УПК, 2 - Сторона УПК, 3 - Сторона ДСП
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             // Точка входа на страницу
             Initialize();
+            await ConnectToMts(); // Подключение к сервису MTS Service
         }
         
         private async Task OnNotify(string value)
@@ -317,6 +327,80 @@ namespace DataTrack.Pages
             await OnNotify("Готов");
         }
         
+        /// <summary>
+        /// Подключение к слубже MTS Service
+        /// </summary>
+        private async Task ConnectToMts()
+        {
+            // Получение параметров подключения сервису МТС
+            _config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            string mtsIP = _config.GetSection("Mts:Ip").Value;
+            int mtsPort = Int32.Parse(_config.GetSection("Mts:Port").Value);
+            int mtsTimeout = Int32.Parse(_config.GetSection("Mts:Timeout").Value);
+            int mtsReconnect = Int32.Parse(_config.GetSection("Mts:ReconnectTimeout").Value);
+            
+            // Получение списка сигналов для подписки
+            _signals = _configMill.GetSignals();
+            
+            // Подключение к сервису МТС
+            try
+            {
+                _mtsConnect = new Data.MtsConnect("ARM-2", mtsIP, mtsPort, mtsTimeout, mtsReconnect);
+                await _mtsConnect.Subscribe(_signals, NewData);
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"Ошибка при подключении к сервису МТС: [{e.Message}]");
+            }
+
+            _logger.Info("Подключились MTSService как АРМ1");
+
+        }
+
+        /// <summary>
+        /// Получены новые данные от службы MTS Service
+        /// </summary>
+        /// <param name="e">Новое состояние системы MTS Service</param>
+        private async void NewData(SubscriptionStateEventArgs e)
+        {
+            SignalsState diff = e.Diff.Signals;
+            if (diff != null)
+            {
+                foreach (var item in diff)
+                {
+                    string message = $"[{item.Key}] = {item.Value}";
+
+                    await InvokeAsync(async () =>
+                    {
+                        await OnNotify(message);
+                        StateHasChanged();
+                    });
+
+                    CheckSignal(item.Key, item.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обработка новых значений сигналов, полученных от службы MTS Service
+        /// </summary>
+        /// <param name="signal">Номер сигнала</param>
+        /// <param name="value">Значение сигнала</param>
+        private async void CheckSignal(ushort signal, double value)
+        {
+            switch (signal)
+            {
+                //
+            }
+        }
+
+        /// <summary>
+        /// Отображение таблицы материалов на экране при наведении мыши на элемент
+        /// </summary>
+        /// <param name="e">Состояние мыши</param>
+        /// <param name="number">Номер элемента на экране</param>
         private void ShowMaterial(MouseEventArgs e, int number)
         {
             int matCount = 0;

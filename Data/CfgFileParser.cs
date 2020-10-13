@@ -5,7 +5,7 @@ namespace DataTrack.Data
 {
     public class CfgFileParser
     {
-        private const string CfgFileName = @"c:\mts\Config\RollingMillConfig.txt";
+        private const string CfgFileName = @"d:\mts\Config\RollingMillConfig.txt";
         private readonly List<CfgFileObjects> _objects = new List<CfgFileObjects>();
         private readonly int[] _objectsCount = {0, 0, 0, 0, 0, 0, 0, 0};
         private readonly string[] _objectsNames = new string[8];

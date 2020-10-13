@@ -67,8 +67,12 @@ namespace DataTrack.Pages
 
             GetMaterials();
             await Initialize();
+            
+            long ellapledTicks = DateTime.Now.Millisecond;
             _cfgFileObjects = _cfgFileParser.GetObjects();
-            // await ConnectToMts(); // Подключение к сервису MTS Service
+            ellapledTicks = DateTime.Now.Millisecond - ellapledTicks;
+            Debug.WriteLine($"Потрачено миллисекунд [{ellapledTicks}]");
+            await ConnectToMts(); // Подключение к сервису MTS Service
 
         }
 
@@ -82,6 +86,9 @@ namespace DataTrack.Pages
             StateHasChanged();
         }
 
+        /// <summary>
+        /// Сохранение состояния системы при удалении объектов
+        /// </summary>
         public void Dispose()
         {
             Notifier.Notify -= OnNotify;
@@ -123,6 +130,10 @@ namespace DataTrack.Pages
 
         }
 
+        /// <summary>
+        /// Обработка полученных данных от MTS Service 
+        /// </summary>
+        /// <param name="e">Состояние системы MTS Service</param>
         private async void NewData(SubscriptionStateEventArgs e)
         {
             SignalsState diff = e.Diff.Signals;
@@ -143,6 +154,11 @@ namespace DataTrack.Pages
             }
         }
 
+        /// <summary>
+        /// Обработка новых значений сигналов, полученных от MTS Service
+        /// </summary>
+        /// <param name="signal">Номер сигнала</param>
+        /// <param name="value">Значение сигнала</param>
         private async void CheckSignal(ushort signal, double value)
         {
             switch (signal)
@@ -177,7 +193,7 @@ namespace DataTrack.Pages
             }
         }
 
-        // Получить список всем материалов
+        // Получить список всех материалов
         private void GetMaterials()
         {
             _materials = _db.GetMaterials();
